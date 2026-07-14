@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { TrackedCta } from "@/components/analytics/tracked-cta";
 import { Container } from "@/components/ui/container";
 import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
@@ -32,9 +32,9 @@ export function Hero() {
             </p>
             <div className="flex shrink-0 flex-col gap-3.5">
               <div className="flex flex-wrap gap-3.5">
-                <Button href="#start" arrow>
+                <TrackedCta href="#start" arrow event="review_call_cta_click">
                   Book a free review call
-                </Button>
+                </TrackedCta>
               </div>
               <p className="text-sm text-faint">
                 20-minute call with the founders. No pitch, no obligation.

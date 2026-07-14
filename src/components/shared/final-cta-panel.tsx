@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { TrackedCta } from "@/components/analytics/tracked-cta";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -61,9 +61,14 @@ export function FinalCtaPanel({
                   </div>
                 </div>
 
-                <Button href={buttonHref} variant="lime" arrow>
+                <TrackedCta
+                  href={buttonHref}
+                  variant="lime"
+                  arrow
+                  event="review_call_cta_click"
+                >
                   {buttonLabel}
-                </Button>
+                </TrackedCta>
 
                 <p className="text-sm text-[#86837a]">
                   Free · 20 min · no pitch, no obligation.

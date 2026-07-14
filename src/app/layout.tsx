@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Archivo, Space_Mono, Newsreader } from "next/font/google";
 import { draftMode } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VisualEditing } from "next-sanity/visual-editing";
 
+import { Clarity } from "@/components/analytics/clarity";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { SanityLive } from "@/sanity/lib/live";
 import { SITE_URL } from "@/lib/seo";
@@ -54,6 +56,8 @@ export default async function RootLayout({
       <body>
         {children}
         <Analytics />
+        <SpeedInsights />
+        <Clarity />
         <SanityLive />
         {isDraftMode && (
           <>

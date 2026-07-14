@@ -1,3 +1,4 @@
+import { TrackedCta } from "@/components/analytics/tracked-cta";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
@@ -35,17 +36,18 @@ export function Hero() {
               Jimmy Coach.
             </p>
             <div className="flex shrink-0 flex-wrap gap-3 sm:gap-3.5">
-              <Button
+              <TrackedCta
                 href="/the-review"
                 size="sm"
                 className="sm:h-[52px] sm:px-7 sm:text-base"
+                event="review_call_cta_click"
               >
                 <span className="sm:hidden">Founder review call</span>
                 <span className="hidden sm:inline">
                   Book a founder review call
                 </span>
                 <ArrowRight className="hidden size-[18px] transition-transform duration-200 group-hover:translate-x-0.5 sm:inline-block" />
-              </Button>
+              </TrackedCta>
               <Button
                 href="#work"
                 variant="outline"
