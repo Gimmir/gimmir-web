@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Space_Mono, Newsreader } from "next/font/google";
 import { draftMode } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import { VisualEditing } from "next-sanity/visual-editing";
 
 import { DisableDraftMode } from "@/components/disable-draft-mode";
@@ -52,6 +53,7 @@ export default async function RootLayout({
     >
       <body>
         {children}
+        <Analytics />
         <SanityLive />
         {isDraftMode && (
           <>
