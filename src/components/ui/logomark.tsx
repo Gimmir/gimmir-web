@@ -1,32 +1,23 @@
 import { cn } from "@/lib/cn";
 
 /**
- * Gimmir logomark — the solid letter G in the wordmark typeface with a lime
- * dot as its period. A letterform can't be mistaken for a status icon (power,
- * toggle, signal), and it stays perfectly cohesive with the "Gimmir" wordmark.
- * The G uses currentColor so it adapts to light / dark surfaces.
+ * Gimmir logomark — the brand tile: a lime "G" on a dark rounded square.
+ * Colors are baked into the mark so it reads consistently on any surface.
  */
 export function Logomark({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 32 32"
+      viewBox="0 0 300 300"
       fill="none"
       aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
       className={cn("shrink-0", className)}
     >
-      <text
-        x="14.5"
-        y="16.4"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontSize="30"
-        fontWeight="800"
-        style={{ fontFamily: "var(--font-archivo), sans-serif" }}
-        className="fill-current"
-      >
-        G
-      </text>
-      <circle cx="26.4" cy="24.2" r="3" className="fill-lime" />
+      <rect width="300" height="300" rx="64" fill="#15140E" />
+      <path
+        d="M168.472 92.6921C164.447 89.4474 160.279 87.0097 155.966 85.379C151.614 83.6925 147.137 82.8408 142.536 82.824C137.951 82.7121 133.289 83.4434 128.55 85.0178C123.867 86.5529 119.174 88.9672 114.47 92.2607C105.679 98.4164 99.4733 106 95.8534 115.013C92.2895 123.986 91.5667 133.918 93.685 144.809C95.7642 155.644 100.979 167.025 109.329 178.95C117.68 190.876 126.601 199.743 136.094 205.554C145.586 211.364 155.206 214.138 164.952 213.874C174.659 213.555 184.048 210.22 193.119 203.868C201.35 198.104 207.363 191.735 211.158 184.759C214.969 177.689 216.542 170.401 215.876 162.895C215.265 155.349 212.405 147.926 207.293 140.626L215.445 136.537L171.097 167.59L152.016 140.34L223.998 89.938L239.099 111.504C249.634 126.55 255.495 141.714 256.682 156.994C257.829 172.219 254.852 186.678 247.75 200.371C240.609 214.008 229.815 225.885 215.368 236C199.241 247.292 182.597 253.673 165.434 255.144C148.233 256.558 131.631 253.109 115.63 244.797C99.6462 236.39 85.3329 223.158 72.6905 205.103C62.9745 191.227 56.3279 177.445 52.7507 163.755C49.1905 149.97 48.4247 136.721 50.4534 124.006C52.482 111.291 56.9827 99.5436 63.9555 88.7648C70.9283 77.986 80.0982 68.6169 91.4652 60.6576C101.208 53.8354 111.275 48.9047 121.664 45.8655C132.014 42.7705 142.232 41.5124 152.317 42.091C162.459 42.6305 172.079 44.9881 181.178 49.1639C190.238 53.284 198.322 59.1675 205.429 66.8146L168.472 92.6921Z"
+        fill="#C9F23D"
+      />
     </svg>
   );
 }
