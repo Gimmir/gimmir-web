@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
+
+// useLayoutEffect on the client (so we can arm the element before it paints),
+// useEffect on the server to avoid the hydration warning.
+const useArmEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 /**
- * One-shot scroll reveal. Content is fully visible at rest (transform-only, no
- * opacity flash); on first intersection it slides up into place. Respects
- * prefers-reduced-motion and degrades gracefully without JS.
+ * One-shot scroll reveal. Renders fully visible at rest — so content never
+ * disappears without JS, for reduced-motion users, or for crawlers — then fades
+ * and rises into place the first time it scrolls into view.
+ *
+ * The reveal is a CSS transition to a *stable* end state (`data-reveal="in"`),
+ * which makes it idempotent: it plays exactly once and can never replay, even if
+ * the effect runs twice (React StrictMode) or the observer fires more than once.
+ * That is the behaviour the old WAAPI `.animate()` version could not guarantee.
  */
 export function Reveal({
   children,
@@ -20,23 +29,32 @@ export function Reveal({
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useArmEffect(() => {
     const el = ref.current;
     if (!el) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || !("IntersectionObserver" in window) || !el.animate) return;
+    if (reduce || !("IntersectionObserver" in window)) return; // stay visible
+
+    el.style.setProperty("--reveal-y", `${y}px`);
+    el.style.setProperty("--reveal-delay", `${delay}ms`);
+    // Arm before the browser paints, so there is no flash of the final position.
+    el.dataset.reveal = "pending";
+
+    // Anything already in or above the viewport at arm time — above the fold, or
+    // a restored / anchored scroll position — reveals right away, so on-screen or
+    // scrolled-past content is never left hidden waiting for an intersection.
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      requestAnimationFrame(() => {
+        el.dataset.reveal = "in";
+      });
+      return;
+    }
 
     const io = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            el.animate(
-              [{ transform: `translateY(${y}px)` }, { transform: "none" }],
-              { duration: 640, delay, easing: "cubic-bezier(.2,.7,.2,1)" },
-            );
-            io.unobserve(e.target);
-          }
-        }
+        if (!entries[0]?.isIntersecting) return;
+        el.dataset.reveal = "in"; // stable end state — the transition runs once
+        io.disconnect();
       },
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
