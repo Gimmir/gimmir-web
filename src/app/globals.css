@@ -118,6 +118,31 @@
   }
 }
 
+/* ------------------------------------------------------------------ */
+/*  Scroll reveal (src/components/ui/reveal.tsx)                       */
+/*  Armed by JS before first paint. The reveal is a CSS transition to  */
+/*  a stable end state, so it plays exactly once and can never replay. */
+/* ------------------------------------------------------------------ */
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 22px));
+  will-change: opacity, transform;
+}
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 640ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 640ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Display headings use Archivo, slightly expanded if the axis is available. */
 @utility display {
   font-weight: 800;
