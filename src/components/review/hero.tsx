@@ -18,7 +18,7 @@ export function Hero() {
             <br />
             will survive growth,{" "}
             <br />
-            <Mark full>before it costs you.</Mark>
+            <Mark>before it costs you.</Mark>
           </h1>
         </Reveal>
 
