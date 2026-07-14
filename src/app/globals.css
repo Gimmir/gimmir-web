@@ -1,0 +1,454 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Gimmir design tokens                                              */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-paper: #f6f4ee;
+  --color-paper-2: #efece3;
+  --color-ink: #15140e;
+  --color-ink-soft: #211f17;
+  --color-ink-2: #1b1a12;
+  --color-surface: #ffffff;
+  --color-muted: #56534a;
+  --color-faint: #807d73;
+  --color-line: #e4e0d6;
+  --color-line-dark: rgba(246, 244, 238, 0.16);
+  --color-lime: #c9f23d;
+  --color-lime-deep: #b6df27;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-mono-ui), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --text-hero: clamp(2.5rem, 1rem + 4.4vw, 5rem);
+  --text-display: clamp(1.85rem, 1rem + 3.2vw, 3.25rem);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.7);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                              */
+/* ------------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(21, 20, 14, 0.85);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* Display headings use Archivo, slightly expanded if the axis is available. */
+@utility display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  font-stretch: 112%;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Trust card illustrations                                          */
+/*  Resting state = the finished composition (shown on touch and to   */
+/*  reduced-motion users). The build-up only plays for real pointers. */
+/* ------------------------------------------------------------------ */
+.t-illu {
+  background-image: radial-gradient(rgba(21, 20, 14, 0.05) 1px, transparent 1.5px);
+  background-size: 18px 18px;
+  background-position: center;
+}
+
+.ti1-progress {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 0;
+}
+.ti1-node {
+  transform: translateX(132px);
+}
+.ti1-st {
+  fill: var(--color-lime);
+}
+
+.ti2-seal {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ti2-check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 0;
+}
+
+.ti3-member {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ti3-link {
+  stroke-dasharray: 56;
+  stroke-dashoffset: 0;
+}
+
+.ti4-shield {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Flow cards (Start with a conversation) — resting = completed. */
+.fi1-b {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.fi2-path {
+  stroke-dasharray: 176;
+  stroke-dashoffset: 0;
+}
+.fi2-cp {
+  fill: var(--color-lime);
+}
+.fi2-flag {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+
+/* What-we-look-at cards (review section 02) — resting = completed. */
+.wi1-badge {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.wi5-glass {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: translateX(26px);
+}
+.wi2-line,
+.wi4-link,
+.wi6-value {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 0;
+}
+.wi3-on {
+  fill: var(--color-lime);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  /* 1 — the founder travels call → build → deliver, lighting each stage */
+  .ti1-progress {
+    stroke-dashoffset: 150;
+    transition: stroke-dashoffset 880ms var(--ease-out);
+  }
+  .ti1-node {
+    transform: translateX(0);
+    transition: transform 880ms cubic-bezier(0.5, 0, 0.2, 1);
+  }
+  .ti1-st {
+    fill: var(--color-paper);
+    transition: fill 260ms var(--ease-out);
+  }
+  .t-card:hover .ti1-progress {
+    stroke-dashoffset: 0;
+  }
+  .t-card:hover .ti1-node {
+    transform: translateX(132px);
+  }
+  .t-card:hover .ti1-st {
+    fill: var(--color-lime);
+  }
+  .t-card:hover .ti1-st.s1 {
+    transition-delay: 80ms;
+  }
+  .t-card:hover .ti1-st.s2 {
+    transition-delay: 380ms;
+  }
+  .t-card:hover .ti1-st.s3 {
+    transition-delay: 700ms;
+  }
+
+  /* 2 — ownership seal stamps on, check draws */
+  .ti2-doc {
+    transition: transform 360ms var(--ease-out);
+  }
+  .ti2-seal {
+    transform: scale(0.2);
+    opacity: 0;
+    transition:
+      transform 460ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 240ms ease;
+  }
+  .ti2-check {
+    stroke-dashoffset: 24;
+    transition: stroke-dashoffset 320ms var(--ease-out) 220ms;
+  }
+  .t-card:hover .ti2-doc {
+    transform: translateY(-3px);
+  }
+  .t-card:hover .ti2-seal {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .t-card:hover .ti2-check {
+    stroke-dashoffset: 0;
+  }
+
+  /* 3 — the team network spins up around the lead, staggered */
+  .ti3-member {
+    transform: scale(0.3);
+    opacity: 0;
+    transition:
+      transform 460ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 260ms ease;
+  }
+  .ti3-link {
+    stroke-dashoffset: 56;
+    transition: stroke-dashoffset 440ms var(--ease-out);
+  }
+  .t-card:hover .ti3-member {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .t-card:hover .ti3-link {
+    stroke-dashoffset: 0;
+  }
+  .t-card:hover .d1 {
+    transition-delay: 60ms;
+  }
+  .t-card:hover .d2 {
+    transition-delay: 130ms;
+  }
+  .t-card:hover .d3 {
+    transition-delay: 200ms;
+  }
+  .t-card:hover .d4 {
+    transition-delay: 270ms;
+  }
+  .t-card:hover .d5 {
+    transition-delay: 340ms;
+  }
+
+  /* 4 — we push back */
+  .ti4-shield {
+    transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .ti4-arrow {
+    transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .t-card:hover .ti4-shield {
+    transform: scale(1.12);
+  }
+  .t-card:hover .ti4-arrow {
+    transform: translateX(-26px);
+  }
+
+  /* flow 1 — conversation bubbles pop in */
+  .fi1-b {
+    transform: scale(0.4);
+    opacity: 0;
+    transition:
+      transform 440ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 240ms ease;
+  }
+  .t-card:hover .fi1-b {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  /* flow 2 — roadmap draws, checkpoints light, flag plants */
+  .fi2-path {
+    stroke-dashoffset: 176;
+    transition: stroke-dashoffset 780ms var(--ease-out);
+  }
+  .fi2-cp {
+    fill: var(--color-paper);
+    transition: fill 240ms var(--ease-out);
+  }
+  .fi2-flag {
+    transform: scale(0);
+    opacity: 0;
+    transition:
+      transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 200ms ease;
+  }
+  .t-card:hover .fi2-path {
+    stroke-dashoffset: 0;
+  }
+  .t-card:hover .fi2-cp {
+    fill: var(--color-lime);
+  }
+  .t-card:hover .fi2-flag {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .t-card:hover .c1 {
+    transition-delay: 200ms;
+  }
+  .t-card:hover .c2 {
+    transition-delay: 380ms;
+  }
+  .t-card:hover .c3 {
+    transition-delay: 560ms;
+  }
+  .t-card:hover .c4 {
+    transition-delay: 700ms;
+  }
+
+  /* flow 3 — blocks build up into the product */
+  .fi3-blk {
+    transform: translateY(-16px);
+    opacity: 0;
+    transition:
+      transform 440ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 240ms ease;
+  }
+  .t-card:hover .fi3-blk {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* ---- review section 02 — what we look at ---- */
+  /* 01 subscriptions: the stack fans out, renewal badge stamps on */
+  .wi1-card {
+    transform: translate(-10px, 4px);
+    opacity: 0;
+    transition:
+      transform 460ms var(--ease-out),
+      opacity 280ms ease;
+  }
+  .wi1-badge {
+    transform: scale(0.3);
+    opacity: 0;
+    transition:
+      transform 460ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 240ms ease;
+  }
+  .w-card:hover .wi1-card {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  .w-card:hover .wi1-badge {
+    transform: scale(1);
+    opacity: 1;
+    transition-delay: 220ms;
+  }
+
+  /* 02 payments: payout routes draw out to the locations */
+  .wi2-line {
+    stroke-dashoffset: 150;
+    transition: stroke-dashoffset 520ms var(--ease-out);
+  }
+  .w-card:hover .wi2-line {
+    stroke-dashoffset: 0;
+  }
+
+  /* 03 booking: slots fill lime under load */
+  .wi3-on {
+    fill: var(--color-surface);
+    transition: fill 300ms var(--ease-out);
+  }
+  .w-card:hover .wi3-on {
+    fill: var(--color-lime);
+  }
+
+  /* 04 data model: the relations grow out, top to bottom */
+  .wi4-link {
+    stroke-dashoffset: 150;
+    transition: stroke-dashoffset 560ms var(--ease-out);
+  }
+  .w-card:hover .wi4-link {
+    stroke-dashoffset: 0;
+  }
+
+  /* 05 security: the due-diligence magnifier sweeps across the shield */
+  .wi5-glass {
+    transform: translateX(-26px);
+    transition: transform 860ms var(--ease-out);
+  }
+  .w-card:hover .wi5-glass {
+    transform: translateX(26px);
+  }
+
+  /* 06 AI: the value route lights up lime */
+  .wi6-value {
+    stroke-dashoffset: 150;
+    transition: stroke-dashoffset 640ms var(--ease-out) 60ms;
+  }
+  .w-card:hover .wi6-value {
+    stroke-dashoffset: 0;
+  }
+}
