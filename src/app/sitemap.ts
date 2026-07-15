@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url("/work"), changeFrequency: "monthly", priority: 0.8 },
     { url: url("/how-we-work"), changeFrequency: "monthly", priority: 0.7 },
     { url: url("/founders"), changeFrequency: "monthly", priority: 0.6 },
+    { url: url("/privacy"), changeFrequency: "yearly", priority: 0.1 },
   ];
 
   // Case studies — driven off the same source as the routes, so the sitemap

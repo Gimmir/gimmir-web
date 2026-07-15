@@ -80,7 +80,15 @@ export function Footer({
       {/* bottom bar */}
       <div className="border-t border-line">
         <Container className="flex flex-col gap-2 py-6 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} {settings?.siteName ?? "Gimmir"}</p>
+          <p className="flex items-center gap-4">
+            <span>© {year} {settings?.siteName ?? "Gimmir"}</span>
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-ink"
+            >
+              Privacy
+            </Link>
+          </p>
           <p className="font-mono text-xs uppercase tracking-wider">
             {nav?.footerNote}
           </p>

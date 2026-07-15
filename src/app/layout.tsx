@@ -39,11 +39,11 @@ export const metadata: Metadata = {
     template: "%s · Gimmir",
   },
   description:
-    "Gimmir builds the apps and platforms behind sport and fitness brands that are scaling. Start with a free review call with the founders who built UN1T's franchise platform and co-founded Jimmy Coach.",
+    "Gimmir builds the apps and platforms behind scaling sport and fitness brands. Start with a free review call with the founders behind UN1T and Jimmy Coach.",
   ...socialMetadata({
     title: "Gimmir — Product engineering for sport & fitness",
     description:
-      "Gimmir builds the apps and platforms behind sport and fitness brands that are scaling.",
+      "Gimmir builds the apps and platforms behind scaling sport and fitness brands.",
     path: "/",
   }),
 };
