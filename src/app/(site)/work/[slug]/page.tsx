@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/seo/json-ld";
 import { JimmyCaseStudy } from "@/components/work/jimmy";
 import { StandardCaseStudy } from "@/components/work/standard";
 import { Un1tCaseStudy } from "@/components/work/un1t";
 import { caseSlugs, getCaseBySlug } from "@/lib/cases";
+import { breadcrumbs, caseStudyWork } from "@/lib/schema";
 
 export function generateStaticParams() {
   return caseSlugs.map((slug) => ({ slug }));
@@ -34,7 +36,37 @@ export default async function CaseStudyPage({
   const data = getCaseBySlug(slug);
   if (!data) notFound();
 
-  if (data.slug === "un1t") return <Un1tCaseStudy data={data} />;
-  if (data.slug === "jimmy-coach") return <JimmyCaseStudy data={data} />;
-  return <StandardCaseStudy data={data} />;
+  const jsonLd = (
+    <>
+      <JsonLd
+        data={breadcrumbs([
+          ["Home", "/"],
+          ["Case studies", "/work"],
+          [data.name, `/work/${data.slug}`],
+        ])}
+      />
+      <JsonLd data={caseStudyWork(data)} />
+    </>
+  );
+
+  if (data.slug === "un1t")
+    return (
+      <>
+        {jsonLd}
+        <Un1tCaseStudy data={data} />
+      </>
+    );
+  if (data.slug === "jimmy-coach")
+    return (
+      <>
+        {jsonLd}
+        <JimmyCaseStudy data={data} />
+      </>
+    );
+  return (
+    <>
+      {jsonLd}
+      <StandardCaseStudy data={data} />
+    </>
+  );
 }

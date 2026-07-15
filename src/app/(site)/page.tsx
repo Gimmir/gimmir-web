@@ -9,8 +9,15 @@ import { TrustSection } from "@/components/home/trust";
 import { ReviewCtaSection } from "@/components/home/review-cta";
 import { FinalCta } from "@/components/home/final-cta";
 import { Marquee } from "@/components/ui/marquee";
+import { JsonLd } from "@/components/seo/json-ld";
+import { organizationGraph } from "@/lib/schema";
 import { sanityFetch } from "@/sanity/lib/live";
-import { HOME_QUERY, HOME_SEO_QUERY } from "@/sanity/lib/queries";
+import {
+  FOUNDERS_QUERY,
+  HOME_QUERY,
+  HOME_SEO_QUERY,
+  SETTINGS_QUERY,
+} from "@/sanity/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data } = await sanityFetch({ query: HOME_SEO_QUERY, stega: false });
@@ -23,12 +30,22 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const { data } = await sanityFetch({ query: HOME_QUERY });
+  const [{ data }, { data: founders }, { data: settings }] = await Promise.all([
+    sanityFetch({ query: HOME_QUERY }),
+    sanityFetch({ query: FOUNDERS_QUERY, stega: false }),
+    sanityFetch({ query: SETTINGS_QUERY, stega: false }),
+  ]);
 
   if (!data) return null;
 
   return (
     <>
+      <JsonLd
+        data={organizationGraph(founders, {
+          email: settings?.contactEmail,
+          description: settings?.description,
+        })}
+      />
       <Hero data={data} />
       <Marquee items={data.marquee ?? []} />
       <ProofSection data={data} />

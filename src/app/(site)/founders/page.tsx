@@ -6,6 +6,8 @@ import { BelieveSection } from "@/components/founders/believe";
 import { PeopleSection } from "@/components/founders/people";
 import { StudioSection } from "@/components/founders/studio";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbs, foundersGraph } from "@/lib/schema";
 import { sanityFetch } from "@/sanity/lib/live";
 import { FOUNDERS_PAGE_QUERY, FOUNDERS_PAGE_SEO_QUERY } from "@/sanity/lib/queries";
 
@@ -28,6 +30,8 @@ export default async function FoundersPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["Founders", "/founders"]])} />
+      <JsonLd data={foundersGraph(data.founders ?? [])} />
       <Hero data={data} />
       <StorySection data={data} />
       <BelieveSection data={data} />

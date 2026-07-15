@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { CaseGrid } from "@/components/shared/case-cards";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbs } from "@/lib/schema";
 import { Container } from "@/components/ui/container";
 import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
@@ -17,6 +19,7 @@ export const metadata: Metadata = {
 export default function WorkPage() {
   return (
     <>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["Case studies", "/work"]])} />
       <section id="top" className="relative overflow-hidden">
         <Container className="pb-14 pt-28 sm:pt-32 md:pb-20 md:pt-36">
           <Reveal>

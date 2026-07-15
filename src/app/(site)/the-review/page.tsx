@@ -10,6 +10,8 @@ import { PricingSection } from "@/components/review/pricing";
 import { FitSection } from "@/components/review/fit";
 import { ProofSection } from "@/components/review/proof";
 import { FaqSection } from "@/components/review/faq";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbs, faqPage } from "@/lib/schema";
 import { FinalCta } from "@/components/review/final-cta";
 import { Marquee } from "@/components/ui/marquee";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -28,8 +30,12 @@ export default async function TheReviewPage() {
   const { data } = await sanityFetch({ query: REVIEW_QUERY });
   if (!data) return null;
 
+  const faqLd = faqPage(data.faqItems ?? []);
+
   return (
     <>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["The Review", "/the-review"]])} />
+      {faqLd && <JsonLd data={faqLd} />}
       <Hero data={data} />
       <Marquee items={data.marquee ?? []} />
       <ProblemSection data={data} />
