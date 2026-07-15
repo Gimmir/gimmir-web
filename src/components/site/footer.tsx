@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Logomark } from "@/components/ui/logomark";
+import { CookieSettingsLink } from "@/components/consent/cookie-settings-link";
 import type {
   NAVIGATION_QUERY_RESULT,
   SETTINGS_QUERY_RESULT,
@@ -88,6 +89,7 @@ export function Footer({
             >
               Privacy
             </Link>
+            <CookieSettingsLink />
           </p>
           <p className="font-mono text-xs uppercase tracking-wider">
             {nav?.footerNote}

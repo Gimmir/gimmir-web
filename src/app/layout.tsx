@@ -5,9 +5,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VisualEditing } from "next-sanity/visual-editing";
 
-import { Clarity } from "@/components/analytics/clarity";
-import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { CalProvider } from "@/components/cal/cal-provider";
+import { CookieConsent } from "@/components/consent/cookie-consent";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { SanityLive } from "@/sanity/lib/live";
 import { SITE_URL, socialMetadata } from "@/lib/seo";
@@ -67,8 +66,7 @@ export default async function RootLayout({
         <CalProvider />
         <Analytics />
         <SpeedInsights />
-        <Clarity />
-        <GoogleAnalytics />
+        <CookieConsent />
         <SanityLive />
         {isDraftMode && (
           <>

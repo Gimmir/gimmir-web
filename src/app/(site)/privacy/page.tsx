@@ -127,8 +127,10 @@ export default function PrivacyPage() {
           <p>
             The site itself does not set marketing cookies. Google Analytics
             and Microsoft Clarity may set cookies to distinguish visitors and
-            sessions. You can block cookies in your browser settings without
-            losing access to any part of the site.
+            sessions — they load only after you accept them in the cookie
+            banner. You can change your choice at any time via the
+            &ldquo;Cookie settings&rdquo; link in the footer, or block cookies
+            in your browser without losing access to any part of the site.
           </p>
         </Section>
 
