@@ -36,7 +36,6 @@ export default function HowWeWorkPage() {
         title="Talk to the founders, not a sales team."
         intro="The fastest way to know if we are the right team is to talk to the people who would actually build with you."
         buttonLabel="Book a founder review call"
-        buttonHref="/the-review"
       />
     </>
   );

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { cn } from "@/lib/cn";
+import { CAL_CONFIG, CAL_LINK, CAL_NAMESPACE } from "@/lib/cal";
 import { ArrowRight } from "./icons";
 
 type Variant = "solid" | "outline" | "outlineLight" | "lime";
@@ -29,6 +30,7 @@ export function Button({
   arrow = false,
   className,
   onClick,
+  cal = false,
 }: {
   href?: string;
   children: React.ReactNode;
@@ -37,6 +39,8 @@ export function Button({
   arrow?: boolean;
   className?: string;
   onClick?: () => void;
+  /** Open the Cal.com founder-review booking popup instead of navigating. */
+  cal?: boolean;
 }) {
   const classes = cn(base, variants[variant], sizes[size], className);
   const content = (
@@ -47,6 +51,21 @@ export function Button({
       ) : null}
     </>
   );
+
+  if (cal) {
+    return (
+      <button
+        type="button"
+        className={classes}
+        onClick={onClick}
+        data-cal-namespace={CAL_NAMESPACE}
+        data-cal-link={CAL_LINK}
+        data-cal-config={CAL_CONFIG}
+      >
+        {content}
+      </button>
+    );
+  }
 
   if (!href) {
     return (

@@ -30,7 +30,7 @@ export function ReviewCtaSection() {
 
         <Reveal>
           <div className="mt-10">
-            <Button href="/the-review" arrow>
+            <Button cal arrow>
               Book a founder review call
             </Button>
           </div>

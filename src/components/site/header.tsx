@@ -87,7 +87,7 @@ export function Header() {
           ))}
         </nav>
         <Button
-          href="/the-review"
+          cal
           className="mt-8 self-start"
           onClick={() => setOpen(false)}
         >
@@ -143,7 +143,7 @@ export function Header() {
 
         <div className="hidden lg:block">
           <Button
-            href="/the-review"
+            cal
             size="sm"
             variant={light ? "outlineLight" : "solid"}
           >

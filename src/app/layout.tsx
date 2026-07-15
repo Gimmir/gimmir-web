@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VisualEditing } from "next-sanity/visual-editing";
 
 import { Clarity } from "@/components/analytics/clarity";
+import { CalProvider } from "@/components/cal/cal-provider";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { SanityLive } from "@/sanity/lib/live";
 import { SITE_URL } from "@/lib/seo";
@@ -55,6 +56,7 @@ export default async function RootLayout({
     >
       <body>
         {children}
+        <CalProvider />
         <Analytics />
         <SpeedInsights />
         <Clarity />

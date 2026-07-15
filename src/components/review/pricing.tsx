@@ -62,7 +62,7 @@ export function PricingSection() {
                 </p>
 
                 <div className="mt-9">
-                  <Button href="#start" variant="lime" arrow>
+                  <Button cal variant="lime" arrow>
                     Book a free review call
                   </Button>
                 </div>

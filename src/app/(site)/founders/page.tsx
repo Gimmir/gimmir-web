@@ -27,7 +27,6 @@ export default function FoundersPage() {
         title="Let’s look at what you are building."
         intro="The best way to know if we are the right team is to talk to us directly."
         buttonLabel="Book a founder review call"
-        buttonHref="/the-review"
       />
     </>
   );

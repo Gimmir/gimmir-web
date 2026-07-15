@@ -7,13 +7,11 @@ export function FinalCtaPanel({
   title,
   intro,
   buttonLabel,
-  buttonHref,
 }: {
   eyebrow: string;
   title: React.ReactNode;
   intro: string;
   buttonLabel: string;
-  buttonHref: string;
 }) {
   return (
     <section className="border-t border-line py-20 md:py-28">
@@ -62,7 +60,7 @@ export function FinalCtaPanel({
                 </div>
 
                 <TrackedCta
-                  href={buttonHref}
+                  cal
                   variant="lime"
                   arrow
                   event="review_call_cta_click"

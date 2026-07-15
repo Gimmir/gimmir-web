@@ -37,7 +37,7 @@ export function Hero() {
             </p>
             <div className="flex shrink-0 flex-wrap gap-3 sm:gap-3.5">
               <TrackedCta
-                href="/the-review"
+                cal
                 size="sm"
                 className="sm:h-[52px] sm:px-7 sm:text-base"
                 event="review_call_cta_click"
@@ -49,7 +49,7 @@ export function Hero() {
                 <ArrowRight className="hidden size-[18px] transition-transform duration-200 group-hover:translate-x-0.5 sm:inline-block" />
               </TrackedCta>
               <Button
-                href="#work"
+                href="/how-we-work"
                 variant="outline"
                 size="sm"
                 className="sm:h-[52px] sm:px-7 sm:text-base"

@@ -31,7 +31,7 @@ export function Footer() {
               We build the apps and platforms behind sport and fitness brands
               that are scaling.
             </p>
-            <Button href="/the-review" arrow className="mt-8">
+            <Button cal arrow className="mt-8">
               Book a founder review call
             </Button>
           </div>

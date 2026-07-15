@@ -30,7 +30,7 @@ export function Hero() {
             </p>
             <div className="flex shrink-0 flex-col gap-3.5">
               <div className="flex flex-wrap gap-3.5">
-                <Button href="/the-review" arrow>
+                <Button cal arrow>
                   Book a founder review call
                 </Button>
               </div>
