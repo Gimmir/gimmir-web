@@ -4,9 +4,10 @@ import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { Container } from "@/components/ui/container";
 import { CountUp } from "@/components/ui/count-up";
 import { Mark } from "@/components/ui/mark";
+import { Marquee } from "@/components/ui/marquee";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CaseBackLink, CasePlaceholder } from "@/components/work/parts";
+import { CaseBackLink } from "@/components/work/parts";
 import type { CaseStudy } from "@/lib/cases";
 
 const SCREENS = [
@@ -18,10 +19,62 @@ const SCREENS = [
   { src: "/screens-all/frame-6.jpg", alt: "Jimmy Coach — progress tracking for steps and body weight over time" },
 ];
 
+/* --- tiny stroke glyphs, matching the site's illustration language --------- */
+
+function GlyphPhone() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-6">
+      <rect x="7" y="2.5" width="10" height="19" rx="2.5" className="stroke-lime" strokeWidth="1.7" />
+      <line x1="10.2" y1="5.4" x2="13.8" y2="5.4" className="stroke-lime" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function GlyphCoach() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-6">
+      <rect x="7" y="2.5" width="10" height="19" rx="2.5" className="stroke-lime" strokeWidth="1.7" />
+      <path d="M9.8 13.5 11.3 15l3-3.4" className="stroke-lime" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      <line x1="10" y1="8.6" x2="14" y2="8.6" className="stroke-lime" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function GlyphDashboard() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden className="size-6">
+      <rect x="2.5" y="4" width="19" height="13" rx="2" className="stroke-lime" strokeWidth="1.7" />
+      <line x1="8" y1="20.5" x2="16" y2="20.5" className="stroke-lime" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M6.5 13.2 10 9.8l2.6 2.4 4.6-4.4" className="stroke-lime" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const SURFACES = [
+  {
+    glyph: <GlyphPhone />,
+    tag: "Native app · iOS & Android",
+    title: "The client app",
+    desc: "Where members train, every day. Today’s workout in clear blocks with timers and video form cues, chat with the coach, the community feed, streaks and PR history — under the coach’s own brand, their logo and colors on the home screen.",
+  },
+  {
+    glyph: <GlyphCoach />,
+    tag: "Native app · iOS & Android",
+    title: "The coach app",
+    desc: "The business in a pocket. Coaches program workouts, answer clients, drop announcements to the community and watch payments come in — between sessions, from the gym floor, not from a laptop.",
+  },
+  {
+    glyph: <GlyphDashboard />,
+    tag: "Web",
+    title: "The dashboard",
+    desc: "The heavy lifting: the workout and course builders, client management, Stripe subscriptions and revenue analytics. Everything a coaching business runs on, in one place instead of five tools.",
+  },
+];
+
 const CAPABILITIES = [
   {
     title: "Workout builder",
-    desc: "Program EMOM, AMRAP, circuits and strength — with video form cues, the way the best coaches actually write.",
+    desc: "EMOM, AMRAP, circuits and strength — structured blocks with video form cues, written the way the best coaches actually program.",
   },
   {
     title: "Community feed",
@@ -29,26 +82,58 @@ const CAPABILITIES = [
   },
   {
     title: "Messaging",
-    desc: "1:1 and group chat, so coaches and clients stay in one app instead of scattered across WhatsApp.",
+    desc: "1:1 and group chat with voice notes, photos and video — so coaching stops living in WhatsApp.",
   },
   {
     title: "Payments & subscriptions",
-    desc: "Stripe billing built in — recurring plans and automated payments, no chasing invoices.",
+    desc: "Stripe billing built in: recurring plans, automated charges and revenue analytics. No chasing invoices.",
   },
   {
     title: "Courses",
-    desc: "Package knowledge into courses that live right next to the training, Skool-style.",
+    desc: "Modules, lessons and full programs packaged next to the training — knowledge the coach sells, not just sessions.",
+  },
+  {
+    title: "Progress & PRs",
+    desc: "Lifts, benchmarks, streaks and graphs — clients see themselves getting better, which is why they stay.",
+  },
+  {
+    title: "Video exercise library",
+    desc: "Every movement with a demonstration, ready to drop into any block of any workout.",
   },
   {
     title: "Their own branded app",
-    desc: "A native iOS and Android app under the coach’s brand — not another logo in someone else’s tool.",
+    desc: "Each coach’s logo and colors — their app on the client’s home screen, not another account in someone else’s tool.",
+  },
+];
+
+const TIMELINE = [
+  {
+    tag: "Day 0",
+    title: "An empty repository",
+    desc: "Co-founded with a coach. No code, no designs — a bet that independent coaches deserve better than PDFs and spreadsheets.",
+  },
+  {
+    tag: "Product",
+    title: "Design system & platform",
+    desc: "One design language, one API, one data model — built once, powering every surface.",
+  },
+  {
+    tag: "Build",
+    title: "Two apps + web",
+    desc: "Native client and coach apps and the web dashboard, built in parallel by the same small team.",
+  },
+  {
+    tag: "Launch",
+    title: "App Store, then traction",
+    desc: "Live in the App Store, 300+ users in the first month — and a weekly release cadence ever since.",
   },
 ];
 
 const RESULTS = [
   { value: 100, suffix: "+", label: "active coaches on the platform" },
   { value: 300, suffix: "+", label: "users in the first month after launch" },
-  { value: 500, suffix: "+", label: "expert workouts, ready on tap", lime: true },
+  { value: 500, suffix: "+", label: "expert workouts, ready on tap" },
+  { value: 2, suffix: "", label: "native apps — client and coach — plus web" },
 ];
 
 export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
@@ -96,9 +181,10 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
             <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
               <p className="max-w-[54ch] text-lg leading-relaxed text-muted md:text-xl">
                 Jimmy is the retention platform for modern fitness coaches — the
-                &ldquo;Skool of Fitness.&rdquo; Programs, community, messaging,
-                payments and courses in one branded app. We co-founded it and
-                built it end to end.
+                &ldquo;Skool of Fitness.&rdquo; A whole platform: two native
+                mobile apps and a web dashboard, with programs, community,
+                messaging, payments and courses inside. We co-founded it and
+                built all of it, end to end.
               </p>
               <dl className="grid shrink-0 grid-cols-2 gap-x-10 gap-y-6 sm:grid-cols-3 md:text-right">
                 <div>
@@ -117,7 +203,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                   <dt className="font-mono text-xs uppercase tracking-widest text-muted">
                     Platform
                   </dt>
-                  <dd className="mt-2 font-semibold">iOS · Android · Web</dd>
+                  <dd className="mt-2 font-semibold">2 native apps · Web</dd>
                 </div>
               </dl>
             </div>
@@ -125,8 +211,20 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
         </Container>
       </section>
 
+      <Marquee
+        items={[
+          "Workout builder",
+          "Community feed",
+          "1:1 & group chat",
+          "Stripe subscriptions",
+          "Courses",
+          "PRs & progress",
+          "Branded apps",
+        ]}
+      />
+
       {/* inside the app — screenshot gallery */}
-      <section className="overflow-hidden pb-20 pt-8 md:pb-28 md:pt-12">
+      <section className="overflow-hidden pb-20 pt-14 md:pb-28 md:pt-16">
         <Container className="mb-8 md:mb-10">
           <Reveal>
             <p className="font-mono text-sm uppercase tracking-widest text-muted">
@@ -155,7 +253,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
         </Reveal>
       </section>
 
-      {/* what it is */}
+      {/* what it is + the real story */}
       <section className="border-t border-line py-20 md:py-28">
         <Container>
           <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start md:gap-16">
@@ -178,18 +276,84 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                   their coach, and belong to a community.
                 </p>
                 <p>
-                  We did not join to bill hours. We{" "}
-                  <strong className="font-semibold text-ink">co-founded it</strong>{" "}
-                  and built the product end to end — from an empty repository to a
-                  platform coaches and their clients use every day.
+                  Jimmy was co-founded with{" "}
+                  <strong className="font-semibold text-ink">
+                    a working coach
+                  </strong>{" "}
+                  — Quentin Randis, who has coached 250+ clients in Hyrox,
+                  CrossFit and functional fitness. He brought the coaching
+                  judgment; we brought everything else:{" "}
+                  <strong className="font-semibold text-ink">
+                    product, design and engineering, from an empty repository to
+                    the App Store
+                  </strong>
+                  . Not billed by the hour — built as owners.
                 </p>
-                <CasePlaceholder label="Story — real detail">
-                  Add the origin: whose idea, how the team came together, and what
-                  made you bet on it. Founders reading this want the real story.
-                </CasePlaceholder>
+                <blockquote className="rounded-2xl border border-line bg-surface p-6 text-base leading-relaxed md:p-7">
+                  <p className="text-ink">
+                    &ldquo;Not a disguised web wrapper or a vibe-coding project.
+                    It&rsquo;s a high-performance mobile app built by engineers,
+                    designed for stability and scalability.&rdquo;
+                  </p>
+                  <footer className="mt-3 font-mono text-xs uppercase tracking-widest text-muted">
+                    How jimmycoach.com describes the product we built
+                  </footer>
+                </blockquote>
               </div>
             </Reveal>
           </div>
+        </Container>
+      </section>
+
+      {/* one platform, three surfaces — dark band */}
+      <section className="bg-ink text-paper">
+        <Container className="py-20 md:py-28">
+          <Reveal>
+            <SectionHeader
+              index="02"
+              onDark
+              titleMax="max-w-[24ch]"
+              title={
+                <>
+                  One platform,{" "}
+                  <span className="font-serif font-normal italic text-lime">
+                    three surfaces.
+                  </span>
+                </>
+              }
+              intro="Not a website with a mobile view. Two native apps and a web dashboard on one shared platform — each surface built for how it is actually used."
+            />
+          </Reveal>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {SURFACES.map((s, i) => (
+              <Reveal key={s.title} delay={i * 80} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-paper/15 p-7 md:p-8">
+                  <div className="flex items-center justify-between">
+                    {s.glyph}
+                    <span className="rounded-full border border-lime/40 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-lime">
+                      {s.tag}
+                    </span>
+                  </div>
+                  <h3 className="mt-6 text-2xl font-bold tracking-tight">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-[#c9c6bc]">{s.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <p className="mt-10 max-w-[62ch] text-lg leading-relaxed text-[#8b887e]">
+              One design system, one API, one data model underneath — which is
+              how a small team ships{" "}
+              <strong className="font-semibold text-paper">
+                a new feature every week
+              </strong>{" "}
+              across all three surfaces without them drifting apart.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -198,16 +362,16 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
         <Container>
           <Reveal>
             <SectionHeader
-              index="02"
+              index="03"
               titleMax="max-w-[24ch]"
-              title="One platform for everything a coaching business runs on."
+              title="Everything a coaching business runs on."
               intro="Two sides in one product: the app clients train in, and the tools coaches run their business with."
             />
           </Reveal>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {CAPABILITIES.map((c, i) => (
-              <Reveal key={c.title} delay={(i % 3) * 60} className="h-full">
+              <Reveal key={c.title} delay={(i % 4) * 60} className="h-full">
                 <div className="flex h-full flex-col rounded-2xl border border-line bg-surface p-7">
                   <span className="flex size-10 items-center justify-center rounded-lg bg-lime font-mono text-sm font-bold text-ink">
                     {String(i + 1).padStart(2, "0")}
@@ -223,6 +387,48 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
         </Container>
       </section>
 
+      {/* from zero to the App Store */}
+      <section className="border-t border-line py-20 md:py-28">
+        <Container>
+          <Reveal>
+            <SectionHeader
+              index="04"
+              titleMax="max-w-[22ch]"
+              title="From an empty repo to the App Store."
+              intro="Built the way we build for clients: senior team, honest scope, working software early and often."
+            />
+          </Reveal>
+
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {TIMELINE.map((t, i) => (
+              <Reveal key={t.title} delay={i * 70} className="h-full">
+                <div className="relative flex h-full flex-col rounded-2xl border border-line bg-surface p-7">
+                  <span className="inline-flex w-fit items-center rounded-full bg-lime px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-ink">
+                    {t.tag}
+                  </span>
+                  <h3 className="mt-5 text-xl font-bold tracking-tight">
+                    {t.title}
+                  </h3>
+                  <p className="mt-2 leading-relaxed text-muted">{t.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <p className="mt-10 max-w-[62ch] text-lg leading-relaxed text-muted">
+              Because we run Jimmy as owners, every hard problem — App Store
+              review, Stripe billing edge cases, chat at scale, keeping two
+              native apps in lockstep — is a problem{" "}
+              <strong className="font-semibold text-ink">
+                we have already solved for ourselves
+              </strong>{" "}
+              before a client ever pays us to solve it for them.
+            </p>
+          </Reveal>
+        </Container>
+      </section>
+
       {/* the result — lime band */}
       <section className="border-t border-line py-20 md:py-28">
         <Container>
@@ -231,7 +437,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
               <p className="font-mono text-sm uppercase tracking-widest text-ink/60">
                 The result
               </p>
-              <div className="mt-8 grid gap-10 sm:grid-cols-3 md:gap-12">
+              <div className="mt-8 grid gap-10 sm:grid-cols-2 md:grid-cols-4 md:gap-12">
                 {RESULTS.map((s, i) => (
                   <div key={i}>
                     <div className="display text-[clamp(2.75rem,6vw,4rem)] leading-none text-ink">
@@ -243,6 +449,10 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                   </div>
                 ))}
               </div>
+              <p className="mt-10 border-t border-ink/15 pt-6 text-ink/70">
+                Live in the App Store, growing week over week — and still built
+                and run by the same team you would be working with.
+              </p>
             </div>
           </Reveal>
         </Container>

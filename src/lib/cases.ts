@@ -71,8 +71,9 @@ export const CASES: CaseStudy[] = [
     seoDescription:
       "An online coaching app we co-founded and built end to end — programs, community, messaging and payments, with 100+ active coaches in the first month.",
     services: [
-      "Product & platform, end to end",
-      "Coach & client apps",
+      "Two native apps — client & coach",
+      "Web dashboard & Stripe billing",
+      "Community, courses & messaging",
       "Built from zero to launch",
     ],
     stats: [
