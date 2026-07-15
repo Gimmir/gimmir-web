@@ -1,6 +1,9 @@
+import Image from "next/image";
+
 import { TrackedCta } from "@/components/analytics/tracked-cta";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { FOUNDER_PHOTOS } from "@/lib/founders";
 
 export function FinalCtaPanel({
   eyebrow,
@@ -42,12 +45,20 @@ export function FinalCtaPanel({
               <div className="flex w-full shrink-0 flex-col items-start gap-5 md:w-auto md:items-end">
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2.5">
-                    <span className="flex size-10 items-center justify-center rounded-full bg-lime text-[13px] font-bold text-ink ring-[3px] ring-ink">
-                      NM
-                    </span>
-                    <span className="flex size-10 items-center justify-center rounded-full bg-paper text-[13px] font-bold text-ink ring-[3px] ring-ink">
-                      OP
-                    </span>
+                    <Image
+                      src={FOUNDER_PHOTOS.nazar}
+                      alt="Nazar Moroz"
+                      width={40}
+                      height={40}
+                      className="size-10 rounded-full object-cover object-top ring-[3px] ring-ink"
+                    />
+                    <Image
+                      src={FOUNDER_PHOTOS.oleh}
+                      alt="Oleh Palazhii"
+                      width={40}
+                      height={40}
+                      className="size-10 rounded-full object-cover object-top ring-[3px] ring-ink"
+                    />
                   </div>
                   <div className="text-sm leading-tight md:text-right">
                     <div className="font-semibold text-paper">

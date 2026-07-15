@@ -1,7 +1,10 @@
+import Image from "next/image";
+
 import { Container } from "@/components/ui/container";
 import { Pencil, Plus } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { FOUNDER_PHOTOS } from "@/lib/founders";
 
 function TeamAvatar() {
   return (
@@ -61,12 +64,20 @@ export function StudioSection() {
                 {/* the team */}
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
                   <div className="flex -space-x-3">
-                    <span className="flex size-10 items-center justify-center rounded-full bg-lime text-[11px] font-bold text-ink ring-2 ring-surface">
-                      NM
-                    </span>
-                    <span className="flex size-10 items-center justify-center rounded-full border border-line bg-paper text-[11px] font-bold text-ink ring-2 ring-surface">
-                      OP
-                    </span>
+                    <Image
+                      src={FOUNDER_PHOTOS.nazar}
+                      alt="Nazar Moroz"
+                      width={40}
+                      height={40}
+                      className="size-10 rounded-full object-cover object-top ring-2 ring-surface"
+                    />
+                    <Image
+                      src={FOUNDER_PHOTOS.oleh}
+                      alt="Oleh Palazhii"
+                      width={40}
+                      height={40}
+                      className="size-10 rounded-full object-cover object-top ring-2 ring-surface"
+                    />
                     {Array.from({ length: 6 }).map((_, i) => (
                       <TeamAvatar key={i} />
                     ))}

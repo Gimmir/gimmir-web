@@ -1,16 +1,22 @@
+import Image from "next/image";
+
 import { Container } from "@/components/ui/container";
+import { LinkedIn } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import { FOUNDER_LINKEDIN, FOUNDER_PHOTOS } from "@/lib/founders";
 
 const FOUNDERS = [
   {
-    initials: "NM",
+    photo: FOUNDER_PHOTOS.nazar,
+    linkedin: FOUNDER_LINKEDIN.nazar,
     name: "Nazar Moroz",
     role: "Founder — product & business",
     bio: "Product and business. Has built and shipped fitness products end to end, as an owner.",
   },
   {
-    initials: "OP",
+    photo: FOUNDER_PHOTOS.oleh,
+    linkedin: FOUNDER_LINKEDIN.oleh,
     name: "Oleh Palazhii",
     role: "CTO — architecture",
     bio: "Led the architecture of both the UN1T platform and Jimmy Coach. The person who can tell in days whether your product will hold up in years.",
@@ -40,19 +46,31 @@ export function FoundersSection() {
           {FOUNDERS.map((f, i) => (
             <Reveal key={f.name} delay={i * 70} className="h-full">
               <article className="flex h-full flex-col rounded-2xl border border-paper/15 p-7 md:p-8">
-                <span
-                  className="flex size-14 items-center justify-center rounded-full bg-lime font-extrabold text-ink"
-                  aria-hidden
-                >
-                  {f.initials}
-                </span>
-                <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <h3 className="text-2xl font-bold tracking-tight">
-                    {f.name}
-                  </h3>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-lime">
-                    {f.role}
-                  </span>
+                <Image
+                  src={f.photo}
+                  alt={f.name}
+                  width={56}
+                  height={56}
+                  className="size-14 rounded-full object-cover object-top"
+                />
+                <div className="mt-5 flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <h3 className="text-2xl font-bold tracking-tight">
+                      {f.name}
+                    </h3>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-lime">
+                      {f.role}
+                    </span>
+                  </div>
+                  <a
+                    href={f.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${f.name} on LinkedIn`}
+                    className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-paper/15 text-paper/70 transition-colors hover:border-lime hover:text-lime"
+                  >
+                    <LinkedIn className="size-[18px]" />
+                  </a>
                 </div>
                 <p className="mt-3 leading-relaxed text-[#c9c6bc]">{f.bio}</p>
               </article>
