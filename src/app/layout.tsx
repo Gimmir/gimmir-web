@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VisualEditing } from "next-sanity/visual-editing";
 
 import { Clarity } from "@/components/analytics/clarity";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { CalProvider } from "@/components/cal/cal-provider";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { SanityLive } from "@/sanity/lib/live";
@@ -67,6 +68,7 @@ export default async function RootLayout({
         <Analytics />
         <SpeedInsights />
         <Clarity />
+        <GoogleAnalytics />
         <SanityLive />
         {isDraftMode && (
           <>

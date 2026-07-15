@@ -59,10 +59,12 @@ export default function PrivacyPage() {
               Usage analytics.
             </strong>{" "}
             We use Vercel Analytics and Vercel Speed Insights (aggregated,
-            privacy-friendly page metrics) and Microsoft Clarity (heatmaps and
+            privacy-friendly page metrics), Google Analytics (visit and
+            traffic-source statistics), and Microsoft Clarity (heatmaps and
             session replays that show how visitors interact with pages).
-            Clarity may use cookies and collects interaction data such as
-            clicks, scrolls, and device information.
+            Google Analytics and Clarity may use cookies and collect
+            interaction data such as pages visited, clicks, scrolls, and
+            device information.
           </p>
           <p>
             <strong className="font-semibold text-ink">
@@ -95,10 +97,10 @@ export default function PrivacyPage() {
         <Section title="Who processes it">
           <p>
             Our service providers process data on our behalf: Vercel (hosting
-            and analytics), Microsoft (Clarity), Cal.com (booking), Sanity
-            (content management), and Attio (CRM). Each processes data under
-            its own security and privacy commitments. We do not sell or rent
-            personal data to anyone.
+            and analytics), Google (Analytics), Microsoft (Clarity), Cal.com
+            (booking), Sanity (content management), and Attio (CRM). Each
+            processes data under its own security and privacy commitments. We
+            do not sell or rent personal data to anyone.
           </p>
         </Section>
 
@@ -123,10 +125,10 @@ export default function PrivacyPage() {
 
         <Section title="Cookies">
           <p>
-            The site itself does not set marketing cookies. Microsoft Clarity
-            may set cookies to distinguish sessions. You can block cookies in
-            your browser settings without losing access to any part of the
-            site.
+            The site itself does not set marketing cookies. Google Analytics
+            and Microsoft Clarity may set cookies to distinguish visitors and
+            sessions. You can block cookies in your browser settings without
+            losing access to any part of the site.
           </p>
         </Section>
 
