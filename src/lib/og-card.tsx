@@ -1,0 +1,125 @@
+import { ImageResponse } from "next/og";
+
+export const OG_SIZE = { width: 1200, height: 630 };
+export const OG_CONTENT_TYPE = "image/png";
+
+const INK = "#15140e";
+const PAPER = "#f6f4ee";
+const LIME = "#c9f23d";
+
+/** Scale the headline down as the longest line grows. */
+function headlineSize(line1: string, line2: string) {
+  const longest = Math.max(line1.length, line2.length);
+  if (longest <= 22) return 76;
+  if (longest <= 32) return 62;
+  if (longest <= 44) return 50;
+  return 42;
+}
+
+/**
+ * The shared social-share card: brand tile + wordmark, a two-line headline
+ * (white line, lime line), and a footer row. Each route's opengraph-image
+ * file feeds it that page's text.
+ */
+export function ogCard({
+  line1,
+  line2,
+  footer = "Built by founders who have shipped real fitness platforms",
+}: {
+  line1: string;
+  line2: string;
+  footer?: string;
+}) {
+  const fontSize = headlineSize(line1, line2);
+
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          background: INK,
+          padding: 72,
+          position: "relative",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            right: -140,
+            top: -180,
+            width: 520,
+            height: 520,
+            borderRadius: 9999,
+            background: "rgba(201,242,61,0.22)",
+            filter: "blur(110px)",
+          }}
+        />
+
+        {/* logo tile + wordmark */}
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <svg width="96" height="96" viewBox="0 0 300 300" fill="none">
+            <rect width="300" height="300" rx="90" fill={INK} stroke={LIME} strokeWidth="6" />
+            <path
+              d="M165.608 101.53C162.219 98.7978 158.708 96.745 155.076 95.3717C151.412 93.9516 147.642 93.2344 143.767 93.2202C139.906 93.126 135.98 93.7418 131.99 95.0676C128.046 96.3603 124.094 98.3934 120.133 101.167C112.73 106.351 107.504 112.737 104.455 120.327C101.454 127.883 100.846 136.247 102.629 145.418C104.38 154.543 108.772 164.126 115.804 174.169C122.835 184.211 130.348 191.679 138.342 196.572C146.336 201.465 154.436 203.8 162.644 203.578C170.818 203.31 178.724 200.501 186.363 195.152C193.295 190.298 198.359 184.935 201.554 179.061C204.764 173.107 206.088 166.969 205.527 160.648C205.013 154.294 202.604 148.043 198.299 141.896L205.164 138.453L167.819 164.602L151.751 141.655L212.367 99.211L225.083 117.372C233.955 130.042 238.891 142.811 239.89 155.679C240.856 168.5 238.349 180.676 232.368 192.207C226.355 203.691 217.265 213.692 205.099 222.211C191.519 231.72 177.503 237.093 163.05 238.331C148.564 239.523 134.584 236.618 121.11 229.618C107.649 222.539 95.5962 211.397 84.9499 196.192C76.768 184.507 71.1709 172.901 68.1585 161.373C65.1604 149.765 64.5155 138.607 66.2239 127.899C67.9322 117.192 71.7223 107.3 77.5941 98.223C83.4659 89.1461 91.1879 81.2564 100.76 74.5538C108.965 68.8088 117.442 64.6566 126.191 62.0972C134.907 59.491 143.511 58.4315 152.004 58.9188C160.544 59.373 168.645 61.3584 176.308 64.8749C183.937 68.3444 190.745 73.299 196.729 79.7386L165.608 101.53Z"
+              fill={LIME}
+            />
+          </svg>
+          <div style={{ display: "flex", fontSize: 64, fontWeight: 800, color: PAPER, letterSpacing: -2 }}>
+            Gimmir
+          </div>
+        </div>
+
+        {/* headline */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize,
+              fontWeight: 800,
+              color: PAPER,
+              letterSpacing: -2.5,
+              lineHeight: 1.05,
+            }}
+          >
+            {line1}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize,
+              fontWeight: 800,
+              color: LIME,
+              letterSpacing: -2.5,
+              lineHeight: 1.05,
+            }}
+          >
+            {line2}
+          </div>
+        </div>
+
+        {/* footer row */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderTop: "1px solid rgba(246,244,238,0.2)",
+            paddingTop: 32,
+          }}
+        >
+          <div style={{ display: "flex", fontSize: 30, color: "rgba(246,244,238,0.75)" }}>
+            {footer}
+          </div>
+          <div style={{ display: "flex", fontSize: 30, fontWeight: 700, color: LIME }}>
+            gimmir.com
+          </div>
+        </div>
+      </div>
+    ),
+    { ...OG_SIZE },
+  );
+}

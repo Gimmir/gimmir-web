@@ -31,6 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: data?.seo?.metaTitle ?? BRAND,
       description: data?.seo?.metaDescription,
       path: "/",
+      image: "/opengraph-image",
     }),
   };
 }
