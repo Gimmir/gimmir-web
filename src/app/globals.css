@@ -135,11 +135,28 @@
     opacity 640ms var(--ease-out) var(--reveal-delay, 0ms),
     transform 640ms var(--ease-out) var(--reveal-delay, 0ms);
 }
+/* Above-the-fold reveals play as a pure CSS animation on first paint — no
+   waiting for JS/hydration, which would delay LCP and replay the entrance on
+   slow devices. Server-rendered as data-reveal="eager"; JS leaves it alone. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 22px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+[data-reveal="eager"] {
+  animation: reveal-in 640ms var(--ease-out) var(--reveal-delay, 0ms) both;
+}
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1;
     transform: none;
     transition: none;
+    animation: none;
   }
 }
 

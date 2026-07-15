@@ -61,11 +61,11 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
           className="pointer-events-none absolute -right-32 -top-24 size-[30rem] rounded-full bg-lime/25 blur-[130px]"
         />
         <Container className="relative pb-14 pt-28 sm:pt-32 md:pb-16 md:pt-36">
-          <Reveal>
+          <Reveal eager>
             <CaseBackLink />
           </Reveal>
 
-          <Reveal delay={40}>
+          <Reveal eager delay={40}>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Image
                 src={data.logo}
@@ -84,7 +84,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
             </div>
           </Reveal>
 
-          <Reveal delay={80}>
+          <Reveal eager delay={80}>
             <h1 className="display mt-9 text-[2.1rem] leading-[1.08] sm:text-hero sm:leading-[0.98]">
               Clients don&rsquo;t just train.
               <br />
@@ -92,7 +92,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
             </h1>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal eager delay={120}>
             <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
               <p className="max-w-[54ch] text-lg leading-relaxed text-muted md:text-xl">
                 Jimmy is the retention platform for modern fitness coaches — the

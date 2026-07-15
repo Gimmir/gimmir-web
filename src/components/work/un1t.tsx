@@ -28,11 +28,11 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
         />
 
         <Container className="relative pb-16 pt-28 sm:pt-32 md:pb-24 md:pt-36">
-          <Reveal>
+          <Reveal eager>
             <CaseBackLink onDark />
           </Reveal>
 
-          <Reveal delay={40}>
+          <Reveal eager delay={40}>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Image
                 src={data.logo}
@@ -51,7 +51,7 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
             </div>
           </Reveal>
 
-          <Reveal delay={80}>
+          <Reveal eager delay={80}>
             <h1 className="display mt-9 text-[2.1rem] leading-[1.06] sm:text-hero sm:leading-[0.98]">
               Off a rented platform.
               <br />
@@ -59,13 +59,13 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
             </h1>
           </Reveal>
 
-          <Reveal delay={120}>
+          <Reveal eager delay={120}>
             <p className="mt-8 max-w-[54ch] text-lg leading-relaxed text-paper/70 md:text-xl">
               {data.summary}
             </p>
           </Reveal>
 
-          <Reveal delay={160}>
+          <Reveal eager delay={160}>
             <dl className="mt-14 grid gap-8 border-t border-paper/15 pt-8 sm:grid-cols-2">
               <div>
                 <dt className="font-mono text-xs uppercase tracking-widest text-lime">

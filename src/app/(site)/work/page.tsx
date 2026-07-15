@@ -30,11 +30,11 @@ export default function WorkPage() {
       <JsonLd data={breadcrumbs([["Home", "/"], ["Case studies", "/work"]])} />
       <section id="top" className="relative overflow-hidden">
         <Container className="pb-14 pt-28 sm:pt-32 md:pb-20 md:pt-36">
-          <Reveal>
+          <Reveal eager>
             <Pill>Case studies</Pill>
           </Reveal>
 
-          <Reveal delay={60}>
+          <Reveal eager delay={60}>
             <h1 className="display mt-8 text-[2rem] leading-[1.12] sm:text-hero sm:leading-[0.98]">
               Real fitness products,
               <br />
@@ -42,7 +42,7 @@ export default function WorkPage() {
             </h1>
           </Reveal>
 
-          <Reveal delay={140}>
+          <Reveal eager delay={140}>
             <p className="mt-10 max-w-[52ch] text-lg leading-relaxed text-muted md:text-xl">
               We do not show mockups. These are platforms we built and shipped as
               owners, still live and still scaling — with the numbers behind

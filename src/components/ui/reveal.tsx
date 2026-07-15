@@ -15,23 +15,30 @@ const useArmEffect = typeof window === "undefined" ? useEffect : useLayoutEffect
  * which makes it idempotent: it plays exactly once and can never replay, even if
  * the effect runs twice (React StrictMode) or the observer fires more than once.
  * That is the behaviour the old WAAPI `.animate()` version could not guarantee.
+ *
+ * `eager` is for above-the-fold content (heroes): the entrance plays as a pure
+ * CSS animation on first paint instead of waiting for hydration. Waiting would
+ * hide the largest element until JS loads — on a slow connection the user sees
+ * the hero, watches it vanish, and gets the LCP attributed seconds late.
  */
 export function Reveal({
   children,
   className,
   delay = 0,
   y = 22,
+  eager = false,
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   y?: number;
+  eager?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useArmEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || eager) return; // eager: the CSS animation already handled it
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce || !("IntersectionObserver" in window)) return; // stay visible
 
@@ -60,10 +67,22 @@ export function Reveal({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [delay, y]);
+  }, [delay, y, eager]);
 
   return (
-    <div ref={ref} className={className}>
+    <div
+      ref={ref}
+      className={className}
+      data-reveal={eager ? "eager" : undefined}
+      style={
+        eager
+          ? ({
+              "--reveal-y": `${y}px`,
+              "--reveal-delay": `${delay}ms`,
+            } as React.CSSProperties)
+          : undefined
+      }
+    >
       {children}
     </div>
   );
