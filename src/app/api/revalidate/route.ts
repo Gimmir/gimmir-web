@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 
@@ -7,6 +7,15 @@ type WebhookPayload = {
   slug?: string;
 };
 
+/**
+ * Sanity publish webhook → instant cache invalidation.
+ *
+ * Content is fetched via `defineLive`, whose cache entries are keyed by opaque
+ * `sanity:*` sync tags — so type-based `revalidateTag` can't reach them.
+ * Content edits are rare and every page shares the layout-level settings /
+ * navigation / founder documents, so the simplest correct move is to expire
+ * the whole route cache on any publish.
+ */
 export async function POST(req: NextRequest) {
   try {
     const { isValidSignature, body } = await parseBody<WebhookPayload>(
@@ -22,17 +31,12 @@ export async function POST(req: NextRequest) {
       return new NextResponse("Bad request: missing _type", { status: 400 });
     }
 
-    // Revalidate everything tagged with this document type.
-    revalidateTag(body._type, "max");
-
-    // Plus the slug-specific tag for case studies.
-    if (body._type === "caseStudy" && body.slug) {
-      revalidateTag(`caseStudy:${body.slug}`, "max");
-    }
+    revalidatePath("/", "layout");
 
     return NextResponse.json({
       revalidated: true,
       type: body._type,
+      slug: body.slug ?? null,
       now: Date.now(),
     });
   } catch (error) {
