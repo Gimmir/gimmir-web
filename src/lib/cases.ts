@@ -18,6 +18,10 @@ export type CaseStudy = {
   industry: string;
   /** One–two sentence summary used on cards and previews. */
   summary: string;
+  /** Keyword-targeted <title> (without the "· Gimmir" suffix). */
+  seoTitle: string;
+  /** Keyword-targeted meta description (~150–160 chars). */
+  seoDescription: string;
   services: string[];
   stats: CaseStat[];
   /** Structured narrative — drives the standard template. */
@@ -39,6 +43,9 @@ export const CASES: CaseStudy[] = [
     industry: "Boutique fitness franchise",
     summary:
       "We moved a global fitness franchise off a third-party platform onto their own app and back office — full control over every location.",
+    seoTitle: "UN1T Case Study — Own Gym App Instead of White-Label",
+    seoDescription:
+      "How a global gym franchise moved off a white-label fitness platform onto its own custom app and back office — 10+ locations, tens of thousands saved monthly.",
     services: [
       "Member app — iOS & Android",
       "Back office & operations",
@@ -60,6 +67,9 @@ export const CASES: CaseStudy[] = [
     industry: "Coaching platform",
     summary:
       "A coaching platform we co-founded and built end to end — live and growing fast in its first month after launch.",
+    seoTitle: "Jimmy Coach Case Study — Online Coaching App",
+    seoDescription:
+      "An online coaching app we co-founded and built end to end — programs, community, messaging and payments, with 100+ active coaches in the first month.",
     services: [
       "Product & platform, end to end",
       "Coach & client apps",

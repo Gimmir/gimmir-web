@@ -10,15 +10,16 @@ import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 
+const WORK_TITLE = "Fitness Software Case Studies — UN1T & Jimmy Coach";
 const WORK_DESCRIPTION =
-  "The sport and fitness products we have built and shipped as owners — the UN1T franchise platform and Jimmy Coach — with the numbers behind them.";
+  "Fitness software development case studies — the UN1T franchise platform and the Jimmy Coach coaching app, built and shipped as owners.";
 
 export const metadata: Metadata = {
-  title: "Case studies",
+  title: WORK_TITLE,
   description: WORK_DESCRIPTION,
   alternates: { canonical: "/work" },
   ...socialMetadata({
-    title: "Case studies",
+    title: WORK_TITLE,
     description: WORK_DESCRIPTION,
     path: "/work",
   }),

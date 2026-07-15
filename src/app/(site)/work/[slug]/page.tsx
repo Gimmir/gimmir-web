@@ -22,12 +22,12 @@ export async function generateMetadata({
   const data = getCaseBySlug(slug);
   if (!data) return {};
   return {
-    title: `${data.name} — Case study`,
-    description: data.summary,
+    title: data.seoTitle,
+    description: data.seoDescription,
     alternates: { canonical: `/work/${data.slug}` },
     ...socialMetadata({
-      title: `${data.name} — Case study`,
-      description: data.summary,
+      title: data.seoTitle,
+      description: data.seoDescription,
       path: `/work/${data.slug}`,
     }),
   };
