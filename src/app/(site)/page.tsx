@@ -11,6 +11,7 @@ import { FinalCta } from "@/components/home/final-cta";
 import { Marquee } from "@/components/ui/marquee";
 import { JsonLd } from "@/components/seo/json-ld";
 import { organizationGraph } from "@/lib/schema";
+import { BRAND, socialMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   FOUNDERS_QUERY,
@@ -26,6 +27,11 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data?.seo?.metaTitle ? { absolute: data.seo.metaTitle } : undefined,
     description: data?.seo?.metaDescription ?? undefined,
     alternates: { canonical: "/" },
+    ...socialMetadata({
+      title: data?.seo?.metaTitle ?? BRAND,
+      description: data?.seo?.metaDescription,
+      path: "/",
+    }),
   };
 }
 

@@ -20,3 +20,46 @@ function resolveSiteUrl(raw: string | undefined): string {
 export const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const BRAND = "Gimmir";
+
+/**
+ * Open Graph + Twitter metadata for a page. Next.js replaces (not merges) the
+ * whole `openGraph` object across segments — and a config-level `openGraph`
+ * also drops the file-convention image — so every page spreads a complete
+ * object from here, with the image referenced explicitly. The image itself is
+ * rendered by `app/opengraph-image.tsx`.
+ */
+export function socialMetadata({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description?: string | null;
+  path: string;
+}) {
+  const images = [
+    {
+      url: "/opengraph-image",
+      width: 1200,
+      height: 630,
+      alt: "Gimmir — Product engineering for sport & fitness",
+    },
+  ];
+  return {
+    openGraph: {
+      type: "website" as const,
+      siteName: BRAND,
+      locale: "en_US",
+      url: path,
+      title,
+      description: description ?? undefined,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description: description ?? undefined,
+      images,
+    },
+  };
+}

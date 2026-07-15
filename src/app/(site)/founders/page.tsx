@@ -8,6 +8,7 @@ import { StudioSection } from "@/components/founders/studio";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbs, foundersGraph } from "@/lib/schema";
+import { socialMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/live";
 import { FOUNDERS_PAGE_QUERY, FOUNDERS_PAGE_SEO_QUERY } from "@/sanity/lib/queries";
 
@@ -21,6 +22,11 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data?.seo?.metaTitle ?? undefined,
     description: data?.seo?.metaDescription ?? undefined,
     alternates: { canonical: "/founders" },
+    ...socialMetadata({
+      title: data?.seo?.metaTitle ?? "Founders",
+      description: data?.seo?.metaDescription,
+      path: "/founders",
+    }),
   };
 }
 

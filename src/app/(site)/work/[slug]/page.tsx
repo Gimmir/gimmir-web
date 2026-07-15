@@ -7,6 +7,7 @@ import { StandardCaseStudy } from "@/components/work/standard";
 import { Un1tCaseStudy } from "@/components/work/un1t";
 import { caseSlugs, getCaseBySlug } from "@/lib/cases";
 import { breadcrumbs, caseStudyWork } from "@/lib/schema";
+import { socialMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return caseSlugs.map((slug) => ({ slug }));
@@ -24,6 +25,11 @@ export async function generateMetadata({
     title: `${data.name} — Case study`,
     description: data.summary,
     alternates: { canonical: `/work/${data.slug}` },
+    ...socialMetadata({
+      title: `${data.name} — Case study`,
+      description: data.summary,
+      path: `/work/${data.slug}`,
+    }),
   };
 }
 

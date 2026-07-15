@@ -12,6 +12,7 @@ import { ProofSection } from "@/components/review/proof";
 import { FaqSection } from "@/components/review/faq";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbs, faqPage } from "@/lib/schema";
+import { socialMetadata } from "@/lib/seo";
 import { FinalCta } from "@/components/review/final-cta";
 import { Marquee } from "@/components/ui/marquee";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -23,6 +24,11 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data?.seo?.metaTitle ?? undefined,
     description: data?.seo?.metaDescription ?? undefined,
     alternates: { canonical: "/the-review" },
+    ...socialMetadata({
+      title: data?.seo?.metaTitle ?? "The Review",
+      description: data?.seo?.metaDescription,
+      path: "/the-review",
+    }),
   };
 }
 

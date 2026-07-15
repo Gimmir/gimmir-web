@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
-import { Pencil, Plus } from "@/components/ui/icons";
+import { Check, Plus } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { urlFor } from "@/sanity/lib/image";
@@ -99,20 +99,15 @@ export function StudioSection({
                   </p>
                 </div>
 
-                {/* team size — the founders confirm the number */}
+                {/* team size */}
                 <div className="mt-7 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:gap-5">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
-                    <Pencil className="size-[18px]" />
+                    <Check className="size-[18px]" />
                   </span>
                   <div>
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                      <span className="font-mono text-xs uppercase tracking-widest text-ink/70">
-                        Team size
-                      </span>
-                      <span className="rounded-full border border-ink/20 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-faint">
-                        Confirm
-                      </span>
-                    </div>
+                    <span className="font-mono text-xs uppercase tracking-widest text-ink/70">
+                      Team size
+                    </span>
                     <p className="mt-2 max-w-[56ch] text-sm leading-relaxed text-muted">
                       {data.studioTeamSizeBody}
                     </p>

@@ -4,16 +4,24 @@ import { CaseGrid } from "@/components/shared/case-cards";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbs } from "@/lib/schema";
+import { socialMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/container";
 import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 
+const WORK_DESCRIPTION =
+  "The sport and fitness products we have built and shipped as owners — the UN1T franchise platform and Jimmy Coach — with the numbers behind them.";
+
 export const metadata: Metadata = {
   title: "Case studies",
-  description:
-    "The sport and fitness products we have built and shipped as owners — the UN1T franchise platform and Jimmy Coach — with the numbers behind them.",
+  description: WORK_DESCRIPTION,
   alternates: { canonical: "/work" },
+  ...socialMetadata({
+    title: "Case studies",
+    description: WORK_DESCRIPTION,
+    path: "/work",
+  }),
 };
 
 export default function WorkPage() {

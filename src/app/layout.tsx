@@ -9,7 +9,7 @@ import { Clarity } from "@/components/analytics/clarity";
 import { CalProvider } from "@/components/cal/cal-provider";
 import { DisableDraftMode } from "@/components/disable-draft-mode";
 import { SanityLive } from "@/sanity/lib/live";
-import { SITE_URL } from "@/lib/seo";
+import { SITE_URL, socialMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -40,6 +40,12 @@ export const metadata: Metadata = {
   },
   description:
     "Gimmir builds the apps and platforms behind sport and fitness brands that are scaling. Start with a free review call with the founders who built UN1T's franchise platform and co-founded Jimmy Coach.",
+  ...socialMetadata({
+    title: "Gimmir — Product engineering for sport & fitness",
+    description:
+      "Gimmir builds the apps and platforms behind sport and fitness brands that are scaling.",
+    path: "/",
+  }),
 };
 
 export default async function RootLayout({
