@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import type { FOUNDERS_PAGE_QUERY_RESULT } from "@/sanity/types";
 
 const glyphProps = {
   viewBox: "0 0 100 100",
@@ -73,67 +74,65 @@ function GlyphKey() {
   );
 }
 
-const BELIEFS = [
-  {
-    title: "Judgment over hours.",
-    desc: "You are not buying time. You are buying decisions that hold up two years from now.",
-    Glyph: GlyphScales,
-  },
-  {
-    title: "We build to survive growth.",
-    desc: "Anyone can ship a demo. We build the version that still works after you scale, add locations, and raise.",
-    Glyph: GlyphGrowth,
-  },
-  {
-    title: "Specific beats generic.",
-    desc: "We build for sport and fitness, because we have shipped real products there. We would rather be the obvious choice for a few than a maybe for everyone.",
-    Glyph: GlyphTarget,
-  },
-  {
-    title: "The truth, even when it costs us.",
-    desc: "We will tell you to cut a feature, change a plan, or not hire us, if that is the honest call.",
-    Glyph: GlyphCompass,
-  },
-];
+const GLYPHS = [GlyphScales, GlyphGrowth, GlyphTarget, GlyphCompass];
 
-const FINALE = {
-  title: "You own everything.",
-  desc: "Your code, your IP, your accounts, yours from day one.",
-};
+export function BelieveSection({
+  data,
+}: {
+  data: NonNullable<FOUNDERS_PAGE_QUERY_RESULT>;
+}) {
+  const items = data.believeItems ?? [];
 
-export function BelieveSection() {
   return (
     <section className="border-t border-line py-20 md:py-28">
       <Container>
         <Reveal>
-          <SectionHeader index="02" title="What we believe." />
+          <SectionHeader
+            index="02"
+            title={
+              <>
+                {data.believeHeading}
+                {data.believeAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic">
+                      {data.believeAccent}
+                    </span>
+                  </>
+                ) : null}
+              </>
+            }
+          />
         </Reveal>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {BELIEFS.map((b, i) => (
-            <Reveal key={i} delay={(i % 2) * 70} className="h-full">
-              <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface p-8 transition-shadow duration-300 ease-out hover:shadow-[0_22px_48px_-28px_rgba(21,20,14,0.32)] md:p-9">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -right-4 -top-4 size-40 text-ink/[0.09] transition-[color,transform] duration-500 ease-out group-hover:-translate-y-0.5 group-hover:text-lime/70 md:size-44"
-                >
-                  <b.Glyph />
-                </div>
+          {items.map((b, i) => {
+            const Glyph = GLYPHS[i % GLYPHS.length];
+            return (
+              <Reveal key={b._key} delay={(i % 2) * 70} className="h-full">
+                <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface p-8 transition-shadow duration-300 ease-out hover:shadow-[0_22px_48px_-28px_rgba(21,20,14,0.32)] md:p-9">
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -right-4 -top-4 size-40 text-ink/[0.09] transition-[color,transform] duration-500 ease-out group-hover:-translate-y-0.5 group-hover:text-lime/70 md:size-44"
+                  >
+                    <Glyph />
+                  </div>
 
-                <div className="relative flex flex-1 flex-col">
-                  <span className="display text-[3.25rem] leading-none text-lime md:text-6xl">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-6 text-2xl font-bold tracking-tight">
-                    {b.title}
-                  </h3>
-                  <p className="mt-3 max-w-[42ch] leading-relaxed text-muted">
-                    {b.desc}
-                  </p>
+                  <div className="relative flex flex-1 flex-col">
+                    <span className="display text-[3.25rem] leading-none text-lime md:text-6xl">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="mt-6 text-2xl font-bold tracking-tight">
+                      {b.title}
+                    </h3>
+                    <p className="mt-3 max-w-[42ch] leading-relaxed text-muted">
+                      {b.body}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
 
         <Reveal>
@@ -151,11 +150,11 @@ export function BelieveSection() {
                   05
                 </span>
                 <h3 className="mt-4 text-3xl font-bold tracking-tight text-ink md:text-4xl">
-                  {FINALE.title}
+                  {data.believeFinaleTitle}
                 </h3>
               </div>
               <p className="max-w-sm text-lg leading-relaxed text-ink/80 md:text-right">
-                {FINALE.desc}
+                {data.believeFinaleBody}
               </p>
             </div>
           </div>

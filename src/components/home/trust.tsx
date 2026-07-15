@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import type { HOME_QUERY_RESULT } from "@/sanity/types";
 
 const svgProps = {
   viewBox: "0 0 220 120",
@@ -255,30 +256,18 @@ function IlluPushback() {
   );
 }
 
-const TRUST = [
-  {
-    title: "Senior from first call to delivery",
-    desc: "The founders are in every engagement. No bait and switch.",
-    illu: <IlluEngagement />,
-  },
-  {
-    title: "You own everything, day one",
-    desc: "Code, IP, and accounts. Always yours.",
-    illu: <IlluOwnership />,
-  },
-  {
-    title: "A full team in weeks",
-    desc: "Our infrastructure spins up a ready team fast, so you do not lose a quarter hiring.",
-    illu: <IlluTeam />,
-  },
-  {
-    title: "We push back",
-    desc: "If a decision will hurt your product later, we say so. You pay for judgment, not just hands.",
-    illu: <IlluPushback />,
-  },
+const TRUST_ILLUSTRATIONS = [
+  <IlluEngagement key="engagement" />,
+  <IlluOwnership key="ownership" />,
+  <IlluTeam key="team" />,
+  <IlluPushback key="pushback" />,
 ];
 
-export function TrustSection() {
+export function TrustSection({
+  data,
+}: {
+  data: NonNullable<HOME_QUERY_RESULT>;
+}) {
   return (
     <section className="border-t border-line py-20 md:py-28">
       <Container>
@@ -287,26 +276,33 @@ export function TrustSection() {
             index="05"
             title={
               <>
-                Why founders trust us with the{" "}
-                <span className="font-serif font-normal italic">real thing.</span>
+                {data.trustHeading}
+                {data.trustAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic">
+                      {data.trustAccent}
+                    </span>
+                  </>
+                ) : null}
               </>
             }
           />
         </Reveal>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {TRUST.map((t, i) => (
-            <Reveal key={t.title} delay={(i % 2) * 70} className="h-full">
+          {(data.trustCards ?? []).map((t, i) => (
+            <Reveal key={t._key} delay={(i % 2) * 70} className="h-full">
               <div className="t-card group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-shadow duration-300 ease-out hover:shadow-[0_20px_44px_-26px_rgba(21,20,14,0.3)]">
                 <div className="t-illu relative h-40 border-b border-line bg-paper-2">
                   <span className="absolute left-4 top-4 z-10 rounded-md bg-ink px-2 py-1 font-mono text-[11px] font-semibold leading-none text-paper">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  {t.illu}
+                  {TRUST_ILLUSTRATIONS[i % TRUST_ILLUSTRATIONS.length]}
                 </div>
                 <div className="flex flex-1 flex-col gap-2.5 p-7 md:p-8">
                   <h3 className="text-xl font-bold tracking-tight">{t.title}</h3>
-                  <p className="leading-relaxed text-muted">{t.desc}</p>
+                  <p className="leading-relaxed text-muted">{t.body}</p>
                 </div>
               </div>
             </Reveal>

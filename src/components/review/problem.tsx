@@ -1,8 +1,9 @@
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import type { REVIEW_QUERY_RESULT } from "@/sanity/types";
 
-export function ProblemSection() {
+export function ProblemSection({ data }: { data: NonNullable<REVIEW_QUERY_RESULT> }) {
   return (
     <section className="border-t border-line py-20 md:py-28">
       <Container>
@@ -10,18 +11,26 @@ export function ProblemSection() {
           <SectionHeader
             index="01"
             titleMax="max-w-[32ch]"
-            title="Most fitness products break at exactly the wrong moment."
+            title={
+              <>
+                {data.problemHeading}
+                {data.problemAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic">
+                      {data.problemAccent}
+                    </span>
+                  </>
+                ) : null}
+              </>
+            }
           />
         </Reveal>
 
         <div className="mt-12 grid gap-8 md:grid-cols-2 md:items-start md:gap-12">
           <Reveal>
             <p className="text-lg leading-relaxed text-muted md:text-xl">
-              The app works fine with 500 members. Then you scale, add locations,
-              raise a round, and the cracks show: payments fail under load,
-              bookings double-charge, the data model can&rsquo;t handle a second
-              franchise, and an investor&rsquo;s technical due diligence finds
-              things you did not know were there.
+              {data.problemBody}
             </p>
           </Reveal>
 
@@ -32,11 +41,7 @@ export function ProblemSection() {
                 className="absolute inset-y-0 left-0 w-[5px] bg-lime"
               />
               <p className="text-lg leading-relaxed text-ink md:text-xl md:leading-relaxed">
-                By the time it shows, fixing it is a rewrite.{" "}
-                <strong className="font-semibold">
-                  The cheapest moment to find these problems is now
-                </strong>
-                , before they cost you members, money, or a round.
+                {data.problemCallout}
               </p>
             </div>
           </Reveal>

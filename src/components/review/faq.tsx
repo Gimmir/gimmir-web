@@ -7,45 +7,43 @@ import { Plus } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { cn } from "@/lib/cn";
+import type { REVIEW_QUERY_RESULT } from "@/sanity/types";
 
-const FAQS = [
-  {
-    q: "Will you just tell me to rebuild everything?",
-    a: "No. We tell you the minimum that actually matters, in priority order. Sometimes the honest answer is “this is solid, here are the three things to watch.”",
-  },
-  {
-    q: "Do I have to build with you afterward?",
-    a: "No. The roadmap is yours to keep and act on however you want. If you do build with us, the review fee is credited.",
-  },
-  {
-    q: "Is my code and IP safe?",
-    a: "Yes. We sign an NDA before we see anything, and you own everything, start to finish.",
-  },
-  {
-    q: "Who actually does the review?",
-    a: "The founders, Nazar and Oleh. Not a junior, not an outsourced analyst.",
-  },
-  {
-    q: "How long does it take?",
-    a: "One to two weeks from kickoff to the roadmap walkthrough.",
-  },
-];
-
-export function FaqSection() {
+export function FaqSection({
+  data,
+}: {
+  data: NonNullable<REVIEW_QUERY_RESULT>;
+}) {
   const [open, setOpen] = useState<number | null>(null);
+  const faqs = data.faqItems ?? [];
 
   return (
     <section className="border-t border-line py-20 md:py-28">
       <Container>
         <Reveal>
-          <SectionHeader index="08" title="Questions, answered straight." />
+          <SectionHeader
+            index="08"
+            title={
+              <>
+                {data.faqHeading}
+                {data.faqAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic">
+                      {data.faqAccent}
+                    </span>
+                  </>
+                ) : null}
+              </>
+            }
+          />
         </Reveal>
 
         <div className="mt-12">
-          {FAQS.map((item, i) => {
+          {faqs.map((item, i) => {
             const isOpen = open === i;
             return (
-              <Reveal key={i} delay={(i % 5) * 50}>
+              <Reveal key={item._key} delay={(i % 5) * 50}>
                 <div className="border-b border-line first:border-t">
                   <h3>
                     <button
@@ -62,7 +60,7 @@ export function FaqSection() {
                           isOpen ? "text-ink" : "text-ink group-hover:text-ink",
                         )}
                       >
-                        {item.q}
+                        {item.question}
                       </span>
                       <span
                         className={cn(
@@ -93,7 +91,7 @@ export function FaqSection() {
                           isOpen ? "opacity-100" : "opacity-0",
                         )}
                       >
-                        {item.a}
+                        {item.answer}
                       </p>
                     </div>
                   </div>

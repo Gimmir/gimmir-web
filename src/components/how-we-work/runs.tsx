@@ -6,31 +6,14 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { cn } from "@/lib/cn";
+import type { HOW_WE_WORK_QUERY_RESULT } from "@/sanity/types";
 
-const STEPS = [
-  {
-    title: "Review",
-    desc: "We look at your product or plan and agree on what actually matters. Often this is the Scale Review.",
-  },
-  {
-    title: "Roadmap",
-    desc: "A clear plan: what to build, in what order, with honest effort for each piece.",
-  },
-  {
-    title: "Team in weeks, not months",
-    desc: "Our infrastructure spins up a ready team fast, so you do not lose a quarter trying to hire.",
-  },
-  {
-    title: "Build with direct access",
-    desc: "The founders stay involved, you talk to the engineers directly, and you see working software in regular demos, not status reports.",
-  },
-  {
-    title: "Yours, throughout",
-    desc: "Code, IP, and accounts stay yours the whole way. Built to scale with you, never to lock you in.",
-  },
-];
-
-export function HowItRunsSection() {
+export function HowItRunsSection({
+  data,
+}: {
+  data: NonNullable<HOW_WE_WORK_QUERY_RESULT>;
+}) {
+  const steps = data.runsSteps ?? [];
   const wrapRef = useRef<HTMLDivElement>(null);
   const badgeRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [spine, setSpine] = useState({ top: 0, height: 0, fill: 0 });
@@ -88,7 +71,19 @@ export function HowItRunsSection() {
               <SectionHeader
                 index="02"
                 titleMax="max-w-[14ch]"
-                title="What working with us looks like."
+                title={
+                  <>
+                    {data.runsHeading}
+                    {data.runsAccent ? (
+                      <>
+                        {" "}
+                        <span className="font-serif font-normal italic">
+                          {data.runsAccent}
+                        </span>
+                      </>
+                    ) : null}
+                  </>
+                }
               />
             </Reveal>
           </div>
@@ -108,11 +103,11 @@ export function HowItRunsSection() {
             />
 
             <ol className="space-y-10 md:space-y-12">
-              {STEPS.map((s, i) => {
+              {steps.map((s, i) => {
                 const on = i < active;
                 return (
                   <li
-                    key={i}
+                    key={s._key}
                     className="relative flex items-start gap-5 md:gap-8"
                   >
                     <span
@@ -133,7 +128,7 @@ export function HowItRunsSection() {
                         {s.title}
                       </h3>
                       <p className="mt-2 max-w-2xl leading-relaxed text-muted">
-                        {s.desc}
+                        {s.body}
                       </p>
                     </div>
                   </li>

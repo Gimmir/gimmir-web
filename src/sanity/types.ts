@@ -15,22 +15,6 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
-
-export type LogoImage = {
-  asset?: SanityImageAssetReference;
-  media?: unknown; // Unable to locate the referenced type "image.media" in schema
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-};
-
 export type Redirect = {
   _id: string;
   _type: "redirect";
@@ -42,74 +26,11 @@ export type Redirect = {
   permanent?: boolean;
 };
 
-export type CaseStudyReference = {
+export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "caseStudy";
-};
-
-export type Testimonial = {
-  _id: string;
-  _type: "testimonial";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  quote?: string;
-  authorName?: string;
-  authorRole?: string;
-  authorCompany?: string;
-  authorPhoto?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  relatedCaseStudy?: CaseStudyReference;
-  order?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type Founder = {
-  _id: string;
-  _type: "founder";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  role?: string;
-  photo?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  bio?: string;
-  socials?: Array<
-    {
-      _key: string;
-    } & SocialLink
-  >;
-  order?: number;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
 export type CaseStudy = {
@@ -195,10 +116,192 @@ export type BlockContent = Array<
     }
 >;
 
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type FoundersPage = {
+  _id: string;
+  _type: "foundersPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  heroEyebrow?: string;
+  heroHeading?: string;
+  heroAccent?: string;
+  heroSubhead?: string;
+  heroCtaLabel?: string;
+  heroCtaHelper?: string;
+  storyHeading?: string;
+  storyAccent?: string;
+  storyDifferenceLabel?: string;
+  storyDifferenceBig?: string;
+  storyDifferenceSub?: string;
+  storyStats?: Array<
+    {
+      _key: string;
+    } & Stat
+  >;
+  storyBody1?: string;
+  storyBody2?: string;
+  storyOriginLabel?: string;
+  storyOriginCaption?: string;
+  storyOriginBody?: string;
+  believeHeading?: string;
+  believeAccent?: string;
+  believeItems?: Array<
+    {
+      _key: string;
+    } & InfoCard
+  >;
+  believeFinaleTitle?: string;
+  believeFinaleBody?: string;
+  peopleHeading?: string;
+  peopleAccent?: string;
+  founders?: Array<
+    {
+      _key: string;
+    } & FounderCard
+  >;
+  peopleFootnote?: string;
+  studioHeading?: string;
+  studioAccent?: string;
+  studioBody?: string;
+  studioTeamCaption?: string;
+  studioTeamSizeBody?: string;
+  finalCtaEyebrow?: string;
+  finalCtaHeading?: string;
+  finalCtaIntro?: string;
+  finalCtaButtonLabel?: string;
+  seo?: Seo;
+};
+
+export type HowWeWorkPage = {
+  _id: string;
+  _type: "howWeWorkPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  heroEyebrow?: string;
+  heroHeading?: string;
+  heroAccent?: string;
+  heroSubhead?: string;
+  heroCtaLabel?: string;
+  heroCtaHelper?: string;
+  marquee?: Array<string>;
+  fearsHeading?: string;
+  fearsAccent?: string;
+  fearsAnswerLabel?: string;
+  fears?: Array<
+    {
+      _key: string;
+    } & FearItem
+  >;
+  runsHeading?: string;
+  runsAccent?: string;
+  runsSteps?: Array<
+    {
+      _key: string;
+    } & InfoCard
+  >;
+  principlesHeading?: string;
+  principlesAccent?: string;
+  principlesItems?: Array<string>;
+  finalCtaEyebrow?: string;
+  finalCtaHeading?: string;
+  finalCtaIntro?: string;
+  finalCtaButtonLabel?: string;
+  seo?: Seo;
+};
+
+export type ReviewPage = {
+  _id: string;
+  _type: "reviewPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  heroEyebrow?: string;
+  heroHeading?: string;
+  heroAccent?: string;
+  heroSubhead?: string;
+  heroCtaLabel?: string;
+  heroCtaHelper?: string;
+  marquee?: Array<string>;
+  problemHeading?: string;
+  problemAccent?: string;
+  problemBody?: string;
+  problemCallout?: string;
+  whatHeading?: string;
+  whatAccent?: string;
+  whatIntro?: string;
+  focusLabel?: string;
+  focusItems?: Array<string>;
+  deliverablesHeading?: string;
+  deliverablesAccent?: string;
+  deliverablesIntro?: string;
+  deliverablesItems?: Array<
+    {
+      _key: string;
+    } & InfoCard
+  >;
+  deliverablesClosing?: string;
+  foundersHeading?: string;
+  foundersAccent?: string;
+  founders?: Array<
+    {
+      _key: string;
+    } & FounderCard
+  >;
+  foundersFootnote?: string;
+  processHeading?: string;
+  processAccent?: string;
+  pricingEyebrow?: string;
+  pricingPrice?: string;
+  pricingPriceSuffix?: string;
+  pricingLead?: string;
+  pricingNote?: string;
+  pricingButtonLabel?: string;
+  pricingIncludedLabel?: string;
+  pricingIncluded?: Array<string>;
+  fitHeading?: string;
+  fitChecks?: Array<string>;
+  fitNotLabel?: string;
+  fitNotBody?: string;
+  proofHeading?: string;
+  proofAccent?: string;
+  faqHeading?: string;
+  faqAccent?: string;
+  faqItems?: Array<
+    {
+      _key: string;
+    } & FaqItem
+  >;
+  finalCtaEyebrow?: string;
+  finalCtaHeading?: string;
+  finalCtaIntro?: string;
+  finalCtaButtonLabel?: string;
+  seo?: Seo;
 };
 
 export type HomePage = {
@@ -208,29 +311,58 @@ export type HomePage = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  pageBuilder?: Array<
-    | ({
-        _key: string;
-      } & HeroSection)
-    | ({
-        _key: string;
-      } & LogosSection)
-    | ({
-        _key: string;
-      } & CaseStudiesSection)
-    | ({
-        _key: string;
-      } & ProcessSection)
-    | ({
-        _key: string;
-      } & TestimonialSection)
-    | ({
-        _key: string;
-      } & FoundersSection)
-    | ({
-        _key: string;
-      } & ReviewCtaSection)
+  heroEyebrow?: string;
+  heroHeading?: string;
+  heroAccent?: string;
+  heroSubhead?: string;
+  heroPrimaryCtaLabel?: string;
+  heroPrimaryCtaLabelShort?: string;
+  heroSecondaryCtaLabel?: string;
+  heroSecondaryCtaHref?: string;
+  marquee?: Array<string>;
+  proofHeading?: string;
+  proofLinkLabel?: string;
+  proofLinkHref?: string;
+  whoHeading?: string;
+  whoAccent?: string;
+  whoIntro?: string;
+  whoRows?: Array<
+    {
+      _key: string;
+    } & InfoCard
   >;
+  servicesHeading?: string;
+  servicesAccent?: string;
+  servicesItems?: Array<
+    {
+      _key: string;
+    } & InfoCard
+  >;
+  servicesFootnote?: string;
+  foundersHeading?: string;
+  foundersAccent?: string;
+  foundersIntro?: string;
+  founders?: Array<
+    {
+      _key: string;
+    } & FounderCard
+  >;
+  foundersFootnote?: string;
+  trustHeading?: string;
+  trustAccent?: string;
+  trustCards?: Array<
+    {
+      _key: string;
+    } & InfoCard
+  >;
+  reviewCtaHeading?: string;
+  reviewCtaAccent?: string;
+  reviewCtaIntro?: string;
+  reviewCtaButtonLabel?: string;
+  finalCtaEyebrow?: string;
+  finalCtaHeading?: string;
+  finalCtaIntro?: string;
+  finalCtaButtonLabel?: string;
   seo?: Seo;
 };
 
@@ -246,8 +378,9 @@ export type Navigation = {
     _type: "navItem";
     _key: string;
   }>;
-  headerCta?: Cta;
+  headerCtaLabel?: string;
   footerTagline?: string;
+  footerCtaLabel?: string;
   footerLinks?: Array<{
     label?: string;
     href?: string;
@@ -255,12 +388,6 @@ export type Navigation = {
     _key: string;
   }>;
   footerNote?: string;
-};
-
-export type Cta = {
-  _type: "cta";
-  label?: string;
-  href?: string;
 };
 
 export type SiteSettings = {
@@ -287,26 +414,19 @@ export type SiteSettings = {
       _key: string;
     } & SocialLink
   >;
+  flowSteps?: Array<
+    {
+      _key: string;
+    } & FlowStep
+  >;
+  finalCtaCaption?: string;
+  finalCtaHelper?: string;
   seo?: Seo;
   analytics?: {
     provider?: "none" | "plausible" | "ga4";
     plausibleDomain?: string;
     gaMeasurementId?: string;
   };
-};
-
-export type ReviewCtaSection = {
-  _type: "reviewCtaSection";
-  anchorId?: string;
-  eyebrow?: string;
-  heading?: string;
-  body?: string;
-  bullets?: Array<string>;
-  formHeading?: string;
-  formNote?: string;
-  submitLabel?: string;
-  successHeading?: string;
-  successMessage?: string;
 };
 
 export type FounderReference = {
@@ -316,102 +436,69 @@ export type FounderReference = {
   [internalGroqTypeReferenceTo]?: "founder";
 };
 
-export type FoundersSection = {
-  _type: "foundersSection";
-  anchorId?: string;
-  eyebrow?: string;
-  heading?: string;
-  intro?: string;
-  founders?: Array<
-    {
-      _key: string;
-    } & FounderReference
-  >;
+export type FounderCard = {
+  _type: "founderCard";
+  founder?: FounderReference;
+  role?: string;
+  bio?: string;
 };
 
-export type TestimonialReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "testimonial";
+export type Founder = {
+  _id: string;
+  _type: "founder";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  role?: string;
+  photo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  bio?: string;
+  linkedinUrl?: string;
+  order?: number;
 };
 
-export type TestimonialSection = {
-  _type: "testimonialSection";
-  anchorId?: string;
-  eyebrow?: string;
-  heading?: string;
-  testimonials?: Array<
-    {
-      _key: string;
-    } & TestimonialReference
-  >;
-};
-
-export type ProcessSection = {
-  _type: "processSection";
-  anchorId?: string;
-  eyebrow?: string;
-  heading?: string;
-  intro?: string;
-  steps?: Array<
-    {
-      _key: string;
-    } & ProcessStep
-  >;
-};
-
-export type CaseStudiesSection = {
-  _type: "caseStudiesSection";
-  anchorId?: string;
-  eyebrow?: string;
-  heading?: string;
-  intro?: string;
-  items?: Array<
-    {
-      _key: string;
-    } & CaseStudyReference
-  >;
-};
-
-export type LogosSection = {
-  _type: "logosSection";
-  anchorId?: string;
-  eyebrow?: string;
-  logos?: Array<{
-    name?: string;
-    image?: LogoImage;
-    _type: "logo";
-    _key: string;
-  }>;
-};
-
-export type HeroSection = {
-  _type: "heroSection";
-  anchorId?: string;
-  eyebrow?: string;
-  headline?: string;
-  accent?: string;
-  subhead?: string;
-  primaryCta?: Cta;
-  secondaryCta?: Cta;
-  stats?: Array<
-    {
-      _key: string;
-    } & Stat
-  >;
-};
-
-export type ProcessStep = {
-  _type: "processStep";
+export type FlowStep = {
+  _type: "flowStep";
+  tag?: string;
   title?: string;
   description?: string;
+};
+
+export type FearItem = {
+  _type: "fearItem";
+  fear?: string;
+  answer?: string;
+};
+
+export type FaqItem = {
+  _type: "faqItem";
+  question?: string;
+  answer?: string;
+};
+
+export type InfoCard = {
+  _type: "infoCard";
+  title?: string;
+  body?: string;
 };
 
 export type Stat = {
   _type: "stat";
   value?: string;
   label?: string;
+};
+
+export type Cta = {
+  _type: "cta";
+  label?: string;
+  href?: string;
 };
 
 export type Metric = {
@@ -524,33 +611,29 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | SanityImageAssetReference
-  | LogoImage
   | Redirect
-  | CaseStudyReference
-  | Testimonial
-  | SanityImageCrop
-  | SanityImageHotspot
-  | Founder
+  | SanityImageAssetReference
   | CaseStudy
   | Seo
   | BlockContent
+  | SanityImageCrop
+  | SanityImageHotspot
   | Slug
+  | FoundersPage
+  | HowWeWorkPage
+  | ReviewPage
   | HomePage
   | Navigation
-  | Cta
   | SiteSettings
-  | ReviewCtaSection
   | FounderReference
-  | FoundersSection
-  | TestimonialReference
-  | TestimonialSection
-  | ProcessSection
-  | CaseStudiesSection
-  | LogosSection
-  | HeroSection
-  | ProcessStep
+  | FounderCard
+  | Founder
+  | FlowStep
+  | FearItem
+  | FaqItem
+  | InfoCard
   | Stat
+  | Cta
   | Metric
   | SocialLink
   | SanityImagePaletteSwatch
@@ -564,48 +647,34 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{    siteName,    description,    location,    contactEmail,    contactPhone,    logo{      ...,      "lqip": asset->metadata.lqip,      "aspectRatio": asset->metadata.dimensions.aspectRatio    },    socials[]{ _key, platform, url },    seo,    analytics  }
+// Query: *[_type == "siteSettings"][0]{    siteName,    description,    contactEmail,    finalCtaCaption,    finalCtaHelper,    flowSteps[]{ _key, tag, title, description },    seo  }
 export type SETTINGS_QUERY_RESULT = {
   siteName: string | null;
   description: string | null;
-  location: string | null;
   contactEmail: string | null;
-  contactPhone: string | null;
-  logo: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    lqip: string | null;
-    aspectRatio: number | null;
-  } | null;
-  socials: Array<{
+  finalCtaCaption: string | null;
+  finalCtaHelper: string | null;
+  flowSteps: Array<{
     _key: string;
-    platform:
-      "email" | "github" | "instagram" | "linkedin" | "x" | "youtube" | null;
-    url: string | null;
+    tag: string | null;
+    title: string | null;
+    description: string | null;
   }> | null;
   seo: Seo | null;
-  analytics: {
-    provider?: "ga4" | "none" | "plausible";
-    plausibleDomain?: string;
-    gaMeasurementId?: string;
-  } | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
 // Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation"][0]{    headerLinks[]{ _key, label, anchor },    headerCta,    footerTagline,    footerLinks[]{ _key, label, href },    footerNote  }
+// Query: *[_type == "navigation"][0]{    headerLinks[]{ _key, label, anchor },    headerCtaLabel,    footerTagline,    footerCtaLabel,    footerLinks[]{ _key, label, href },    footerNote  }
 export type NAVIGATION_QUERY_RESULT = {
   headerLinks: Array<{
     _key: string;
     label: string | null;
     anchor: string | null;
   }> | null;
-  headerCta: Cta | null;
+  headerCtaLabel: string | null;
   footerTagline: string | null;
+  footerCtaLabel: string | null;
   footerLinks: Array<{
     _key: string;
     label: string | null;
@@ -615,183 +684,13 @@ export type NAVIGATION_QUERY_RESULT = {
 } | null;
 
 // Source: src/sanity/lib/queries.ts
-// Variable: HOME_QUERY
-// Query: *[_type == "homePage"][0]{    _id,    title,    pageBuilder[]{      _key,      _type,      _type == "heroSection" => {        anchorId,        eyebrow,        headline,        accent,        subhead,        primaryCta,        secondaryCta,        stats[]{ _key, value, label }      },      _type == "logosSection" => {        anchorId,        eyebrow,        logos[]{          _key,          name,          image{            ...,            "lqip": asset->metadata.lqip,            "aspectRatio": asset->metadata.dimensions.aspectRatio          }        }      },      _type == "caseStudiesSection" => {        anchorId,        eyebrow,        heading,        intro,        items[]->{          _id,          title,          client,          industry,          excerpt,          "slug": slug.current,          coverImage{            ...,            "lqip": asset->metadata.lqip,            "aspectRatio": asset->metadata.dimensions.aspectRatio          },          metrics[]{ _key, value, label }        }      },      _type == "processSection" => {        anchorId,        eyebrow,        heading,        intro,        steps[]{ _key, title, description }      },      _type == "testimonialSection" => {        anchorId,        eyebrow,        heading,        testimonials[]->{          _id,          quote,          authorName,          authorRole,          authorCompany,          authorPhoto{            ...,            "lqip": asset->metadata.lqip,            "aspectRatio": asset->metadata.dimensions.aspectRatio          }        }      },      _type == "foundersSection" => {        anchorId,        eyebrow,        heading,        intro,        founders[]->{          _id,          name,          role,          bio,          photo{            ...,            "lqip": asset->metadata.lqip,            "aspectRatio": asset->metadata.dimensions.aspectRatio          },          socials[]{ _key, platform, url }        }      },      _type == "reviewCtaSection" => {        anchorId,        eyebrow,        heading,        body,        bullets,        formHeading,        formNote,        submitLabel,        successHeading,        successMessage      }    },    seo  }
-export type HOME_QUERY_RESULT = {
+// Variable: FOUNDERS_QUERY
+// Query: *[_type == "founder"] | order(order asc){    _id,    name,    linkedinUrl,    photo{      ...,      "lqip": asset->metadata.lqip,      "aspectRatio": asset->metadata.dimensions.aspectRatio    }  }
+export type FOUNDERS_QUERY_RESULT = Array<{
   _id: string;
-  title: string | null;
-  pageBuilder: Array<
-    | {
-        _key: string;
-        _type: "caseStudiesSection";
-        anchorId: string | null;
-        eyebrow: string | null;
-        heading: string | null;
-        intro: string | null;
-        items: Array<{
-          _id: string;
-          title: string | null;
-          client: string | null;
-          industry: string | null;
-          excerpt: string | null;
-          slug: string | null;
-          coverImage: {
-            asset?: SanityImageAssetReference;
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt?: string;
-            _type: "image";
-            lqip: string | null;
-            aspectRatio: number | null;
-          } | null;
-          metrics: Array<{
-            _key: string;
-            value: string | null;
-            label: string | null;
-          }> | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "foundersSection";
-        anchorId: string | null;
-        eyebrow: string | null;
-        heading: string | null;
-        intro: string | null;
-        founders: Array<{
-          _id: string;
-          name: string | null;
-          role: string | null;
-          bio: string | null;
-          photo: {
-            asset?: SanityImageAssetReference;
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt?: string;
-            _type: "image";
-            lqip: string | null;
-            aspectRatio: number | null;
-          } | null;
-          socials: Array<{
-            _key: string;
-            platform:
-              | "email"
-              | "github"
-              | "instagram"
-              | "linkedin"
-              | "x"
-              | "youtube"
-              | null;
-            url: string | null;
-          }> | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "heroSection";
-        anchorId: string | null;
-        eyebrow: string | null;
-        headline: string | null;
-        accent: string | null;
-        subhead: string | null;
-        primaryCta: Cta | null;
-        secondaryCta: Cta | null;
-        stats: Array<{
-          _key: string;
-          value: string | null;
-          label: string | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "logosSection";
-        anchorId: string | null;
-        eyebrow: string | null;
-        logos: Array<{
-          _key: string;
-          name: string | null;
-          image: {
-            asset?: SanityImageAssetReference;
-            media?: unknown; // Unable to locate the referenced type "image.media" in schema
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt?: string;
-            _type: "image";
-            lqip: string | null;
-            aspectRatio: number | null;
-          } | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "processSection";
-        anchorId: string | null;
-        eyebrow: string | null;
-        heading: string | null;
-        intro: string | null;
-        steps: Array<{
-          _key: string;
-          title: string | null;
-          description: string | null;
-        }> | null;
-      }
-    | {
-        _key: string;
-        _type: "reviewCtaSection";
-        anchorId: string | null;
-        eyebrow: string | null;
-        heading: string | null;
-        body: string | null;
-        bullets: Array<string> | null;
-        formHeading: string | null;
-        formNote: string | null;
-        submitLabel: string | null;
-        successHeading: string | null;
-        successMessage: string | null;
-      }
-    | {
-        _key: string;
-        _type: "testimonialSection";
-        anchorId: string | null;
-        eyebrow: string | null;
-        heading: string | null;
-        testimonials: Array<{
-          _id: string;
-          quote: string | null;
-          authorName: string | null;
-          authorRole: string | null;
-          authorCompany: string | null;
-          authorPhoto: {
-            asset?: SanityImageAssetReference;
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt?: string;
-            _type: "image";
-            lqip: string | null;
-            aspectRatio: number | null;
-          } | null;
-        }> | null;
-      }
-  > | null;
-  seo: Seo | null;
-} | null;
-
-// Source: src/sanity/lib/queries.ts
-// Variable: CASE_STUDY_QUERY
-// Query: *[_type == "caseStudy" && slug.current == $slug][0]{    _id,    _type,    title,    client,    industry,    excerpt,    publishedAt,    "slug": slug.current,    coverImage{      ...,      "lqip": asset->metadata.lqip,      "aspectRatio": asset->metadata.dimensions.aspectRatio    },    problem,    solution,    result,    metrics[]{ _key, value, label },    technologies,    links[]{ _key, label, href },    seo  }
-export type CASE_STUDY_QUERY_RESULT = {
-  _id: string;
-  _type: "caseStudy";
-  title: string | null;
-  client: string | null;
-  industry: string | null;
-  excerpt: string | null;
-  publishedAt: string | null;
-  slug: string | null;
-  coverImage: {
+  name: string | null;
+  linkedinUrl: string | null;
+  photo: {
     asset?: SanityImageAssetReference;
     media?: unknown;
     hotspot?: SanityImageHotspot;
@@ -801,53 +700,292 @@ export type CASE_STUDY_QUERY_RESULT = {
     lqip: string | null;
     aspectRatio: number | null;
   } | null;
-  problem: BlockContent | null;
-  solution: BlockContent | null;
-  result: BlockContent | null;
-  metrics: Array<{
+}>;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: HOME_QUERY
+// Query: *[_type == "homePage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead,    heroPrimaryCtaLabel, heroPrimaryCtaLabelShort, heroSecondaryCtaLabel, heroSecondaryCtaHref,    marquee,    proofHeading, proofLinkLabel, proofLinkHref,    whoHeading, whoAccent, whoIntro, whoRows[]{ _key, title, body },    servicesHeading, servicesAccent, servicesItems[]{ _key, title, body }, servicesFootnote,    foundersHeading, foundersAccent, foundersIntro, foundersFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    trustHeading, trustAccent, trustCards[]{ _key, title, body },    reviewCtaHeading, reviewCtaAccent, reviewCtaIntro, reviewCtaButtonLabel,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+export type HOME_QUERY_RESULT = {
+  heroEyebrow: string | null;
+  heroHeading: string | null;
+  heroAccent: string | null;
+  heroSubhead: string | null;
+  heroPrimaryCtaLabel: string | null;
+  heroPrimaryCtaLabelShort: string | null;
+  heroSecondaryCtaLabel: string | null;
+  heroSecondaryCtaHref: string | null;
+  marquee: Array<string> | null;
+  proofHeading: string | null;
+  proofLinkLabel: string | null;
+  proofLinkHref: string | null;
+  whoHeading: string | null;
+  whoAccent: string | null;
+  whoIntro: string | null;
+  whoRows: Array<{
     _key: string;
-    value: string | null;
-    label: string | null;
+    title: string | null;
+    body: string | null;
   }> | null;
-  technologies: Array<string> | null;
-  links: Array<{
+  servicesHeading: string | null;
+  servicesAccent: string | null;
+  servicesItems: Array<{
     _key: string;
-    label: string | null;
-    href: string | null;
+    title: string | null;
+    body: string | null;
   }> | null;
-  seo: Seo | null;
+  servicesFootnote: string | null;
+  foundersHeading: string | null;
+  foundersAccent: string | null;
+  foundersIntro: string | null;
+  foundersFootnote: string | null;
+  founders: Array<{
+    _key: string;
+    role: string | null;
+    bio: string | null;
+    founder: {
+      _id: string;
+      name: string | null;
+      linkedinUrl: string | null;
+      photo: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        lqip: string | null;
+        aspectRatio: number | null;
+      } | null;
+    } | null;
+  }> | null;
+  trustHeading: string | null;
+  trustAccent: string | null;
+  trustCards: Array<{
+    _key: string;
+    title: string | null;
+    body: string | null;
+  }> | null;
+  reviewCtaHeading: string | null;
+  reviewCtaAccent: string | null;
+  reviewCtaIntro: string | null;
+  reviewCtaButtonLabel: string | null;
+  finalCtaEyebrow: string | null;
+  finalCtaHeading: string | null;
+  finalCtaIntro: string | null;
+  finalCtaButtonLabel: string | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
 // Variable: HOME_SEO_QUERY
-// Query: *[_type == "homePage"][0]{ title, seo }
+// Query: *[_type == "homePage"][0]{ seo }
 export type HOME_SEO_QUERY_RESULT = {
-  title: string | null;
   seo: Seo | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
-// Variable: CASE_STUDY_SLUGS_QUERY
-// Query: *[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }
-export type CASE_STUDY_SLUGS_QUERY_RESULT = Array<{
-  slug: string | null;
-}>;
+// Variable: REVIEW_QUERY
+// Query: *[_type == "reviewPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,    problemHeading, problemAccent, problemBody, problemCallout,    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,    foundersHeading, foundersAccent, foundersFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    processHeading, processAccent,    pricingEyebrow, pricingPrice, pricingPriceSuffix, pricingLead, pricingNote, pricingButtonLabel, pricingIncludedLabel, pricingIncluded,    fitHeading, fitChecks, fitNotLabel, fitNotBody,    proofHeading, proofAccent,    faqHeading, faqAccent, faqItems[]{ _key, question, answer },    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+export type REVIEW_QUERY_RESULT = {
+  heroEyebrow: string | null;
+  heroHeading: string | null;
+  heroAccent: string | null;
+  heroSubhead: string | null;
+  heroCtaLabel: string | null;
+  heroCtaHelper: string | null;
+  marquee: Array<string> | null;
+  problemHeading: string | null;
+  problemAccent: string | null;
+  problemBody: string | null;
+  problemCallout: string | null;
+  whatHeading: string | null;
+  whatAccent: string | null;
+  whatIntro: string | null;
+  focusLabel: string | null;
+  focusItems: Array<string> | null;
+  deliverablesHeading: string | null;
+  deliverablesAccent: string | null;
+  deliverablesIntro: string | null;
+  deliverablesItems: Array<{
+    _key: string;
+    title: string | null;
+    body: string | null;
+  }> | null;
+  deliverablesClosing: string | null;
+  foundersHeading: string | null;
+  foundersAccent: string | null;
+  foundersFootnote: string | null;
+  founders: Array<{
+    _key: string;
+    role: string | null;
+    bio: string | null;
+    founder: {
+      _id: string;
+      name: string | null;
+      linkedinUrl: string | null;
+      photo: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        lqip: string | null;
+        aspectRatio: number | null;
+      } | null;
+    } | null;
+  }> | null;
+  processHeading: string | null;
+  processAccent: string | null;
+  pricingEyebrow: string | null;
+  pricingPrice: string | null;
+  pricingPriceSuffix: string | null;
+  pricingLead: string | null;
+  pricingNote: string | null;
+  pricingButtonLabel: string | null;
+  pricingIncludedLabel: string | null;
+  pricingIncluded: Array<string> | null;
+  fitHeading: string | null;
+  fitChecks: Array<string> | null;
+  fitNotLabel: string | null;
+  fitNotBody: string | null;
+  proofHeading: string | null;
+  proofAccent: string | null;
+  faqHeading: string | null;
+  faqAccent: string | null;
+  faqItems: Array<{
+    _key: string;
+    question: string | null;
+    answer: string | null;
+  }> | null;
+  finalCtaEyebrow: string | null;
+  finalCtaHeading: string | null;
+  finalCtaIntro: string | null;
+  finalCtaButtonLabel: string | null;
+} | null;
 
 // Source: src/sanity/lib/queries.ts
-// Variable: SITEMAP_QUERY
-// Query: *[    (_type == "homePage" && seo.noIndex != true) ||    (_type == "caseStudy" && defined(slug.current) && seo.noIndex != true)  ]{    _type,    "slug": slug.current,    _updatedAt  }
-export type SITEMAP_QUERY_RESULT = Array<
-  | {
-      _type: "caseStudy";
-      slug: string | null;
-      _updatedAt: string;
-    }
-  | {
-      _type: "homePage";
-      slug: null;
-      _updatedAt: string;
-    }
->;
+// Variable: REVIEW_SEO_QUERY
+// Query: *[_type == "reviewPage"][0]{ seo }
+export type REVIEW_SEO_QUERY_RESULT = {
+  seo: Seo | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: HOW_WE_WORK_QUERY
+// Query: *[_type == "howWeWorkPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },    runsHeading, runsAccent, runsSteps[]{ _key, title, body },    principlesHeading, principlesAccent, principlesItems,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+export type HOW_WE_WORK_QUERY_RESULT = {
+  heroEyebrow: string | null;
+  heroHeading: string | null;
+  heroAccent: string | null;
+  heroSubhead: string | null;
+  heroCtaLabel: string | null;
+  heroCtaHelper: string | null;
+  marquee: Array<string> | null;
+  fearsHeading: string | null;
+  fearsAccent: string | null;
+  fearsAnswerLabel: string | null;
+  fears: Array<{
+    _key: string;
+    fear: string | null;
+    answer: string | null;
+  }> | null;
+  runsHeading: string | null;
+  runsAccent: string | null;
+  runsSteps: Array<{
+    _key: string;
+    title: string | null;
+    body: string | null;
+  }> | null;
+  principlesHeading: string | null;
+  principlesAccent: string | null;
+  principlesItems: Array<string> | null;
+  finalCtaEyebrow: string | null;
+  finalCtaHeading: string | null;
+  finalCtaIntro: string | null;
+  finalCtaButtonLabel: string | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: HOW_WE_WORK_SEO_QUERY
+// Query: *[_type == "howWeWorkPage"][0]{ seo }
+export type HOW_WE_WORK_SEO_QUERY_RESULT = {
+  seo: Seo | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: FOUNDERS_PAGE_QUERY
+// Query: *[_type == "foundersPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper,    storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,    storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,    believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,    peopleHeading, peopleAccent, peopleFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+export type FOUNDERS_PAGE_QUERY_RESULT = {
+  heroEyebrow: string | null;
+  heroHeading: string | null;
+  heroAccent: string | null;
+  heroSubhead: string | null;
+  heroCtaLabel: string | null;
+  heroCtaHelper: string | null;
+  storyHeading: string | null;
+  storyAccent: string | null;
+  storyDifferenceLabel: string | null;
+  storyDifferenceBig: string | null;
+  storyDifferenceSub: string | null;
+  storyStats: Array<{
+    _key: string;
+    value: string | null;
+    label: string | null;
+  }> | null;
+  storyBody1: string | null;
+  storyBody2: string | null;
+  storyOriginLabel: string | null;
+  storyOriginCaption: string | null;
+  storyOriginBody: string | null;
+  believeHeading: string | null;
+  believeAccent: string | null;
+  believeItems: Array<{
+    _key: string;
+    title: string | null;
+    body: string | null;
+  }> | null;
+  believeFinaleTitle: string | null;
+  believeFinaleBody: string | null;
+  peopleHeading: string | null;
+  peopleAccent: string | null;
+  peopleFootnote: string | null;
+  founders: Array<{
+    _key: string;
+    role: string | null;
+    bio: string | null;
+    founder: {
+      _id: string;
+      name: string | null;
+      linkedinUrl: string | null;
+      photo: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+        lqip: string | null;
+        aspectRatio: number | null;
+      } | null;
+    } | null;
+  }> | null;
+  studioHeading: string | null;
+  studioAccent: string | null;
+  studioBody: string | null;
+  studioTeamCaption: string | null;
+  studioTeamSizeBody: string | null;
+  finalCtaEyebrow: string | null;
+  finalCtaHeading: string | null;
+  finalCtaIntro: string | null;
+  finalCtaButtonLabel: string | null;
+} | null;
+
+// Source: src/sanity/lib/queries.ts
+// Variable: FOUNDERS_PAGE_SEO_QUERY
+// Query: *[_type == "foundersPage"][0]{ seo }
+export type FOUNDERS_PAGE_SEO_QUERY_RESULT = {
+  seo: Seo | null;
+} | null;
 
 // Source: src/sanity/lib/queries.ts
 // Variable: REDIRECTS_QUERY
@@ -862,13 +1000,17 @@ export type REDIRECTS_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[_type == "siteSettings"][0]{\n    siteName,\n    description,\n    location,\n    contactEmail,\n    contactPhone,\n    logo{\n      ...,\n      "lqip": asset->metadata.lqip,\n      "aspectRatio": asset->metadata.dimensions.aspectRatio\n    },\n    socials[]{ _key, platform, url },\n    seo,\n    analytics\n  }\n': SETTINGS_QUERY_RESULT;
-    '\n  *[_type == "navigation"][0]{\n    headerLinks[]{ _key, label, anchor },\n    headerCta,\n    footerTagline,\n    footerLinks[]{ _key, label, href },\n    footerNote\n  }\n': NAVIGATION_QUERY_RESULT;
-    '\n  *[_type == "homePage"][0]{\n    _id,\n    title,\n    pageBuilder[]{\n      _key,\n      _type,\n      _type == "heroSection" => {\n        anchorId,\n        eyebrow,\n        headline,\n        accent,\n        subhead,\n        primaryCta,\n        secondaryCta,\n        stats[]{ _key, value, label }\n      },\n      _type == "logosSection" => {\n        anchorId,\n        eyebrow,\n        logos[]{\n          _key,\n          name,\n          image{\n            ...,\n            "lqip": asset->metadata.lqip,\n            "aspectRatio": asset->metadata.dimensions.aspectRatio\n          }\n        }\n      },\n      _type == "caseStudiesSection" => {\n        anchorId,\n        eyebrow,\n        heading,\n        intro,\n        items[]->{\n          _id,\n          title,\n          client,\n          industry,\n          excerpt,\n          "slug": slug.current,\n          coverImage{\n            ...,\n            "lqip": asset->metadata.lqip,\n            "aspectRatio": asset->metadata.dimensions.aspectRatio\n          },\n          metrics[]{ _key, value, label }\n        }\n      },\n      _type == "processSection" => {\n        anchorId,\n        eyebrow,\n        heading,\n        intro,\n        steps[]{ _key, title, description }\n      },\n      _type == "testimonialSection" => {\n        anchorId,\n        eyebrow,\n        heading,\n        testimonials[]->{\n          _id,\n          quote,\n          authorName,\n          authorRole,\n          authorCompany,\n          authorPhoto{\n            ...,\n            "lqip": asset->metadata.lqip,\n            "aspectRatio": asset->metadata.dimensions.aspectRatio\n          }\n        }\n      },\n      _type == "foundersSection" => {\n        anchorId,\n        eyebrow,\n        heading,\n        intro,\n        founders[]->{\n          _id,\n          name,\n          role,\n          bio,\n          photo{\n            ...,\n            "lqip": asset->metadata.lqip,\n            "aspectRatio": asset->metadata.dimensions.aspectRatio\n          },\n          socials[]{ _key, platform, url }\n        }\n      },\n      _type == "reviewCtaSection" => {\n        anchorId,\n        eyebrow,\n        heading,\n        body,\n        bullets,\n        formHeading,\n        formNote,\n        submitLabel,\n        successHeading,\n        successMessage\n      }\n    },\n    seo\n  }\n': HOME_QUERY_RESULT;
-    '\n  *[_type == "caseStudy" && slug.current == $slug][0]{\n    _id,\n    _type,\n    title,\n    client,\n    industry,\n    excerpt,\n    publishedAt,\n    "slug": slug.current,\n    coverImage{\n      ...,\n      "lqip": asset->metadata.lqip,\n      "aspectRatio": asset->metadata.dimensions.aspectRatio\n    },\n    problem,\n    solution,\n    result,\n    metrics[]{ _key, value, label },\n    technologies,\n    links[]{ _key, label, href },\n    seo\n  }\n': CASE_STUDY_QUERY_RESULT;
-    '\n  *[_type == "homePage"][0]{ title, seo }\n': HOME_SEO_QUERY_RESULT;
-    '\n  *[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }\n': CASE_STUDY_SLUGS_QUERY_RESULT;
-    '\n  *[\n    (_type == "homePage" && seo.noIndex != true) ||\n    (_type == "caseStudy" && defined(slug.current) && seo.noIndex != true)\n  ]{\n    _type,\n    "slug": slug.current,\n    _updatedAt\n  }\n': SITEMAP_QUERY_RESULT;
+    '\n  *[_type == "siteSettings"][0]{\n    siteName,\n    description,\n    contactEmail,\n    finalCtaCaption,\n    finalCtaHelper,\n    flowSteps[]{ _key, tag, title, description },\n    seo\n  }\n': SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "navigation"][0]{\n    headerLinks[]{ _key, label, anchor },\n    headerCtaLabel,\n    footerTagline,\n    footerCtaLabel,\n    footerLinks[]{ _key, label, href },\n    footerNote\n  }\n': NAVIGATION_QUERY_RESULT;
+    '\n  *[_type == "founder"] | order(order asc){\n    _id,\n    name,\n    linkedinUrl,\n    photo{\n      ...,\n      "lqip": asset->metadata.lqip,\n      "aspectRatio": asset->metadata.dimensions.aspectRatio\n    }\n  }\n': FOUNDERS_QUERY_RESULT;
+    '\n  *[_type == "homePage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead,\n    heroPrimaryCtaLabel, heroPrimaryCtaLabelShort, heroSecondaryCtaLabel, heroSecondaryCtaHref,\n    marquee,\n    proofHeading, proofLinkLabel, proofLinkHref,\n    whoHeading, whoAccent, whoIntro, whoRows[]{ _key, title, body },\n    servicesHeading, servicesAccent, servicesItems[]{ _key, title, body }, servicesFootnote,\n    foundersHeading, foundersAccent, foundersIntro, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    trustHeading, trustAccent, trustCards[]{ _key, title, body },\n    reviewCtaHeading, reviewCtaAccent, reviewCtaIntro, reviewCtaButtonLabel,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': HOME_QUERY_RESULT;
+    '\n  *[_type == "homePage"][0]{ seo }\n': HOME_SEO_QUERY_RESULT;
+    '\n  *[_type == "reviewPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,\n    problemHeading, problemAccent, problemBody, problemCallout,\n    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,\n    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,\n    foundersHeading, foundersAccent, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    processHeading, processAccent,\n    pricingEyebrow, pricingPrice, pricingPriceSuffix, pricingLead, pricingNote, pricingButtonLabel, pricingIncludedLabel, pricingIncluded,\n    fitHeading, fitChecks, fitNotLabel, fitNotBody,\n    proofHeading, proofAccent,\n    faqHeading, faqAccent, faqItems[]{ _key, question, answer },\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': REVIEW_QUERY_RESULT;
+    '\n  *[_type == "reviewPage"][0]{ seo }\n': REVIEW_SEO_QUERY_RESULT;
+    '\n  *[_type == "howWeWorkPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,\n    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },\n    runsHeading, runsAccent, runsSteps[]{ _key, title, body },\n    principlesHeading, principlesAccent, principlesItems,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': HOW_WE_WORK_QUERY_RESULT;
+    '\n  *[_type == "howWeWorkPage"][0]{ seo }\n': HOW_WE_WORK_SEO_QUERY_RESULT;
+    '\n  *[_type == "foundersPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper,\n    storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,\n    storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,\n    believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,\n    peopleHeading, peopleAccent, peopleFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': FOUNDERS_PAGE_QUERY_RESULT;
+    '\n  *[_type == "foundersPage"][0]{ seo }\n': FOUNDERS_PAGE_SEO_QUERY_RESULT;
     '\n  *[_type == "redirect" && defined(source) && defined(destination)]{\n    source,\n    destination,\n    permanent\n  }\n': REDIRECTS_QUERY_RESULT;
   }
 }

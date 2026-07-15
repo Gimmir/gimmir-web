@@ -1,12 +1,19 @@
 import { Header } from "@/components/site/header";
 import { HeaderThemeProvider } from "@/components/site/header-theme";
 import { Footer } from "@/components/site/footer";
+import { sanityFetch } from "@/sanity/lib/live";
+import { NAVIGATION_QUERY, SETTINGS_QUERY } from "@/sanity/lib/queries";
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [{ data: nav }, { data: settings }] = await Promise.all([
+    sanityFetch({ query: NAVIGATION_QUERY }),
+    sanityFetch({ query: SETTINGS_QUERY }),
+  ]);
+
   return (
     <HeaderThemeProvider>
       <a
@@ -15,9 +22,9 @@ export default function SiteLayout({
       >
         Skip to content
       </a>
-      <Header />
+      <Header nav={nav} />
       <main id="main">{children}</main>
-      <Footer />
+      <Footer nav={nav} settings={settings} />
     </HeaderThemeProvider>
   );
 }

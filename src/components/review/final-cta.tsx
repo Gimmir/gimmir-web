@@ -1,12 +1,17 @@
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
+import type { REVIEW_QUERY_RESULT } from "@/sanity/types";
 
-export function FinalCta() {
+export function FinalCta({
+  data,
+}: {
+  data: NonNullable<REVIEW_QUERY_RESULT>;
+}) {
   return (
     <FinalCtaPanel
-      eyebrow="Find out before it costs you"
-      title="Find out before it costs you."
-      intro="The problems that sink fitness products are cheapest to fix today. Start with a free call with the founders."
-      buttonLabel="Book a free review call"
+      eyebrow={data.finalCtaEyebrow!}
+      title={data.finalCtaHeading}
+      intro={data.finalCtaIntro!}
+      buttonLabel={data.finalCtaButtonLabel!}
     />
   );
 }

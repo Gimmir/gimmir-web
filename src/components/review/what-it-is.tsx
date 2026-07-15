@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import type { REVIEW_QUERY_RESULT } from "@/sanity/types";
 
 const svgProps = {
   viewBox: "0 0 220 120",
@@ -413,25 +414,22 @@ function IlluAI() {
   );
 }
 
-const FOCUS = [
-  { title: "Memberships, subscriptions & billing", illu: <IlluSubscriptions /> },
-  { title: "Payments, fees & payouts across locations", illu: <IlluPayments /> },
-  { title: "Booking & scheduling under real load", illu: <IlluBooking /> },
-  {
-    title: "The data model behind multiple studios or franchises",
-    illu: <IlluDataModel />,
-  },
-  {
-    title: "Security, access & what investor due diligence finds",
-    illu: <IlluSecurity />,
-  },
-  {
-    title: "Where AI adds real value, and where it is a distraction",
-    illu: <IlluAI />,
-  },
+const FOCUS_ILLUSTRATIONS = [
+  <IlluSubscriptions key="subscriptions" />,
+  <IlluPayments key="payments" />,
+  <IlluBooking key="booking" />,
+  <IlluDataModel key="data-model" />,
+  <IlluSecurity key="security" />,
+  <IlluAI key="ai" />,
 ];
 
-export function WhatItIsSection() {
+export function WhatItIsSection({
+  data,
+}: {
+  data: NonNullable<REVIEW_QUERY_RESULT>;
+}) {
+  const focusItems = data.focusItems ?? [];
+
   return (
     <section
       id="start"
@@ -445,35 +443,40 @@ export function WhatItIsSection() {
             introMax="max-w-4xl"
             title={
               <>
-                A two-week expert review of whether your product is{" "}
-                <span className="font-serif font-normal italic">
-                  built to scale.
-                </span>
+                {data.whatHeading}
+                {data.whatAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic">
+                      {data.whatAccent}
+                    </span>
+                  </>
+                ) : null}
               </>
             }
-            intro="This is not a sales call dressed up as an audit. Two founders who have shipped real fitness platforms go deep on your product against one question: will this survive growth."
+            intro={data.whatIntro}
           />
         </Reveal>
 
         <Reveal>
           <p className="mt-12 font-mono text-sm uppercase tracking-wider text-muted">
-            We look at what actually breaks sport &amp; fitness products at scale
+            {data.focusLabel}
           </p>
         </Reveal>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {FOCUS.map((item, i) => (
+          {focusItems.map((title, i) => (
             <Reveal key={i} delay={(i % 3) * 70} className="h-full">
               <div className="w-card group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-shadow duration-300 ease-out hover:shadow-[0_20px_44px_-26px_rgba(21,20,14,0.3)]">
                 <div className="t-illu relative h-36 border-b border-line bg-paper-2">
                   <span className="absolute left-4 top-4 z-10 rounded-md bg-ink px-2 py-1 font-mono text-[11px] font-semibold leading-none text-paper">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  {item.illu}
+                  {FOCUS_ILLUSTRATIONS[i]}
                 </div>
                 <div className="flex flex-1 items-center p-6 md:p-7">
                   <h3 className="text-lg font-bold leading-snug tracking-tight md:text-xl">
-                    {item.title}
+                    {title}
                   </h3>
                 </div>
               </div>

@@ -8,18 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Logomark } from "@/components/ui/logomark";
 import { useHeaderTheme } from "@/components/site/header-theme";
 import { cn } from "@/lib/cn";
+import type { NAVIGATION_QUERY_RESULT } from "@/sanity/types";
 
-type NavItem = { label: string; hash?: string; href?: string };
+type Nav = NonNullable<NAVIGATION_QUERY_RESULT>;
 
-const NAV: NavItem[] = [
-  { label: "Home", hash: "#top" },
-  { label: "Case studies", href: "/work" },
-  { label: "How we work", href: "/how-we-work" },
-  { label: "Founders", href: "/founders" },
-  { label: "The Review", href: "/the-review" },
-];
-
-export function Header() {
+export function Header({ nav }: { nav: Nav | null }) {
   const pathname = usePathname();
   const onHome = pathname === "/";
   const { dark } = useHeaderTheme();
@@ -30,8 +23,12 @@ export function Header() {
   // Light header content while sitting over a dark hero (before scroll / menu).
   const light = dark && !scrolled && !open;
 
-  const resolve = (item: NavItem) =>
-    item.href ?? (onHome ? item.hash! : `/${item.hash}`);
+  const links = nav?.headerLinks ?? [];
+  const ctaLabel = nav?.headerCtaLabel ?? "Book a review call";
+
+  // On-page anchors (#top) only work on the home page; elsewhere prefix "/".
+  const resolve = (anchor: string) =>
+    anchor.startsWith("#") ? (onHome ? anchor : `/${anchor}`) : anchor;
 
   useEffect(() => {
     const onScroll = () => {
@@ -75,10 +72,10 @@ export function Header() {
         )}
       >
         <nav aria-label="Mobile" className="flex flex-col">
-          {NAV.map((item) => (
+          {links.map((item) => (
             <Link
-              key={item.label}
-              href={resolve(item)}
+              key={item._key}
+              href={resolve(item.anchor ?? "#")}
               onClick={() => setOpen(false)}
               className="display border-b border-line py-4 text-[30px] leading-none"
             >
@@ -91,7 +88,7 @@ export function Header() {
           className="mt-8 self-start"
           onClick={() => setOpen(false)}
         >
-          Founder Review Call
+          {ctaLabel}
         </Button>
       </div>
 
@@ -125,10 +122,10 @@ export function Header() {
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-9 lg:flex">
-          {NAV.map((item) => (
+          {links.map((item) => (
             <Link
-              key={item.label}
-              href={resolve(item)}
+              key={item._key}
+              href={resolve(item.anchor ?? "#")}
               className={cn(
                 "text-[15px] font-medium transition-colors",
                 light
@@ -147,7 +144,7 @@ export function Header() {
             size="sm"
             variant={light ? "outlineLight" : "solid"}
           >
-            Founder Review Call
+            {ctaLabel}
           </Button>
         </div>
 

@@ -40,11 +40,13 @@ export const navigationType = defineType({
       ],
     }),
     defineField({
-      name: "headerCta",
-      title: "Header CTA",
-      type: "cta",
+      name: "headerCtaLabel",
+      title: "Header CTA label",
+      type: "string",
       group: "header",
-      description: "The button shown at the end of the header.",
+      description:
+        "The button at the end of the header. Opens the Cal.com booking popup.",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "footerTagline",
@@ -52,6 +54,14 @@ export const navigationType = defineType({
       type: "text",
       rows: 2,
       group: "footer",
+    }),
+    defineField({
+      name: "footerCtaLabel",
+      title: "Footer CTA label",
+      type: "string",
+      group: "footer",
+      description: "The button in the footer. Opens the Cal.com booking popup.",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "footerLinks",

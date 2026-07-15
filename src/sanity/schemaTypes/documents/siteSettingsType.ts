@@ -9,6 +9,7 @@ export const siteSettingsType = defineType({
   groups: [
     { name: "general", title: "General", default: true },
     { name: "contact", title: "Contact & social" },
+    { name: "shared", title: "Shared content" },
     { name: "seo", title: "Default SEO" },
     { name: "analytics", title: "Analytics" },
   ],
@@ -64,6 +65,30 @@ export const siteSettingsType = defineType({
       type: "array",
       group: "contact",
       of: [defineArrayMember({ type: "socialLink" })],
+    }),
+    defineField({
+      name: "flowSteps",
+      title: "Flow steps",
+      type: "array",
+      group: "shared",
+      description:
+        'The "three steps, low risk" flow shown on both the Home and The Review pages.',
+      of: [defineArrayMember({ type: "flowStep" })],
+      validation: (rule) => rule.max(4),
+    }),
+    defineField({
+      name: "finalCtaCaption",
+      title: "Final-CTA avatar caption",
+      type: "string",
+      group: "shared",
+      description: 'Under the founder avatars, e.g. "The founders, on the call".',
+    }),
+    defineField({
+      name: "finalCtaHelper",
+      title: "Final-CTA helper line",
+      type: "string",
+      group: "shared",
+      description: 'e.g. "Free · 20 min · no pitch, no obligation.".',
     }),
     defineField({
       name: "seo",

@@ -3,8 +3,13 @@ import { Container } from "@/components/ui/container";
 import { FlowSteps } from "@/components/shared/flow-steps";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import type { HOME_QUERY_RESULT } from "@/sanity/types";
 
-export function ReviewCtaSection() {
+export function ReviewCtaSection({
+  data,
+}: {
+  data: NonNullable<HOME_QUERY_RESULT>;
+}) {
   return (
     <section
       id="start"
@@ -16,13 +21,18 @@ export function ReviewCtaSection() {
             index="06"
             title={
               <>
-                Start with a conversation,{" "}
-                <span className="font-serif font-normal italic">
-                  not a contract.
-                </span>
+                {data.reviewCtaHeading}
+                {data.reviewCtaAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic">
+                      {data.reviewCtaAccent}
+                    </span>
+                  </>
+                ) : null}
               </>
             }
-            intro="One path, three steps. You decide how far you go — and nothing is locked in."
+            intro={data.reviewCtaIntro}
           />
         </Reveal>
 
@@ -31,7 +41,7 @@ export function ReviewCtaSection() {
         <Reveal>
           <div className="mt-10">
             <Button cal arrow>
-              Book a founder review call
+              {data.reviewCtaButtonLabel}
             </Button>
           </div>
         </Reveal>

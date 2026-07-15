@@ -4,26 +4,14 @@ import { Container } from "@/components/ui/container";
 import { LinkedIn } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { FOUNDER_LINKEDIN, FOUNDER_PHOTOS } from "@/lib/founders";
+import { urlFor } from "@/sanity/lib/image";
+import type { HOME_QUERY_RESULT } from "@/sanity/types";
 
-const FOUNDERS = [
-  {
-    name: "Nazar Moroz",
-    role: "Founder",
-    photo: FOUNDER_PHOTOS.nazar,
-    linkedin: FOUNDER_LINKEDIN.nazar,
-    bio: "Leads product and business. Has built and shipped fitness products end to end, as an owner carrying the same risk you do.",
-  },
-  {
-    name: "Oleh Palazhii",
-    role: "CTO",
-    photo: FOUNDER_PHOTOS.oleh,
-    linkedin: FOUNDER_LINKEDIN.oleh,
-    bio: "Led the architecture of both the UN1T platform and Jimmy Coach. The person who designs how your product holds up as it scales.",
-  },
-];
-
-export function FoundersSection() {
+export function FoundersSection({
+  data,
+}: {
+  data: NonNullable<HOME_QUERY_RESULT>;
+}) {
   return (
     <section id="founders" className="scroll-mt-24 bg-ink text-paper">
       <Container className="py-20 md:py-28">
@@ -33,43 +21,50 @@ export function FoundersSection() {
             onDark
             title={
               <>
-                You work with the people{" "}
-                <span className="font-serif font-normal italic text-lime">
-                  who built it.
-                </span>
+                {data.foundersHeading}
+                {data.foundersAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic text-lime">
+                      {data.foundersAccent}
+                    </span>
+                  </>
+                ) : null}
               </>
             }
-            intro="Most agencies put a senior on the sales call and juniors on your project. With Gimmir, the founders are in the room from the first call to delivery."
+            intro={data.foundersIntro}
           />
         </Reveal>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
-          {FOUNDERS.map((f, i) => (
-            <Reveal key={f.name} delay={i * 80} className="h-full">
+          {(data.founders ?? []).map((f, i) => (
+            <Reveal key={f._key} delay={i * 80} className="h-full">
               <article className="flex h-full flex-col rounded-[22px] border border-paper/15 p-7 sm:p-8">
                 <div className="relative mb-7 aspect-[4/3] overflow-hidden rounded-2xl bg-[#211f17]">
-                  <Image
-                    src={f.photo}
-                    alt={f.name}
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="object-cover object-top"
-                  />
+                  {f.founder?.photo ? (
+                    <Image
+                      src={urlFor(f.founder.photo).width(800).height(600).fit("crop").url()}
+                      alt={f.founder.name ?? ""}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover object-top"
+                    />
+                  ) : null}
                 </div>
                 <div className="mb-3 flex items-start justify-between gap-3">
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <h3 className="text-2xl font-extrabold tracking-tight sm:text-[30px]">
-                      {f.name}
+                      {f.founder?.name}
                     </h3>
                     <span className="text-xs font-semibold uppercase tracking-wider text-lime">
                       {f.role}
                     </span>
                   </div>
                   <a
-                    href={f.linkedin}
+                    href={f.founder?.linkedinUrl ?? undefined}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${f.name} on LinkedIn`}
+                    aria-label={`${f.founder?.name} on LinkedIn`}
                     className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-paper/15 text-paper/70 transition-colors hover:border-lime hover:text-lime"
                   >
                     <LinkedIn className="size-[18px]" />
@@ -83,8 +78,7 @@ export function FoundersSection() {
 
         <Reveal>
           <p className="mt-8 max-w-[56ch] text-lg leading-relaxed text-[#8b887e]">
-            Two founders who have already built what you are trying to build —
-            plus the team behind them.
+            {data.foundersFootnote}
           </p>
         </Reveal>
       </Container>

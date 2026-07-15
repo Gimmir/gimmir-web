@@ -6,36 +6,39 @@ import { HowItRunsSection } from "@/components/how-we-work/runs";
 import { PrinciplesSection } from "@/components/how-we-work/principles";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { Marquee } from "@/components/ui/marquee";
+import { sanityFetch } from "@/sanity/lib/live";
+import { HOW_WE_WORK_QUERY, HOW_WE_WORK_SEO_QUERY } from "@/sanity/lib/queries";
 
-export const metadata: Metadata = {
-  title: "How we work",
-  description:
-    "Outsourcing without the part everyone hates. The founders are in every engagement, you own your code and IP from day one, and you talk directly to the engineers building your product.",
-  alternates: { canonical: "/how-we-work" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await sanityFetch({
+    query: HOW_WE_WORK_SEO_QUERY,
+    stega: false,
+  });
 
-export default function HowWeWorkPage() {
+  return {
+    title: data?.seo?.metaTitle ?? undefined,
+    description: data?.seo?.metaDescription ?? undefined,
+    alternates: { canonical: "/how-we-work" },
+  };
+}
+
+export default async function HowWeWorkPage() {
+  const { data } = await sanityFetch({ query: HOW_WE_WORK_QUERY });
+
+  if (!data) return null;
+
   return (
     <>
-      <Hero />
-      <Marquee
-        items={[
-          "Founders in every project",
-          "IP yours from day one",
-          "Direct access to seniors",
-          "We push back",
-          "Built to scale",
-          "QA is our job",
-        ]}
-      />
-      <FearsSection />
-      <HowItRunsSection />
-      <PrinciplesSection />
+      <Hero data={data} />
+      <Marquee items={data.marquee ?? []} />
+      <FearsSection data={data} />
+      <HowItRunsSection data={data} />
+      <PrinciplesSection data={data} />
       <FinalCtaPanel
-        eyebrow="Talk to the founders"
-        title="Talk to the founders, not a sales team."
-        intro="The fastest way to know if we are the right team is to talk to the people who would actually build with you."
-        buttonLabel="Book a founder review call"
+        eyebrow={data.finalCtaEyebrow!}
+        title={data.finalCtaHeading}
+        intro={data.finalCtaIntro!}
+        buttonLabel={data.finalCtaButtonLabel!}
       />
     </>
   );

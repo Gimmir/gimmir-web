@@ -1,5 +1,5 @@
 import { UserIcon } from "@sanity/icons";
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 export const founderType = defineType({
   name: "founder",
@@ -30,15 +30,17 @@ export const founderType = defineType({
     }),
     defineField({
       name: "bio",
-      title: "Bio",
+      title: "Default bio",
       type: "text",
       rows: 4,
+      description: "Fallback bio; page founder cards can override this.",
     }),
     defineField({
-      name: "socials",
-      title: "Social links",
-      type: "array",
-      of: [defineArrayMember({ type: "socialLink" })],
+      name: "linkedinUrl",
+      title: "LinkedIn URL",
+      type: "url",
+      validation: (rule) =>
+        rule.uri({ scheme: ["https"], allowRelative: false }),
     }),
     defineField({
       name: "order",

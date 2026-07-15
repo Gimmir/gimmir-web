@@ -2,19 +2,16 @@ import { Container } from "@/components/ui/container";
 import { Pencil } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import type { FOUNDERS_PAGE_QUERY_RESULT } from "@/sanity/types";
 
-const STATS = [
-  {
-    value: "10+",
-    label: "UN1T franchises worldwide, moved off a third-party system onto their own platform",
-  },
-  {
-    value: "100+",
-    label: "Jimmy Coach coaches in the first month, built from zero",
-  },
-];
+export function StorySection({
+  data,
+}: {
+  data: NonNullable<FOUNDERS_PAGE_QUERY_RESULT>;
+}) {
+  const stats = data.storyStats ?? [];
+  const differenceBig = (data.storyDifferenceBig ?? "").replace(/\.+$/, "");
 
-export function StorySection() {
   return (
     <section className="border-t border-line py-20 md:py-28">
       <Container>
@@ -24,10 +21,15 @@ export function StorySection() {
             titleMax="max-w-[24ch]"
             title={
               <>
-                Most fitness software is built by people who have{" "}
-                <span className="font-serif font-normal italic">
-                  never run a fitness business.
-                </span>
+                {data.storyHeading}
+                {data.storyAccent ? (
+                  <>
+                    {" "}
+                    <span className="font-serif font-normal italic">
+                      {data.storyAccent}
+                    </span>
+                  </>
+                ) : null}
               </>
             }
           />
@@ -48,19 +50,20 @@ export function StorySection() {
             <div className="relative grid gap-10 md:grid-cols-2 md:items-center md:gap-14">
               <div>
                 <p className="font-mono text-sm uppercase tracking-widest text-lime">
-                  The difference
+                  {data.storyDifferenceLabel}
                 </p>
                 <p className="display mt-5 text-[clamp(3.5rem,10vw,6.5rem)] leading-[0.82]">
-                  We have<span className="text-lime">.</span>
+                  {differenceBig}
+                  <span className="text-lime">.</span>
                 </p>
                 <p className="mt-7 max-w-[38ch] text-lg leading-relaxed text-paper/70">
-                  As owners, not contractors.
+                  {data.storyDifferenceSub}
                 </p>
               </div>
 
               <div className="grid gap-5">
-                {STATS.map((s, i) => (
-                  <Reveal key={s.value} delay={i * 90}>
+                {stats.map((s, i) => (
+                  <Reveal key={s._key} delay={i * 90}>
                     <div className="rounded-2xl border border-paper/10 bg-paper/[0.04] p-6 backdrop-blur-sm md:p-7">
                       <div className="display text-[clamp(2.75rem,6vw,3.75rem)] leading-none text-lime">
                         {s.value}
@@ -81,26 +84,13 @@ export function StorySection() {
           <div className="grid gap-x-14 gap-y-6 md:grid-cols-2">
             <Reveal>
               <p className="text-lg leading-relaxed text-muted md:text-xl">
-                We built the platform behind{" "}
-                <strong className="font-semibold text-ink">UN1T</strong>, a
-                global fitness franchise, and moved it off a third-party system
-                onto its own app and back office, across 10+ franchises
-                worldwide. We co-founded{" "}
-                <strong className="font-semibold text-ink">Jimmy Coach</strong>{" "}
-                and built it from zero into a coaching platform that reached 100+
-                active coaches in its first month.
+                {data.storyBody1}
               </p>
             </Reveal>
 
             <Reveal delay={80}>
               <p className="text-lg leading-relaxed text-muted md:text-xl">
-                Building those products as owners, not contractors, taught us
-                what actually breaks fitness software at scale, and how few teams
-                can be trusted with it. We started Gimmir to be that team for
-                other founders:{" "}
-                <strong className="font-semibold text-ink">
-                  senior, honest, and on the hook for the result, not the hours.
-                </strong>
+                {data.storyBody2}
               </p>
             </Reveal>
           </div>
@@ -120,19 +110,15 @@ export function StorySection() {
                 <div>
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
                     <span className="font-mono text-xs uppercase tracking-widest text-ink/70">
-                      Founders&rsquo; origin
+                      {data.storyOriginLabel}
                     </span>
                     <span className="rounded-full border border-ink/20 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-faint">
-                      To add
+                      {data.storyOriginCaption}
                     </span>
                   </div>
 
                   <p className="mt-3 max-w-[64ch] leading-relaxed text-muted">
-                    Two to three sentences of your real origin: how you and Oleh
-                    started working together, how many years, what you did
-                    before Gimmir, and why sport and fitness specifically. This
-                    is the one paragraph only you can write, and the one that
-                    makes this page convert.
+                    {data.storyOriginBody}
                   </p>
 
                   <div className="mt-5 flex items-center gap-3">

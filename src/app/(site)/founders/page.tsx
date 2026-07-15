@@ -6,27 +6,38 @@ import { BelieveSection } from "@/components/founders/believe";
 import { PeopleSection } from "@/components/founders/people";
 import { StudioSection } from "@/components/founders/studio";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
+import { sanityFetch } from "@/sanity/lib/live";
+import { FOUNDERS_PAGE_QUERY, FOUNDERS_PAGE_SEO_QUERY } from "@/sanity/lib/queries";
 
-export const metadata: Metadata = {
-  title: "Founders",
-  description:
-    "Gimmir is led by two founders, Nazar Moroz and Oleh Palazhii, who built and shipped the platforms behind UN1T and Jimmy Coach as owners. Meet the people you work with directly.",
-  alternates: { canonical: "/founders" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await sanityFetch({
+    query: FOUNDERS_PAGE_SEO_QUERY,
+    stega: false,
+  });
 
-export default function FoundersPage() {
+  return {
+    title: data?.seo?.metaTitle ?? undefined,
+    description: data?.seo?.metaDescription ?? undefined,
+    alternates: { canonical: "/founders" },
+  };
+}
+
+export default async function FoundersPage() {
+  const { data } = await sanityFetch({ query: FOUNDERS_PAGE_QUERY });
+  if (!data) return null;
+
   return (
     <>
-      <Hero />
-      <StorySection />
-      <BelieveSection />
-      <PeopleSection />
-      <StudioSection />
+      <Hero data={data} />
+      <StorySection data={data} />
+      <BelieveSection data={data} />
+      <PeopleSection data={data} />
+      <StudioSection data={data} />
       <FinalCtaPanel
-        eyebrow="Let’s talk"
-        title="Let’s look at what you are building."
-        intro="The best way to know if we are the right team is to talk to us directly."
-        buttonLabel="Book a founder review call"
+        eyebrow={data.finalCtaEyebrow!}
+        title={data.finalCtaHeading}
+        intro={data.finalCtaIntro!}
+        buttonLabel={data.finalCtaButtonLabel!}
       />
     </>
   );

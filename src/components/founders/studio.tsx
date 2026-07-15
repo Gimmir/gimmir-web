@@ -4,7 +4,8 @@ import { Container } from "@/components/ui/container";
 import { Pencil, Plus } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { FOUNDER_PHOTOS } from "@/lib/founders";
+import { urlFor } from "@/sanity/lib/image";
+import type { FOUNDERS_PAGE_QUERY_RESULT } from "@/sanity/types";
 
 function TeamAvatar() {
   return (
@@ -29,7 +30,13 @@ function TeamAvatar() {
   );
 }
 
-export function StudioSection() {
+export function StudioSection({
+  data,
+}: {
+  data: NonNullable<FOUNDERS_PAGE_QUERY_RESULT>;
+}) {
+  const founders = data.founders ?? [];
+
   return (
     <section className="border-t border-line py-20 md:py-28">
       <Container>
@@ -38,24 +45,26 @@ export function StudioSection() {
             <SectionHeader
               index="04"
               titleMax="max-w-[18ch]"
-              title="Two founders, a full team behind them."
+              title={
+                <>
+                  {data.studioHeading}
+                  {data.studioAccent ? (
+                    <>
+                      {" "}
+                      <span className="font-serif font-normal italic">
+                        {data.studioAccent}
+                      </span>
+                    </>
+                  ) : null}
+                </>
+              }
             />
           </Reveal>
 
           <div>
             <Reveal>
               <p className="text-lg leading-relaxed text-muted md:text-xl">
-                Behind the two of us is a team of senior engineers and designers,
-                and the infrastructure to spin up a dedicated team for you in{" "}
-                <strong className="font-semibold text-ink">
-                  weeks, not months
-                </strong>
-                . We are a{" "}
-                <strong className="font-semibold text-ink">
-                  Ukrainian studio
-                </strong>
-                , and that engineering talent is a large part of why founders in
-                the US and UK keep building with us.
+                {data.studioBody}
               </p>
             </Reveal>
 
@@ -64,20 +73,20 @@ export function StudioSection() {
                 {/* the team */}
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
                   <div className="flex -space-x-3">
-                    <Image
-                      src={FOUNDER_PHOTOS.nazar}
-                      alt="Nazar Moroz"
-                      width={40}
-                      height={40}
-                      className="size-10 rounded-full object-cover object-top ring-2 ring-surface"
-                    />
-                    <Image
-                      src={FOUNDER_PHOTOS.oleh}
-                      alt="Oleh Palazhii"
-                      width={40}
-                      height={40}
-                      className="size-10 rounded-full object-cover object-top ring-2 ring-surface"
-                    />
+                    {founders.map((f) =>
+                      f.founder?.photo ? (
+                        <Image
+                          key={f._key}
+                          src={urlFor(f.founder.photo).width(80).height(80).fit("crop").url()}
+                          alt={f.founder.name ?? ""}
+                          width={40}
+                          height={40}
+                          placeholder={f.founder.photo.lqip ? "blur" : undefined}
+                          blurDataURL={f.founder.photo.lqip ?? undefined}
+                          className="size-10 rounded-full object-cover object-top ring-2 ring-surface"
+                        />
+                      ) : null,
+                    )}
                     {Array.from({ length: 6 }).map((_, i) => (
                       <TeamAvatar key={i} />
                     ))}
@@ -86,9 +95,7 @@ export function StudioSection() {
                     </span>
                   </div>
                   <p className="text-sm leading-snug text-muted">
-                    Nazar &amp; Oleh, plus the
-                    <br className="hidden sm:block" /> senior team behind every
-                    build.
+                    {data.studioTeamCaption}
                   </p>
                 </div>
 
@@ -107,10 +114,7 @@ export function StudioSection() {
                       </span>
                     </div>
                     <p className="mt-2 max-w-[56ch] text-sm leading-relaxed text-muted">
-                      How you want to state it, kept honest — e.g. &ldquo;a team
-                      of 15+ engineers and designers.&rdquo; No global offices
-                      you do not have; it is the first thing a careful buyer
-                      checks.
+                      {data.studioTeamSizeBody}
                     </p>
                   </div>
                 </div>

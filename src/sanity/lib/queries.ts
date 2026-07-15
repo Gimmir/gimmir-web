@@ -1,189 +1,128 @@
 import { defineQuery } from "next-sanity";
 
 /**
- * Image projections keep the raw `asset` reference (so `urlFor` works) and add
- * `lqip` + `aspectRatio` from metadata for blur placeholders and stable layout.
+ * Content is delivered as structured singleton documents (one per page) plus
+ * shared `siteSettings`, `navigation`, and `founder` documents. Founder cards
+ * reference a founder and override role + bio per page. Image projections keep
+ * the raw `asset` reference (so `urlFor` works) and add `lqip` + `aspectRatio`.
  */
 
 export const SETTINGS_QUERY = defineQuery(`
   *[_type == "siteSettings"][0]{
     siteName,
     description,
-    location,
     contactEmail,
-    contactPhone,
-    logo{
-      ...,
-      "lqip": asset->metadata.lqip,
-      "aspectRatio": asset->metadata.dimensions.aspectRatio
-    },
-    socials[]{ _key, platform, url },
-    seo,
-    analytics
+    finalCtaCaption,
+    finalCtaHelper,
+    flowSteps[]{ _key, tag, title, description },
+    seo
   }
 `);
 
 export const NAVIGATION_QUERY = defineQuery(`
   *[_type == "navigation"][0]{
     headerLinks[]{ _key, label, anchor },
-    headerCta,
+    headerCtaLabel,
     footerTagline,
+    footerCtaLabel,
     footerLinks[]{ _key, label, href },
     footerNote
   }
 `);
 
-export const HOME_QUERY = defineQuery(`
-  *[_type == "homePage"][0]{
+/** Both founders, for the small avatar stacks (final CTA panel, studio). */
+export const FOUNDERS_QUERY = defineQuery(`
+  *[_type == "founder"] | order(order asc){
     _id,
-    title,
-    pageBuilder[]{
-      _key,
-      _type,
-      _type == "heroSection" => {
-        anchorId,
-        eyebrow,
-        headline,
-        accent,
-        subhead,
-        primaryCta,
-        secondaryCta,
-        stats[]{ _key, value, label }
-      },
-      _type == "logosSection" => {
-        anchorId,
-        eyebrow,
-        logos[]{
-          _key,
-          name,
-          image{
-            ...,
-            "lqip": asset->metadata.lqip,
-            "aspectRatio": asset->metadata.dimensions.aspectRatio
-          }
-        }
-      },
-      _type == "caseStudiesSection" => {
-        anchorId,
-        eyebrow,
-        heading,
-        intro,
-        items[]->{
-          _id,
-          title,
-          client,
-          industry,
-          excerpt,
-          "slug": slug.current,
-          coverImage{
-            ...,
-            "lqip": asset->metadata.lqip,
-            "aspectRatio": asset->metadata.dimensions.aspectRatio
-          },
-          metrics[]{ _key, value, label }
-        }
-      },
-      _type == "processSection" => {
-        anchorId,
-        eyebrow,
-        heading,
-        intro,
-        steps[]{ _key, title, description }
-      },
-      _type == "testimonialSection" => {
-        anchorId,
-        eyebrow,
-        heading,
-        testimonials[]->{
-          _id,
-          quote,
-          authorName,
-          authorRole,
-          authorCompany,
-          authorPhoto{
-            ...,
-            "lqip": asset->metadata.lqip,
-            "aspectRatio": asset->metadata.dimensions.aspectRatio
-          }
-        }
-      },
-      _type == "foundersSection" => {
-        anchorId,
-        eyebrow,
-        heading,
-        intro,
-        founders[]->{
-          _id,
-          name,
-          role,
-          bio,
-          photo{
-            ...,
-            "lqip": asset->metadata.lqip,
-            "aspectRatio": asset->metadata.dimensions.aspectRatio
-          },
-          socials[]{ _key, platform, url }
-        }
-      },
-      _type == "reviewCtaSection" => {
-        anchorId,
-        eyebrow,
-        heading,
-        body,
-        bullets,
-        formHeading,
-        formNote,
-        submitLabel,
-        successHeading,
-        successMessage
-      }
-    },
-    seo
-  }
-`);
-
-export const CASE_STUDY_QUERY = defineQuery(`
-  *[_type == "caseStudy" && slug.current == $slug][0]{
-    _id,
-    _type,
-    title,
-    client,
-    industry,
-    excerpt,
-    publishedAt,
-    "slug": slug.current,
-    coverImage{
+    name,
+    linkedinUrl,
+    photo{
       ...,
       "lqip": asset->metadata.lqip,
       "aspectRatio": asset->metadata.dimensions.aspectRatio
+    }
+  }
+`);
+
+export const HOME_QUERY = defineQuery(`
+  *[_type == "homePage"][0]{
+    heroEyebrow, heroHeading, heroAccent, heroSubhead,
+    heroPrimaryCtaLabel, heroPrimaryCtaLabelShort, heroSecondaryCtaLabel, heroSecondaryCtaHref,
+    marquee,
+    proofHeading, proofLinkLabel, proofLinkHref,
+    whoHeading, whoAccent, whoIntro, whoRows[]{ _key, title, body },
+    servicesHeading, servicesAccent, servicesItems[]{ _key, title, body }, servicesFootnote,
+    foundersHeading, foundersAccent, foundersIntro, foundersFootnote,
+    founders[]{
+      _key, role, bio,
+      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }
     },
-    problem,
-    solution,
-    result,
-    metrics[]{ _key, value, label },
-    technologies,
-    links[]{ _key, label, href },
-    seo
+    trustHeading, trustAccent, trustCards[]{ _key, title, body },
+    reviewCtaHeading, reviewCtaAccent, reviewCtaIntro, reviewCtaButtonLabel,
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
   }
 `);
 
 export const HOME_SEO_QUERY = defineQuery(`
-  *[_type == "homePage"][0]{ title, seo }
+  *[_type == "homePage"][0]{ seo }
 `);
 
-export const CASE_STUDY_SLUGS_QUERY = defineQuery(`
-  *[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }
-`);
-
-export const SITEMAP_QUERY = defineQuery(`
-  *[
-    (_type == "homePage" && seo.noIndex != true) ||
-    (_type == "caseStudy" && defined(slug.current) && seo.noIndex != true)
-  ]{
-    _type,
-    "slug": slug.current,
-    _updatedAt
+export const REVIEW_QUERY = defineQuery(`
+  *[_type == "reviewPage"][0]{
+    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,
+    problemHeading, problemAccent, problemBody, problemCallout,
+    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,
+    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,
+    foundersHeading, foundersAccent, foundersFootnote,
+    founders[]{
+      _key, role, bio,
+      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }
+    },
+    processHeading, processAccent,
+    pricingEyebrow, pricingPrice, pricingPriceSuffix, pricingLead, pricingNote, pricingButtonLabel, pricingIncludedLabel, pricingIncluded,
+    fitHeading, fitChecks, fitNotLabel, fitNotBody,
+    proofHeading, proofAccent,
+    faqHeading, faqAccent, faqItems[]{ _key, question, answer },
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
   }
+`);
+
+export const REVIEW_SEO_QUERY = defineQuery(`
+  *[_type == "reviewPage"][0]{ seo }
+`);
+
+export const HOW_WE_WORK_QUERY = defineQuery(`
+  *[_type == "howWeWorkPage"][0]{
+    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,
+    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },
+    runsHeading, runsAccent, runsSteps[]{ _key, title, body },
+    principlesHeading, principlesAccent, principlesItems,
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
+  }
+`);
+
+export const HOW_WE_WORK_SEO_QUERY = defineQuery(`
+  *[_type == "howWeWorkPage"][0]{ seo }
+`);
+
+export const FOUNDERS_PAGE_QUERY = defineQuery(`
+  *[_type == "foundersPage"][0]{
+    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper,
+    storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,
+    storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,
+    believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,
+    peopleHeading, peopleAccent, peopleFootnote,
+    founders[]{
+      _key, role, bio,
+      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }
+    },
+    studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
+  }
+`);
+
+export const FOUNDERS_PAGE_SEO_QUERY = defineQuery(`
+  *[_type == "foundersPage"][0]{ seo }
 `);
 
 export const REDIRECTS_QUERY = defineQuery(`

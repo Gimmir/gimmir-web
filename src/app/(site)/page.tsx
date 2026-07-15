@@ -9,32 +9,35 @@ import { TrustSection } from "@/components/home/trust";
 import { ReviewCtaSection } from "@/components/home/review-cta";
 import { FinalCta } from "@/components/home/final-cta";
 import { Marquee } from "@/components/ui/marquee";
+import { sanityFetch } from "@/sanity/lib/live";
+import { HOME_QUERY, HOME_SEO_QUERY } from "@/sanity/lib/queries";
 
-export const metadata: Metadata = {
-  title: { absolute: "Gimmir — Product engineering for sport & fitness" },
-  alternates: { canonical: "/" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await sanityFetch({ query: HOME_SEO_QUERY, stega: false });
 
-export default function HomePage() {
+  return {
+    title: data?.seo?.metaTitle ? { absolute: data.seo.metaTitle } : undefined,
+    description: data?.seo?.metaDescription ?? undefined,
+    alternates: { canonical: "/" },
+  };
+}
+
+export default async function HomePage() {
+  const { data } = await sanityFetch({ query: HOME_QUERY });
+
+  if (!data) return null;
+
   return (
     <>
-      <Hero />
-      <Marquee
-        items={[
-          "franchise platform",
-          "Jimmy Coach",
-          "Member & booking systems",
-          "iOS & Android apps",
-          "AI in product",
-        ]}
-      />
-      <ProofSection />
-      <WhoSection />
-      <ServicesSection />
-      <FoundersSection />
-      <TrustSection />
-      <ReviewCtaSection />
-      <FinalCta />
+      <Hero data={data} />
+      <Marquee items={data.marquee ?? []} />
+      <ProofSection data={data} />
+      <WhoSection data={data} />
+      <ServicesSection data={data} />
+      <FoundersSection data={data} />
+      <TrustSection data={data} />
+      <ReviewCtaSection data={data} />
+      <FinalCta data={data} />
     </>
   );
 }

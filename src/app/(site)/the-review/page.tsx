@@ -12,38 +12,36 @@ import { ProofSection } from "@/components/review/proof";
 import { FaqSection } from "@/components/review/faq";
 import { FinalCta } from "@/components/review/final-cta";
 import { Marquee } from "@/components/ui/marquee";
+import { sanityFetch } from "@/sanity/lib/live";
+import { REVIEW_QUERY, REVIEW_SEO_QUERY } from "@/sanity/lib/queries";
 
-export const metadata: Metadata = {
-  title: "The Review",
-  description:
-    "A two-week expert review of whether your sport or fitness product is built to scale. The founders behind UN1T and Jimmy Coach hand you a clear roadmap.",
-  alternates: { canonical: "/the-review" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await sanityFetch({ query: REVIEW_SEO_QUERY, stega: false });
+  return {
+    title: data?.seo?.metaTitle ?? undefined,
+    description: data?.seo?.metaDescription ?? undefined,
+    alternates: { canonical: "/the-review" },
+  };
+}
 
-export default function TheReviewPage() {
+export default async function TheReviewPage() {
+  const { data } = await sanityFetch({ query: REVIEW_QUERY });
+  if (!data) return null;
+
   return (
     <>
-      <Hero />
-      <Marquee
-        items={[
-          "Memberships & billing",
-          "Payments at scale",
-          "Booking under load",
-          "Multi-location data",
-          "Security & DD",
-          "AI where it pays",
-        ]}
-      />
-      <ProblemSection />
-      <WhatItIsSection />
-      <DeliverablesSection />
-      <FoundersSection />
-      <ProcessSection />
-      <PricingSection />
-      <FitSection />
-      <ProofSection />
-      <FaqSection />
-      <FinalCta />
+      <Hero data={data} />
+      <Marquee items={data.marquee ?? []} />
+      <ProblemSection data={data} />
+      <WhatItIsSection data={data} />
+      <DeliverablesSection data={data} />
+      <FoundersSection data={data} />
+      <ProcessSection data={data} />
+      <PricingSection data={data} />
+      <FitSection data={data} />
+      <ProofSection data={data} />
+      <FaqSection data={data} />
+      <FinalCta data={data} />
     </>
   );
 }

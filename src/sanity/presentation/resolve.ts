@@ -8,6 +8,21 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       tone: "positive",
       locations: [{ title: "Home", href: "/" }],
     }),
+    reviewPage: defineLocations({
+      message: "Used for The Review page",
+      tone: "positive",
+      locations: [{ title: "The Review", href: "/the-review" }],
+    }),
+    howWeWorkPage: defineLocations({
+      message: "Used for the How we work page",
+      tone: "positive",
+      locations: [{ title: "How we work", href: "/how-we-work" }],
+    }),
+    foundersPage: defineLocations({
+      message: "Used for the Founders page",
+      tone: "positive",
+      locations: [{ title: "Founders", href: "/founders" }],
+    }),
     siteSettings: defineLocations({
       message: "Used across every page (header, footer, metadata)",
       tone: "caution",
@@ -26,20 +41,14 @@ export const resolve: PresentationPluginOptions["resolve"] = {
             title: doc?.title || "Untitled case study",
             href: `/work/${doc?.slug}`,
           },
-          { title: "Case studies", href: "/#work" },
+          { title: "Case studies", href: "/work" },
         ],
       }),
     }),
     founder: defineLocations({
       select: { name: "name" },
       resolve: (doc) => ({
-        locations: [{ title: doc?.name || "Founder", href: "/#founders" }],
-      }),
-    }),
-    testimonial: defineLocations({
-      select: { name: "authorName" },
-      resolve: (doc) => ({
-        locations: [{ title: doc?.name || "Testimonial", href: "/" }],
+        locations: [{ title: doc?.name || "Founder", href: "/founders" }],
       }),
     }),
   },

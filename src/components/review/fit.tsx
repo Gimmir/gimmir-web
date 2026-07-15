@@ -2,19 +2,20 @@ import { Container } from "@/components/ui/container";
 import { Check, X } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
+import type { REVIEW_QUERY_RESULT } from "@/sanity/types";
 
-const FITS = [
-  "You have a funded startup or a multi-location fitness brand with real revenue.",
-  "You already have a product, or a serious plan and budget to build one.",
-  "You care more about getting it right than getting it cheap.",
-];
+export function FitSection({
+  data,
+}: {
+  data: NonNullable<REVIEW_QUERY_RESULT>;
+}) {
+  const fits = data.fitChecks ?? [];
 
-export function FitSection() {
   return (
     <section className="border-t border-line py-20 md:py-28">
       <Container>
         <Reveal>
-          <SectionHeader index="06" title="This is a fit if…" />
+          <SectionHeader index="06" title={data.fitHeading} />
         </Reveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 md:items-stretch">
@@ -32,7 +33,7 @@ export function FitSection() {
               </div>
 
               <ul className="mt-7 flex flex-col gap-5">
-                {FITS.map((f, i) => (
+                {fits.map((f, i) => (
                   <li key={i} className="flex items-start gap-3.5">
                     <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
                       <Check className="size-3.5" />
@@ -61,12 +62,10 @@ export function FitSection() {
               </div>
 
               <h3 className="mt-7 text-xl font-bold tracking-tight">
-                Honestly, not a fit if
+                {data.fitNotLabel}
               </h3>
               <p className="mt-3 text-lg leading-relaxed text-muted">
-                You are at idea stage with no budget, or you are shopping purely
-                on hourly rate. That is fine — we are just not the right team for
-                it.
+                {data.fitNotBody}
               </p>
             </div>
           </Reveal>

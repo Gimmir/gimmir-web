@@ -7,24 +7,21 @@ import { socialLinkType } from "./objects/socialLinkType";
 import { metricType } from "./objects/metricType";
 import { ctaType } from "./objects/ctaType";
 import { statType } from "./objects/statType";
-import { processStepType } from "./objects/processStepType";
-
-// Page-builder sections
-import { heroSectionType } from "./sections/heroSectionType";
-import { logosSectionType } from "./sections/logosSectionType";
-import { caseStudiesSectionType } from "./sections/caseStudiesSectionType";
-import { processSectionType } from "./sections/processSectionType";
-import { testimonialSectionType } from "./sections/testimonialSectionType";
-import { foundersSectionType } from "./sections/foundersSectionType";
-import { reviewCtaSectionType } from "./sections/reviewCtaSectionType";
+import { infoCardType } from "./objects/infoCardType";
+import { faqItemType } from "./objects/faqItemType";
+import { fearItemType } from "./objects/fearItemType";
+import { flowStepType } from "./objects/flowStepType";
+import { founderCardType } from "./objects/founderCardType";
 
 // Documents
 import { siteSettingsType } from "./documents/siteSettingsType";
 import { navigationType } from "./documents/navigationType";
 import { homePageType } from "./documents/homePageType";
+import { reviewPageType } from "./documents/reviewPageType";
+import { howWeWorkPageType } from "./documents/howWeWorkPageType";
+import { foundersPageType } from "./documents/foundersPageType";
 import { caseStudyType } from "./documents/caseStudyType";
 import { founderType } from "./documents/founderType";
-import { testimonialType } from "./documents/testimonialType";
 import { redirectType } from "./documents/redirectType";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
@@ -35,21 +32,19 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   metricType,
   ctaType,
   statType,
-  processStepType,
-  // Sections
-  heroSectionType,
-  logosSectionType,
-  caseStudiesSectionType,
-  processSectionType,
-  testimonialSectionType,
-  foundersSectionType,
-  reviewCtaSectionType,
+  infoCardType,
+  faqItemType,
+  fearItemType,
+  flowStepType,
+  founderCardType,
   // Documents
   siteSettingsType,
   navigationType,
   homePageType,
+  reviewPageType,
+  howWeWorkPageType,
+  foundersPageType,
   caseStudyType,
   founderType,
-  testimonialType,
   redirectType,
 ];

@@ -2,6 +2,8 @@ import { Fragment } from "react";
 
 import { ArrowRight } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
+import { sanityFetch } from "@/sanity/lib/live";
+import { SETTINGS_QUERY } from "@/sanity/lib/queries";
 
 const svgProps = {
   viewBox: "0 0 220 120",
@@ -181,25 +183,11 @@ function IlluBuild() {
   );
 }
 
-const STEPS = [
-  {
-    tag: "Free · 20 min",
-    title: "Founder review call",
-    desc: "Talk directly with Nazar and Oleh. We look at your product or plan and give you real input on the spot.",
-    illu: <IlluConversation />,
-  },
-  {
-    tag: "Paid",
-    title: "Scale Review + Roadmap",
-    desc: "We review your product, code, or plan against one question: will it survive growth. You get a clear roadmap of what to build, fix, and in what order.",
-    illu: <IlluRoadmap />,
-  },
-  {
-    tag: "Build",
-    title: "Dedicated team or turnkey build",
-    desc: "Delivered by the team the founders lead. Your review fee is credited toward the build.",
-    illu: <IlluBuild />,
-  },
+// Illustrations stay in code, matched to the flow steps by order.
+const ILLUS = [
+  <IlluConversation key="conversation" />,
+  <IlluRoadmap key="roadmap" />,
+  <IlluBuild key="build" />,
 ];
 
 function FlowArrow() {
@@ -212,29 +200,32 @@ function FlowArrow() {
   );
 }
 
-export function FlowSteps() {
+export async function FlowSteps() {
+  const { data: settings } = await sanityFetch({ query: SETTINGS_QUERY });
+  const steps = settings?.flowSteps ?? [];
+
   return (
     <div className="mt-12 grid gap-5 md:grid-cols-[1fr_auto_1fr_auto_1fr] md:items-stretch md:gap-3">
-      {STEPS.map((s, i) => (
-        <Fragment key={s.title}>
+      {steps.map((s, i) => (
+        <Fragment key={s._key}>
           <Reveal delay={i * 90} className="h-full">
             <div className="t-card group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-shadow duration-300 ease-out hover:shadow-[0_20px_44px_-26px_rgba(21,20,14,0.3)]">
               <div className="t-illu relative h-36 border-b border-line bg-paper-2">
                 <span className="absolute left-4 top-4 z-10 flex size-8 items-center justify-center rounded-full bg-ink font-mono text-[12px] font-semibold text-paper">
                   0{i + 1}
                 </span>
-                {s.illu}
+                {ILLUS[i]}
               </div>
               <div className="flex flex-1 flex-col gap-3 p-7 md:p-8">
                 <span className="inline-flex w-fit items-center rounded-full bg-lime px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-ink">
                   {s.tag}
                 </span>
                 <h3 className="text-xl font-bold tracking-tight">{s.title}</h3>
-                <p className="leading-relaxed text-muted">{s.desc}</p>
+                <p className="leading-relaxed text-muted">{s.description}</p>
               </div>
             </div>
           </Reveal>
-          {i < STEPS.length - 1 ? <FlowArrow /> : null}
+          {i < steps.length - 1 ? <FlowArrow /> : null}
         </Fragment>
       ))}
     </div>
