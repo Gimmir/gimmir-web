@@ -3,7 +3,6 @@ import { Container } from "@/components/ui/container";
 import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
-import { CAL_LINK_OPERATORS } from "@/lib/cal";
 
 export function Hero() {
   return (
@@ -32,7 +31,7 @@ export function Hero() {
             <div className="flex shrink-0 flex-col gap-3.5">
               <div className="flex flex-wrap gap-3.5">
                 <TrackedCta
-                  cal={CAL_LINK_OPERATORS}
+                  cal="costCheck"
                   arrow
                   event="operators_cost_check_cta_click"
                 >

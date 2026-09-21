@@ -24,6 +24,10 @@ export type CaseStudy = {
   seoDescription: string;
   services: string[];
   stats: CaseStat[];
+  /** Founder who tells the story (schema.org Article author). */
+  author: "founderNazar" | "founderOleh";
+  /** First published on the site, ISO date. */
+  publishedAt: string;
   /** Structured narrative — drives the standard template. */
   story?: {
     challenge: string;
@@ -56,6 +60,8 @@ export const CASES: CaseStudy[] = [
       { value: 10, suffix: "+", label: "locations on one platform they own" },
       { text: "~$10K", lime: true, label: "kept every month in platform and payment fees" },
     ],
+    author: "founderNazar",
+    publishedAt: "2026-07-14",
   },
   {
     slug: "jimmy-coach",
@@ -80,6 +86,8 @@ export const CASES: CaseStudy[] = [
       { value: 100, suffix: "+", label: "active coaches" },
       { value: 300, suffix: "+", label: "first-month users" },
     ],
+    author: "founderOleh",
+    publishedAt: "2026-07-14",
   },
 ];
 

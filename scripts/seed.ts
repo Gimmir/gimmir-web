@@ -1,10 +1,12 @@
 /**
- * Seeds the Gimmir dataset with the live site content.
+ * Seeds an EMPTY Gimmir dataset with the site's original launch content.
  *
- * Run with:  npm run seed
+ * Run with:  npm run seed -- --force
  *
- * Idempotent: documents use fixed ids and createOrReplace. Founder photos are
- * uploaded once and reused on re-runs (existing asset references are kept).
+ * Documents use fixed ids and createOrReplace, so running this against the
+ * live dataset overwrites every page with this file's copy, which is older
+ * than what editors have published since. It refuses to run without --force.
+ * Founder photos are uploaded once and reused on re-runs.
  */
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -32,6 +34,14 @@ function loadEnv() {
   }
 }
 loadEnv();
+
+if (!process.argv.includes("--force")) {
+  console.error(
+    "Refusing to seed: this overwrites live Sanity content with older copy.\n" +
+      "Only run it against an empty dataset: npm run seed -- --force",
+  );
+  process.exit(1);
+}
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";

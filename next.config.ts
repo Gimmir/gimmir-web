@@ -6,6 +6,7 @@ import { fetchRedirects } from "./src/lib/redirects";
 const STATIC_REDIRECTS = [
   { source: "/contact", destination: "/#start", permanent: true },
   { source: "/about", destination: "/founders", permanent: true },
+  { source: "/nazar-and-oleh", destination: "/founders", permanent: true },
   { source: "/services", destination: "/how-we-work", permanent: true },
   { source: "/case-studies", destination: "/work", permanent: true },
 ];

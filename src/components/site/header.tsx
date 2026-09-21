@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Logomark } from "@/components/ui/logomark";
 import { useHeaderTheme } from "@/components/site/header-theme";
-import { CAL_LINK_OPERATORS } from "@/lib/cal";
+import { bookingForPath } from "@/lib/booking";
 import { cn } from "@/lib/cn";
 import type { NAVIGATION_QUERY_RESULT } from "@/sanity/types";
 
@@ -26,8 +26,9 @@ export function Header({ nav }: { nav: Nav | null }) {
 
   const links = nav?.headerLinks ?? [];
   const ctaLabel = nav?.headerCtaLabel ?? "Book a call";
-  // Operators book the platform cost check; everyone else the founder review.
-  const cal = pathname.startsWith("/operators") ? CAL_LINK_OPERATORS : true;
+  // The call this page offers; pages serving both audiences fall back to the
+  // founder review.
+  const cal = bookingForPath(pathname) ?? "founderReview";
   const isActive = (href: string) =>
     href !== "/" &&
     !href.startsWith("#") &&

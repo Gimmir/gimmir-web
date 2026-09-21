@@ -6,7 +6,7 @@ import { JimmyCaseStudy } from "@/components/work/jimmy";
 import { StandardCaseStudy } from "@/components/work/standard";
 import { Un1tCaseStudy } from "@/components/work/un1t";
 import { caseSlugs, getCaseBySlug } from "@/lib/cases";
-import { breadcrumbs, caseStudyWork } from "@/lib/schema";
+import { breadcrumbs, caseStudyArticle } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -51,7 +51,7 @@ export default async function CaseStudyPage({
           [data.name, `/work/${data.slug}`],
         ])}
       />
-      <JsonLd data={caseStudyWork(data)} />
+      <JsonLd data={caseStudyArticle(data)} />
     </>
   );
 

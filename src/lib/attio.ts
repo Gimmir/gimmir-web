@@ -47,7 +47,7 @@ export async function createLead(lead: Lead): Promise<void> {
   const apiKey = process.env.ATTIO_API_KEY;
   if (!apiKey) {
     console.warn(
-      `[attio] ATTIO_API_KEY not set — lead from ${lead.email} was not forwarded.`,
+      `[attio] ATTIO_API_KEY not set; lead from ${lead.email} was not forwarded.`,
     );
     return;
   }
@@ -95,7 +95,7 @@ export async function createLead(lead: Lead): Promise<void> {
       data: {
         parent_object: "people",
         parent_record_id: recordId,
-        title: "Founder review request — gimmir.com",
+        title: "Founder review request: gimmir.com",
         format: "plaintext",
         content: contentLines.join("\n"),
       },

@@ -3,18 +3,18 @@
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { CAL_LINK_OPERATORS } from "@/lib/cal";
+import { bookingForPath } from "@/lib/booking";
 
 /**
  * The footer's booking button. Client-side only so it can follow the page:
- * operators get the platform cost check, everyone else the founder review.
+ * operator pages get the platform cost check, everyone else the founder review.
  */
 export function FooterCta({ label }: { label: string }) {
-  const onOperators = usePathname().startsWith("/operators");
+  const costCheck = bookingForPath(usePathname()) === "costCheck";
 
   return (
-    <Button cal={onOperators ? CAL_LINK_OPERATORS : true} arrow className="mt-8">
-      {onOperators ? "Get your platform cost check" : label}
+    <Button cal={costCheck ? "costCheck" : "founderReview"} arrow className="mt-8">
+      {costCheck ? "Get your platform cost check" : label}
     </Button>
   );
 }

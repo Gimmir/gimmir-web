@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { cn } from "@/lib/cn";
-import { CAL_CONFIG, CAL_LINK, CAL_NAMESPACE } from "@/lib/cal";
+import { BOOKINGS, type BookingId } from "@/lib/booking";
+import { CAL_CONFIG, CAL_NAMESPACE } from "@/lib/cal";
 import { ArrowRight } from "./icons";
 
 type Variant = "solid" | "outline" | "outlineLight" | "lime";
@@ -40,10 +41,10 @@ export function Button({
   className?: string;
   onClick?: () => void;
   /**
-   * Open a Cal.com booking popup instead of navigating: `true` for the
-   * founder-review event, or a Cal link (e.g. CAL_LINK_OPERATORS).
+   * Open a Cal.com booking popup instead of navigating: a booking id from
+   * `lib/booking.ts`, or `true` for the founder review.
    */
-  cal?: boolean | string;
+  cal?: boolean | BookingId;
 }) {
   const classes = cn(base, variants[variant], sizes[size], className);
   const content = (
@@ -56,13 +57,15 @@ export function Button({
   );
 
   if (cal) {
+    const booking = BOOKINGS[cal === true ? "founderReview" : cal];
     return (
       <button
         type="button"
         className={classes}
         onClick={onClick}
         data-cal-namespace={CAL_NAMESPACE}
-        data-cal-link={typeof cal === "string" ? cal : CAL_LINK}
+        data-cal-link={booking.calLink}
+        data-booking={booking.id}
         data-cal-config={CAL_CONFIG}
       >
         {content}

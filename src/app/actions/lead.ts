@@ -71,7 +71,7 @@ export async function submitLead(
   try {
     await createLead({
       ...parsed.data,
-      source: "gimmir.com — founder review",
+      source: "gimmir.com: founder review",
     });
     return { status: "success" };
   } catch (error) {

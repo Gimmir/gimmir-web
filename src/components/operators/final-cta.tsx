@@ -1,7 +1,6 @@
 import { TrackedCta } from "@/components/analytics/tracked-cta";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { CAL_LINK_OPERATORS } from "@/lib/cal";
 
 /**
  * Mirrors the look of `FinalCtaPanel` but is fully static (no Sanity fetch)
@@ -36,7 +35,7 @@ export function OperatorsFinalCta() {
 
               <div className="flex w-full shrink-0 flex-col items-start gap-5 md:w-auto md:items-end">
                 <TrackedCta
-                  cal={CAL_LINK_OPERATORS}
+                  cal="costCheck"
                   variant="lime"
                   arrow
                   event="operators_cost_check_cta_click"
