@@ -8,6 +8,6 @@ export default function Image() {
   return ogCard({
     line1: "The Review",
     line2: "technical due diligence for fitness products",
-    footer: "Two weeks · led by both founders · $4,500 fixed, credited",
+    footer: "Two weeks · led by both founders · €2,500 fixed, credited",
   });
 }

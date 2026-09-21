@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { CountUp } from "@/components/ui/count-up";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CaseBackLink, CasePlaceholder } from "@/components/work/parts";
+import { CaseBackLink } from "@/components/work/parts";
 import type { CaseStudy } from "@/lib/cases";
 
 const dots =
@@ -102,18 +102,12 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
                 <p>
                   UN1T ran its members, bookings, and payments on a{" "}
                   <strong className="font-semibold text-ink">
-                    third-party platform
+                    white-label platform
                   </strong>
                   . As the franchise grew across locations, that meant renting
-                  software they could not fully control — and losing tens of
-                  thousands a month to payment fees baked into someone
-                  else&rsquo;s system.
+                  software they could not fully control — and about $10k a
+                  month leaving the business in platform and payment fees.
                 </p>
-                <CasePlaceholder label="Challenge — real detail">
-                  Add the specifics: which platform, what actually broke as you
-                  scaled, and the moment you decided to move. Concrete beats
-                  general.
-                </CasePlaceholder>
               </div>
             </Reveal>
           </div>

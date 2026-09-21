@@ -7,7 +7,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default function Image() {
   return ogCard({
     line1: "Case studies",
-    line2: "UN1T & Jimmy Coach, built as owners",
+    line2: "UN1T & Jimmy Coach, still run in production",
     footer: "Real fitness products, not promises",
   });
 }

@@ -6,7 +6,7 @@ import { CountUp } from "@/components/ui/count-up";
 import { Check } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CaseBackLink, CasePlaceholder } from "@/components/work/parts";
+import { CaseBackLink } from "@/components/work/parts";
 import type { CaseStudy } from "@/lib/cases";
 
 const dots =
@@ -80,32 +80,27 @@ export function StandardCaseStudy({ data }: { data: CaseStudy }) {
         </Container>
       </section>
 
-      {/* challenge */}
-      <section className="border-t border-line py-20 md:py-28">
-        <Container>
-          <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:items-start md:gap-16">
-            <Reveal>
-              <SectionHeader
-                index="01"
-                titleMax="max-w-[12ch]"
-                title="The challenge."
-              />
-            </Reveal>
-            <Reveal delay={80}>
-              {story?.challenge ? (
+      {/* challenge — skipped until there is a real one to tell */}
+      {story?.challenge ? (
+        <section className="border-t border-line py-20 md:py-28">
+          <Container>
+            <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:items-start md:gap-16">
+              <Reveal>
+                <SectionHeader
+                  index="01"
+                  titleMax="max-w-[12ch]"
+                  title="The challenge."
+                />
+              </Reveal>
+              <Reveal delay={80}>
                 <p className="text-lg leading-relaxed text-muted md:text-xl">
                   {story.challenge}
                 </p>
-              ) : (
-                <CasePlaceholder label="Challenge">
-                  What state was the product in, and what needed to change? One
-                  or two honest sentences.
-                </CasePlaceholder>
-              )}
-            </Reveal>
-          </div>
-        </Container>
-      </section>
+              </Reveal>
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {/* approach */}
       <section className="border-t border-line py-20 md:py-28">

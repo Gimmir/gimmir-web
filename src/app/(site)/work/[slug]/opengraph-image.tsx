@@ -23,6 +23,6 @@ export default async function Image({
   return ogCard({
     line1: data.name,
     line2: angle,
-    footer: `${data.industry} · built and shipped as owners`,
+    footer: `${data.industry} · built and still run in production`,
   });
 }

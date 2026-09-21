@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 import { Container } from "@/components/ui/container";
 import { Check, X } from "@/components/ui/icons";
@@ -8,6 +8,17 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { cn } from "@/lib/cn";
 import type { HOW_WE_WORK_QUERY_RESULT } from "@/sanity/types";
+
+const noop = () => () => {};
+
+/** True only after hydration — keeps the server HTML free of duplicate copy. */
+function useHydrated() {
+  return useSyncExternalStore(
+    noop,
+    () => true,
+    () => false,
+  );
+}
 
 const strikeActive =
   "text-ink/45 [text-decoration-line:line-through] [text-decoration-thickness:2px] decoration-lime";
@@ -20,6 +31,9 @@ export function FearsSection({
   const fears = data.fears ?? [];
   const [sel, setSel] = useState(0);
   const active = fears[sel] ?? fears[0];
+  // The desktop answer panel repeats an answer the accordion already carries,
+  // so it is client-only: crawlers and the server HTML see each answer once.
+  const hydrated = useHydrated();
 
   if (!active) return null;
 
@@ -81,7 +95,11 @@ export function FearsSection({
                           : "border border-ink/15 text-ink/40",
                       )}
                     >
-                      {on ? <Check className="size-3.5" /> : <X className="size-3.5" />}
+                      {on ? (
+                        <Check className="size-3.5" />
+                      ) : (
+                        <X className="size-3.5" />
+                      )}
                     </span>
                     <span
                       className={cn(
@@ -99,31 +117,33 @@ export function FearsSection({
 
           <div className="md:sticky md:top-28">
             <div className="rounded-2xl border border-line bg-surface p-8 md:p-9">
-              <div
-                key={sel}
-                className="[animation:answer-in_340ms_var(--ease-out)]"
-              >
-                <p
-                  className={cn(
-                    "font-serif text-xl italic leading-snug md:text-2xl",
-                    strikeActive,
-                  )}
+              {hydrated ? (
+                <div
+                  key={sel}
+                  className="[animation:answer-in_340ms_var(--ease-out)]"
                 >
-                  “{active.fear}”
-                </p>
-                <div aria-hidden className="my-6 h-px w-full bg-line" />
-                <div className="flex items-center gap-2.5">
-                  <span className="flex size-8 items-center justify-center rounded-full bg-lime text-ink">
-                    <Check className="size-4" />
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-widest text-muted">
-                    {data.fearsAnswerLabel}
-                  </span>
+                  <p
+                    className={cn(
+                      "font-serif text-xl italic leading-snug md:text-2xl",
+                      strikeActive,
+                    )}
+                  >
+                    “{active.fear}”
+                  </p>
+                  <div aria-hidden className="my-6 h-px w-full bg-line" />
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex size-8 items-center justify-center rounded-full bg-lime text-ink">
+                      <Check className="size-4" />
+                    </span>
+                    <span className="font-mono text-xs uppercase tracking-widest text-muted">
+                      {data.fearsAnswerLabel}
+                    </span>
+                  </div>
+                  <p className="mt-5 text-lg leading-relaxed text-ink md:text-xl">
+                    {active.answer}
+                  </p>
                 </div>
-                <p className="mt-5 text-lg leading-relaxed text-ink md:text-xl">
-                  {active.answer}
-                </p>
-              </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -143,10 +163,16 @@ export function FearsSection({
                   <span
                     className={cn(
                       "mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200",
-                      on ? "bg-lime text-ink" : "border border-ink/15 text-ink/40",
+                      on
+                        ? "bg-lime text-ink"
+                        : "border border-ink/15 text-ink/40",
                     )}
                   >
-                    {on ? <Check className="size-4" /> : <X className="size-3.5" />}
+                    {on ? (
+                      <Check className="size-4" />
+                    ) : (
+                      <X className="size-3.5" />
+                    )}
                   </span>
                   <span
                     className={cn(

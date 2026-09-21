@@ -1,5 +1,4 @@
 import { Container } from "@/components/ui/container";
-import { Pencil } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import type { FOUNDERS_PAGE_QUERY_RESULT } from "@/sanity/types";
@@ -95,49 +94,25 @@ export function StorySection({
             </Reveal>
           </div>
 
-          {/* origin — the founders write this */}
-          <Reveal delay={80}>
-            <div className="relative mt-10 overflow-hidden rounded-2xl border border-dashed border-ink/25 bg-paper-2/50 p-6 md:p-8">
-              <span
-                aria-hidden
-                className="absolute inset-y-0 left-0 w-1 bg-lime/60"
-              />
-              <div className="flex flex-col gap-5 sm:flex-row sm:gap-6">
-                <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
-                  <Pencil className="size-5" />
-                </span>
-
-                <div>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <span className="font-mono text-xs uppercase tracking-widest text-ink/70">
-                      {data.storyOriginLabel}
-                    </span>
-                    <span className="rounded-full border border-ink/20 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-faint">
-                      {data.storyOriginCaption}
-                    </span>
-                  </div>
-
-                  <p className="mt-3 max-w-[64ch] leading-relaxed text-muted">
-                    {data.storyOriginBody}
-                  </p>
-
-                  <div className="mt-5 flex items-center gap-3">
-                    <div className="flex -space-x-2">
-                      <span className="flex size-7 items-center justify-center rounded-full bg-lime text-[10px] font-bold text-ink ring-2 ring-paper-2">
-                        NM
-                      </span>
-                      <span className="flex size-7 items-center justify-center rounded-full bg-surface text-[10px] font-bold text-ink ring-2 ring-paper-2">
-                        OP
-                      </span>
-                    </div>
-                    <span className="text-sm text-faint">
-                      In Nazar &amp; Oleh&rsquo;s words
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
+          {/* origin — rendered only when the founders' own words exist */}
+          {data.storyOriginBody ? (
+            <Reveal delay={80}>
+              <figure className="relative mt-10 overflow-hidden rounded-2xl border border-line bg-paper-2/50 p-6 md:p-8">
+                <span
+                  aria-hidden
+                  className="absolute inset-y-0 left-0 w-1 bg-lime"
+                />
+                {data.storyOriginLabel ? (
+                  <figcaption className="font-mono text-xs uppercase tracking-widest text-ink/70">
+                    {data.storyOriginLabel}
+                  </figcaption>
+                ) : null}
+                <blockquote className="mt-3 max-w-[64ch] font-serif text-xl italic leading-relaxed text-ink md:text-2xl">
+                  {data.storyOriginBody}
+                </blockquote>
+              </figure>
+            </Reveal>
+          ) : null}
         </div>
       </Container>
     </section>
