@@ -46,19 +46,17 @@ export const FOUNDERS_QUERY = defineQuery(`
 export const HOME_QUERY = defineQuery(`
   *[_type == "homePage"][0]{
     heroEyebrow, heroHeading, heroAccent, heroSubhead,
-    heroPrimaryCtaLabel, heroPrimaryCtaLabelShort, heroSecondaryCtaLabel, heroSecondaryCtaHref,
-    marquee,
+    heroSecondaryCtaLabel, heroSecondaryCtaHref, heroTrustStrip,
+    problemHeading, problemAccent, problemBody,
     proofHeading, proofLinkLabel, proofLinkHref,
-    whoHeading, whoAccent, whoIntro, whoRows[]{ _key, title, body },
-    servicesHeading, servicesAccent, servicesItems[]{ _key, title, body }, servicesFootnote,
-    foundersHeading, foundersAccent, foundersIntro, foundersFootnote,
+    foundersHeading, foundersAccent, foundersIntro, foundersBullets, foundersFootnote,
     founders[]{
       _key, role, bio,
       founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }
     },
-    trustHeading, trustAccent, trustCards[]{ _key, title, body },
-    reviewCtaHeading, reviewCtaAccent, reviewCtaIntro, reviewCtaButtonLabel,
-    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
+    offersHeading, offersIntro,
+    faqHeading, faqItems[]{ _key, question, answer },
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro
   }
 `);
 
@@ -92,11 +90,13 @@ export const REVIEW_SEO_QUERY = defineQuery(`
 
 export const HOW_WE_WORK_QUERY = defineQuery(`
   *[_type == "howWeWorkPage"][0]{
-    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,
+    heroEyebrow, heroHeading, heroAccent, heroSubhead, marquee,
     fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },
     runsHeading, runsAccent, runsSteps[]{ _key, title, body },
     principlesHeading, principlesAccent, principlesItems,
-    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
+    twoPersonHeading, twoPersonBody, twoPersonBullets,
+    pricingHeading, pricingBody,
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro
   }
 `);
 
@@ -106,7 +106,7 @@ export const HOW_WE_WORK_SEO_QUERY = defineQuery(`
 
 export const FOUNDERS_PAGE_QUERY = defineQuery(`
   *[_type == "foundersPage"][0]{
-    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper,
+    heroEyebrow, heroHeading, heroAccent, heroSubhead,
     storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,
     storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,
     believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,
@@ -116,7 +116,7 @@ export const FOUNDERS_PAGE_QUERY = defineQuery(`
       founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }
     },
     studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,
-    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro
   }
 `);
 

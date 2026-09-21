@@ -3,11 +3,13 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/how-we-work/hero";
 import { FearsSection } from "@/components/how-we-work/fears";
 import { HowItRunsSection } from "@/components/how-we-work/runs";
+import { PricingPhilosophySection } from "@/components/how-we-work/pricing-philosophy";
 import { PrinciplesSection } from "@/components/how-we-work/principles";
 import {
   STRAIGHT_ANSWERS,
   StraightAnswersSection,
 } from "@/components/how-we-work/straight-answers";
+import { TwoPersonSection } from "@/components/how-we-work/two-person";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Marquee } from "@/components/ui/marquee";
@@ -42,19 +44,25 @@ export default async function HowWeWorkPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbs([["Home", "/"], ["How we work", "/how-we-work"]])}
+        data={breadcrumbs([
+          ["Home", "/"],
+          ["How we work", "/how-we-work"],
+        ])}
       />
       <JsonLd data={faqPage(STRAIGHT_ANSWERS)!} />
       <Hero data={data} />
       <Marquee items={data.marquee ?? []} />
-      <FearsSection data={data} />
       <HowItRunsSection data={data} />
       <PrinciplesSection data={data} />
+      <TwoPersonSection data={data} />
+      <PricingPhilosophySection data={data} />
+      <FearsSection data={data} />
       <StraightAnswersSection />
       <FinalCtaPanel
         eyebrow={data.finalCtaEyebrow!}
         title={data.finalCtaHeading}
         intro={data.finalCtaIntro!}
+        bookings={["costCheck", "founderReview"]}
       />
     </>
   );

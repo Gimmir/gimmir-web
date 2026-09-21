@@ -45,7 +45,7 @@ export function FearsSection({
       <Container>
         <Reveal>
           <SectionHeader
-            index="01"
+            index="05"
             titleMax="max-w-[30ch]"
             title={
               <>

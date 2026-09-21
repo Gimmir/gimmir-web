@@ -13,11 +13,14 @@ export function ProofSection({
   data: NonNullable<HOME_QUERY_RESULT>;
 }) {
   return (
-    <section id="work" className="scroll-mt-24 py-20 md:py-28">
+    <section
+      id="work"
+      className="scroll-mt-24 border-t border-line py-20 md:py-28"
+    >
       <Container>
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeader index="01" title={data.proofHeading} />
+            <SectionHeader index="03" title={data.proofHeading} />
             <Link
               href={data.proofLinkHref ?? "/work"}
               className="group inline-flex items-center gap-2 text-[15px] font-semibold text-ink"

@@ -2,9 +2,21 @@ import { FaqList } from "@/components/shared/faq-list";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CONTRACT_ANSWER, DISAPPEAR_ANSWER } from "@/lib/trust-answers";
+import {
+  CONTRACT_ANSWER,
+  DISAPPEAR_ANSWER,
+  NOT_OUTSOURCED_ANSWER,
+  TAKEOVER_ANSWER,
+  UNAVAILABLE_ANSWER,
+} from "@/lib/trust-answers";
 
-export const STRAIGHT_ANSWERS = [DISAPPEAR_ANSWER, CONTRACT_ANSWER];
+export const STRAIGHT_ANSWERS = [
+  UNAVAILABLE_ANSWER,
+  TAKEOVER_ANSWER,
+  NOT_OUTSOURCED_ANSWER,
+  DISAPPEAR_ANSWER,
+  CONTRACT_ANSWER,
+];
 
 export function StraightAnswersSection() {
   return (
@@ -12,10 +24,10 @@ export function StraightAnswersSection() {
       <Container>
         <Reveal>
           <SectionHeader
-            index="04"
+            index="06"
             title={
               <>
-                Two questions,{" "}
+                The careful questions,{" "}
                 <span className="font-serif font-normal italic">
                   answered straight.
                 </span>

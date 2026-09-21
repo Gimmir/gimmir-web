@@ -42,9 +42,12 @@ const client = createClient({
 
 // --- helpers ------------------------------------------------------------------
 
+type Doc = Record<string, unknown>;
+
 type Change = {
   id: string;
-  set: Record<string, unknown>;
+  /** Fields to set; a function receives the published document. */
+  set: Doc | ((published: Doc) => Doc);
   unset?: string[];
 };
 
@@ -79,6 +82,16 @@ const links = (
     type,
     items.map(([label, href]) => ({ label, href })),
   );
+
+/** Founder cards with a new role / bio per founder, keeping keys and refs. */
+const withRoles = (
+  cards: unknown,
+  byFounder: Record<string, { role?: string; bio?: string }>,
+) =>
+  ((cards as Doc[] | undefined) ?? []).map((card) => {
+    const ref = (card.founder as { _ref?: string } | undefined)?._ref ?? "";
+    return { ...card, ...byFounder[ref] };
+  });
 
 // --- content ------------------------------------------------------------------
 
@@ -291,6 +304,196 @@ const PHASES: Record<number, Change[]> = {
       unset: ["finalCtaHelper"],
     },
   ],
+  2: [
+    {
+      id: "homePage",
+      set: (published) => ({
+        heroEyebrow: "Fitness & wellness platforms, founder-led",
+        heroHeading: "Fitness platforms your members love,",
+        heroAccent: "and you actually own.",
+        heroSubhead:
+          "We’re Nazar and Oleh. We build member apps, coaching platforms and back offices for fitness and wellness businesses, then hand you the keys. Code, repos and app-store listings in your name from day one.",
+        heroSecondaryCtaLabel: "See the work",
+        heroSecondaryCtaHref: "/work",
+        heroTrustStrip: [
+          "Real apps in the App Store & Google Play",
+          "Fixed prices",
+          "You own everything",
+        ],
+        problemHeading: "Renting your platform is quietly expensive.",
+        problemAccent: "",
+        problemBody:
+          "Most operators we meet pay every month for a platform they’ll never own, and a slice of every member payment on top. The fees scale with your success, not your costs. Product founders have the mirror-image problem: an MVP built by whoever was cheapest, that breaks the moment real users arrive. We fix both. You end up with software that’s yours, built to last.",
+        proofHeading: "Two builds. Real numbers.",
+        proofLinkLabel: "See all work",
+        proofLinkHref: "/work",
+        foundersHeading: "You talk to the people",
+        foundersAccent: "who build it.",
+        foundersIntro:
+          "No account managers, no handoffs. Nazar scopes and sells; Oleh owns the architecture and delivery. Behind us is a small senior team we’ve shipped with before. You get the focus of a two-person studio and the depth of a team that’s done this.",
+        foundersBullets: [
+          "Your first call is with a founder, and so is the last.",
+          "Fixed prices, agreed before we start.",
+          "Code, repos, cloud and app-store accounts in your name from day one.",
+          "We build in fitness and wellness every day. We know your problems before you describe them.",
+        ],
+        founders: withRoles(published.founders, {
+          founderNazar: { role: "Founder · product & business" },
+          founderOleh: { role: "CTO · architecture & delivery" },
+        }),
+        offersHeading: "Ways to start.",
+        offersIntro:
+          "Both paths begin with a free call and a fixed-price diagnostic, so you know what you’re buying before you commit to a build.",
+        faqHeading: "Questions, answered straight.",
+        faqItems: faqs("hq", [
+          [
+            "Who is Gimmir for?",
+            "Fitness operators with 8+ locations who want their own platform, and funded fitness or wellness product founders who need a V1 built right the first time.",
+          ],
+          [
+            "Do you only do fitness?",
+            "Fitness is our core. We also build wellness and prevention apps, and we take on select adjacent work. We’ll always tell you honestly if something isn’t our lane.",
+          ],
+          [
+            "Who owns the code and accounts?",
+            "You do, from day one. Code, repositories, cloud accounts and app-store listings are in your name.",
+          ],
+          [
+            "It’s just two of you?",
+            "Two founders you deal with directly, plus a core team of ten senior engineers and designers we’ve shipped with before. How we handle continuity is on the How we work page.",
+          ],
+        ]),
+        finalCtaEyebrow: "Let’s talk",
+        finalCtaHeading: "Let’s talk about what you’re building.",
+        finalCtaIntro:
+          "No pitch deck. If we’re not the right team, we’ll tell you.",
+        seo: {
+          _type: "seo",
+          metaTitle: "Fitness & Wellness App Development Company · Gimmir",
+          metaDescription:
+            "Member apps, coaching platforms and back offices for fitness operators and wellness founders. Your code and app-store listings from day one. Talk to Nazar & Oleh.",
+        },
+      }),
+      unset: [
+        "heroPrimaryCtaLabel",
+        "heroPrimaryCtaLabelShort",
+        "marquee",
+        "whoHeading",
+        "whoAccent",
+        "whoIntro",
+        "whoRows",
+        "servicesHeading",
+        "servicesAccent",
+        "servicesItems",
+        "servicesFootnote",
+        "trustHeading",
+        "trustAccent",
+        "trustCards",
+        "reviewCtaHeading",
+        "reviewCtaAccent",
+        "reviewCtaIntro",
+        "reviewCtaButtonLabel",
+        "finalCtaButtonLabel",
+      ],
+    },
+    {
+      id: "howWeWorkPage",
+      set: {
+        heroEyebrow: "How we work",
+        heroHeading: "How we work, and how we de-risk",
+        heroAccent: "working with two founders.",
+        heroSubhead:
+          "Fixed prices. Your ownership. Straight answers about what happens if one of us is unavailable.",
+        runsHeading: "From first call to live platform.",
+        runsAccent: "",
+        runsSteps: cards("rs", [
+          [
+            "A call with a founder",
+            "Nazar if you run fitness locations, Nazar and Oleh if you’re building a product. Free, and no pitch deck.",
+          ],
+          [
+            "A fixed-scope diagnostic",
+            "The Platform Fee Teardown or The Review: a written answer before any build is on the table.",
+          ],
+          [
+            "A written plan and a fixed price",
+            "You see the plan, the milestones and the price before you commit to anything.",
+          ],
+          [
+            "A build in milestones you approve",
+            "The founders stay involved, you talk to the engineers directly, and you see working software in regular demos, not status reports.",
+          ],
+          [
+            "Care and roadmap once you’re live",
+            "Ongoing build and maintenance with us, or a clean handover to your own team. Your call.",
+          ],
+        ]),
+        principlesHeading: "It’s yours from day one, not at the end.",
+        principlesAccent: "",
+        principlesItems: [
+          "Code and repositories in your name.",
+          "Cloud accounts in your name.",
+          "App-store listings in your name.",
+          "No lock-in: you can take it to any team, any time.",
+        ],
+        twoPersonHeading: "“It’s just two of you. What if something happens?”",
+        twoPersonBody:
+          "Fair question; we’d ask it too. Here’s the honest answer. You deal with Nazar and Oleh directly, but you’re not depending on two heads. A small senior team we’ve shipped with before works on the builds. Everything lives in your accounts, not ours. We keep runbooks and documentation so any competent engineer can pick up the work. If one of us is unavailable, the other and the team keep going, and you’re never locked out of your own product.",
+        twoPersonBullets: [
+          "A core team you can see, not hidden behind “the studio”.",
+          "IP and accounts in your name, always.",
+          "Runbooks and documentation as standard, not an add-on.",
+          "No single point of failure on your product.",
+        ],
+        pricingHeading:
+          "Fixed prices, because surprises aren’t a business model.",
+        pricingBody:
+          "We quote a fixed price before we start. Our entry offers are productized, and money-back where we can promise an outcome. You always know what you’re paying and what you’re getting.",
+        seo: {
+          _type: "seo",
+          metaTitle: "How We Work: Fixed Prices, Your Code from Day One",
+          metaDescription:
+            "How Gimmir works: fixed-price milestones, code and accounts in your name from day one, a senior team behind two founders, and runbooks so nothing lives in one head.",
+        },
+      },
+      unset: ["heroCtaLabel", "heroCtaHelper", "finalCtaButtonLabel"],
+    },
+    {
+      id: "foundersPage",
+      // The origin story and "What we believe" stay as they are until Nazar
+      // approves the fitness-and-wellness wording.
+      set: (published) => ({
+        heroEyebrow: "Nazar & Oleh",
+        heroHeading: "Nazar & Oleh.",
+        heroAccent: "You’ll work with us directly.",
+        heroSubhead:
+          "Two founders, one small senior team, and a rule we don’t break: the people who sell you the work are the people who build it.",
+        storyBody1:
+          "We built the platform behind UN1T, a London-founded boutique fitness franchise, and moved it off a white-label platform onto its own app and back office across 10+ locations. We co-founded Jimmy Coach and built it from zero into a coaching platform that reached 100+ active coaches in its first month.",
+        founders: withRoles(published.founders, {
+          founderNazar: {
+            role: "Founder · product & business",
+            bio: "I take the first call and the last. I scope what you need, price it, and make sure what we build actually moves your business. I’ve built and shipped fitness products end to end, as an owner. If you run a fitness business, you’ll deal with me.",
+          },
+          founderOleh: {
+            role: "CTO · architecture & delivery",
+            bio: "I own how it’s built and whether it lasts: architecture, code quality, delivery. I led the architecture of both the UN1T platform and Jimmy Coach. If you’re a product founder, we’ll talk CTO-to-CTO.",
+          },
+        }),
+        studioBody:
+          "Behind the two of us is a core team of senior engineers and designers we have shipped with before. We’re Ukrainian-founded and work across the EU. Gimmir LLC is registered in Delaware, USA, so you sign with a US company and work with a European team in your working hours.",
+        studioTeamSizeBody:
+          "Around ten senior engineers and designers we’ve shipped with before, brought onto builds as they’re needed. You get a small studio’s focus with a proven team’s depth.",
+        seo: {
+          _type: "seo",
+          metaTitle: "Nazar & Oleh: the Founders Who Build Your Platform",
+          metaDescription:
+            "Meet Nazar Moroz and Oleh Palazhii, Gimmir’s founders. Nazar leads product and business, Oleh architecture and delivery. You work with both of us directly.",
+        },
+      }),
+      unset: ["heroCtaLabel", "heroCtaHelper", "finalCtaButtonLabel"],
+    },
+  ],
 };
 
 // --- run ----------------------------------------------------------------------
@@ -327,7 +530,9 @@ async function applyChange(
   const draftId = `drafts.${change.id}`;
   const existing = strip(await client.getDocument(draftId));
 
-  const next: Record<string, unknown> = { ...strip(published), ...change.set };
+  const set =
+    typeof change.set === "function" ? change.set(published) : change.set;
+  const next: Record<string, unknown> = { ...strip(published), ...set };
   for (const k of change.unset ?? []) delete next[k];
 
   const base = strip(published) ?? {};

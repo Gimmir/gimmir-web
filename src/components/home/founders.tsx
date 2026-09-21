@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Container } from "@/components/ui/container";
-import { LinkedIn } from "@/components/ui/icons";
+import { Check, LinkedIn } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { urlFor } from "@/sanity/lib/image";
@@ -17,7 +17,7 @@ export function FoundersSection({
       <Container className="py-20 md:py-28">
         <Reveal>
           <SectionHeader
-            index="03"
+            index="04"
             onDark
             title={
               <>
@@ -36,6 +36,23 @@ export function FoundersSection({
           />
         </Reveal>
 
+        {data.foundersBullets?.length ? (
+          <Reveal>
+            <ul className="mt-10 grid gap-x-10 gap-y-4 md:grid-cols-2">
+              {data.foundersBullets.map((b) => (
+                <li key={b} className="flex items-start gap-3.5">
+                  <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
+                    <Check className="size-3.5" />
+                  </span>
+                  <span className="text-lg leading-relaxed text-paper/85">
+                    {b}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ) : null}
+
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {(data.founders ?? []).map((f, i) => (
             <Reveal key={f._key} delay={i * 80} className="h-full">
@@ -43,7 +60,11 @@ export function FoundersSection({
                 <div className="relative mb-7 aspect-[4/3] overflow-hidden rounded-2xl bg-[#211f17]">
                   {f.founder?.photo ? (
                     <Image
-                      src={urlFor(f.founder.photo).width(800).height(600).fit("crop").url()}
+                      src={urlFor(f.founder.photo)
+                        .width(800)
+                        .height(600)
+                        .fit("crop")
+                        .url()}
                       alt={f.founder.name ?? ""}
                       fill
                       sizes="(min-width: 768px) 50vw, 100vw"

@@ -16,7 +16,7 @@ export function PrinciplesSection({
       <Container>
         <Reveal>
           <SectionHeader
-            index="03"
+            index="02"
             title={
               <>
                 {data.principlesHeading}

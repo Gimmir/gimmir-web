@@ -18,6 +18,8 @@ export const foundersPageType = defineType({
     { name: "studio", title: "Studio", options: { collapsible: true, collapsed: true } },
     { name: "finalCta", title: "Final CTA", options: { collapsible: true, collapsed: true } },
   ],
+  // Hidden fields are retired: signed CTA labels and call lengths now live
+  // in code (lib/booking.ts).
   fields: [
     defineField({ name: "title", title: "Internal title", type: "string", group: "content", initialValue: "Founders", validation: (r) => r.required() }),
 
@@ -26,8 +28,8 @@ export const foundersPageType = defineType({
     defineField({ name: "heroHeading", title: "Heading", type: "string", group: "content", fieldset: "hero", validation: (r) => r.required() }),
     defineField({ name: "heroAccent", title: "Heading accent", type: "string", group: "content", fieldset: "hero" }),
     defineField({ name: "heroSubhead", title: "Subhead", type: "text", rows: 3, group: "content", fieldset: "hero" }),
-    defineField({ name: "heroCtaLabel", title: "CTA label", type: "string", group: "content", fieldset: "hero" }),
-    defineField({ name: "heroCtaHelper", title: "CTA helper", type: "string", group: "content", fieldset: "hero" }),
+    defineField({ name: "heroCtaLabel", hidden: true, title: "CTA label", type: "string", group: "content", fieldset: "hero" }),
+    defineField({ name: "heroCtaHelper", hidden: true, title: "CTA helper", type: "string", group: "content", fieldset: "hero" }),
 
     // Story
     defineField({ name: "storyHeading", title: "Heading", type: "string", group: "content", fieldset: "story" }),

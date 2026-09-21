@@ -169,7 +169,7 @@
 }
 
 /* ------------------------------------------------------------------ */
-/*  Trust card illustrations                                          */
+/*  Card illustrations                                                */
 /*  Resting state = the finished composition (shown on touch and to   */
 /*  reduced-motion users). The build-up only plays for real pointers. */
 /* ------------------------------------------------------------------ */
@@ -179,39 +179,9 @@
   background-position: center;
 }
 
-.ti1-progress {
-  stroke-dasharray: 150;
-  stroke-dashoffset: 0;
-}
-.ti1-node {
-  transform: translateX(132px);
-}
-.ti1-st {
-  fill: var(--color-lime);
-}
 
-.ti2-seal {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.ti2-check {
-  stroke-dasharray: 24;
-  stroke-dashoffset: 0;
-}
 
-.ti3-member {
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.ti3-link {
-  stroke-dasharray: 56;
-  stroke-dashoffset: 0;
-}
 
-.ti4-shield {
-  transform-box: fill-box;
-  transform-origin: center;
-}
 
 /* Flow cards (Start with a conversation) — resting = completed. */
 .fi1-b {
@@ -251,83 +221,7 @@
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  /* 1 — the founder travels call → build → deliver, lighting each stage */
-  .ti1-progress {
-    stroke-dashoffset: 150;
-    transition: stroke-dashoffset 880ms var(--ease-out);
-  }
-  .ti1-node {
-    transform: translateX(0);
-    transition: transform 880ms cubic-bezier(0.5, 0, 0.2, 1);
-  }
-  .ti1-st {
-    fill: var(--color-paper);
-    transition: fill 260ms var(--ease-out);
-  }
-  .t-card:hover .ti1-progress {
-    stroke-dashoffset: 0;
-  }
-  .t-card:hover .ti1-node {
-    transform: translateX(132px);
-  }
-  .t-card:hover .ti1-st {
-    fill: var(--color-lime);
-  }
-  .t-card:hover .ti1-st.s1 {
-    transition-delay: 80ms;
-  }
-  .t-card:hover .ti1-st.s2 {
-    transition-delay: 380ms;
-  }
-  .t-card:hover .ti1-st.s3 {
-    transition-delay: 700ms;
-  }
-
-  /* 2 — ownership seal stamps on, check draws */
-  .ti2-doc {
-    transition: transform 360ms var(--ease-out);
-  }
-  .ti2-seal {
-    transform: scale(0.2);
-    opacity: 0;
-    transition:
-      transform 460ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      opacity 240ms ease;
-  }
-  .ti2-check {
-    stroke-dashoffset: 24;
-    transition: stroke-dashoffset 320ms var(--ease-out) 220ms;
-  }
-  .t-card:hover .ti2-doc {
-    transform: translateY(-3px);
-  }
-  .t-card:hover .ti2-seal {
-    transform: scale(1);
-    opacity: 1;
-  }
-  .t-card:hover .ti2-check {
-    stroke-dashoffset: 0;
-  }
-
-  /* 3 — the team network spins up around the lead, staggered */
-  .ti3-member {
-    transform: scale(0.3);
-    opacity: 0;
-    transition:
-      transform 460ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      opacity 260ms ease;
-  }
-  .ti3-link {
-    stroke-dashoffset: 56;
-    transition: stroke-dashoffset 440ms var(--ease-out);
-  }
-  .t-card:hover .ti3-member {
-    transform: scale(1);
-    opacity: 1;
-  }
-  .t-card:hover .ti3-link {
-    stroke-dashoffset: 0;
-  }
+  /* staggered build-up delays, shared by the card illustrations */
   .t-card:hover .d1 {
     transition-delay: 60ms;
   }
@@ -342,20 +236,6 @@
   }
   .t-card:hover .d5 {
     transition-delay: 340ms;
-  }
-
-  /* 4 — we push back */
-  .ti4-shield {
-    transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .ti4-arrow {
-    transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .t-card:hover .ti4-shield {
-    transform: scale(1.12);
-  }
-  .t-card:hover .ti4-arrow {
-    transform: translateX(-26px);
   }
 
   /* flow 1 — conversation bubbles pop in */

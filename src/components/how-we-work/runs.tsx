@@ -69,7 +69,7 @@ export function HowItRunsSection({
           <div className="md:sticky md:top-28">
             <Reveal>
               <SectionHeader
-                index="02"
+                index="01"
                 titleMax="max-w-[14ch]"
                 title={
                   <>

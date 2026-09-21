@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 
-import { Hero } from "@/components/home/hero";
-import { ProofSection } from "@/components/home/proof";
-import { WhoSection } from "@/components/home/who";
-import { ServicesSection } from "@/components/home/services";
-import { FoundersSection } from "@/components/home/founders";
-import { TrustSection } from "@/components/home/trust";
-import { ReviewCtaSection } from "@/components/home/review-cta";
+import { RouteSelector } from "@/components/home/doors";
+import { FaqSection } from "@/components/home/faq";
 import { FinalCta } from "@/components/home/final-cta";
-import { Marquee } from "@/components/ui/marquee";
+import { FoundersSection } from "@/components/home/founders";
+import { Hero } from "@/components/home/hero";
+import { OffersSnapshot } from "@/components/home/offers-snapshot";
+import { ProblemSection } from "@/components/home/problem";
+import { ProofSection } from "@/components/home/proof";
 import { JsonLd } from "@/components/seo/json-ld";
-import { organizationGraph } from "@/lib/schema";
+import { faqPage, organizationGraph } from "@/lib/schema";
 import { BRAND, socialMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
@@ -45,6 +44,8 @@ export default async function HomePage() {
 
   if (!data) return null;
 
+  const faqLd = faqPage(data.faqItems ?? []);
+
   return (
     <>
       <JsonLd
@@ -53,14 +54,14 @@ export default async function HomePage() {
           description: settings?.description,
         })}
       />
+      {faqLd && <JsonLd data={faqLd} />}
       <Hero data={data} />
-      <Marquee items={data.marquee ?? []} />
+      <RouteSelector />
+      <ProblemSection data={data} />
       <ProofSection data={data} />
-      <WhoSection data={data} />
-      <ServicesSection data={data} />
       <FoundersSection data={data} />
-      <TrustSection data={data} />
-      <ReviewCtaSection data={data} />
+      <OffersSnapshot heading={data.offersHeading} intro={data.offersIntro} />
+      <FaqSection data={data} />
       <FinalCta data={data} />
     </>
   );

@@ -7,10 +7,13 @@ import { PeopleSection } from "@/components/founders/people";
 import { StudioSection } from "@/components/founders/studio";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbs, foundersGraph } from "@/lib/schema";
+import { aboutPage, breadcrumbs, foundersGraph } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/live";
-import { FOUNDERS_PAGE_QUERY, FOUNDERS_PAGE_SEO_QUERY } from "@/sanity/lib/queries";
+import {
+  FOUNDERS_PAGE_QUERY,
+  FOUNDERS_PAGE_SEO_QUERY,
+} from "@/sanity/lib/queries";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { data } = await sanityFetch({
@@ -36,7 +39,19 @@ export default async function FoundersPage() {
 
   return (
     <>
-      <JsonLd data={breadcrumbs([["Home", "/"], ["Founders", "/founders"]])} />
+      <JsonLd
+        data={breadcrumbs([
+          ["Home", "/"],
+          ["Nazar & Oleh", "/founders"],
+        ])}
+      />
+      <JsonLd
+        data={aboutPage(
+          (data.founders ?? []).flatMap((c) =>
+            c.founder ? [c.founder._id] : [],
+          ),
+        )}
+      />
       <JsonLd data={foundersGraph(data.founders ?? [])} />
       <Hero data={data} />
       <StorySection data={data} />
@@ -47,6 +62,7 @@ export default async function FoundersPage() {
         eyebrow={data.finalCtaEyebrow!}
         title={data.finalCtaHeading}
         intro={data.finalCtaIntro!}
+        bookings={["costCheck", "founderReview"]}
       />
     </>
   );

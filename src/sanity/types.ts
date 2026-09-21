@@ -227,6 +227,11 @@ export type HowWeWorkPage = {
   principlesHeading?: string;
   principlesAccent?: string;
   principlesItems?: Array<string>;
+  twoPersonHeading?: string;
+  twoPersonBody?: string;
+  twoPersonBullets?: Array<string>;
+  pricingHeading?: string;
+  pricingBody?: string;
   finalCtaEyebrow?: string;
   finalCtaHeading?: string;
   finalCtaIntro?: string;
@@ -322,6 +327,10 @@ export type HomePage = {
   heroSecondaryCtaLabel?: string;
   heroSecondaryCtaHref?: string;
   marquee?: Array<string>;
+  heroTrustStrip?: Array<string>;
+  problemHeading?: string;
+  problemAccent?: string;
+  problemBody?: string;
   proofHeading?: string;
   proofLinkLabel?: string;
   proofLinkHref?: string;
@@ -349,6 +358,7 @@ export type HomePage = {
       _key: string;
     } & FounderCard
   >;
+  foundersBullets?: Array<string>;
   foundersFootnote?: string;
   trustHeading?: string;
   trustAccent?: string;
@@ -361,6 +371,14 @@ export type HomePage = {
   reviewCtaAccent?: string;
   reviewCtaIntro?: string;
   reviewCtaButtonLabel?: string;
+  offersHeading?: string;
+  offersIntro?: string;
+  faqHeading?: string;
+  faqItems?: Array<
+    {
+      _key: string;
+    } & FaqItem
+  >;
   finalCtaEyebrow?: string;
   finalCtaHeading?: string;
   finalCtaIntro?: string;
@@ -720,39 +738,25 @@ export type FOUNDERS_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries.ts
 // Variable: HOME_QUERY
-// Query: *[_type == "homePage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead,    heroPrimaryCtaLabel, heroPrimaryCtaLabelShort, heroSecondaryCtaLabel, heroSecondaryCtaHref,    marquee,    proofHeading, proofLinkLabel, proofLinkHref,    whoHeading, whoAccent, whoIntro, whoRows[]{ _key, title, body },    servicesHeading, servicesAccent, servicesItems[]{ _key, title, body }, servicesFootnote,    foundersHeading, foundersAccent, foundersIntro, foundersFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    trustHeading, trustAccent, trustCards[]{ _key, title, body },    reviewCtaHeading, reviewCtaAccent, reviewCtaIntro, reviewCtaButtonLabel,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+// Query: *[_type == "homePage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead,    heroSecondaryCtaLabel, heroSecondaryCtaHref, heroTrustStrip,    problemHeading, problemAccent, problemBody,    proofHeading, proofLinkLabel, proofLinkHref,    foundersHeading, foundersAccent, foundersIntro, foundersBullets, foundersFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    offersHeading, offersIntro,    faqHeading, faqItems[]{ _key, question, answer },    finalCtaEyebrow, finalCtaHeading, finalCtaIntro  }
 export type HOME_QUERY_RESULT = {
   heroEyebrow: string | null;
   heroHeading: string | null;
   heroAccent: string | null;
   heroSubhead: string | null;
-  heroPrimaryCtaLabel: string | null;
-  heroPrimaryCtaLabelShort: string | null;
   heroSecondaryCtaLabel: string | null;
   heroSecondaryCtaHref: string | null;
-  marquee: Array<string> | null;
+  heroTrustStrip: Array<string> | null;
+  problemHeading: string | null;
+  problemAccent: string | null;
+  problemBody: string | null;
   proofHeading: string | null;
   proofLinkLabel: string | null;
   proofLinkHref: string | null;
-  whoHeading: string | null;
-  whoAccent: string | null;
-  whoIntro: string | null;
-  whoRows: Array<{
-    _key: string;
-    title: string | null;
-    body: string | null;
-  }> | null;
-  servicesHeading: string | null;
-  servicesAccent: string | null;
-  servicesItems: Array<{
-    _key: string;
-    title: string | null;
-    body: string | null;
-  }> | null;
-  servicesFootnote: string | null;
   foundersHeading: string | null;
   foundersAccent: string | null;
   foundersIntro: string | null;
+  foundersBullets: Array<string> | null;
   foundersFootnote: string | null;
   founders: Array<{
     _key: string;
@@ -774,21 +778,17 @@ export type HOME_QUERY_RESULT = {
       } | null;
     } | null;
   }> | null;
-  trustHeading: string | null;
-  trustAccent: string | null;
-  trustCards: Array<{
+  offersHeading: string | null;
+  offersIntro: string | null;
+  faqHeading: string | null;
+  faqItems: Array<{
     _key: string;
-    title: string | null;
-    body: string | null;
+    question: string | null;
+    answer: string | null;
   }> | null;
-  reviewCtaHeading: string | null;
-  reviewCtaAccent: string | null;
-  reviewCtaIntro: string | null;
-  reviewCtaButtonLabel: string | null;
   finalCtaEyebrow: string | null;
   finalCtaHeading: string | null;
   finalCtaIntro: string | null;
-  finalCtaButtonLabel: string | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
@@ -882,14 +882,12 @@ export type REVIEW_SEO_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: HOW_WE_WORK_QUERY
-// Query: *[_type == "howWeWorkPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },    runsHeading, runsAccent, runsSteps[]{ _key, title, body },    principlesHeading, principlesAccent, principlesItems,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+// Query: *[_type == "howWeWorkPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, marquee,    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },    runsHeading, runsAccent, runsSteps[]{ _key, title, body },    principlesHeading, principlesAccent, principlesItems,    twoPersonHeading, twoPersonBody, twoPersonBullets,    pricingHeading, pricingBody,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro  }
 export type HOW_WE_WORK_QUERY_RESULT = {
   heroEyebrow: string | null;
   heroHeading: string | null;
   heroAccent: string | null;
   heroSubhead: string | null;
-  heroCtaLabel: string | null;
-  heroCtaHelper: string | null;
   marquee: Array<string> | null;
   fearsHeading: string | null;
   fearsAccent: string | null;
@@ -909,10 +907,14 @@ export type HOW_WE_WORK_QUERY_RESULT = {
   principlesHeading: string | null;
   principlesAccent: string | null;
   principlesItems: Array<string> | null;
+  twoPersonHeading: string | null;
+  twoPersonBody: string | null;
+  twoPersonBullets: Array<string> | null;
+  pricingHeading: string | null;
+  pricingBody: string | null;
   finalCtaEyebrow: string | null;
   finalCtaHeading: string | null;
   finalCtaIntro: string | null;
-  finalCtaButtonLabel: string | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
@@ -924,14 +926,12 @@ export type HOW_WE_WORK_SEO_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: FOUNDERS_PAGE_QUERY
-// Query: *[_type == "foundersPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper,    storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,    storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,    believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,    peopleHeading, peopleAccent, peopleFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+// Query: *[_type == "foundersPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead,    storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,    storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,    believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,    peopleHeading, peopleAccent, peopleFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,    finalCtaEyebrow, finalCtaHeading, finalCtaIntro  }
 export type FOUNDERS_PAGE_QUERY_RESULT = {
   heroEyebrow: string | null;
   heroHeading: string | null;
   heroAccent: string | null;
   heroSubhead: string | null;
-  heroCtaLabel: string | null;
-  heroCtaHelper: string | null;
   storyHeading: string | null;
   storyAccent: string | null;
   storyDifferenceLabel: string | null;
@@ -987,7 +987,6 @@ export type FOUNDERS_PAGE_QUERY_RESULT = {
   finalCtaEyebrow: string | null;
   finalCtaHeading: string | null;
   finalCtaIntro: string | null;
-  finalCtaButtonLabel: string | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
@@ -1013,13 +1012,13 @@ declare module "@sanity/client" {
     '\n  *[_type == "siteSettings"][0]{\n    siteName,\n    description,\n    contactEmail,\n    finalCtaCaption,\n    flowSteps[]{ _key, tag, title, description },\n    seo\n  }\n': SETTINGS_QUERY_RESULT;
     '\n  *[_type == "navigation"][0]{\n    headerLinks[]{ _key, label, anchor },\n    headerCtaLabel,\n    footerTagline,\n    footerCtaLabel,\n    footerColumns[]{ _key, title, links[]{ _key, label, href } },\n    footerNote\n  }\n': NAVIGATION_QUERY_RESULT;
     '\n  *[_type == "founder"] | order(order asc){\n    _id,\n    name,\n    linkedinUrl,\n    photo{\n      ...,\n      "lqip": asset->metadata.lqip,\n      "aspectRatio": asset->metadata.dimensions.aspectRatio\n    }\n  }\n': FOUNDERS_QUERY_RESULT;
-    '\n  *[_type == "homePage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead,\n    heroPrimaryCtaLabel, heroPrimaryCtaLabelShort, heroSecondaryCtaLabel, heroSecondaryCtaHref,\n    marquee,\n    proofHeading, proofLinkLabel, proofLinkHref,\n    whoHeading, whoAccent, whoIntro, whoRows[]{ _key, title, body },\n    servicesHeading, servicesAccent, servicesItems[]{ _key, title, body }, servicesFootnote,\n    foundersHeading, foundersAccent, foundersIntro, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    trustHeading, trustAccent, trustCards[]{ _key, title, body },\n    reviewCtaHeading, reviewCtaAccent, reviewCtaIntro, reviewCtaButtonLabel,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': HOME_QUERY_RESULT;
+    '\n  *[_type == "homePage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead,\n    heroSecondaryCtaLabel, heroSecondaryCtaHref, heroTrustStrip,\n    problemHeading, problemAccent, problemBody,\n    proofHeading, proofLinkLabel, proofLinkHref,\n    foundersHeading, foundersAccent, foundersIntro, foundersBullets, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    offersHeading, offersIntro,\n    faqHeading, faqItems[]{ _key, question, answer },\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro\n  }\n': HOME_QUERY_RESULT;
     '\n  *[_type == "homePage"][0]{ seo }\n': HOME_SEO_QUERY_RESULT;
     '\n  *[_type == "reviewPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, marquee,\n    problemHeading, problemAccent, problemBody, problemCallout,\n    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,\n    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,\n    foundersHeading, foundersAccent, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    processHeading, processAccent,\n    pricingEyebrow, pricingLead, pricingNote, pricingIncludedLabel, pricingIncluded,\n    fitHeading, fitChecks, fitNotItems,\n    proofHeading, proofAccent, proofBody,\n    faqHeading, faqAccent, faqItems[]{ _key, question, answer },\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro\n  }\n': REVIEW_QUERY_RESULT;
     '\n  *[_type == "reviewPage"][0]{ seo }\n': REVIEW_SEO_QUERY_RESULT;
-    '\n  *[_type == "howWeWorkPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,\n    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },\n    runsHeading, runsAccent, runsSteps[]{ _key, title, body },\n    principlesHeading, principlesAccent, principlesItems,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': HOW_WE_WORK_QUERY_RESULT;
+    '\n  *[_type == "howWeWorkPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, marquee,\n    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },\n    runsHeading, runsAccent, runsSteps[]{ _key, title, body },\n    principlesHeading, principlesAccent, principlesItems,\n    twoPersonHeading, twoPersonBody, twoPersonBullets,\n    pricingHeading, pricingBody,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro\n  }\n': HOW_WE_WORK_QUERY_RESULT;
     '\n  *[_type == "howWeWorkPage"][0]{ seo }\n': HOW_WE_WORK_SEO_QUERY_RESULT;
-    '\n  *[_type == "foundersPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper,\n    storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,\n    storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,\n    believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,\n    peopleHeading, peopleAccent, peopleFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': FOUNDERS_PAGE_QUERY_RESULT;
+    '\n  *[_type == "foundersPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead,\n    storyHeading, storyAccent, storyDifferenceLabel, storyDifferenceBig, storyDifferenceSub,\n    storyStats[]{ _key, value, label }, storyBody1, storyBody2, storyOriginLabel, storyOriginCaption, storyOriginBody,\n    believeHeading, believeAccent, believeItems[]{ _key, title, body }, believeFinaleTitle, believeFinaleBody,\n    peopleHeading, peopleAccent, peopleFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    studioHeading, studioAccent, studioBody, studioTeamCaption, studioTeamSizeBody,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro\n  }\n': FOUNDERS_PAGE_QUERY_RESULT;
     '\n  *[_type == "foundersPage"][0]{ seo }\n': FOUNDERS_PAGE_SEO_QUERY_RESULT;
     '\n  *[_type == "redirect" && defined(source) && defined(destination)]{\n    source,\n    destination,\n    permanent\n  }\n': REDIRECTS_QUERY_RESULT;
   }

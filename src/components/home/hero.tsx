@@ -1,14 +1,17 @@
-import { TrackedCta } from "@/components/analytics/tracked-cta";
+import { BookingCta } from "@/components/shared/booking-cta";
+import { FoundersFaces } from "@/components/shared/founders-faces";
 import { Button } from "@/components/ui/button";
-import { Doors } from "@/components/home/doors";
 import { Container } from "@/components/ui/container";
-import { ArrowRight } from "@/components/ui/icons";
+import { Check } from "@/components/ui/icons";
 import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
+import { BOOKINGS } from "@/lib/booking";
 import type { HOME_QUERY_RESULT } from "@/sanity/types";
 
 export function Hero({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
+  const trust = data.heroTrustStrip ?? [];
+
   return (
     <section id="top" className="relative overflow-hidden">
       <Container className="pb-14 pt-28 sm:pt-32 md:pb-20 md:pt-36">
@@ -30,38 +33,41 @@ export function Hero({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
 
         <Reveal eager delay={140}>
           <div className="mt-10 flex flex-col gap-9 md:flex-row md:items-end md:justify-between md:gap-12">
-            <p className="max-w-[46ch] text-lg leading-relaxed text-muted md:text-xl">
-              {data.heroSubhead}
-            </p>
-            <div className="flex shrink-0 flex-wrap gap-3 sm:gap-3.5">
-              <TrackedCta
-                cal
-                size="sm"
-                className="sm:h-[52px] sm:px-7 sm:text-base"
-                event="review_call_cta_click"
-              >
-                <span className="sm:hidden">
-                  {data.heroPrimaryCtaLabelShort}
-                </span>
-                <span className="hidden sm:inline">
-                  {data.heroPrimaryCtaLabel}
-                </span>
-                <ArrowRight className="hidden size-[18px] transition-transform duration-200 group-hover:translate-x-0.5 sm:inline-block" />
-              </TrackedCta>
-              <Button
-                href={data.heroSecondaryCtaHref ?? undefined}
-                variant="outline"
-                size="sm"
-                className="sm:h-[52px] sm:px-7 sm:text-base"
-              >
-                {data.heroSecondaryCtaLabel}
-              </Button>
+            <div className="max-w-[48ch]">
+              <p className="text-lg leading-relaxed text-muted md:text-xl">
+                {data.heroSubhead}
+              </p>
+              <FoundersFaces
+                caption="The founders who build it, on every call"
+                className="mt-7"
+              />
+            </div>
+            <div className="flex shrink-0 flex-col gap-5">
+              <div className="flex flex-wrap gap-3 sm:gap-3.5">
+                <BookingCta
+                  booking="costCheck"
+                  placement="hero"
+                  label={BOOKINGS.costCheck.short}
+                />
+                <Button
+                  href={data.heroSecondaryCtaHref ?? "/work"}
+                  variant="outline"
+                >
+                  {data.heroSecondaryCtaLabel ?? "See the work"}
+                </Button>
+              </div>
+              {trust.length ? (
+                <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+                  {trust.map((item) => (
+                    <li key={item} className="flex items-center gap-1.5">
+                      <Check className="size-3.5 text-ink" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
           </div>
-        </Reveal>
-
-        <Reveal eager delay={200}>
-          <Doors className="mt-10 md:mt-14" />
         </Reveal>
       </Container>
     </section>

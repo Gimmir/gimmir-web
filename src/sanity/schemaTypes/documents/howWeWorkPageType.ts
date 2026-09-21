@@ -15,8 +15,12 @@ export const howWeWorkPageType = defineType({
     { name: "fears", title: "Fears", options: { collapsible: true, collapsed: true } },
     { name: "runs", title: "What working with us looks like", options: { collapsible: true, collapsed: true } },
     { name: "principles", title: "Principles", options: { collapsible: true, collapsed: true } },
+    { name: "twoPerson", title: "The two-person question", options: { collapsible: true, collapsed: true } },
+    { name: "pricing", title: "Pricing philosophy", options: { collapsible: true, collapsed: true } },
     { name: "finalCta", title: "Final CTA", options: { collapsible: true, collapsed: true } },
   ],
+  // Hidden fields are retired: signed CTA labels and call lengths now live
+  // in code (lib/booking.ts).
   fields: [
     defineField({ name: "title", title: "Internal title", type: "string", group: "content", initialValue: "How we work", validation: (r) => r.required() }),
 
@@ -25,8 +29,8 @@ export const howWeWorkPageType = defineType({
     defineField({ name: "heroHeading", title: "Heading", type: "string", group: "content", fieldset: "hero", validation: (r) => r.required() }),
     defineField({ name: "heroAccent", title: "Heading accent", type: "string", group: "content", fieldset: "hero" }),
     defineField({ name: "heroSubhead", title: "Subhead", type: "text", rows: 3, group: "content", fieldset: "hero" }),
-    defineField({ name: "heroCtaLabel", title: "CTA label", type: "string", group: "content", fieldset: "hero" }),
-    defineField({ name: "heroCtaHelper", title: "CTA helper", type: "string", group: "content", fieldset: "hero" }),
+    defineField({ name: "heroCtaLabel", hidden: true, title: "CTA label", type: "string", group: "content", fieldset: "hero" }),
+    defineField({ name: "heroCtaHelper", hidden: true, title: "CTA helper", type: "string", group: "content", fieldset: "hero" }),
     defineField({ name: "marquee", title: "Marquee items", type: "array", of: [defineArrayMember({ type: "string" })], group: "content", fieldset: "hero" }),
 
     // Fears
@@ -44,6 +48,15 @@ export const howWeWorkPageType = defineType({
     defineField({ name: "principlesHeading", title: "Heading", type: "string", group: "content", fieldset: "principles" }),
     defineField({ name: "principlesAccent", title: "Heading accent", type: "string", group: "content", fieldset: "principles" }),
     defineField({ name: "principlesItems", title: "Items", type: "array", of: [defineArrayMember({ type: "string" })], group: "content", fieldset: "principles" }),
+
+    // Two-person question
+    defineField({ name: "twoPersonHeading", title: "Heading", type: "string", group: "content", fieldset: "twoPerson" }),
+    defineField({ name: "twoPersonBody", title: "Body", type: "text", rows: 6, group: "content", fieldset: "twoPerson" }),
+    defineField({ name: "twoPersonBullets", title: "Bullets", type: "array", of: [defineArrayMember({ type: "string" })], group: "content", fieldset: "twoPerson" }),
+
+    // Pricing philosophy (prices themselves live in lib/offers.ts)
+    defineField({ name: "pricingHeading", title: "Heading", type: "string", group: "content", fieldset: "pricing" }),
+    defineField({ name: "pricingBody", title: "Body", type: "text", rows: 3, group: "content", fieldset: "pricing" }),
 
     // Final CTA
     defineField({ name: "finalCtaEyebrow", title: "Eyebrow", type: "string", group: "content", fieldset: "finalCta" }),
