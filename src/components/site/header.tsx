@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Logomark } from "@/components/ui/logomark";
 import { useHeaderTheme } from "@/components/site/header-theme";
+import { CAL_LINK_OPERATORS } from "@/lib/cal";
 import { cn } from "@/lib/cn";
 import type { NAVIGATION_QUERY_RESULT } from "@/sanity/types";
 
@@ -24,7 +25,13 @@ export function Header({ nav }: { nav: Nav | null }) {
   const light = dark && !scrolled && !open;
 
   const links = nav?.headerLinks ?? [];
-  const ctaLabel = nav?.headerCtaLabel ?? "Book a review call";
+  const ctaLabel = nav?.headerCtaLabel ?? "Book a call";
+  // Operators book the platform cost check; everyone else the founder review.
+  const cal = pathname.startsWith("/operators") ? CAL_LINK_OPERATORS : true;
+  const isActive = (href: string) =>
+    href !== "/" &&
+    !href.startsWith("#") &&
+    (pathname === href || pathname.startsWith(`${href}/`));
 
   // On-page anchors (#top) only work on the home page; elsewhere prefix "/".
   const resolve = (anchor: string) =>
@@ -77,14 +84,15 @@ export function Header({ nav }: { nav: Nav | null }) {
               key={item._key}
               href={resolve(item.anchor ?? "#")}
               onClick={() => setOpen(false)}
-              className="display border-b border-line py-4 text-[30px] leading-none"
+              aria-current={isActive(item.anchor ?? "") ? "page" : undefined}
+              className="display border-b border-line py-4 text-[30px] leading-none aria-[current=page]:text-ink/45"
             >
               {item.label}
             </Link>
           ))}
         </nav>
         <Button
-          cal
+          cal={cal}
           className="mt-8 self-start"
           onClick={() => setOpen(false)}
         >
@@ -109,70 +117,76 @@ export function Header({ nav }: { nav: Nav | null }) {
 
         {/* bar */}
         <div className="relative mx-auto flex max-w-[1280px] items-center justify-between gap-6 px-5 md:px-10">
-        <Link
-          href="/"
-          onClick={() => setOpen(false)}
-          className={cn(
-            "flex items-center gap-2 text-[22px] font-extrabold tracking-tight transition-colors",
-            light ? "text-paper" : "text-ink",
-          )}
-        >
-          <Logomark className={cn("size-7", light ? "text-paper" : "text-ink")} />
-          Gimmir
-        </Link>
-
-        <nav aria-label="Primary" className="hidden items-center gap-9 lg:flex">
-          {links.map((item) => (
-            <Link
-              key={item._key}
-              href={resolve(item.anchor ?? "#")}
-              className={cn(
-                "text-[15px] font-medium transition-colors",
-                light
-                  ? "text-paper/70 hover:text-paper"
-                  : "text-muted hover:text-ink",
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden lg:block">
-          <Button
-            cal
-            size="sm"
-            variant={light ? "outlineLight" : "solid"}
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className={cn(
+              "flex items-center gap-2 text-[22px] font-extrabold tracking-tight transition-colors",
+              light ? "text-paper" : "text-ink",
+            )}
           >
-            {ctaLabel}
-          </Button>
-        </div>
+            <Logomark
+              className={cn("size-7", light ? "text-paper" : "text-ink")}
+            />
+            Gimmir
+          </Link>
 
-        <button
-          type="button"
-          className="-mr-2 flex size-11 touch-manipulation items-center justify-center lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="relative block h-[14px] w-6">
-            <span
-              className={cn(
-                "absolute left-0 block h-[2px] w-6 transition-all duration-300",
-                light ? "bg-paper" : "bg-ink",
-                open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0",
-              )}
-            />
-            <span
-              className={cn(
-                "absolute bottom-0 left-0 block h-[2px] w-6 transition-all duration-300",
-                light ? "bg-paper" : "bg-ink",
-                open ? "bottom-1/2 translate-y-1/2 -rotate-45" : "",
-              )}
-            />
-          </span>
-        </button>
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-9 lg:flex"
+          >
+            {links.map((item) => (
+              <Link
+                key={item._key}
+                href={resolve(item.anchor ?? "#")}
+                aria-current={isActive(item.anchor ?? "") ? "page" : undefined}
+                className={cn(
+                  "text-[15px] font-medium transition-colors",
+                  light
+                    ? "text-paper/70 hover:text-paper aria-[current=page]:text-paper"
+                    : "text-muted hover:text-ink aria-[current=page]:text-ink",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="hidden lg:block">
+            <Button
+              cal={cal}
+              size="sm"
+              variant={light ? "outlineLight" : "solid"}
+            >
+              {ctaLabel}
+            </Button>
+          </div>
+
+          <button
+            type="button"
+            className="-mr-2 flex size-11 touch-manipulation items-center justify-center lg:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="relative block h-[14px] w-6">
+              <span
+                className={cn(
+                  "absolute left-0 block h-[2px] w-6 transition-all duration-300",
+                  light ? "bg-paper" : "bg-ink",
+                  open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0",
+                )}
+              />
+              <span
+                className={cn(
+                  "absolute bottom-0 left-0 block h-[2px] w-6 transition-all duration-300",
+                  light ? "bg-paper" : "bg-ink",
+                  open ? "bottom-1/2 translate-y-1/2 -rotate-45" : "",
+                )}
+              />
+            </span>
+          </button>
         </div>
       </header>
     </>
