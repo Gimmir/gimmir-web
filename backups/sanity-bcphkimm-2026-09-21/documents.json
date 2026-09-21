@@ -1,0 +1,717 @@
+[
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "founderNazar",
+    "_rev": "HkA50Q2p1kmztH2ufIBajQ",
+    "_type": "founder",
+    "_updatedAt": "2026-07-15T13:27:37Z",
+    "bio": "Leads product and business. Has built and shipped fitness products end to end, as an owner carrying the same risk a founder carries. On a Gimmir engagement, Nazar is the one who pressure-tests your product thinking and your plan.",
+    "linkedinUrl": "https://www.linkedin.com/in/nazarmoroze/",
+    "name": "Nazar Moroz",
+    "order": 0,
+    "photo": {
+      "_type": "image",
+      "alt": "Nazar Moroz",
+      "asset": {
+        "_ref": "image-d1a55215171d9442d048697b0ab6ff8869b37db7-800x800-png",
+        "_type": "reference"
+      }
+    },
+    "role": "Founder"
+  },
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "founderOleh",
+    "_rev": "HkA50Q2p1kmztH2ufIBajQ",
+    "_type": "founder",
+    "_updatedAt": "2026-07-15T13:27:37Z",
+    "bio": "Led the architecture of both the UN1T platform and Jimmy Coach. The person who can tell, in days, whether a product will hold up in years. On a Gimmir engagement, Oleh owns the technical judgment: how it is built, and whether it will scale.",
+    "linkedinUrl": "https://www.linkedin.com/in/oleh-palazh/",
+    "name": "Oleh Palazhii",
+    "order": 1,
+    "photo": {
+      "_type": "image",
+      "alt": "Oleh Palazhii",
+      "asset": {
+        "_ref": "image-3861e6b36d7e244adf83b911cd5bae4f074423f6-800x800-png",
+        "_type": "reference"
+      }
+    },
+    "role": "CTO"
+  },
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "foundersPage",
+    "_rev": "FhaKCniGTxwFh6i6luBSJc",
+    "_system": {
+      "base": {
+        "id": "foundersPage",
+        "rev": "OfVylNx0g6jHXpaB4SOwTo"
+      }
+    },
+    "_type": "foundersPage",
+    "_updatedAt": "2026-09-21T09:41:50Z",
+    "believeAccent": "",
+    "believeFinaleBody": "Your code, your IP, your accounts, yours from day one.",
+    "believeFinaleTitle": "You own everything.",
+    "believeHeading": "What we believe.",
+    "believeItems": [
+      {
+        "_key": "k1f",
+        "_type": "infoCard",
+        "body": "You are not buying time. You are buying decisions that hold up two years from now.",
+        "title": "Judgment over hours."
+      },
+      {
+        "_key": "k1g",
+        "_type": "infoCard",
+        "body": "Anyone can ship a demo. We build the version that still works after you scale, add locations, and raise.",
+        "title": "We build to survive growth."
+      },
+      {
+        "_key": "k1h",
+        "_type": "infoCard",
+        "body": "We build for sport and fitness, because we have shipped real products there. We would rather be the obvious choice for a few than a maybe for everyone.",
+        "title": "Specific beats generic."
+      },
+      {
+        "_key": "k1i",
+        "_type": "infoCard",
+        "body": "We will tell you to cut a feature, change a plan, or not hire us, if that is the honest call.",
+        "title": "The truth, even when it costs us."
+      }
+    ],
+    "finalCtaButtonLabel": "Book a founder review call",
+    "finalCtaEyebrow": "Let’s talk",
+    "finalCtaHeading": "Let’s look at what you are building.",
+    "finalCtaIntro": "The best way to know if we are the right team is to talk to us directly.",
+    "founders": [
+      {
+        "_key": "k1j",
+        "_type": "founderCard",
+        "bio": "Leads product and business. Has built and shipped fitness products end to end, as an owner carrying the same risk a founder carries. On a Gimmir engagement, Nazar is the one who pressure-tests your product thinking and your plan.",
+        "founder": {
+          "_ref": "founderNazar",
+          "_type": "reference"
+        },
+        "role": "Founder"
+      },
+      {
+        "_key": "k1k",
+        "_type": "founderCard",
+        "bio": "Led the architecture of both the UN1T platform and Jimmy Coach. The person who can tell, in days, whether a product will hold up in years. On a Gimmir engagement, Oleh owns the technical judgment: how it is built, and whether it will scale.",
+        "founder": {
+          "_ref": "founderOleh",
+          "_type": "reference"
+        },
+        "role": "CTO"
+      }
+    ],
+    "heroAccent": "built our own.",
+    "heroCtaHelper": "20-minute call with the founders. No pitch, no obligation.",
+    "heroCtaLabel": "Book a founder review call",
+    "heroEyebrow": "About Gimmir",
+    "heroHeading": "We build fitness products because we have",
+    "heroSubhead": "Gimmir is a product studio led by two founders, Nazar Moroz and Oleh Palazhii. We built UN1T’s franchise platform as their engineering partner, and we co-founded Jimmy Coach as owners. Now we do it for founders who need software that holds up as they grow.",
+    "peopleAccent": "",
+    "peopleFootnote": "Two founders who have already built what you are trying to build. On every engagement, one or both of us is in the room.",
+    "peopleHeading": "You work with us, directly.",
+    "seo": {
+      "_type": "seo",
+      "metaDescription": "Gimmir is led by founders Nazar Moroz and Oleh Palazhii, UN1T’s engineering partner and co-founders of Jimmy Coach. Meet the people you work with.",
+      "metaTitle": "Founders: we built UN1T's platform and Jimmy Coach"
+    },
+    "storyAccent": "never run a fitness business.",
+    "storyBody1": "We built the platform behind UN1T, a global fitness franchise, and moved it off a white-label platform onto its own app and back office, across 10+ franchises worldwide. We co-founded Jimmy Coach and built it from zero into a coaching platform that reached 100+ active coaches in its first month.",
+    "storyBody2": "Building those products, one as an engineering partner and one as owners, taught us what actually breaks fitness software at scale, and how few teams can be trusted with it. We started Gimmir to be that team for other founders: senior, honest, and on the hook for the result, not the hours.",
+    "storyDifferenceBig": "We have.",
+    "storyDifferenceLabel": "The difference",
+    "storyDifferenceSub": "We co-founded Jimmy Coach and run it as owners.",
+    "storyHeading": "Most fitness software is built by people who have",
+    "storyOriginBody": "We have built software together for years as a general-purpose agency. The projects we were proudest of, and the ones where our judgment mattered most, were in fitness: a franchise platform that had to run every location, and a coaching app we put our own money and names behind. In 2026 we stopped taking everything else.",
+    "storyOriginLabel": "Founders’ origin",
+    "storyStats": [
+      {
+        "_key": "k1d",
+        "_type": "stat",
+        "label": "UN1T franchises worldwide, moved off a white-label platform onto their own",
+        "value": "10+"
+      },
+      {
+        "_key": "k1e",
+        "_type": "stat",
+        "label": "Jimmy Coach coaches in the first month, built from zero",
+        "value": "100+"
+      }
+    ],
+    "studioAccent": "",
+    "studioBody": "Behind the two of us is a core team of senior engineers and designers we have shipped with before. We are a Ukrainian-founded studio. You contract with Gimmir LLC, a US (Delaware) company; the team works from the EU in your working hours.",
+    "studioHeading": "Two founders, a full team behind them.",
+    "studioTeamCaption": "Nazar & Oleh, plus the senior team behind every build.",
+    "studioTeamSizeBody": "A core team of ten senior engineers and designers we have shipped with before. No bench of juniors: the team is assembled around your build.",
+    "title": "Founders"
+  },
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "homePage",
+    "_rev": "FhaKCniGTxwFh6i6luBSJc",
+    "_system": {
+      "base": {
+        "id": "homePage",
+        "rev": "3l9lIg7NcohtTeLi7fT1ow"
+      }
+    },
+    "_type": "homePage",
+    "_updatedAt": "2026-09-21T09:41:50Z",
+    "finalCtaButtonLabel": "Book a founder review call",
+    "finalCtaEyebrow": "Let’s talk",
+    "finalCtaHeading": "Let’s look at what you are building.",
+    "finalCtaIntro": "Tell us what you are working on. We will tell you honestly how we would approach it, and whether we are the right team for it.",
+    "founders": [
+      {
+        "_key": "kj",
+        "_type": "founderCard",
+        "bio": "Leads product and business. Has built and shipped fitness products end to end, as an owner carrying the same risk you do.",
+        "founder": {
+          "_ref": "founderNazar",
+          "_type": "reference"
+        },
+        "role": "Founder"
+      },
+      {
+        "_key": "kk",
+        "_type": "founderCard",
+        "bio": "Led the architecture of both the UN1T platform and Jimmy Coach. The person who designs how your product holds up as it scales.",
+        "founder": {
+          "_ref": "founderOleh",
+          "_type": "reference"
+        },
+        "role": "CTO"
+      }
+    ],
+    "foundersAccent": "who built it.",
+    "foundersFootnote": "Two founders who have already built what you are trying to build, plus the team behind them.",
+    "foundersHeading": "You work with the people",
+    "foundersIntro": "Most agencies put a senior on the sales call and juniors on your project. With Gimmir, the founders are in the room from the first call to delivery.",
+    "heroAccent": "runs on.",
+    "heroEyebrow": "Product engineering for sport & fitness",
+    "heroHeading": "Own the platform your fitness business",
+    "heroPrimaryCtaLabel": "Book a founder review call",
+    "heroPrimaryCtaLabelShort": "Founder review call",
+    "heroSecondaryCtaHref": "/work",
+    "heroSecondaryCtaLabel": "See our work",
+    "heroSubhead": "We build the apps and back offices behind fitness brands that have outgrown rented software. We moved UN1T’s 10+ location franchise onto a platform they own, and we co-founded Jimmy Coach. Two founders in every engagement. Your code from the first commit.",
+    "marquee": [
+      "franchise platform",
+      "Jimmy Coach",
+      "Member & booking systems",
+      "iOS & Android apps",
+      "AI in product"
+    ],
+    "proofHeading": "Real fitness products, not promises.",
+    "proofLinkHref": "/work",
+    "proofLinkLabel": "All case studies",
+    "reviewCtaAccent": "not a contract.",
+    "reviewCtaButtonLabel": "Book a founder review call",
+    "reviewCtaHeading": "Start with a conversation,",
+    "reviewCtaIntro": "One path, three steps. You decide how far you go, and nothing is locked in.",
+    "seo": {
+      "_type": "seo",
+      "metaDescription": "Fitness app and software development company behind scaling sport and fitness brands. Start with a free review call with the founders behind UN1T and Jimmy Coach.",
+      "metaTitle": "Fitness App & Software Development Company · Gimmir"
+    },
+    "servicesAccent": "",
+    "servicesFootnote": "Delivered by a senior team that works alongside yours, or as a fixed-scope build with a clear timeline and price.",
+    "servicesHeading": "One team for the whole product, not just the easy parts.",
+    "servicesItems": [
+      {
+        "_key": "kf",
+        "_type": "infoCard",
+        "body": "Subscriptions, payments, scheduling, and the back office that runs every location.",
+        "title": "Member & booking platforms"
+      },
+      {
+        "_key": "kg",
+        "_type": "infoCard",
+        "body": "iOS and Android products your members open every day. Fast, and built to last.",
+        "title": "Sport & fitness apps"
+      },
+      {
+        "_key": "kh",
+        "_type": "infoCard",
+        "body": "Chat, groups, and the engagement layer that keeps athletes coming back.",
+        "title": "Community & social features"
+      },
+      {
+        "_key": "ki",
+        "_type": "infoCard",
+        "body": "Personalized coaching, smart recommendations, and assistants built into real workflows, not bolted on.",
+        "title": "AI inside your product"
+      }
+    ],
+    "title": "Home",
+    "trustAccent": "real thing.",
+    "trustCards": [
+      {
+        "_key": "kl",
+        "_type": "infoCard",
+        "body": "The founders are in every engagement. No bait and switch.",
+        "title": "Senior from first call to delivery"
+      },
+      {
+        "_key": "km",
+        "_type": "infoCard",
+        "body": "Code, IP, and accounts. Always yours.",
+        "title": "You own everything, day one"
+      },
+      {
+        "_key": "kn",
+        "_type": "infoCard",
+        "body": "People we have shipped with before, led by the founders. You don’t lose a quarter hiring.",
+        "title": "A senior team, already formed"
+      },
+      {
+        "_key": "ko",
+        "_type": "infoCard",
+        "body": "If a decision will hurt your product later, we say so. You pay for judgment, not just hands.",
+        "title": "We push back"
+      }
+    ],
+    "trustHeading": "Why founders trust us with the",
+    "whoAccent": "seriously.",
+    "whoHeading": "Built for founders who take their product",
+    "whoIntro": "You are not looking for cheap hands. You want a team that understands what you are building and can be trusted with the part of your business your members actually touch.",
+    "whoRows": [
+      {
+        "_key": "kd",
+        "_type": "infoCard",
+        "body": "Studios, gyms, and franchises where memberships, bookings, and payments simply have to work.",
+        "title": "Multi-location operators"
+      },
+      {
+        "_key": "kc",
+        "_type": "infoCard",
+        "body": "Sport and fitness founders building a product members depend on, not a prototype to demo.",
+        "title": "Founders shipping the real thing"
+      },
+      {
+        "_key": "ke",
+        "_type": "infoCard",
+        "body": "Coaching and creator-led products going from a handful of clients to thousands.",
+        "title": "Coaching apps that scale"
+      }
+    ]
+  },
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "howWeWorkPage",
+    "_rev": "FhaKCniGTxwFh6i6luBSJc",
+    "_system": {
+      "base": {
+        "id": "howWeWorkPage",
+        "rev": "OfVylNx0g6jHXpaB4SOwTo"
+      }
+    },
+    "_type": "howWeWorkPage",
+    "_updatedAt": "2026-09-21T09:41:50Z",
+    "fears": [
+      {
+        "_key": "k11",
+        "_type": "fearItem",
+        "answer": "The founders, Nazar and Oleh, are in every engagement, from the first call through delivery. You meet the people who actually build, and they stay your point of contact. No bait and switch.",
+        "fear": "Senior on the sales call, juniors on the project."
+      },
+      {
+        "_key": "k12",
+        "_type": "fearItem",
+        "answer": "We build products to live and grow, not to hand off and vanish. We stay through launch and scale, and we design the architecture so your next change is a change, not a rewrite.",
+        "fear": "They delivered, then disappeared."
+      },
+      {
+        "_key": "k13",
+        "_type": "fearItem",
+        "answer": "Code, IP, repositories, and accounts are yours from day one. Not at the end. Not on final payment. Day one. You are never locked in to us.",
+        "fear": "I don’t really own what they built."
+      },
+      {
+        "_key": "k14",
+        "_type": "fearItem",
+        "answer": "No manager wall, no telephone game. You talk directly to the engineers writing your code, with real overlap hours and a direct line, not a ticket that gets answered tomorrow.",
+        "fear": "I can never reach the actual developers."
+      },
+      {
+        "_key": "k15",
+        "_type": "fearItem",
+        "answer": "We work with deliberate overlap with your hours and treat async communication as a skill, not an excuse. You are never sitting a full day waiting on an answer.",
+        "fear": "We were in different timezones and lost half a day on every question."
+      },
+      {
+        "_key": "k16",
+        "_type": "fearItem",
+        "answer": "We scope honestly and we push back. If a feature or a plan will hurt you later, we tell you before we build it. You are paying for judgment, not just hours.",
+        "fear": "Every sprint we fixed the same bugs and rebuilt the same things."
+      },
+      {
+        "_key": "k17",
+        "_type": "fearItem",
+        "answer": "Quality is our job, not yours. Testing and review are part of how we ship, not a surprise you discover is missing after launch.",
+        "fear": "QA was basically me."
+      }
+    ],
+    "fearsAccent": "Here is how we kill each.",
+    "fearsAnswerLabel": "How we kill it",
+    "fearsHeading": "The fears you have are the right ones.",
+    "finalCtaButtonLabel": "Book a founder review call",
+    "finalCtaEyebrow": "Talk to the founders",
+    "finalCtaHeading": "Talk to the founders, not a sales team.",
+    "finalCtaIntro": "The fastest way to know if we are the right team is to talk to the people who would actually build with you.",
+    "heroAccent": "pushes back.",
+    "heroCtaHelper": "20-minute call with the founders. No pitch, no obligation.",
+    "heroCtaLabel": "Book a founder review call",
+    "heroEyebrow": "How we work",
+    "heroHeading": "A product team that",
+    "heroSubhead": "You have probably been burned, or watched a friend get burned: the senior who vanishes after the contract is signed, the juniors you never agreed to, the code you somehow cannot touch. Here is what we do instead, point by point.",
+    "marquee": [
+      "Founders in every project",
+      "IP yours from day one",
+      "Direct access to seniors",
+      "We push back",
+      "Built to scale",
+      "QA is our job"
+    ],
+    "principlesAccent": "",
+    "principlesHeading": "What never changes.",
+    "principlesItems": [
+      "The founders are in every project.",
+      "Direct access to the senior engineers building your product.",
+      "Your IP and accounts are yours from day one.",
+      "We push back when a decision will cost you later.",
+      "Everything is built to survive growth."
+    ],
+    "runsAccent": "",
+    "runsHeading": "What working with us looks like.",
+    "runsSteps": [
+      {
+        "_key": "k18",
+        "_type": "infoCard",
+        "body": "We look at your product or plan and agree on what actually matters. Often this is the Scale Review.",
+        "title": "Review"
+      },
+      {
+        "_key": "k19",
+        "_type": "infoCard",
+        "body": "A clear plan: what to build, in what order, with honest effort for each piece.",
+        "title": "Roadmap"
+      },
+      {
+        "_key": "k1a",
+        "_type": "infoCard",
+        "body": "People the founders have shipped with before. No hiring quarter.",
+        "title": "A senior team, already formed"
+      },
+      {
+        "_key": "k1b",
+        "_type": "infoCard",
+        "body": "The founders stay involved, you talk to the engineers directly, and you see working software in regular demos, not status reports.",
+        "title": "Build with direct access"
+      },
+      {
+        "_key": "k1c",
+        "_type": "infoCard",
+        "body": "Code, IP, and accounts stay yours the whole way. Built to scale with you, never to lock you in.",
+        "title": "Yours, throughout"
+      }
+    ],
+    "seo": {
+      "_type": "seo",
+      "metaDescription": "Fixed-scope fitness product builds led by the founders. You own the code and IP from day one and talk directly to the engineers building your product.",
+      "metaTitle": "How We Work: Fixed-Scope Fitness Product Builds"
+    },
+    "title": "How we work"
+  },
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "navigation",
+    "_rev": "H9ASAGA65Kq0AQze3tGJxV",
+    "_type": "navigation",
+    "_updatedAt": "2026-09-21T09:37:25Z",
+    "footerCtaLabel": "Book a founder review call",
+    "footerLinks": [
+      {
+        "_key": "fkops",
+        "_type": "footerLink",
+        "href": "/operators",
+        "label": "For operators"
+      },
+      {
+        "_key": "fkfnd",
+        "_type": "footerLink",
+        "href": "/the-review",
+        "label": "For founders"
+      },
+      {
+        "_key": "fk4",
+        "_type": "footerLink",
+        "href": "/work",
+        "label": "Case studies"
+      },
+      {
+        "_key": "fk5",
+        "_type": "footerLink",
+        "href": "/how-we-work",
+        "label": "How we work"
+      },
+      {
+        "_key": "fk6",
+        "_type": "footerLink",
+        "href": "/founders",
+        "label": "About"
+      }
+    ],
+    "footerNote": "Product engineering for sport & fitness",
+    "footerTagline": "We build the apps and platforms behind sport and fitness brands that are scaling.",
+    "headerCtaLabel": "Book a call",
+    "headerLinks": [
+      {
+        "_key": "kops",
+        "_type": "navItem",
+        "anchor": "/operators",
+        "label": "For operators"
+      },
+      {
+        "_key": "kfnd",
+        "_type": "navItem",
+        "anchor": "/the-review",
+        "label": "For founders"
+      },
+      {
+        "_key": "k4",
+        "_type": "navItem",
+        "anchor": "/work",
+        "label": "Case studies"
+      },
+      {
+        "_key": "k5",
+        "_type": "navItem",
+        "anchor": "/how-we-work",
+        "label": "How we work"
+      },
+      {
+        "_key": "k6",
+        "_type": "navItem",
+        "anchor": "/founders",
+        "label": "About"
+      }
+    ]
+  },
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "reviewPage",
+    "_rev": "FhaKCniGTxwFh6i6luBSJc",
+    "_system": {
+      "base": {
+        "id": "reviewPage",
+        "rev": "OfVylNx0g6jHXpaB4SOwTo"
+      }
+    },
+    "_type": "reviewPage",
+    "_updatedAt": "2026-09-21T09:41:50Z",
+    "deliverablesAccent": "",
+    "deliverablesClosing": "This is the same thinking that helped UN1T move off a white-label platform onto their own, and keep about $10k a month.",
+    "deliverablesHeading": "You walk away with a roadmap, whether or not you build with us.",
+    "deliverablesIntro": "A clear document plus a live walkthrough session.",
+    "deliverablesItems": [
+      {
+        "_key": "kp",
+        "_type": "infoCard",
+        "body": "What in your product holds up, and what will break as you grow, in plain language.",
+        "title": "Scale assessment"
+      },
+      {
+        "_key": "kq",
+        "_type": "infoCard",
+        "body": "The specific issues that will cost you, ranked by how much damage they do and how soon.",
+        "title": "Risk map"
+      },
+      {
+        "_key": "kr",
+        "_type": "infoCard",
+        "body": "What to build and fix, in what order, with rough effort for each.",
+        "title": "Priority build plan"
+      },
+      {
+        "_key": "ks",
+        "_type": "infoCard",
+        "body": "What each gap is likely to cost in money, members, or a stalled round.",
+        "title": "Cost of doing nothing"
+      },
+      {
+        "_key": "kt",
+        "_type": "infoCard",
+        "body": "Exactly how we would execute it, if you choose to build with us.",
+        "title": "Recommended path"
+      }
+    ],
+    "faqAccent": "",
+    "faqHeading": "Questions, answered straight.",
+    "faqItems": [
+      {
+        "_key": "kw",
+        "_type": "faqItem",
+        "answer": "No. We tell you the minimum that actually matters, in priority order. Sometimes the honest answer is “this is solid, here are the three things to watch.”",
+        "question": "Will you just tell me to rebuild everything?"
+      },
+      {
+        "_key": "kx",
+        "_type": "faqItem",
+        "answer": "No. The roadmap is yours to keep and act on however you want. If you do build with us, the review fee is credited.",
+        "question": "Do I have to build with you afterward?"
+      },
+      {
+        "_key": "ky",
+        "_type": "faqItem",
+        "answer": "Yes. We sign an NDA before we see anything, and you own everything, start to finish.",
+        "question": "Is my code and IP safe?"
+      },
+      {
+        "_key": "kz",
+        "_type": "faqItem",
+        "answer": "The founders, Nazar and Oleh. Not a junior, not a hand-off to an analyst.",
+        "question": "Who actually does the review?"
+      },
+      {
+        "_key": "k10",
+        "_type": "faqItem",
+        "answer": "One to two weeks from kickoff to the roadmap walkthrough.",
+        "question": "How long does it take?"
+      }
+    ],
+    "finalCtaButtonLabel": "Book a free review call",
+    "finalCtaEyebrow": "Find out before it costs you",
+    "finalCtaHeading": "Find out before it costs you.",
+    "finalCtaIntro": "The problems that sink fitness products are cheapest to fix today. Start with a free call with the founders.",
+    "fitChecks": [
+      "You have a funded startup or a multi-location fitness brand with real revenue.",
+      "You already have a product, or a serious plan and budget to build one.",
+      "You care more about getting it right than getting it cheap."
+    ],
+    "fitHeading": "This is a fit if…",
+    "fitNotBody": "You are at idea stage with no budget, or you are shopping purely on hourly rate. That is fine, we are just not the right team for it.",
+    "fitNotLabel": "Honestly, not a fit if",
+    "focusItems": [
+      "Memberships, subscriptions & billing",
+      "Payments, fees & payouts across locations",
+      "Booking & scheduling under real load",
+      "The data model behind multiple studios or franchises",
+      "Security, access & what investor due diligence finds",
+      "Where AI adds real value, and where it is a distraction"
+    ],
+    "focusLabel": "We look at what actually breaks sport & fitness products at scale",
+    "founders": [
+      {
+        "_key": "ku",
+        "_type": "founderCard",
+        "bio": "Product and business. Has built and shipped fitness products end to end, as an owner.",
+        "founder": {
+          "_ref": "founderNazar",
+          "_type": "reference"
+        },
+        "role": "Founder, product & business"
+      },
+      {
+        "_key": "kv",
+        "_type": "founderCard",
+        "bio": "Led the architecture of both the UN1T platform and Jimmy Coach. The person who can tell in days whether your product will hold up in years.",
+        "founder": {
+          "_ref": "founderOleh",
+          "_type": "reference"
+        },
+        "role": "CTO, architecture"
+      }
+    ],
+    "foundersAccent": "not a sales team.",
+    "foundersFootnote": "You are not paying for a report a junior wrote. You are paying for the judgment of two founders who have already built what you are building.",
+    "foundersHeading": "The people who built it,",
+    "heroAccent": "before it costs you.",
+    "heroCtaHelper": "20-minute call with the founders. No pitch, no obligation.",
+    "heroCtaLabel": "Book a free review call",
+    "heroEyebrow": "For funded sport & fitness founders",
+    "heroHeading": "Find out if your product will survive growth,",
+    "heroSubhead": "In two weeks, the founders who built UN1T’s platform and Jimmy Coach review your product, code, or plan and hand you a clear roadmap of what holds up, what breaks at scale, and what to do about it.",
+    "marquee": [
+      "Memberships & billing",
+      "Payments at scale",
+      "Booking under load",
+      "Multi-location data",
+      "Security & DD",
+      "AI where it pays"
+    ],
+    "pricingButtonLabel": "Book a free review call",
+    "pricingEyebrow": "One flat fee, credited toward your build",
+    "pricingIncluded": [
+      "Scale assessment",
+      "Risk map",
+      "Priority build plan",
+      "Cost of doing nothing",
+      "Recommended path",
+      "Live roadmap walkthrough"
+    ],
+    "pricingIncludedLabel": "Every review includes",
+    "pricingLead": "One to two weeks. Led by both founders. You keep the roadmap either way.",
+    "pricingNote": "If you build with us, the full fee is credited toward your first invoice. So if the review leads to a build, it effectively costs you nothing.",
+    "pricingPrice": "€2,500",
+    "pricingPriceSuffix": "fixed",
+    "problemAccent": "",
+    "problemBody": "The app works fine with 500 members. Then you scale, add locations, raise a round, and the cracks show: payments fail under load, bookings double-charge, the data model can’t handle a second franchise, and an investor’s technical due diligence finds things you did not know were there.",
+    "problemCallout": "By the time it shows, fixing it is a rewrite. The cheapest moment to find these problems is now, before they cost you members, money, or a round.",
+    "problemHeading": "Most fitness products break at exactly the wrong moment.",
+    "processAccent": "",
+    "processHeading": "Three steps, low risk.",
+    "proofAccent": "",
+    "proofHeading": "Built by people with real products behind them.",
+    "seo": {
+      "_type": "seo",
+      "metaDescription": "A two-week technical due diligence and scale review for sport and fitness products. The founders behind UN1T and Jimmy Coach hand you a clear roadmap.",
+      "metaTitle": "The Review: Technical Due Diligence for Fitness Products"
+    },
+    "title": "The Review",
+    "whatAccent": "built to scale.",
+    "whatHeading": "A two-week expert review of whether your product is",
+    "whatIntro": "This is not a sales call dressed up as an audit. Two founders who have shipped real fitness platforms go deep on your product against one question: will this survive growth."
+  },
+  {
+    "_createdAt": "2026-07-15T13:27:37Z",
+    "_id": "siteSettings",
+    "_rev": "LI671VOuLZTgT1VfbV2uBr",
+    "_type": "siteSettings",
+    "_updatedAt": "2026-09-21T09:03:31Z",
+    "contactEmail": "hello@gimmir.com",
+    "description": "Product engineering for sport & fitness",
+    "finalCtaCaption": "The founders, on the call",
+    "finalCtaHelper": "Free · 20 min · no pitch, no obligation.",
+    "flowSteps": [
+      {
+        "_key": "k0",
+        "_type": "flowStep",
+        "description": "Talk directly with Nazar and Oleh. We look at your product or plan and give you real input on the spot.",
+        "tag": "Free · 20 min",
+        "title": "Founder review call"
+      },
+      {
+        "_key": "k1",
+        "_type": "flowStep",
+        "description": "We review your product, code, or plan against one question: will it survive growth. You get a clear roadmap of what to build, fix, and in what order.",
+        "tag": "Paid",
+        "title": "Scale Review + Roadmap"
+      },
+      {
+        "_key": "k2",
+        "_type": "flowStep",
+        "description": "Delivered by the team the founders lead. Your review fee is credited toward the build.",
+        "tag": "Build",
+        "title": "Senior team or fixed-scope build"
+      }
+    ],
+    "siteName": "Gimmir"
+  }
+]
