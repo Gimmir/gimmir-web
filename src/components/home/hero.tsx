@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { FoundersPortrait } from "@/components/home/founders-portrait";
 import { BookingCta } from "@/components/shared/booking-cta";
 import { Button } from "@/components/ui/button";
@@ -21,19 +19,7 @@ export function Hero({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
 
   return (
     <section id="top" className="relative overflow-hidden">
-      {/* watercolour hills in the bottom-right corner; the painting bleeds
-          off the right and bottom edges, the portraits sit on top */}
-      <Image
-        src="/illustrations/hero-hills.webp"
-        alt=""
-        aria-hidden
-        width={1086}
-        height={505}
-        priority
-        sizes="(min-width: 1280px) 52vw, 100vw"
-        className="pointer-events-none absolute -right-[2vw] bottom-0 hidden w-[min(52vw,900px)] select-none xl:block"
-      />
-      <Container className="relative pb-16 pt-28 sm:pt-32 md:pb-24 md:pt-36">
+      <Container className="pb-16 pt-28 sm:pt-32 md:pb-24 md:pt-36">
         <div className="grid gap-14 xl:grid-cols-12 xl:gap-x-10">
           <div className="xl:col-span-8">
             <Reveal eager>
@@ -92,17 +78,6 @@ export function Hero({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
           <FoundersPortrait className="w-full max-w-[420px] xl:col-span-4 xl:mt-[5.5rem] xl:max-w-none" />
         </div>
       </Container>
-
-      {/* below xl the same hills close the stacked hero as a full-width band */}
-      <Image
-        src="/illustrations/hero-hills.webp"
-        alt=""
-        aria-hidden
-        width={1086}
-        height={505}
-        sizes="100vw"
-        className="pointer-events-none -mt-8 ml-auto block w-full max-w-[900px] select-none sm:-mt-20 xl:hidden"
-      />
     </section>
   );
 }
