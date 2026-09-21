@@ -8,7 +8,8 @@ import { CountUp } from "@/components/ui/count-up";
 import { ArrowRight } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CaseBackLink } from "@/components/work/parts";
+import { CaseBackLink, CaseQuote, QuickFacts } from "@/components/work/parts";
+import { BOOKINGS } from "@/lib/booking";
 import type { CaseStudy } from "@/lib/cases";
 
 const dots =
@@ -55,9 +56,9 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
 
           <Reveal eager delay={80}>
             <h1 className="display mt-9 text-[2.1rem] leading-[1.06] sm:text-hero sm:leading-[0.98]">
-              Off a rented platform.
+              UN1T kept about $10k a month
               <br />
-              <span className="text-lime">Onto their own.</span>
+              <span className="text-lime">by owning their platform.</span>
             </h1>
           </Reveal>
 
@@ -68,22 +69,7 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
           </Reveal>
 
           <Reveal eager delay={160}>
-            <dl className="mt-14 grid gap-8 border-t border-paper/15 pt-8 sm:grid-cols-2">
-              <div>
-                <dt className="font-mono text-xs uppercase tracking-widest text-lime">
-                  Industry
-                </dt>
-                <dd className="mt-2 text-lg text-paper/85">{data.industry}</dd>
-              </div>
-              <div>
-                <dt className="font-mono text-xs uppercase tracking-widest text-lime">
-                  Our role
-                </dt>
-                <dd className="mt-2 text-lg text-paper/85">
-                  Platform design &amp; engineering
-                </dd>
-              </div>
-            </dl>
+            <QuickFacts facts={data.facts} onDark className="mt-14" />
           </Reveal>
         </Container>
       </section>
@@ -102,13 +88,13 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
             <Reveal delay={80}>
               <div className="space-y-6 text-lg leading-relaxed text-muted md:text-xl">
                 <p>
-                  UN1T ran its members, bookings, and payments on a{" "}
+                  UN1T had grown to 10+ locations on a rented{" "}
                   <strong className="font-semibold text-ink">
-                    white-label platform
+                    white-label booking platform
                   </strong>
-                  . As the franchise grew across locations, that meant renting
-                  software they could not fully control, and about $10k a
-                  month leaving the business in platform and payment fees.
+                  . Every member and every payment carried a fee, about $10k a
+                  month leaving the business, and the member experience and
+                  data lived on a system they didn&rsquo;t own.
                 </p>
               </div>
             </Reveal>
@@ -124,7 +110,7 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
               index="02"
               titleMax="max-w-[22ch]"
               title="Their own app and back office, end to end."
-              intro="We replaced the rented stack with a platform they own: one system across every location."
+              intro="We built UN1T their own member app (iOS & Android), a back office for classes, memberships and staff across locations, and payments with fees and payouts modeled around a multi-location franchise. Everything in UN1T’s name from day one."
             />
           </Reveal>
 
@@ -179,8 +165,19 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
                   </div>
                 ))}
               </div>
+              <p className="relative mt-10 max-w-[60ch] text-lg leading-relaxed text-paper/75">
+                About $10k a month in platform and payment fees now stays
+                inside the business. UN1T owns their app, their data and their
+                member relationship.
+              </p>
             </div>
           </Reveal>
+
+          {data.quote ? (
+            <Reveal>
+              <CaseQuote quote={data.quote} className="mt-12" />
+            </Reveal>
+          ) : null}
 
           <Reveal>
             <Link
@@ -195,9 +192,9 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
       </section>
 
       <FinalCtaPanel
-        eyebrow="Let’s talk"
-        title="Building something that has to scale?"
-        intro="Tell us what you are working on. We will tell you honestly how we would approach it, and whether we are the right team for it."
+        eyebrow="Platform cost check"
+        title="What would owning your platform keep in your business?"
+        intro={`${BOOKINGS.costCheck.minutes} minutes with Nazar. Bring your last platform invoice and processing statement, and you leave with your number.`}
         bookings={["costCheck"]}
       />
     </article>

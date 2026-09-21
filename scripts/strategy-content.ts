@@ -83,6 +83,21 @@ const links = (
     items.map(([label, href]) => ({ label, href })),
   );
 
+/** Replace one exact phrase; throws if it's missing (the copy has drifted). */
+function replaceOnce(
+  text: unknown,
+  from: string,
+  to: string,
+  { optional = false } = {},
+) {
+  const value = String(text ?? "");
+  if (!value.includes(from)) {
+    if (optional) return value;
+    throw new Error(`Expected phrase not found: "${from}"`);
+  }
+  return value.replace(from, to);
+}
+
 /** Founder cards with a new role / bio per founder, keeping keys and refs. */
 const withRoles = (
   cards: unknown,
@@ -460,9 +475,25 @@ const PHASES: Record<number, Change[]> = {
     },
     {
       id: "foundersPage",
-      // The origin story and "What we believe" stay as they are until Nazar
-      // approves the fitness-and-wellness wording.
       set: (published) => ({
+        // Approved by Nazar on 2026-09-21: fitness AND wellness is the focus,
+        // so the "beyond fitness" signal on /what-we-build doesn't contradict it.
+        storyOriginBody: replaceOnce(
+          published.storyOriginBody,
+          "In 2026 we stopped taking everything else.",
+          "In 2026 we made fitness and wellness our focus.",
+        ),
+        believeItems: ((published.believeItems as Doc[] | undefined) ?? []).map(
+          (item) => ({
+            ...item,
+            body: replaceOnce(
+              item.body,
+              "We build for sport and fitness,",
+              "We build for fitness and wellness,",
+              { optional: true },
+            ),
+          }),
+        ),
         heroEyebrow: "Nazar & Oleh",
         heroHeading: "Nazar & Oleh.",
         heroAccent: "You’ll work with us directly.",
@@ -470,6 +501,17 @@ const PHASES: Record<number, Change[]> = {
           "Two founders, one small senior team, and a rule we don’t break: the people who sell you the work are the people who build it.",
         storyBody1:
           "We built the platform behind UN1T, a London-founded boutique fitness franchise, and moved it off a white-label platform onto its own app and back office across 10+ locations. We co-founded Jimmy Coach and built it from zero into a coaching platform that reached 100+ active coaches in its first month.",
+        storyStats: ((published.storyStats as Doc[] | undefined) ?? []).map(
+          (stat) => ({
+            ...stat,
+            label: replaceOnce(
+              stat.label,
+              "UN1T franchises worldwide,",
+              "UN1T locations,",
+              { optional: true },
+            ),
+          }),
+        ),
         founders: withRoles(published.founders, {
           founderNazar: {
             role: "Founder · product & business",

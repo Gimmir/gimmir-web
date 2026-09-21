@@ -24,6 +24,8 @@ export type CaseStudy = {
   seoDescription: string;
   services: string[];
   stats: CaseStat[];
+  /** The at-a-glance panel under the hero. */
+  facts: Array<[label: string, value: string]>;
   /** Founder who tells the story (schema.org Article author). */
   author: "founderNazar" | "founderOleh";
   /** First published on the site, ISO date. */
@@ -43,15 +45,15 @@ export const CASES: CaseStudy[] = [
     slug: "un1t",
     name: "UN1T",
     logo: "/design/un1t-logo.png",
-    tag: "Global franchise",
+    tag: "Boutique franchise",
     dark: true,
     variant: "custom",
     industry: "Boutique fitness franchise",
     summary:
-      "We moved a global fitness franchise off a white-label platform onto their own app and back office, with full control over every location.",
-    seoTitle: "UN1T Case Study: A 10+ Site Franchise on Its Own Platform",
+      "We moved a London-founded boutique fitness franchise off a white-label platform onto their own app, back office and payments, across 10+ locations.",
+    seoTitle: "UN1T Case Study: From White-Label to Their Own Gym App",
     seoDescription:
-      "How a global gym franchise moved off a white-label fitness platform onto its own custom app and back office: 10+ locations, about $10k a month kept in platform and payment fees.",
+      "How a London-founded boutique franchise moved off a white-label booking platform onto its own gym app and back office: 10+ locations, about $10k a month kept.",
     services: [
       "Member app: iOS & Android",
       "Back office & operations",
@@ -61,6 +63,13 @@ export const CASES: CaseStudy[] = [
     stats: [
       { value: 10, suffix: "+", label: "locations on one platform they own" },
       { text: "~$10K", lime: true, label: "kept every month in platform and payment fees" },
+    ],
+    facts: [
+      ["Client", "UN1T, a London-founded boutique fitness franchise"],
+      ["Locations", "10+, on one data model"],
+      ["Platforms", "iOS & Android member app, back office"],
+      ["Stack", "React Native (Expo), TypeScript, Supabase"],
+      ["Our role", "Full build and migration"],
     ],
     author: "founderNazar",
     publishedAt: "2026-07-14",
@@ -74,10 +83,10 @@ export const CASES: CaseStudy[] = [
     variant: "custom",
     industry: "Coaching platform",
     summary:
-      "A coaching platform we co-founded and built end to end, live and growing fast in its first month after launch.",
-    seoTitle: "Jimmy Coach Case Study: Online Coaching App",
+      "A coaching platform we co-founded and co-own with a working coach: two native apps and a web dashboard, live in the App Store and Google Play.",
+    seoTitle: "Jimmy Coach Case Study: Building an Online Coaching App",
     seoDescription:
-      "An online coaching app we co-founded and built end to end: programs, community, messaging and payments, with 100+ active coaches in the first month.",
+      "An online coaching app we co-founded and built end to end: two native apps and web with programs, community, messaging and Stripe. 100+ coaches in month one.",
     services: [
       "Two native apps: client & coach",
       "Web dashboard & Stripe billing",
@@ -87,6 +96,13 @@ export const CASES: CaseStudy[] = [
     stats: [
       { value: 100, suffix: "+", label: "active coaches" },
       { value: 300, suffix: "+", label: "first-month users" },
+    ],
+    facts: [
+      ["Product", "Jimmy Coach, a coaching platform"],
+      ["Co-founded with", "Quentin Randis, Hyrox & CrossFit coach (250+ clients)"],
+      ["Build", "Client app + coach app (native) + web dashboard"],
+      ["Stack", "React Native (Expo), Supabase, Next.js, Stripe"],
+      ["Our role", "Co-founders, co-owners and builders"],
     ],
     author: "founderOleh",
     publishedAt: "2026-07-14",

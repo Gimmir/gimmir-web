@@ -7,7 +7,7 @@ import { Mark } from "@/components/ui/mark";
 import { Marquee } from "@/components/ui/marquee";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CaseBackLink } from "@/components/work/parts";
+import { CaseBackLink, CaseQuote, QuickFacts } from "@/components/work/parts";
 import type { CaseStudy } from "@/lib/cases";
 
 const SCREENS = [
@@ -125,7 +125,7 @@ const TIMELINE = [
   {
     tag: "Launch",
     title: "App Store, then traction",
-    desc: "Live in the App Store, 300+ users in the first month, and a weekly release cadence ever since.",
+    desc: "Live in the App Store and Google Play, 300+ users in the first month, and a weekly release cadence ever since.",
   },
 ];
 
@@ -171,42 +171,25 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
 
           <Reveal eager delay={80}>
             <h1 className="display mt-9 text-[2.1rem] leading-[1.08] sm:text-hero sm:leading-[0.98]">
-              Clients don&rsquo;t just train.
-              <br />
-              <Mark>They belong.</Mark>
+              Jimmy Coach reached 100+ coaches{" "}
+              <Mark>in its first month.</Mark>
             </h1>
           </Reveal>
 
           <Reveal eager delay={120}>
-            <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
-              <p className="max-w-[54ch] text-lg leading-relaxed text-muted md:text-xl">
+            <div className="mt-8">
+              <p className="max-w-[60ch] text-lg leading-relaxed text-muted md:text-xl">
                 Jimmy is the retention platform for modern fitness coaches, the
                 &ldquo;Skool of Fitness.&rdquo; A whole platform: two native
                 mobile apps and a web dashboard, with programs, community,
                 messaging, payments and courses inside. We co-founded it and
                 built all of it, end to end.
               </p>
-              <dl className="grid shrink-0 grid-cols-2 gap-x-10 gap-y-6 sm:grid-cols-3 md:text-right">
-                <div>
-                  <dt className="font-mono text-xs uppercase tracking-widest text-muted">
-                    Industry
-                  </dt>
-                  <dd className="mt-2 font-semibold">Fitness platform</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-xs uppercase tracking-widest text-muted">
-                    Our role
-                  </dt>
-                  <dd className="mt-2 font-semibold">Co-founder</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-xs uppercase tracking-widest text-muted">
-                    Platform
-                  </dt>
-                  <dd className="mt-2 font-semibold">2 native apps · Web</dd>
-                </div>
-              </dl>
             </div>
+          </Reveal>
+
+          <Reveal eager delay={160}>
+            <QuickFacts facts={data.facts} className="mt-12" />
           </Reveal>
         </Container>
       </section>
@@ -292,6 +275,12 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
               </div>
             </Reveal>
           </div>
+
+          {data.quote ? (
+            <Reveal>
+              <CaseQuote quote={data.quote} className="mt-14" />
+            </Reveal>
+          ) : null}
         </Container>
       </section>
 
@@ -384,7 +373,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
             <SectionHeader
               index="04"
               titleMax="max-w-[22ch]"
-              title="From an empty repo to the App Store."
+              title="From an empty repo to the app stores."
               intro="Built the way we build for clients: senior team, honest scope, working software early and often."
             />
           </Reveal>
@@ -440,7 +429,8 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                 ))}
               </div>
               <p className="mt-10 border-t border-ink/15 pt-6 text-ink/70">
-                Live in the App Store, growing week over week, and still built
+                Live in the App Store and Google Play, growing week over week,
+                and still built
                 and run by the same team you would be working with.
               </p>
             </div>
@@ -451,7 +441,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
       <FinalCtaPanel
         eyebrow="Let’s talk"
         title="Have an idea worth building right?"
-        intro="Tell us what you are working on. We will tell you honestly how we would approach it, and whether we are the right team for it."
+        intro="Tell us what you’re building. Nazar and Oleh will tell you honestly how we’d approach it, and whether we’re the right team."
       />
     </article>
   );
