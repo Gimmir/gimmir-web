@@ -10,9 +10,9 @@ import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
 
-const WORK_TITLE = "Fitness Software Case Studies — UN1T & Jimmy Coach";
+const WORK_TITLE = "Fitness Software Case Studies: UN1T & Jimmy Coach";
 const WORK_DESCRIPTION =
-  "Fitness software development case studies — the UN1T franchise platform and the Jimmy Coach coaching app, built and still run in production.";
+  "Fitness software development case studies: the UN1T franchise platform and the Jimmy Coach coaching app, built and still run in production.";
 
 export const metadata: Metadata = {
   title: WORK_TITLE,
@@ -46,7 +46,7 @@ export default function WorkPage() {
           <Reveal eager delay={140}>
             <p className="mt-10 max-w-[52ch] text-lg leading-relaxed text-muted md:text-xl">
               We do not show mockups. These are platforms we built and still run in
-              production, live and still scaling — with the numbers behind
+              production, live and still scaling, with the numbers behind
               them.
             </p>
           </Reveal>
@@ -62,7 +62,7 @@ export default function WorkPage() {
       <FinalCtaPanel
         eyebrow="Let’s talk"
         title="Let’s look at what you are building."
-        intro="Tell us what you are working on. We will tell you honestly how we would approach it — and whether we are the right team for it."
+        intro="Tell us what you are working on. We will tell you honestly how we would approach it, and whether we are the right team for it."
         buttonLabel="Book a founder review call"
       />
     </>

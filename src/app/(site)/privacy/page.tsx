@@ -5,7 +5,7 @@ import { Pill } from "@/components/ui/pill";
 import { socialMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
-  "How Gimmir collects, uses and protects your data — analytics, booking, and contact information.";
+  "How Gimmir collects, uses and protects your data: analytics, booking, and contact information.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
               Booking details.
             </strong>{" "}
             When you book a review call, the booking runs on Cal.com. We
-            receive the details you submit there — typically your name, email,
+            receive the details you submit there, typically your name, email,
             and anything you add to the booking notes.
           </p>
           <p>
@@ -118,7 +118,7 @@ export default function PrivacyPage() {
             Depending on where you live (including under the GDPR and UK
             GDPR), you may have the right to access, correct, delete, or
             receive a copy of your personal data, and to object to or restrict
-            its processing. To exercise any of these rights, email us — we will
+            its processing. To exercise any of these rights, email us and we will
             respond promptly.
           </p>
         </Section>
@@ -127,7 +127,7 @@ export default function PrivacyPage() {
           <p>
             The site itself does not set marketing cookies. Google Analytics
             and Microsoft Clarity may set cookies to distinguish visitors and
-            sessions — they load only after you accept them in the cookie
+            sessions. They load only after you accept them in the cookie
             banner. You can change your choice at any time via the
             &ldquo;Cookie settings&rdquo; link in the footer, or block cookies
             in your browser without losing access to any part of the site.

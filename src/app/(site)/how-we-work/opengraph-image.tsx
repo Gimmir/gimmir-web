@@ -1,6 +1,6 @@
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og-card";
 
-export const alt = "How we work — a dedicated fitness software team";
+export const alt = "How we work: fixed-scope fitness product builds";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

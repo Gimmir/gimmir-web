@@ -11,12 +11,12 @@ import { CaseBackLink } from "@/components/work/parts";
 import type { CaseStudy } from "@/lib/cases";
 
 const SCREENS = [
-  { src: "/screens-all/frame-1.jpg", alt: "Jimmy Coach — the member home screen with today’s workout, steps and weight progress" },
-  { src: "/screens-all/frame-5.jpg", alt: "Jimmy Coach — a personal program with weekly progress and upcoming workouts" },
-  { src: "/screens-all/frame-2.jpg", alt: "Jimmy Coach — a workout broken into warm-up, power, strength and conditioning blocks" },
-  { src: "/screens-all/frame-3.jpg", alt: "Jimmy Coach — logging reps, weights and coach’s notes during a live session" },
-  { src: "/screens-all/frame-4.jpg", alt: "Jimmy Coach — direct chats between a client and their coach" },
-  { src: "/screens-all/frame-6.jpg", alt: "Jimmy Coach — progress tracking for steps and body weight over time" },
+  { src: "/screens-all/frame-1.jpg", alt: "Jimmy Coach: the member home screen with today’s workout, steps and weight progress" },
+  { src: "/screens-all/frame-5.jpg", alt: "Jimmy Coach: a personal program with weekly progress and upcoming workouts" },
+  { src: "/screens-all/frame-2.jpg", alt: "Jimmy Coach: a workout broken into warm-up, power, strength and conditioning blocks" },
+  { src: "/screens-all/frame-3.jpg", alt: "Jimmy Coach: logging reps, weights and coach’s notes during a live session" },
+  { src: "/screens-all/frame-4.jpg", alt: "Jimmy Coach: direct chats between a client and their coach" },
+  { src: "/screens-all/frame-6.jpg", alt: "Jimmy Coach: progress tracking for steps and body weight over time" },
 ];
 
 /* --- tiny stroke glyphs, matching the site's illustration language --------- */
@@ -55,13 +55,13 @@ const SURFACES = [
     glyph: <GlyphPhone />,
     tag: "Native app · iOS & Android",
     title: "The client app",
-    desc: "Where members train, every day. Today’s workout in clear blocks with timers and video form cues, chat with the coach, the community feed, streaks and PR history — under the coach’s own brand, their logo and colors on the home screen.",
+    desc: "Where members train, every day. Today’s workout in clear blocks with timers and video form cues, chat with the coach, the community feed, streaks and PR history, under the coach’s own brand, their logo and colors on the home screen.",
   },
   {
     glyph: <GlyphCoach />,
     tag: "Native app · iOS & Android",
     title: "The coach app",
-    desc: "The business in a pocket. Coaches program workouts, answer clients, drop announcements to the community and watch payments come in — between sessions, from the gym floor, not from a laptop.",
+    desc: "The business in a pocket. Coaches program workouts, answer clients, drop announcements to the community and watch payments come in, between sessions, from the gym floor, not from a laptop.",
   },
   {
     glyph: <GlyphDashboard />,
@@ -74,7 +74,7 @@ const SURFACES = [
 const CAPABILITIES = [
   {
     title: "Workout builder",
-    desc: "EMOM, AMRAP, circuits and strength — structured blocks with video form cues, written the way the best coaches actually program.",
+    desc: "EMOM, AMRAP, circuits and strength: structured blocks with video form cues, written the way the best coaches actually program.",
   },
   {
     title: "Community feed",
@@ -82,7 +82,7 @@ const CAPABILITIES = [
   },
   {
     title: "Messaging",
-    desc: "1:1 and group chat with voice notes, photos and video — so coaching stops living in WhatsApp.",
+    desc: "1:1 and group chat with voice notes, photos and video, so coaching stops living in WhatsApp.",
   },
   {
     title: "Payments & subscriptions",
@@ -90,11 +90,11 @@ const CAPABILITIES = [
   },
   {
     title: "Courses",
-    desc: "Modules, lessons and full programs packaged next to the training — knowledge the coach sells, not just sessions.",
+    desc: "Modules, lessons and full programs packaged next to the training: knowledge the coach sells, not just sessions.",
   },
   {
     title: "Progress & PRs",
-    desc: "Lifts, benchmarks, streaks and graphs — clients see themselves getting better, which is why they stay.",
+    desc: "Lifts, benchmarks, streaks and graphs. Clients see themselves getting better, which is why they stay.",
   },
   {
     title: "Video exercise library",
@@ -102,7 +102,7 @@ const CAPABILITIES = [
   },
   {
     title: "Their own branded app",
-    desc: "Each coach’s logo and colors — their app on the client’s home screen, not another account in someone else’s tool.",
+    desc: "Each coach’s logo and colors: their app on the client’s home screen, not another account in someone else’s tool.",
   },
 ];
 
@@ -110,12 +110,12 @@ const TIMELINE = [
   {
     tag: "Day 0",
     title: "An empty repository",
-    desc: "Co-founded with a coach. No code, no designs — a bet that independent coaches deserve better than PDFs and spreadsheets.",
+    desc: "Co-founded with a coach. No code, no designs. Just a bet that independent coaches deserve better than PDFs and spreadsheets.",
   },
   {
     tag: "Product",
     title: "Design system & platform",
-    desc: "One design language, one API, one data model — built once, powering every surface.",
+    desc: "One design language, one API, one data model, built once, powering every surface.",
   },
   {
     tag: "Build",
@@ -125,7 +125,7 @@ const TIMELINE = [
   {
     tag: "Launch",
     title: "App Store, then traction",
-    desc: "Live in the App Store, 300+ users in the first month — and a weekly release cadence ever since.",
+    desc: "Live in the App Store, 300+ users in the first month, and a weekly release cadence ever since.",
   },
 ];
 
@@ -133,7 +133,7 @@ const RESULTS = [
   { value: 100, suffix: "+", label: "active coaches on the platform" },
   { value: 300, suffix: "+", label: "users in the first month after launch" },
   { value: 500, suffix: "+", label: "expert workouts, ready on tap" },
-  { value: 2, suffix: "", label: "native apps — client and coach — plus web" },
+  { value: 2, suffix: "", label: "native apps (client and coach) plus web" },
 ];
 
 export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
@@ -180,7 +180,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
           <Reveal eager delay={120}>
             <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
               <p className="max-w-[54ch] text-lg leading-relaxed text-muted md:text-xl">
-                Jimmy is the retention platform for modern fitness coaches — the
+                Jimmy is the retention platform for modern fitness coaches, the
                 &ldquo;Skool of Fitness.&rdquo; A whole platform: two native
                 mobile apps and a web dashboard, with programs, community,
                 messaging, payments and courses inside. We co-founded it and
@@ -268,7 +268,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
               <div className="space-y-6 text-lg leading-relaxed text-muted md:text-xl">
                 <p>
                   Most coaches run their business across WhatsApp, spreadsheets
-                  and PDFs — and lose clients in the gaps. Jimmy pulls it into{" "}
+                  and PDFs, and lose clients in the gaps. Jimmy pulls it into{" "}
                   <strong className="font-semibold text-ink">
                     one branded app
                   </strong>{" "}
@@ -279,15 +279,15 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                   Jimmy was co-founded with{" "}
                   <strong className="font-semibold text-ink">
                     a working coach
-                  </strong>{" "}
-                  — Quentin Randis, who has coached 250+ clients in Hyrox,
+                  </strong>
+                  , Quentin Randis, who has coached 250+ clients in Hyrox,
                   CrossFit and functional fitness. He brought the coaching
                   judgment; we brought everything else:{" "}
                   <strong className="font-semibold text-ink">
                     product, design and engineering, from an empty repository to
                     the App Store
                   </strong>
-                  . Not billed by the hour — built as owners.
+                  . Not billed by the hour, built as owners.
                 </p>
               </div>
             </Reveal>
@@ -311,7 +311,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                   </span>
                 </>
               }
-              intro="Not a website with a mobile view. Two native apps and a web dashboard on one shared platform — each surface built for how it is actually used."
+              intro="Not a website with a mobile view. Two native apps and a web dashboard on one shared platform, each surface built for how it is actually used."
             />
           </Reveal>
 
@@ -336,7 +336,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
 
           <Reveal>
             <p className="mt-10 max-w-[62ch] text-lg leading-relaxed text-[#8b887e]">
-              One design system, one API, one data model underneath — which is
+              One design system, one API, one data model underneath, which is
               how a small team ships{" "}
               <strong className="font-semibold text-paper">
                 a new feature every week
@@ -407,9 +407,9 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
 
           <Reveal>
             <p className="mt-10 max-w-[62ch] text-lg leading-relaxed text-muted">
-              Because we run Jimmy as owners, every hard problem — App Store
+              Because we run Jimmy as owners, every hard problem (App Store
               review, Stripe billing edge cases, chat at scale, keeping two
-              native apps in lockstep — is a problem{" "}
+              native apps in lockstep) is a problem{" "}
               <strong className="font-semibold text-ink">
                 we have already solved for ourselves
               </strong>{" "}
@@ -440,7 +440,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                 ))}
               </div>
               <p className="mt-10 border-t border-ink/15 pt-6 text-ink/70">
-                Live in the App Store, growing week over week — and still built
+                Live in the App Store, growing week over week, and still built
                 and run by the same team you would be working with.
               </p>
             </div>
@@ -451,7 +451,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
       <FinalCtaPanel
         eyebrow="Let’s talk"
         title="Have an idea worth building right?"
-        intro="Tell us what you are working on. We will tell you honestly how we would approach it — and whether we are the right team for it."
+        intro="Tell us what you are working on. We will tell you honestly how we would approach it, and whether we are the right team for it."
         buttonLabel="Book a founder review call"
       />
     </article>

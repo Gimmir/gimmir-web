@@ -128,7 +128,7 @@ export function caseStudyWork(data: CaseStudy) {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "@id": `${SITE_URL}/work/${data.slug}#case-study`,
-    name: `${data.name} — Case study`,
+    name: `${data.name}: Case study`,
     url: `${SITE_URL}/work/${data.slug}`,
     about: data.industry,
     abstract: data.summary,

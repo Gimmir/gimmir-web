@@ -16,9 +16,9 @@ export default async function Image({
   const data = getCaseBySlug(slug);
   if (!data) notFound();
 
-  // "UN1T Case Study — Own Gym App Instead of White-Label" → the part after
-  // the dash becomes the lime line.
-  const angle = data.seoTitle.split("—")[1]?.trim().toLowerCase() ?? data.tag;
+  // "UN1T Case Study: A 10+ Site Franchise on Its Own Platform" → the part
+  // after the colon becomes the lime line.
+  const angle = data.seoTitle.split(":")[1]?.trim().toLowerCase() ?? data.tag;
 
   return ogCard({
     line1: data.name,

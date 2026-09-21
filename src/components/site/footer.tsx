@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Logomark } from "@/components/ui/logomark";
 import { CookieSettingsLink } from "@/components/consent/cookie-settings-link";
+import { FooterCta } from "@/components/site/footer-cta";
 import type {
   NAVIGATION_QUERY_RESULT,
   SETTINGS_QUERY_RESULT,
@@ -36,9 +36,9 @@ export function Footer({
             <p className="mt-5 max-w-sm text-lg leading-relaxed text-muted">
               {nav?.footerTagline}
             </p>
-            <Button cal arrow className="mt-8">
-              {nav?.footerCtaLabel ?? "Book a founder review call"}
-            </Button>
+            <FooterCta
+              label={nav?.footerCtaLabel ?? "Book a founder review call"}
+            />
           </div>
 
           {/* nav + contact */}

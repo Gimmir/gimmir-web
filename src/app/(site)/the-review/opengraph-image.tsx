@@ -1,6 +1,6 @@
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og-card";
 
-export const alt = "The Review — technical due diligence for fitness products";
+export const alt = "The Review: technical due diligence for fitness products";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

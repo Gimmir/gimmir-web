@@ -42,12 +42,12 @@ export const CASES: CaseStudy[] = [
     variant: "custom",
     industry: "Boutique fitness franchise",
     summary:
-      "We moved a global fitness franchise off a white-label platform onto their own app and back office — full control over every location.",
-    seoTitle: "UN1T Case Study — A 10+ Site Franchise on Its Own Platform",
+      "We moved a global fitness franchise off a white-label platform onto their own app and back office, with full control over every location.",
+    seoTitle: "UN1T Case Study: A 10+ Site Franchise on Its Own Platform",
     seoDescription:
-      "How a global gym franchise moved off a white-label fitness platform onto its own custom app and back office — 10+ locations, about $10k a month kept in platform and payment fees.",
+      "How a global gym franchise moved off a white-label fitness platform onto its own custom app and back office: 10+ locations, about $10k a month kept in platform and payment fees.",
     services: [
-      "Member app — iOS & Android",
+      "Member app: iOS & Android",
       "Back office & operations",
       "Payments, fees & payouts",
       "Multi-location data model",
@@ -66,12 +66,12 @@ export const CASES: CaseStudy[] = [
     variant: "custom",
     industry: "Coaching platform",
     summary:
-      "A coaching platform we co-founded and built end to end — live and growing fast in its first month after launch.",
-    seoTitle: "Jimmy Coach Case Study — Online Coaching App",
+      "A coaching platform we co-founded and built end to end, live and growing fast in its first month after launch.",
+    seoTitle: "Jimmy Coach Case Study: Online Coaching App",
     seoDescription:
-      "An online coaching app we co-founded and built end to end — programs, community, messaging and payments, with 100+ active coaches in the first month.",
+      "An online coaching app we co-founded and built end to end: programs, community, messaging and payments, with 100+ active coaches in the first month.",
     services: [
-      "Two native apps — client & coach",
+      "Two native apps: client & coach",
       "Web dashboard & Stripe billing",
       "Community, courses & messaging",
       "Built from zero to launch",

@@ -11,7 +11,7 @@ const FITS = [
 ];
 
 const NOT_FITS = [
-  "You have fewer than 8 sites — the payback is usually too long, and we will tell you so.",
+  "You have fewer than 8 sites. The payback is usually too long, and we will tell you so.",
   "Your current platform does everything you need at a price you're happy with.",
   "You need it live in six weeks.",
 ];

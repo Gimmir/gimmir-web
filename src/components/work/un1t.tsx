@@ -107,7 +107,7 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
                     white-label platform
                   </strong>
                   . As the franchise grew across locations, that meant renting
-                  software they could not fully control — and about $10k a
+                  software they could not fully control, and about $10k a
                   month leaving the business in platform and payment fees.
                 </p>
               </div>
@@ -124,7 +124,7 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
               index="02"
               titleMax="max-w-[22ch]"
               title="Their own app and back office, end to end."
-              intro="We replaced the rented stack with a platform they own — one system across every location."
+              intro="We replaced the rented stack with a platform they own: one system across every location."
             />
           </Reveal>
 
@@ -197,7 +197,7 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
       <FinalCtaPanel
         eyebrow="Let’s talk"
         title="Building something that has to scale?"
-        intro="Tell us what you are working on. We will tell you honestly how we would approach it — and whether we are the right team for it."
+        intro="Tell us what you are working on. We will tell you honestly how we would approach it, and whether we are the right team for it."
         buttonLabel="Book a founder review call"
       />
     </article>

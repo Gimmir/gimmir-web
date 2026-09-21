@@ -1,6 +1,6 @@
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og-card";
 
-export const alt = "Fitness software case studies — UN1T & Jimmy Coach";
+export const alt = "Fitness software case studies: UN1T & Jimmy Coach";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

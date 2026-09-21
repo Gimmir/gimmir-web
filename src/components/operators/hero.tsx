@@ -25,8 +25,8 @@ export function Hero() {
             <p className="max-w-[46ch] text-lg leading-relaxed text-muted md:text-xl">
               At eight sites and up, you pay for your booking platform three
               times: a licence per location, a margin on every card payment,
-              and a roadmap you don&apos;t control. We moved UN1T — a fitness
-              franchise with 10+ locations — onto an app and back office they
+              and a roadmap you don&apos;t control. We moved UN1T, a fitness
+              franchise with 10+ locations, onto an app and back office they
               own. About $10k a month stayed in the business.
             </p>
             <div className="flex shrink-0 flex-col gap-3.5">
@@ -41,7 +41,7 @@ export function Hero() {
               </div>
               <p className="text-sm text-faint">
                 20 minutes with the founders. Bring your last platform
-                invoice — you leave with your number.
+                invoice and you leave with your number.
               </p>
             </div>
           </div>

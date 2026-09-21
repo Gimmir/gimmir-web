@@ -35,13 +35,13 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Gimmir — Product engineering for sport & fitness",
+    default: "Gimmir: Product engineering for sport & fitness",
     template: "%s · Gimmir",
   },
   description:
     "Gimmir builds the apps and platforms behind scaling sport and fitness brands. Start with a free review call with the founders behind UN1T and Jimmy Coach.",
   ...socialMetadata({
-    title: "Gimmir — Fitness app & software development company",
+    title: "Gimmir: Fitness app & software development company",
     description:
       "Gimmir builds the apps and platforms behind scaling sport and fitness brands.",
     path: "/",

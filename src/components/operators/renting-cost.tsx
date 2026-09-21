@@ -39,7 +39,7 @@ export function RentingCost() {
         <Reveal delay={120}>
           <p className="mt-10 max-w-[62ch] text-lg leading-relaxed text-muted">
             Most founders have never seen the twelve-month total. Add up the
-            last twelve invoices and the processing statements — that is the
+            last twelve invoices and the processing statements. That is the
             number we start from.
           </p>
         </Reveal>
