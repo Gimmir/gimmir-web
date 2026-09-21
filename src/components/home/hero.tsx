@@ -32,6 +32,8 @@ export function Hero({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
                 {data.heroAccent ? (
                   <>
                     {" "}
+                    {/* the highlighted promise always gets its own line in the split */}
+                    <br className="hidden xl:block" />
                     <Mark>{data.heroAccent}</Mark>
                   </>
                 ) : null}

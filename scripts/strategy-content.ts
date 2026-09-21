@@ -415,7 +415,8 @@ const PHASES: Record<number, Change[]> = {
       id: "howWeWorkPage",
       set: {
         heroEyebrow: "How we work",
-        heroHeading: "How we work, and how we de-risk",
+        // U+2011 keeps "de‑risk" from breaking at the hyphen.
+        heroHeading: "How we work, and how we de‑risk",
         heroAccent: "working with two founders.",
         heroSubhead:
           "Fixed prices. Your ownership. Straight answers about what happens if one of us is unavailable.",
