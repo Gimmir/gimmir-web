@@ -247,9 +247,9 @@ const PHASES: Record<number, Change[]> = {
           "navItem",
           [
             ["Work", "/work"],
-            ["For operators", "/operators"],
-            ["For product founders", "/the-review"],
-            ["What we build", "/what-we-build"],
+            ["For Operators", "/operators"],
+            ["For Product Founders", "/the-review"],
+            ["What We Build", "/what-we-build"],
             ["Pricing", "/pricing"],
             ["Nazar & Oleh", "/founders"],
           ].map(([label, anchor]) => ({ label, anchor })),
