@@ -288,8 +288,10 @@ export type ReviewPage = {
   fitChecks?: Array<string>;
   fitNotLabel?: string;
   fitNotBody?: string;
+  fitNotItems?: Array<string>;
   proofHeading?: string;
   proofAccent?: string;
+  proofBody?: string;
   faqHeading?: string;
   faqAccent?: string;
   faqItems?: Array<
@@ -381,6 +383,17 @@ export type Navigation = {
   headerCtaLabel?: string;
   footerTagline?: string;
   footerCtaLabel?: string;
+  footerColumns?: Array<{
+    title?: string;
+    links?: Array<{
+      label?: string;
+      href?: string;
+      _type: "footerColumnLink";
+      _key: string;
+    }>;
+    _type: "footerColumn";
+    _key: string;
+  }>;
   footerLinks?: Array<{
     label?: string;
     href?: string;
@@ -647,13 +660,12 @@ export type AllSanitySchemaTypes =
 
 // Source: src/sanity/lib/queries.ts
 // Variable: SETTINGS_QUERY
-// Query: *[_type == "siteSettings"][0]{    siteName,    description,    contactEmail,    finalCtaCaption,    finalCtaHelper,    flowSteps[]{ _key, tag, title, description },    seo  }
+// Query: *[_type == "siteSettings"][0]{    siteName,    description,    contactEmail,    finalCtaCaption,    flowSteps[]{ _key, tag, title, description },    seo  }
 export type SETTINGS_QUERY_RESULT = {
   siteName: string | null;
   description: string | null;
   contactEmail: string | null;
   finalCtaCaption: string | null;
-  finalCtaHelper: string | null;
   flowSteps: Array<{
     _key: string;
     tag: string | null;
@@ -665,7 +677,7 @@ export type SETTINGS_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: NAVIGATION_QUERY
-// Query: *[_type == "navigation"][0]{    headerLinks[]{ _key, label, anchor },    headerCtaLabel,    footerTagline,    footerCtaLabel,    footerLinks[]{ _key, label, href },    footerNote  }
+// Query: *[_type == "navigation"][0]{    headerLinks[]{ _key, label, anchor },    headerCtaLabel,    footerTagline,    footerCtaLabel,    footerColumns[]{ _key, title, links[]{ _key, label, href } },    footerNote  }
 export type NAVIGATION_QUERY_RESULT = {
   headerLinks: Array<{
     _key: string;
@@ -675,10 +687,14 @@ export type NAVIGATION_QUERY_RESULT = {
   headerCtaLabel: string | null;
   footerTagline: string | null;
   footerCtaLabel: string | null;
-  footerLinks: Array<{
+  footerColumns: Array<{
     _key: string;
-    label: string | null;
-    href: string | null;
+    title: string | null;
+    links: Array<{
+      _key: string;
+      label: string | null;
+      href: string | null;
+    }> | null;
   }> | null;
   footerNote: string | null;
 } | null;
@@ -784,14 +800,12 @@ export type HOME_SEO_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: REVIEW_QUERY
-// Query: *[_type == "reviewPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,    problemHeading, problemAccent, problemBody, problemCallout,    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,    foundersHeading, foundersAccent, foundersFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    processHeading, processAccent,    pricingEyebrow, pricingPrice, pricingPriceSuffix, pricingLead, pricingNote, pricingButtonLabel, pricingIncludedLabel, pricingIncluded,    fitHeading, fitChecks, fitNotLabel, fitNotBody,    proofHeading, proofAccent,    faqHeading, faqAccent, faqItems[]{ _key, question, answer },    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel  }
+// Query: *[_type == "reviewPage"][0]{    heroEyebrow, heroHeading, heroAccent, heroSubhead, marquee,    problemHeading, problemAccent, problemBody, problemCallout,    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,    foundersHeading, foundersAccent, foundersFootnote,    founders[]{      _key, role, bio,      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }    },    processHeading, processAccent,    pricingEyebrow, pricingLead, pricingNote, pricingIncludedLabel, pricingIncluded,    fitHeading, fitChecks, fitNotItems,    proofHeading, proofAccent, proofBody,    faqHeading, faqAccent, faqItems[]{ _key, question, answer },    finalCtaEyebrow, finalCtaHeading, finalCtaIntro  }
 export type REVIEW_QUERY_RESULT = {
   heroEyebrow: string | null;
   heroHeading: string | null;
   heroAccent: string | null;
   heroSubhead: string | null;
-  heroCtaLabel: string | null;
-  heroCtaHelper: string | null;
   marquee: Array<string> | null;
   problemHeading: string | null;
   problemAccent: string | null;
@@ -837,19 +851,16 @@ export type REVIEW_QUERY_RESULT = {
   processHeading: string | null;
   processAccent: string | null;
   pricingEyebrow: string | null;
-  pricingPrice: string | null;
-  pricingPriceSuffix: string | null;
   pricingLead: string | null;
   pricingNote: string | null;
-  pricingButtonLabel: string | null;
   pricingIncludedLabel: string | null;
   pricingIncluded: Array<string> | null;
   fitHeading: string | null;
   fitChecks: Array<string> | null;
-  fitNotLabel: string | null;
-  fitNotBody: string | null;
+  fitNotItems: Array<string> | null;
   proofHeading: string | null;
   proofAccent: string | null;
+  proofBody: string | null;
   faqHeading: string | null;
   faqAccent: string | null;
   faqItems: Array<{
@@ -860,7 +871,6 @@ export type REVIEW_QUERY_RESULT = {
   finalCtaEyebrow: string | null;
   finalCtaHeading: string | null;
   finalCtaIntro: string | null;
-  finalCtaButtonLabel: string | null;
 } | null;
 
 // Source: src/sanity/lib/queries.ts
@@ -1000,12 +1010,12 @@ export type REDIRECTS_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '\n  *[_type == "siteSettings"][0]{\n    siteName,\n    description,\n    contactEmail,\n    finalCtaCaption,\n    finalCtaHelper,\n    flowSteps[]{ _key, tag, title, description },\n    seo\n  }\n': SETTINGS_QUERY_RESULT;
-    '\n  *[_type == "navigation"][0]{\n    headerLinks[]{ _key, label, anchor },\n    headerCtaLabel,\n    footerTagline,\n    footerCtaLabel,\n    footerLinks[]{ _key, label, href },\n    footerNote\n  }\n': NAVIGATION_QUERY_RESULT;
+    '\n  *[_type == "siteSettings"][0]{\n    siteName,\n    description,\n    contactEmail,\n    finalCtaCaption,\n    flowSteps[]{ _key, tag, title, description },\n    seo\n  }\n': SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "navigation"][0]{\n    headerLinks[]{ _key, label, anchor },\n    headerCtaLabel,\n    footerTagline,\n    footerCtaLabel,\n    footerColumns[]{ _key, title, links[]{ _key, label, href } },\n    footerNote\n  }\n': NAVIGATION_QUERY_RESULT;
     '\n  *[_type == "founder"] | order(order asc){\n    _id,\n    name,\n    linkedinUrl,\n    photo{\n      ...,\n      "lqip": asset->metadata.lqip,\n      "aspectRatio": asset->metadata.dimensions.aspectRatio\n    }\n  }\n': FOUNDERS_QUERY_RESULT;
     '\n  *[_type == "homePage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead,\n    heroPrimaryCtaLabel, heroPrimaryCtaLabelShort, heroSecondaryCtaLabel, heroSecondaryCtaHref,\n    marquee,\n    proofHeading, proofLinkLabel, proofLinkHref,\n    whoHeading, whoAccent, whoIntro, whoRows[]{ _key, title, body },\n    servicesHeading, servicesAccent, servicesItems[]{ _key, title, body }, servicesFootnote,\n    foundersHeading, foundersAccent, foundersIntro, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    trustHeading, trustAccent, trustCards[]{ _key, title, body },\n    reviewCtaHeading, reviewCtaAccent, reviewCtaIntro, reviewCtaButtonLabel,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': HOME_QUERY_RESULT;
     '\n  *[_type == "homePage"][0]{ seo }\n': HOME_SEO_QUERY_RESULT;
-    '\n  *[_type == "reviewPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,\n    problemHeading, problemAccent, problemBody, problemCallout,\n    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,\n    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,\n    foundersHeading, foundersAccent, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    processHeading, processAccent,\n    pricingEyebrow, pricingPrice, pricingPriceSuffix, pricingLead, pricingNote, pricingButtonLabel, pricingIncludedLabel, pricingIncluded,\n    fitHeading, fitChecks, fitNotLabel, fitNotBody,\n    proofHeading, proofAccent,\n    faqHeading, faqAccent, faqItems[]{ _key, question, answer },\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': REVIEW_QUERY_RESULT;
+    '\n  *[_type == "reviewPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, marquee,\n    problemHeading, problemAccent, problemBody, problemCallout,\n    whatHeading, whatAccent, whatIntro, focusLabel, focusItems,\n    deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,\n    foundersHeading, foundersAccent, foundersFootnote,\n    founders[]{\n      _key, role, bio,\n      founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }\n    },\n    processHeading, processAccent,\n    pricingEyebrow, pricingLead, pricingNote, pricingIncludedLabel, pricingIncluded,\n    fitHeading, fitChecks, fitNotItems,\n    proofHeading, proofAccent, proofBody,\n    faqHeading, faqAccent, faqItems[]{ _key, question, answer },\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro\n  }\n': REVIEW_QUERY_RESULT;
     '\n  *[_type == "reviewPage"][0]{ seo }\n': REVIEW_SEO_QUERY_RESULT;
     '\n  *[_type == "howWeWorkPage"][0]{\n    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,\n    fearsHeading, fearsAccent, fearsAnswerLabel, fears[]{ _key, fear, answer },\n    runsHeading, runsAccent, runsSteps[]{ _key, title, body },\n    principlesHeading, principlesAccent, principlesItems,\n    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel\n  }\n': HOW_WE_WORK_QUERY_RESULT;
     '\n  *[_type == "howWeWorkPage"][0]{ seo }\n': HOW_WE_WORK_SEO_QUERY_RESULT;

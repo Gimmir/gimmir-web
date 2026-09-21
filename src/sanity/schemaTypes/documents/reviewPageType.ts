@@ -23,6 +23,8 @@ export const reviewPageType = defineType({
     { name: "faq", title: "FAQ", options: { collapsible: true, collapsed: true } },
     { name: "finalCta", title: "Final CTA", options: { collapsible: true, collapsed: true } },
   ],
+  // Hidden fields are retired: signed CTA labels, call lengths and prices now
+  // live in code (lib/booking.ts, lib/offers.ts) so they can't drift.
   fields: [
     defineField({ name: "title", title: "Internal title", type: "string", group: "content", initialValue: "The Review", validation: (r) => r.required() }),
 
@@ -31,8 +33,8 @@ export const reviewPageType = defineType({
     defineField({ name: "heroHeading", title: "Heading", type: "string", group: "content", fieldset: "hero", validation: (r) => r.required() }),
     defineField({ name: "heroAccent", title: "Heading accent", type: "string", group: "content", fieldset: "hero" }),
     defineField({ name: "heroSubhead", title: "Subhead", type: "text", rows: 3, group: "content", fieldset: "hero" }),
-    defineField({ name: "heroCtaLabel", title: "CTA label", type: "string", group: "content", fieldset: "hero" }),
-    defineField({ name: "heroCtaHelper", title: "CTA helper", type: "string", group: "content", fieldset: "hero" }),
+    defineField({ name: "heroCtaLabel", hidden: true, title: "CTA label", type: "string", group: "content", fieldset: "hero" }),
+    defineField({ name: "heroCtaHelper", hidden: true, title: "CTA helper", type: "string", group: "content", fieldset: "hero" }),
     defineField({ name: "marquee", title: "Marquee items", type: "array", of: [defineArrayMember({ type: "string" })], group: "content", fieldset: "hero" }),
 
     // Problem
@@ -67,23 +69,25 @@ export const reviewPageType = defineType({
 
     // Pricing
     defineField({ name: "pricingEyebrow", title: "Eyebrow", type: "string", group: "content", fieldset: "pricing" }),
-    defineField({ name: "pricingPrice", title: "Price", type: "string", group: "content", fieldset: "pricing" }),
-    defineField({ name: "pricingPriceSuffix", title: "Price suffix", type: "string", group: "content", fieldset: "pricing" }),
+    defineField({ name: "pricingPrice", hidden: true, title: "Price", type: "string", group: "content", fieldset: "pricing" }),
+    defineField({ name: "pricingPriceSuffix", hidden: true, title: "Price suffix", type: "string", group: "content", fieldset: "pricing" }),
     defineField({ name: "pricingLead", title: "Lead paragraph", type: "text", rows: 2, group: "content", fieldset: "pricing" }),
     defineField({ name: "pricingNote", title: "Note paragraph", type: "text", rows: 3, group: "content", fieldset: "pricing" }),
-    defineField({ name: "pricingButtonLabel", title: "Button label", type: "string", group: "content", fieldset: "pricing" }),
+    defineField({ name: "pricingButtonLabel", hidden: true, title: "Button label", type: "string", group: "content", fieldset: "pricing" }),
     defineField({ name: "pricingIncludedLabel", title: "Included label", type: "string", group: "content", fieldset: "pricing" }),
     defineField({ name: "pricingIncluded", title: "Included items", type: "array", of: [defineArrayMember({ type: "string" })], group: "content", fieldset: "pricing" }),
 
     // Fit
     defineField({ name: "fitHeading", title: "Heading", type: "string", group: "content", fieldset: "fit" }),
     defineField({ name: "fitChecks", title: "Fit checks", type: "array", of: [defineArrayMember({ type: "string" })], group: "content", fieldset: "fit" }),
-    defineField({ name: "fitNotLabel", title: "Not-a-fit label", type: "string", group: "content", fieldset: "fit" }),
-    defineField({ name: "fitNotBody", title: "Not-a-fit body", type: "text", rows: 3, group: "content", fieldset: "fit" }),
+    defineField({ name: "fitNotLabel", hidden: true, title: "Not-a-fit label", type: "string", group: "content", fieldset: "fit" }),
+    defineField({ name: "fitNotBody", hidden: true, title: "Not-a-fit body", type: "text", rows: 3, group: "content", fieldset: "fit" }),
+    defineField({ name: "fitNotItems", title: "Not-a-fit items", type: "array", of: [defineArrayMember({ type: "string" })], group: "content", fieldset: "fit" }),
 
     // Proof
     defineField({ name: "proofHeading", title: "Heading", type: "string", group: "content", fieldset: "proof" }),
     defineField({ name: "proofAccent", title: "Heading accent", type: "string", group: "content", fieldset: "proof" }),
+    defineField({ name: "proofBody", title: "Body", type: "text", rows: 4, group: "content", fieldset: "proof" }),
 
     // FAQ
     defineField({ name: "faqHeading", title: "Heading", type: "string", group: "content", fieldset: "faq" }),
@@ -94,7 +98,7 @@ export const reviewPageType = defineType({
     defineField({ name: "finalCtaEyebrow", title: "Eyebrow", type: "string", group: "content", fieldset: "finalCta" }),
     defineField({ name: "finalCtaHeading", title: "Heading", type: "string", group: "content", fieldset: "finalCta" }),
     defineField({ name: "finalCtaIntro", title: "Intro", type: "text", rows: 3, group: "content", fieldset: "finalCta" }),
-    defineField({ name: "finalCtaButtonLabel", title: "Button label", type: "string", group: "content", fieldset: "finalCta" }),
+    defineField({ name: "finalCtaButtonLabel", hidden: true, title: "Button label", type: "string", group: "content", fieldset: "finalCta" }),
 
     defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
   ],

@@ -2,19 +2,23 @@
 
 import { usePathname } from "next/navigation";
 
+import { BookingCta } from "@/components/shared/booking-cta";
 import { Button } from "@/components/ui/button";
 import { bookingForPath } from "@/lib/booking";
 
 /**
  * The footer's booking button. Client-side only so it can follow the page:
- * operator pages get the platform cost check, everyone else the founder review.
+ * operator and founder pages book their own call, pages that serve both
+ * audiences send visitors to /contact to choose.
  */
 export function FooterCta({ label }: { label: string }) {
-  const costCheck = bookingForPath(usePathname()) === "costCheck";
+  const booking = bookingForPath(usePathname());
 
-  return (
-    <Button cal={costCheck ? "costCheck" : "founderReview"} arrow className="mt-8">
-      {costCheck ? "Get your platform cost check" : label}
+  return booking ? (
+    <BookingCta booking={booking} placement="footer" className="mt-8" />
+  ) : (
+    <Button href="/contact" arrow className="mt-8">
+      {label}
     </Button>
   );
 }

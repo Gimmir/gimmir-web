@@ -47,7 +47,6 @@ export default async function FoundersPage() {
         eyebrow={data.finalCtaEyebrow!}
         title={data.finalCtaHeading}
         intro={data.finalCtaIntro!}
-        buttonLabel={data.finalCtaButtonLabel!}
       />
     </>
   );

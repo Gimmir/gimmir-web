@@ -2,39 +2,52 @@ import { FaqList, type FaqItem } from "@/components/shared/faq-list";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CONTRACT_ANSWER, DISAPPEAR_ANSWER } from "@/lib/trust-answers";
+import { OFFERS, formatPrice } from "@/lib/offers";
+import {
+  CONTRACT_ANSWER,
+  DISAPPEAR_ANSWER,
+  TWO_FOUNDERS_ANSWER,
+} from "@/lib/trust-answers";
+
+const teardown = formatPrice(OFFERS.teardown);
 
 export const OPERATORS_FAQ_ITEMS: FaqItem[] = [
   {
-    key: "timeline",
-    question: "How long does a move like this take?",
+    key: "disruption",
+    question: "Will switching disrupt my members or billing?",
     answer:
-      "Typically four to six months from blueprint to the last location switched over. Sites move in waves, not all at once.",
+      "No, that's exactly what the Migration Blueprint prevents. Before anything moves, we map and test member data and plan a cutover that doesn't interrupt billing. Sites move in waves, not all at once.",
   },
   {
-    key: "risk",
-    question: "What is the risky part?",
+    key: "data",
+    question: "What happens to my member data?",
     answer:
-      "Not the build. It is moving members, payment mandates and bookings without anyone noticing. Most of our planning time goes there, and it is the first thing the teardown looks at.",
+      "It's yours. We migrate it into a system in your name, in your cloud account and your region, and you keep full control. We sign a DPA, work with least-privilege access, and remove access the day someone leaves the project.",
+  },
+  {
+    key: "timeline",
+    question: "How long does a full build take?",
+    answer:
+      "Typically four to six months from blueprint to the last location switched over. You get a fixed timeline in the Blueprint before you commit to the build.",
+  },
+  {
+    key: "teardown-refund",
+    question: "What if the Teardown doesn't find savings?",
+    answer: `If I can't find at least ${teardown} a year in savings, you get your ${teardown} back.`,
+  },
+  TWO_FOUNDERS_ANSWER,
+  {
+    key: "platforms",
+    question: "Which platforms do you move operators off?",
+    answer:
+      "We don't name platforms on this site. Tell me on the call which one you're on, and I'll tell you what it's costing you.",
   },
   DISAPPEAR_ANSWER,
-  {
-    key: "small-team",
-    question: "You're a small team. Can you carry this?",
-    answer:
-      "Two founders lead every engagement, with a core team of ten senior engineers and designers. We take on few projects at a time on purpose. If we can't staff yours properly, we will say so on the first call.",
-  },
   CONTRACT_ANSWER,
   {
-    key: "gdpr",
-    question: "What about member data and GDPR?",
-    answer:
-      "Your data lives in your cloud account, in your region. We sign a DPA, work with least-privilege access, and remove access the day someone leaves the project.",
-  },
-  {
     key: "build-after",
-    question: "Do we have to build with you after the teardown?",
-    answer: "No. The model and the risk map are yours either way.",
+    question: "Do we have to build with you after the Teardown?",
+    answer: "No. The savings breakdown and the model are yours either way.",
   },
 ];
 
@@ -43,7 +56,7 @@ export function OperatorsFaq() {
     <section className="border-t border-line py-20 md:py-28">
       <Container>
         <Reveal>
-          <SectionHeader index="06" title="Questions operators ask first." />
+          <SectionHeader index="08" title="Questions operators ask first." />
         </Reveal>
 
         <FaqList items={OPERATORS_FAQ_ITEMS} className="mt-12" />

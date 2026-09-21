@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { TrackedCta } from "@/components/analytics/tracked-cta";
 import { Button } from "@/components/ui/button";
 import { Logomark } from "@/components/ui/logomark";
 import { useHeaderTheme } from "@/components/site/header-theme";
-import { bookingForPath } from "@/lib/booking";
+import { BOOKINGS, bookingForPath } from "@/lib/booking";
 import { cn } from "@/lib/cn";
 import type { NAVIGATION_QUERY_RESULT } from "@/sanity/types";
 
@@ -26,9 +27,31 @@ export function Header({ nav }: { nav: Nav | null }) {
 
   const links = nav?.headerLinks ?? [];
   const ctaLabel = nav?.headerCtaLabel ?? "Book a call";
-  // The call this page offers; pages serving both audiences fall back to the
-  // founder review.
-  const cal = bookingForPath(pathname) ?? "founderReview";
+  // Operator and founder pages book their own call; pages that serve both
+  // audiences send visitors to /contact to choose.
+  const booking = bookingForPath(pathname);
+  const cta = (
+    placement: string,
+    props: Pick<
+      React.ComponentProps<typeof Button>,
+      "className" | "size" | "variant"
+    >,
+  ) =>
+    booking ? (
+      <TrackedCta
+        cal={booking}
+        event="book_cta_click"
+        eventProps={{ booking, placement }}
+        {...props}
+        onClick={() => setOpen(false)}
+      >
+        {BOOKINGS[booking].header}
+      </TrackedCta>
+    ) : (
+      <Button href="/contact" {...props} onClick={() => setOpen(false)}>
+        {ctaLabel}
+      </Button>
+    );
   const isActive = (href: string) =>
     href !== "/" &&
     !href.startsWith("#") &&
@@ -92,13 +115,7 @@ export function Header({ nav }: { nav: Nav | null }) {
             </Link>
           ))}
         </nav>
-        <Button
-          cal={cal}
-          className="mt-8 self-start"
-          onClick={() => setOpen(false)}
-        >
-          {ctaLabel}
-        </Button>
+        {cta("mobile-menu", { className: "mt-8 self-start" })}
       </div>
 
       <header
@@ -117,7 +134,7 @@ export function Header({ nav }: { nav: Nav | null }) {
         />
 
         {/* bar */}
-        <div className="relative mx-auto flex max-w-[1280px] items-center justify-between gap-6 px-5 md:px-10">
+        <div className="relative mx-auto flex max-w-[1280px] items-center justify-between gap-5 px-5 md:px-10">
           <Link
             href="/"
             onClick={() => setOpen(false)}
@@ -134,7 +151,7 @@ export function Header({ nav }: { nav: Nav | null }) {
 
           <nav
             aria-label="Primary"
-            className="hidden items-center gap-9 lg:flex"
+            className="hidden items-center gap-5 lg:flex xl:gap-9"
           >
             {links.map((item) => (
               <Link
@@ -142,7 +159,7 @@ export function Header({ nav }: { nav: Nav | null }) {
                 href={resolve(item.anchor ?? "#")}
                 aria-current={isActive(item.anchor ?? "") ? "page" : undefined}
                 className={cn(
-                  "text-[15px] font-medium transition-colors",
+                  "whitespace-nowrap text-[15px] font-medium transition-colors",
                   light
                     ? "text-paper/70 hover:text-paper aria-[current=page]:text-paper"
                     : "text-muted hover:text-ink aria-[current=page]:text-ink",
@@ -154,13 +171,11 @@ export function Header({ nav }: { nav: Nav | null }) {
           </nav>
 
           <div className="hidden lg:block">
-            <Button
-              cal={cal}
-              size="sm"
-              variant={light ? "outlineLight" : "solid"}
-            >
-              {ctaLabel}
-            </Button>
+            {cta("header", {
+              size: "sm",
+              className: "whitespace-nowrap",
+              variant: light ? "outlineLight" : "solid",
+            })}
           </div>
 
           <button

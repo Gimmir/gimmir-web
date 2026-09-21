@@ -4,19 +4,23 @@
  * Oleh's own calendar) is a one-line change.
  */
 
+import type { FounderId } from "@/lib/founders";
+
 export type BookingId = "costCheck" | "founderReview";
 
 export type Booking = {
   id: BookingId;
   /** Cal.com event path, `user/event`. */
   calLink: string;
-  /** Who the visitor meets, as named in the CTA. */
-  host: string;
+  /** Founders on the call, in the order they're named. */
+  hosts: FounderId[];
   minutes: number;
   /** Full signed CTA label. */
   label: string;
-  /** Compact label for tight spots (header, mobile). */
+  /** Compact label for mobile. */
   short: string;
+  /** Header button label. */
+  header: string;
 };
 
 export const BOOKINGS: Record<BookingId, Booking> = {
@@ -24,18 +28,20 @@ export const BOOKINGS: Record<BookingId, Booking> = {
     id: "costCheck",
     // Swap to "nazarmoroze/platform-cost-check" once that event exists in Cal.com.
     calLink: "nazarmoroze/founder-review",
-    host: "Nazar",
+    hosts: ["nazar"],
     minutes: 20,
-    label: "Book your free 20-min platform cost check with Nazar",
+    label: "Book your free cost check with Nazar",
     short: "Book 20 minutes with Nazar",
+    header: "Book with Nazar",
   },
   founderReview: {
     id: "founderReview",
     calLink: "nazarmoroze/founder-review",
-    host: "Nazar & Oleh",
-    minutes: 20,
+    hosts: ["nazar", "oleh"],
+    minutes: 30,
     label: "Book a founder review call with Nazar & Oleh",
     short: "Book with Nazar & Oleh",
+    header: "Book with Nazar & Oleh",
   },
 };
 

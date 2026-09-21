@@ -13,7 +13,6 @@ export const SETTINGS_QUERY = defineQuery(`
     description,
     contactEmail,
     finalCtaCaption,
-    finalCtaHelper,
     flowSteps[]{ _key, tag, title, description },
     seo
   }
@@ -25,7 +24,7 @@ export const NAVIGATION_QUERY = defineQuery(`
     headerCtaLabel,
     footerTagline,
     footerCtaLabel,
-    footerLinks[]{ _key, label, href },
+    footerColumns[]{ _key, title, links[]{ _key, label, href } },
     footerNote
   }
 `);
@@ -69,7 +68,7 @@ export const HOME_SEO_QUERY = defineQuery(`
 
 export const REVIEW_QUERY = defineQuery(`
   *[_type == "reviewPage"][0]{
-    heroEyebrow, heroHeading, heroAccent, heroSubhead, heroCtaLabel, heroCtaHelper, marquee,
+    heroEyebrow, heroHeading, heroAccent, heroSubhead, marquee,
     problemHeading, problemAccent, problemBody, problemCallout,
     whatHeading, whatAccent, whatIntro, focusLabel, focusItems,
     deliverablesHeading, deliverablesAccent, deliverablesIntro, deliverablesItems[]{ _key, title, body }, deliverablesClosing,
@@ -79,11 +78,11 @@ export const REVIEW_QUERY = defineQuery(`
       founder->{ _id, name, linkedinUrl, photo{ ..., "lqip": asset->metadata.lqip, "aspectRatio": asset->metadata.dimensions.aspectRatio } }
     },
     processHeading, processAccent,
-    pricingEyebrow, pricingPrice, pricingPriceSuffix, pricingLead, pricingNote, pricingButtonLabel, pricingIncludedLabel, pricingIncluded,
-    fitHeading, fitChecks, fitNotLabel, fitNotBody,
-    proofHeading, proofAccent,
+    pricingEyebrow, pricingLead, pricingNote, pricingIncludedLabel, pricingIncluded,
+    fitHeading, fitChecks, fitNotItems,
+    proofHeading, proofAccent, proofBody,
     faqHeading, faqAccent, faqItems[]{ _key, question, answer },
-    finalCtaEyebrow, finalCtaHeading, finalCtaIntro, finalCtaButtonLabel
+    finalCtaEyebrow, finalCtaHeading, finalCtaIntro
   }
 `);
 

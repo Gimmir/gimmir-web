@@ -7,7 +7,6 @@ export function FinalCta({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
       eyebrow={data.finalCtaEyebrow!}
       title={data.finalCtaHeading}
       intro={data.finalCtaIntro!}
-      buttonLabel={data.finalCtaButtonLabel!}
     />
   );
 }

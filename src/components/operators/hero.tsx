@@ -1,8 +1,11 @@
-import { TrackedCta } from "@/components/analytics/tracked-cta";
+import { BookingCta } from "@/components/shared/booking-cta";
+import { FounderChip } from "@/components/shared/founder-chip";
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Mark } from "@/components/ui/mark";
 import { Pill } from "@/components/ui/pill";
 import { Reveal } from "@/components/ui/reveal";
+import { BOOKINGS } from "@/lib/booking";
 
 export function Hero() {
   return (
@@ -14,33 +17,32 @@ export function Hero() {
 
         <Reveal eager delay={60}>
           <h1 className="display mt-8 text-[1.7rem] leading-[1.2] sm:text-hero sm:leading-[0.98]">
-            Stop renting the platform{" "}
-            <Mark>your studios run on.</Mark>
+            Stop renting your fitness platform. <Mark>Own it.</Mark>
           </h1>
         </Reveal>
 
         <Reveal eager delay={140}>
           <div className="mt-10 flex flex-col gap-9 md:flex-row md:items-end md:justify-between md:gap-12">
-            <p className="max-w-[46ch] text-lg leading-relaxed text-muted md:text-xl">
-              At eight sites and up, you pay for your booking platform three
-              times: a licence per location, a margin on every card payment,
-              and a roadmap you don&apos;t control. We moved UN1T, a fitness
-              franchise with 10+ locations, onto an app and back office they
-              own. About $10k a month stayed in the business.
-            </p>
+            <div className="max-w-[48ch]">
+              <p className="text-lg leading-relaxed text-muted md:text-xl">
+                If you run 8+ locations, you&apos;re probably paying every month
+                for a booking platform you&apos;ll never own, plus a cut of
+                every member payment. I&apos;m Nazar. My team and I move
+                operators onto their own app, back office and payments, and keep
+                those fees inside your business.
+              </p>
+              <FounderChip id="nazar" className="mt-7" />
+            </div>
             <div className="flex shrink-0 flex-col gap-3.5">
-              <div className="flex flex-wrap gap-3.5">
-                <TrackedCta
-                  cal="costCheck"
-                  arrow
-                  event="operators_cost_check_cta_click"
-                >
-                  Get your platform cost check
-                </TrackedCta>
+              <div className="flex flex-col gap-3 sm:items-start">
+                <BookingCta booking="costCheck" placement="hero" />
+                <Button href="#ladder" variant="outline">
+                  Start with a Platform Fee Teardown
+                </Button>
               </div>
-              <p className="text-sm text-faint">
-                20 minutes with the founders. Bring your last platform
-                invoice and you leave with your number.
+              <p className="max-w-[40ch] text-sm text-faint">
+                Free, {BOOKINGS.costCheck.minutes} minutes. Bring your last
+                platform invoice and you leave with your number.
               </p>
             </div>
           </div>

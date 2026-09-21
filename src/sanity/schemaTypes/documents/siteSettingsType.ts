@@ -88,6 +88,8 @@ export const siteSettingsType = defineType({
       title: "Final-CTA helper line",
       type: "string",
       group: "shared",
+      // Retired: derived from the call length in lib/booking.ts.
+      hidden: true,
       description: 'e.g. "Free · 20 min · no pitch, no obligation.".',
     }),
     defineField({

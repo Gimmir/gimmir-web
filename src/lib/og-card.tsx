@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
+import { FOUNDERS, type FounderId } from "@/lib/founders";
+
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
 
@@ -18,17 +20,10 @@ function headlineSize(line1: string, line2: string) {
   return 42;
 }
 
-export type Face = "nazar" | "oleh";
-
-const FACE_FILES: Record<Face, { file: string; name: string }> = {
-  nazar: { file: "nazar-m.png", name: "Nazar" },
-  oleh: { file: "oleh-p.png", name: "Oleh" },
-};
-
 /** Founder headshot as a data URL (cards render at build time, in Node). */
-async function faceSrc(face: Face) {
+async function faceSrc(face: FounderId) {
   const data = await readFile(
-    join(process.cwd(), "public/photo", FACE_FILES[face].file),
+    join(process.cwd(), "public", FOUNDERS[face].photo),
     "base64",
   );
   return `data:image/png;base64,${data}`;
@@ -49,7 +44,7 @@ export async function ogCard({
   line2: string;
   footer?: string;
   /** Founders pictured top right; faces earn trust on shared links. */
-  faces?: Face[];
+  faces?: FounderId[];
 }) {
   const fontSize = headlineSize(line1, line2);
   const faceSrcs = await Promise.all(faces.map(faceSrc));
@@ -122,7 +117,7 @@ export async function ogCard({
                 ))}
               </div>
               <div style={{ display: "flex", fontSize: 30, fontWeight: 700, color: PAPER }}>
-                {faces.map((f) => FACE_FILES[f].name).join(" & ")}
+                {faces.map((f) => FOUNDERS[f].first).join(" & ")}
               </div>
             </div>
           ) : null}

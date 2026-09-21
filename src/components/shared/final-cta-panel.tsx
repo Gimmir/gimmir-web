@@ -1,29 +1,44 @@
 import Image from "next/image";
 
-import { TrackedCta } from "@/components/analytics/tracked-cta";
+import { BookingCta } from "@/components/shared/booking-cta";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
+import { BOOKINGS, type BookingId } from "@/lib/booking";
+import { FOUNDERS, hostNames, type FounderId } from "@/lib/founders";
 import { sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
 import { FOUNDERS_QUERY, SETTINGS_QUERY } from "@/sanity/lib/queries";
 
+/**
+ * The dark closing CTA: the faces of whoever is on the call, and one signed
+ * button per call offered (two on pages that serve both audiences).
+ */
 export async function FinalCtaPanel({
   eyebrow,
   title,
   intro,
-  buttonLabel,
+  bookings = ["founderReview"],
 }: {
   eyebrow: string;
   title: React.ReactNode;
   intro: string;
-  buttonLabel: string;
+  bookings?: BookingId[];
 }) {
   const [{ data: founders }, { data: settings }] = await Promise.all([
     sanityFetch({ query: FOUNDERS_QUERY }),
     sanityFetch({ query: SETTINGS_QUERY }),
   ]);
 
-  const ringByIndex = ["ring-ink", "ring-ink"];
+  const calls = bookings.map((id) => BOOKINGS[id]);
+  const hosts: FounderId[] = [...new Set(calls.flatMap((c) => c.hosts))];
+  const hostIds = new Set<string>(hosts.map((h) => FOUNDERS[h].sanityId));
+  const onCall = founders.filter((f) => hostIds.has(f._id));
+  const minutes = [...new Set(calls.map((c) => c.minutes))].sort(
+    (a, b) => a - b,
+  );
+  const helper = `Free · ${minutes.join(" to ")} min · no pitch, no obligation.`;
+  const caption =
+    hosts.length === 1 ? FOUNDERS[hosts[0]].role : settings?.finalCtaCaption;
 
   return (
     <section className="border-t border-line py-20 md:py-28">
@@ -54,41 +69,43 @@ export async function FinalCtaPanel({
               <div className="flex w-full shrink-0 flex-col items-start gap-5 md:w-auto md:items-end">
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2.5">
-                    {founders.slice(0, 2).map((f, i) =>
+                    {onCall.map((f) =>
                       f.photo ? (
                         <Image
                           key={f._id}
-                          src={urlFor(f.photo).width(80).height(80).fit("crop").url()}
+                          src={urlFor(f.photo)
+                            .width(80)
+                            .height(80)
+                            .fit("crop")
+                            .url()}
                           alt={f.name ?? ""}
                           width={40}
                           height={40}
-                          className={`size-10 rounded-full object-cover object-top ring-[3px] ${ringByIndex[i] ?? "ring-ink"}`}
+                          className="size-10 rounded-full object-cover object-top ring-[3px] ring-ink"
                         />
                       ) : null,
                     )}
                   </div>
                   <div className="text-sm leading-tight md:text-right">
                     <div className="font-semibold text-paper">
-                      {founders.map((f) => f.name?.split(" ")[0]).filter(Boolean).join(" & ")}
+                      {hostNames(hosts)}
                     </div>
-                    <div className="text-[#9b988e]">
-                      {settings?.finalCtaCaption}
-                    </div>
+                    <div className="text-[#9b988e]">{caption}</div>
                   </div>
                 </div>
 
-                <TrackedCta
-                  cal
-                  variant="lime"
-                  arrow
-                  event="review_call_cta_click"
-                >
-                  {buttonLabel}
-                </TrackedCta>
+                <div className="flex flex-col items-start gap-3 md:items-end">
+                  {bookings.map((id, i) => (
+                    <BookingCta
+                      key={id}
+                      booking={id}
+                      placement="final"
+                      variant={i === 0 ? "lime" : "outlineLight"}
+                    />
+                  ))}
+                </div>
 
-                <p className="text-sm text-[#86837a]">
-                  {settings?.finalCtaHelper}
-                </p>
+                <p className="text-sm text-[#86837a]">{helper}</p>
               </div>
             </div>
           </div>

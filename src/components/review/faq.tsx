@@ -20,7 +20,7 @@ export function FaqSection({
       <Container>
         <Reveal>
           <SectionHeader
-            index="08"
+            index="09"
             title={
               <>
                 {data.faqHeading}

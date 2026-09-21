@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
+import { BookingCta } from "@/components/shared/booking-cta";
 import { Container } from "@/components/ui/container";
 import { Check } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
+import { OFFERS, formatPrice } from "@/lib/offers";
 import type { REVIEW_QUERY_RESULT } from "@/sanity/types";
 
 export function PricingSection({
@@ -12,7 +13,10 @@ export function PricingSection({
   const included = data.pricingIncluded ?? [];
 
   return (
-    <section className="border-t border-line py-20 md:py-28">
+    <section
+      id="pricing"
+      className="scroll-mt-24 border-t border-line py-20 md:py-28"
+    >
       <Container>
         <Reveal>
           <div className="relative overflow-hidden rounded-[28px] bg-ink p-8 text-paper sm:p-10 md:p-14">
@@ -40,11 +44,9 @@ export function PricingSection({
 
                 <div className="mt-6 flex items-end gap-3">
                   <span className="display text-[clamp(3.25rem,8vw,5.25rem)] leading-[0.9]">
-                    {data.pricingPrice}
+                    {formatPrice(OFFERS.review)}
                   </span>
-                  <span className="mb-2 text-lg text-paper/45">
-                    {data.pricingPriceSuffix}
-                  </span>
+                  <span className="mb-2 text-lg text-paper/45">fixed</span>
                 </div>
 
                 <p className="mt-6 max-w-[42ch] text-lg leading-relaxed text-paper/75">
@@ -56,9 +58,11 @@ export function PricingSection({
                 </p>
 
                 <div className="mt-9">
-                  <Button cal variant="lime" arrow>
-                    {data.pricingButtonLabel}
-                  </Button>
+                  <BookingCta
+                    booking="founderReview"
+                    placement="pricing"
+                    variant="lime"
+                  />
                 </div>
               </div>
 

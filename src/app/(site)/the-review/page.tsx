@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { AfterReviewSection } from "@/components/review/after-review";
 import { Hero } from "@/components/review/hero";
 import { ProblemSection } from "@/components/review/problem";
 import { WhatItIsSection } from "@/components/review/what-it-is";
@@ -11,7 +12,7 @@ import { FitSection } from "@/components/review/fit";
 import { ProofSection } from "@/components/review/proof";
 import { FaqSection } from "@/components/review/faq";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbs, faqPage } from "@/lib/schema";
+import { breadcrumbs, faqPage, serviceSchema } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 import { FinalCta } from "@/components/review/final-cta";
 import { Marquee } from "@/components/ui/marquee";
@@ -40,8 +41,23 @@ export default async function TheReviewPage() {
 
   return (
     <>
-      <JsonLd data={breadcrumbs([["Home", "/"], ["The Review", "/the-review"]])} />
+      <JsonLd
+        data={breadcrumbs([
+          ["Home", "/"],
+          ["The Review", "/the-review"],
+        ])}
+      />
       {faqLd && <JsonLd data={faqLd} />}
+      <JsonLd
+        data={serviceSchema({
+          id: "the-review",
+          name: "The Review: technical due diligence",
+          description:
+            "A founder-led architecture, code and plan review for funded fitness and health products, with a written report and a prioritized plan.",
+          path: "/the-review",
+          offers: ["reviewCall", "review", "fixSprint", "build", "care"],
+        })}
+      />
       <Hero data={data} />
       <Marquee items={data.marquee ?? []} />
       <ProblemSection data={data} />
@@ -50,6 +66,7 @@ export default async function TheReviewPage() {
       <FoundersSection data={data} />
       <ProcessSection data={data} />
       <PricingSection data={data} />
+      <AfterReviewSection />
       <FitSection data={data} />
       <ProofSection data={data} />
       <FaqSection data={data} />

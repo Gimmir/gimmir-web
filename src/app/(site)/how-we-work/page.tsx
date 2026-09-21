@@ -55,7 +55,6 @@ export default async function HowWeWorkPage() {
         eyebrow={data.finalCtaEyebrow!}
         title={data.finalCtaHeading}
         intro={data.finalCtaIntro!}
-        buttonLabel={data.finalCtaButtonLabel!}
       />
     </>
   );

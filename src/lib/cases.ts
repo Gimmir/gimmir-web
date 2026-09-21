@@ -28,6 +28,8 @@ export type CaseStudy = {
   author: "founderNazar" | "founderOleh";
   /** First published on the site, ISO date. */
   publishedAt: string;
+  /** Client quote; only set once the client has approved the exact words. */
+  quote?: { text: string; name: string; role: string };
   /** Structured narrative — drives the standard template. */
   story?: {
     challenge: string;

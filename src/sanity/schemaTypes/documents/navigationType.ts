@@ -31,7 +31,8 @@ export const navigationType = defineType({
               name: "anchor",
               title: "Anchor",
               type: "string",
-              description: 'An on-page anchor like "#work" or a path like "/work/un1t".',
+              description:
+                'An on-page anchor like "#work" or a path like "/work/un1t".',
               validation: (rule) => rule.required(),
             }),
           ],
@@ -45,7 +46,7 @@ export const navigationType = defineType({
       type: "string",
       group: "header",
       description:
-        "The button at the end of the header. Opens the Cal.com booking popup.",
+        "The header button on pages that serve both audiences; it links to /contact. Operator and founder pages show their own signed booking button.",
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -60,14 +61,67 @@ export const navigationType = defineType({
       title: "Footer CTA label",
       type: "string",
       group: "footer",
-      description: "The button in the footer. Opens the Cal.com booking popup.",
+      description:
+        "The footer button on pages that serve both audiences; it links to /contact. Operator and founder pages show their own signed booking button.",
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "footerColumns",
+      title: "Footer columns",
+      type: "array",
+      group: "footer",
+      description:
+        "Link columns in the footer. The legal & contact column is added in code.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "footerColumn",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "links",
+              title: "Links",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  name: "footerColumnLink",
+                  fields: [
+                    defineField({
+                      name: "label",
+                      title: "Label",
+                      type: "string",
+                      validation: (rule) => rule.required(),
+                    }),
+                    defineField({
+                      name: "href",
+                      title: "Link",
+                      type: "string",
+                      validation: (rule) => rule.required(),
+                    }),
+                  ],
+                  preview: { select: { title: "label", subtitle: "href" } },
+                }),
+              ],
+            }),
+          ],
+          preview: { select: { title: "title" } },
+        }),
+      ],
+      validation: (rule) => rule.max(4),
     }),
     defineField({
       name: "footerLinks",
       title: "Footer links",
       type: "array",
       group: "footer",
+      // Retired: replaced by footerColumns.
+      hidden: true,
       of: [
         defineArrayMember({
           type: "object",
@@ -95,7 +149,8 @@ export const navigationType = defineType({
       title: "Footer note",
       type: "string",
       group: "footer",
-      description: 'Small print, e.g. "© Gimmir Ltd.". The year is added automatically.',
+      description:
+        'Small print, e.g. "© Gimmir Ltd.". The year is added automatically.',
     }),
   ],
   preview: {

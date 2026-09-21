@@ -66,7 +66,7 @@ export const foundersPageType = defineType({
     defineField({ name: "finalCtaEyebrow", title: "Eyebrow", type: "string", group: "content", fieldset: "finalCta" }),
     defineField({ name: "finalCtaHeading", title: "Heading", type: "string", group: "content", fieldset: "finalCta" }),
     defineField({ name: "finalCtaIntro", title: "Intro", type: "text", rows: 3, group: "content", fieldset: "finalCta" }),
-    defineField({ name: "finalCtaButtonLabel", title: "Button label", type: "string", group: "content", fieldset: "finalCta" }),
+    defineField({ name: "finalCtaButtonLabel", hidden: true, title: "Button label", type: "string", group: "content", fieldset: "finalCta" }),
 
     defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" }),
   ],
