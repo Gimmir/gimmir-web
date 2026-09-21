@@ -4,10 +4,14 @@ import { Hero } from "@/components/how-we-work/hero";
 import { FearsSection } from "@/components/how-we-work/fears";
 import { HowItRunsSection } from "@/components/how-we-work/runs";
 import { PrinciplesSection } from "@/components/how-we-work/principles";
+import {
+  STRAIGHT_ANSWERS,
+  StraightAnswersSection,
+} from "@/components/how-we-work/straight-answers";
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Marquee } from "@/components/ui/marquee";
-import { breadcrumbs } from "@/lib/schema";
+import { breadcrumbs, faqPage } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/live";
 import { HOW_WE_WORK_QUERY, HOW_WE_WORK_SEO_QUERY } from "@/sanity/lib/queries";
@@ -40,11 +44,13 @@ export default async function HowWeWorkPage() {
       <JsonLd
         data={breadcrumbs([["Home", "/"], ["How we work", "/how-we-work"]])}
       />
+      <JsonLd data={faqPage(STRAIGHT_ANSWERS)!} />
       <Hero data={data} />
       <Marquee items={data.marquee ?? []} />
       <FearsSection data={data} />
       <HowItRunsSection data={data} />
       <PrinciplesSection data={data} />
+      <StraightAnswersSection />
       <FinalCtaPanel
         eyebrow={data.finalCtaEyebrow!}
         title={data.finalCtaHeading}

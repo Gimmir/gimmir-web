@@ -1,5 +1,6 @@
 import { TrackedCta } from "@/components/analytics/tracked-cta";
 import { Button } from "@/components/ui/button";
+import { Doors } from "@/components/home/doors";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import { Mark } from "@/components/ui/mark";
@@ -57,6 +58,10 @@ export function Hero({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
               </Button>
             </div>
           </div>
+        </Reveal>
+
+        <Reveal eager delay={200}>
+          <Doors className="mt-10 md:mt-14" />
         </Reveal>
       </Container>
     </section>

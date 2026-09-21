@@ -273,7 +273,7 @@ export function TrustSection({
       <Container>
         <Reveal>
           <SectionHeader
-            index="05"
+            index="04"
             title={
               <>
                 {data.trustHeading}

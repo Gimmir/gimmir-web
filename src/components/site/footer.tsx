@@ -81,8 +81,8 @@ export function Footer({
       {/* bottom bar */}
       <div className="border-t border-line">
         <Container className="flex flex-col gap-2 py-6 text-sm text-faint sm:flex-row sm:items-center sm:justify-between">
-          <p className="flex items-center gap-4">
-            <span>© {year} {settings?.siteName ?? "Gimmir"}</span>
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span>© {year} Gimmir LLC · Delaware, USA · Team in the EU</span>
             <Link
               href="/privacy"
               className="transition-colors hover:text-ink"

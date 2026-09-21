@@ -1,9 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
 import { HeaderDark } from "@/components/site/header-theme";
 import { Container } from "@/components/ui/container";
 import { CountUp } from "@/components/ui/count-up";
+import { ArrowRight } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import { CaseBackLink } from "@/components/work/parts";
@@ -178,6 +180,16 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
                 ))}
               </div>
             </div>
+          </Reveal>
+
+          <Reveal>
+            <Link
+              href="/operators"
+              className="group mt-8 inline-flex items-center gap-2 text-lg font-semibold text-ink"
+            >
+              Run 8+ locations? See your own number
+              <ArrowRight className="size-[18px] transition-transform duration-200 group-hover:translate-x-0.5" />
+            </Link>
           </Reveal>
         </Container>
       </section>

@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/reveal";
 import type { HOME_QUERY_RESULT } from "@/sanity/types";
 
 const AUDIENCE_ICONS: ((props: SVGProps<SVGSVGElement>) => React.ReactElement)[] =
-  [Layers, Buildings, TrendingUp];
+  [Buildings, Layers, TrendingUp];
 
 export function WhoSection({
   data,

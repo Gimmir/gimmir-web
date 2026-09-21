@@ -46,6 +46,12 @@ export function organizationGraph(
         "@type": "Organization",
         "@id": ORG_ID,
         name: BRAND,
+        legalName: "Gimmir LLC",
+        address: {
+          "@type": "PostalAddress",
+          addressRegion: "DE",
+          addressCountry: "US",
+        },
         url: SITE_URL,
         logo: `${SITE_URL}/logo/Logo-Gimmir.svg`,
         description: stegaClean(opts.description) ?? undefined,
@@ -129,5 +135,27 @@ export function caseStudyWork(data: CaseStudy) {
     image: `${SITE_URL}${data.logo}`,
     author: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
+  };
+}
+
+/** The paid first step offered on /operators. */
+export function platformTeardownService() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}/operators#platform-fee-teardown`,
+    name: "Platform Fee Teardown",
+    serviceType: "Fitness platform rent-vs-own analysis",
+    description:
+      "A fixed-price, five-working-day analysis for fitness operators and franchisors with 8+ locations: the real three-year cost of renting your platform, a rent-vs-own model with payback in months, a migration risk map, and a plain go / no-go.",
+    url: `${SITE_URL}/operators`,
+    provider: { "@id": ORG_ID },
+    areaServed: { "@type": "Country", name: "GB" },
+    offers: {
+      "@type": "Offer",
+      price: "2500",
+      priceCurrency: "GBP",
+      url: `${SITE_URL}/operators`,
+    },
   };
 }

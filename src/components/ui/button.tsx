@@ -39,8 +39,11 @@ export function Button({
   arrow?: boolean;
   className?: string;
   onClick?: () => void;
-  /** Open the Cal.com founder-review booking popup instead of navigating. */
-  cal?: boolean;
+  /**
+   * Open a Cal.com booking popup instead of navigating: `true` for the
+   * founder-review event, or a Cal link (e.g. CAL_LINK_OPERATORS).
+   */
+  cal?: boolean | string;
 }) {
   const classes = cn(base, variants[variant], sizes[size], className);
   const content = (
@@ -59,7 +62,7 @@ export function Button({
         className={classes}
         onClick={onClick}
         data-cal-namespace={CAL_NAMESPACE}
-        data-cal-link={CAL_LINK}
+        data-cal-link={typeof cal === "string" ? cal : CAL_LINK}
         data-cal-config={CAL_CONFIG}
       >
         {content}

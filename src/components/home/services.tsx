@@ -16,7 +16,7 @@ export function ServicesSection({
       <Container>
         <Reveal>
           <SectionHeader
-            index="03"
+            index="02"
             titleMax="max-w-[32ch]"
             title={
               <>

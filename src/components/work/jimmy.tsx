@@ -289,16 +289,6 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
                   </strong>
                   . Not billed by the hour — built as owners.
                 </p>
-                <blockquote className="rounded-2xl border border-line bg-surface p-6 text-base leading-relaxed md:p-7">
-                  <p className="text-ink">
-                    &ldquo;Not a disguised web wrapper or a vibe-coding project.
-                    It&rsquo;s a high-performance mobile app built by engineers,
-                    designed for stability and scalability.&rdquo;
-                  </p>
-                  <footer className="mt-3 font-mono text-xs uppercase tracking-widest text-muted">
-                    How jimmycoach.com describes the product we built
-                  </footer>
-                </blockquote>
               </div>
             </Reveal>
           </div>
