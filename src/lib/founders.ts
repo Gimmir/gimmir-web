@@ -24,7 +24,7 @@ export const FOUNDERS: Record<FounderId, Founder> = {
     name: "Nazar Moroz",
     first: "Nazar",
     role: "Founder · product & business",
-    photo: "/photo/nazar-m.png",
+    photo: "/photo/nazar-m.jpg",
     linkedin: "https://www.linkedin.com/in/nazarmoroze/",
   },
   oleh: {
@@ -33,7 +33,7 @@ export const FOUNDERS: Record<FounderId, Founder> = {
     name: "Oleh Palazhii",
     first: "Oleh",
     role: "CTO · architecture & delivery",
-    photo: "/photo/oleh-p.png",
+    photo: "/photo/oleh-p.jpg",
     linkedin: "https://www.linkedin.com/in/oleh-palazh/",
   },
 };

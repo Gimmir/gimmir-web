@@ -22,11 +22,10 @@ function headlineSize(line1: string, line2: string) {
 
 /** Founder headshot as a data URL (cards render at build time, in Node). */
 async function faceSrc(face: FounderId) {
-  const data = await readFile(
-    join(process.cwd(), "public", FOUNDERS[face].photo),
-    "base64",
-  );
-  return `data:image/png;base64,${data}`;
+  const { photo } = FOUNDERS[face];
+  const data = await readFile(join(process.cwd(), "public", photo), "base64");
+  const type = photo.endsWith(".png") ? "image/png" : "image/jpeg";
+  return `data:${type};base64,${data}`;
 }
 
 /**
