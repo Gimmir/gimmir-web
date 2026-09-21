@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 
 import { BOOKINGS, type BookingId } from "@/lib/booking";
+import { recordBooking } from "@/lib/booking-analytics";
 import { CAL_UI } from "@/lib/cal";
 
 /**
@@ -21,11 +22,18 @@ export function CalEmbed({
   namespace: string;
 }) {
   useEffect(() => {
-    (async () => {
-      const cal = await getCalApi({ namespace });
+    const onBooked = () => recordBooking(booking, "contact");
+    const calReady = getCalApi({ namespace }).then((cal) => {
       cal("ui", CAL_UI);
-    })();
-  }, [namespace]);
+      cal("on", { action: "bookingSuccessfulV2", callback: onBooked });
+      return cal;
+    });
+    return () => {
+      calReady.then((cal) =>
+        cal("off", { action: "bookingSuccessfulV2", callback: onBooked }),
+      );
+    };
+  }, [booking, namespace]);
 
   return (
     <div className="h-[520px] w-full overflow-hidden rounded-2xl border border-line bg-surface sm:h-[640px]">

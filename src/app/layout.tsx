@@ -35,15 +35,15 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Gimmir: Product engineering for sport & fitness",
+    default: "Gimmir: Fitness & wellness platforms you own",
     template: "%s · Gimmir",
   },
   description:
-    "Gimmir builds the apps and platforms behind scaling sport and fitness brands. Start with a free review call with the founders behind UN1T and Jimmy Coach.",
+    "Founder-led product engineering for fitness and wellness: member apps, coaching platforms and back offices, in your name from day one. Talk to Nazar & Oleh.",
   ...socialMetadata({
-    title: "Gimmir: Fitness app & software development company",
+    title: "Gimmir: Fitness & wellness app development company",
     description:
-      "Gimmir builds the apps and platforms behind scaling sport and fitness brands.",
+      "Founder-led product engineering for fitness and wellness: member apps, coaching platforms and back offices you own.",
     path: "/",
     image: "/opengraph-image",
   }),

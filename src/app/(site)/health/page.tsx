@@ -13,7 +13,7 @@ import { socialMetadata } from "@/lib/seo";
 
 const TITLE = "Wellness & Prevention App Development";
 const DESCRIPTION =
-  "Wellness and prevention apps for sleep, nutrition, women's health, longevity and mental wellbeing. Privacy-first, HealthKit and Health Connect ready. Not clinical software.";
+  "Wellness and prevention apps for sleep, nutrition, women’s health and longevity. Privacy-first, HealthKit and Health Connect ready. Not clinical software.";
 
 export const metadata: Metadata = {
   title: TITLE,

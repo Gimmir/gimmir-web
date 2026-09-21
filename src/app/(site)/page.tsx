@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { RouteSelector } from "@/components/home/doors";
+import { RouteSelector } from "@/components/shared/route-selector";
 import { FaqSection } from "@/components/home/faq";
 import { FinalCta } from "@/components/home/final-cta";
 import { FoundersSection } from "@/components/home/founders";
