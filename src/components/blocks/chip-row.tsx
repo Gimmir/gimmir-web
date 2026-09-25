@@ -33,7 +33,7 @@ export function ChipRow({
             href={c.href}
             className={cn(
               "group inline-flex h-9 items-center gap-1.5 rounded-full border border-line bg-surface/70 pr-2.5 text-[12.5px] transition-colors duration-200 hover:border-ink/40 sm:h-10 sm:gap-2.5 sm:pr-4 sm:text-[13.5px]",
-              c.logo || c.grid ? "pl-1 sm:pl-1.5" : "pl-2.5 sm:pl-4",
+              c.logo || c.grid ? "pl-1 sm:pl-[5px]" : "pl-2.5 sm:pl-4",
             )}
           >
             {c.logo ? (
@@ -42,15 +42,15 @@ export function ChipRow({
                 alt=""
                 width={28}
                 height={28}
-                className="size-7 rounded-[8px] max-sm:size-[26px]"
+                className="size-7 rounded-full max-sm:size-[26px]"
               />
             ) : c.grid ? (
               <span
                 aria-hidden
-                className="grid size-[26px] grid-cols-3 place-content-center gap-[2px] rounded-[8px] bg-ink p-[6px] sm:size-7 sm:p-[7px]"
+                className="grid size-[26px] grid-cols-3 place-content-center gap-[2px] rounded-full bg-ink sm:size-7"
               >
                 {Array.from({ length: 9 }, (_, n) => (
-                  <span key={n} className="size-[3px] rounded-[1px] bg-paper" />
+                  <span key={n} className="size-[3px] rounded-full bg-paper" />
                 ))}
               </span>
             ) : null}
