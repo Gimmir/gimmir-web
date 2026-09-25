@@ -45,7 +45,7 @@ export function Footer() {
                 <span className="block text-lg font-semibold">{d.title}</span>
                 <span className="block text-paper/60">{d.detail}</span>
               </span>
-              <span className="col-start-2 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-transform duration-200 group-hover:translate-x-0.5 sm:col-start-3">
+              <span className="col-start-2 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-[transform,background-color] duration-200 group-hover:translate-x-0.5 group-hover:bg-lime sm:col-start-3">
                 <ArrowRight className="size-[18px]" />
               </span>
             </BookTrigger>

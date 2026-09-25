@@ -10,7 +10,8 @@ export type Door = { id: string; label: string; href: string };
 
 /**
  * The two front doors: one per buyer. Both are the same size on purpose;
- * the first is filled because fitness brands are the main road in.
+ * the first is filled because fitness brands are the main road in, and it
+ * lights up lime on hover like every filled button on the site.
  */
 export function TwoDoor({
   doors,
@@ -36,10 +37,10 @@ export function TwoDoor({
               "group inline-flex h-16 items-center justify-between gap-6 rounded-full pl-7 pr-2 text-[17px] font-semibold transition-[background-color,color,border-color,transform] duration-200 ease-[cubic-bezier(.23,1,.32,1)] active:scale-[.97] sm:h-[68px] sm:text-lg",
               tone === "paper"
                 ? filled
-                  ? "bg-ink text-paper hover:bg-ink-soft"
+                  ? "bg-ink text-paper hover:bg-lime hover:text-ink"
                   : "border border-ink/80 text-ink hover:border-ink hover:bg-ink hover:text-paper"
                 : filled
-                  ? "bg-paper text-ink hover:bg-paper-2"
+                  ? "bg-paper text-ink hover:bg-lime"
                   : "border border-paper/30 text-paper hover:border-paper hover:bg-paper hover:text-ink",
             )}
           >
@@ -47,10 +48,10 @@ export function TwoDoor({
             <span
               aria-hidden
               className={cn(
-                "flex size-12 items-center justify-center rounded-full transition-transform duration-300 ease-[cubic-bezier(.23,1,.32,1)] group-hover:translate-x-0.5 sm:size-[52px]",
+                "flex size-12 items-center justify-center rounded-full transition-[transform,background-color,color] duration-300 ease-[cubic-bezier(.23,1,.32,1)] group-hover:translate-x-0.5 sm:size-[52px]",
                 filled
                   ? tone === "paper"
-                    ? "bg-paper text-ink"
+                    ? "bg-paper text-ink group-hover:bg-ink group-hover:text-paper"
                     : "bg-ink text-paper"
                   : tone === "paper"
                     ? "bg-ink text-paper group-hover:bg-paper group-hover:text-ink"

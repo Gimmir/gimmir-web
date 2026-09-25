@@ -207,8 +207,8 @@ export function Header() {
               className={cn(
                 "inline-flex h-11 items-center gap-2 rounded-full pl-5 pr-4 text-[15px] font-semibold transition-[background-color,color,transform] duration-200 ease-[cubic-bezier(.23,1,.32,1)] active:scale-[.97]",
                 dark
-                  ? "bg-paper text-ink hover:bg-paper-2"
-                  : "bg-ink text-paper hover:bg-ink-soft",
+                  ? "bg-paper text-ink hover:bg-lime"
+                  : "bg-ink text-paper hover:bg-lime hover:text-ink",
               )}
             >
               Book a call
