@@ -1,11 +1,16 @@
 import { cn } from "@/lib/cn";
 
-/** The lime dot of the margin notes, here marking our answer. */
-export function Dot() {
+/**
+ * The lime dot of the margin notes, here marking our answer. `top` centres
+ * it on the first line of text beside it: half the line height, less half
+ * the dot.
+ */
+export function Dot({ top = "0.55em" }: { top?: string }) {
   return (
     <span
       aria-hidden
-      className="mt-[0.55em] size-2 shrink-0 rounded-full bg-lime ring-1 ring-lime/40"
+      className="size-2 shrink-0 rounded-full bg-lime ring-1 ring-lime/40"
+      style={{ marginTop: top }}
     />
   );
 }

@@ -65,25 +65,43 @@ export function CompareOnPhone({
         ))}
       </div>
 
+      {/* Both of their answers sit stacked in one cell, only the picked one
+          visible, so every row is as tall as its longest answer and the
+          toggle never moves anything. Our cell repeats the row label
+          invisibly, so both answers start on the same line. */}
       <div className="fade mt-6 grid grid-cols-2" style={d(delay + 80)}>
         <div className="flex flex-col justify-end gap-3 pb-5 pr-4">
-          <span key={them} className={cn("block", touched && SWAP)}>
-            <Glyph
-              kind={THEIRS[them]}
-              delay={delay + 200}
-              className="size-14"
-            />
+          <span className="grid">
+            {THEIRS.map((kind, i) => (
+              <span
+                key={i === them ? `on-${i}` : `off-${i}`}
+                className={cn(
+                  "[grid-area:1/1]",
+                  i === them ? touched && SWAP : "invisible",
+                )}
+              >
+                <Glyph kind={kind} delay={delay + 200} className="size-14" />
+              </span>
+            ))}
           </span>
-          <span
-            key={`name-${them}`}
-            className={cn("text-[15px] font-semibold", touched && SWAP)}
-          >
-            {columns[them]}
+          <span className="grid text-[15px] font-semibold leading-snug">
+            {[0, 1].map((i) => (
+              <span
+                key={i === them ? `on-${i}` : `off-${i}`}
+                aria-hidden={i !== them || undefined}
+                className={cn(
+                  "[grid-area:1/1]",
+                  i === them ? touched && SWAP : "invisible",
+                )}
+              >
+                {columns[i]}
+              </span>
+            ))}
           </span>
         </div>
         <div className="flex flex-col justify-end gap-3 rounded-t-[20px] bg-ink px-4 pb-5 pt-5 text-paper">
           <Glyph kind="key" delay={delay + 420} className="size-14" />
-          <span className="flex items-center gap-2 text-[15px] font-semibold">
+          <span className="flex items-center gap-2 text-[15px] font-semibold leading-snug">
             <Logomark className="size-5" />
             {columns[2]}
           </span>
@@ -93,23 +111,39 @@ export function CompareOnPhone({
           const last = n === rows.length - 1;
           return (
             <Fragment key={r.label}>
-              <div className="flex flex-col justify-between gap-2 border-t border-line py-4 pr-4">
-                <span className="text-[13px] font-semibold">{r.label}</span>
-                <span
-                  key={`${them}-${n}`}
-                  className={cn("text-[15px] leading-snug", touched && SWAP)}
-                >
-                  {r.values[them]}
+              <div className="border-t border-line py-4 pr-4">
+                <span className="block text-[13px] font-semibold leading-snug">
+                  {r.label}
+                </span>
+                <span className="mt-2 grid text-[15px] leading-snug">
+                  {[0, 1].map((i) => (
+                    <span
+                      key={i === them ? `on-${i}` : `off-${i}`}
+                      aria-hidden={i !== them || undefined}
+                      className={cn(
+                        "[grid-area:1/1]",
+                        i === them ? touched && SWAP : "invisible",
+                      )}
+                    >
+                      {r.values[i]}
+                    </span>
+                  ))}
                 </span>
               </div>
               <div
                 className={cn(
-                  "flex items-end border-t border-line-dark bg-ink px-4 py-4 text-paper",
+                  "border-t border-line-dark bg-ink px-4 py-4 text-paper",
                   last && "rounded-b-[20px] pb-5",
                 )}
               >
-                <span className="flex gap-2 text-[15px] font-semibold leading-snug">
-                  <Dot />
+                <span
+                  aria-hidden
+                  className="invisible block text-[13px] font-semibold leading-snug"
+                >
+                  {r.label}
+                </span>
+                <span className="mt-2 flex gap-2 text-[15px] font-semibold leading-snug">
+                  <Dot top="0.42em" />
                   {r.values[2]}
                 </span>
               </div>
