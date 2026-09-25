@@ -18,27 +18,34 @@ export function Footer() {
   const muted = "text-[15px] text-paper/60 transition-colors hover:text-paper";
 
   return (
-    <footer data-tone="ink" className="bg-ink text-paper">
-      <Container className="pb-10 pt-24 md:pt-32">
-        <p className="display max-w-[18ch] text-[length:var(--text-title)] leading-[1.02]">
-          {FOOTER.line[0]}{" "}
-          <span className="text-paper/45">{FOOTER.line[1]}</span>
+    <footer data-tone="ink" className="border-t border-line-dark bg-ink text-paper">
+      <Container className="pb-10 pt-20 md:pt-28">
+        {/* one sentence per line, so the pair never breaks mid-thought */}
+        <p className="display text-[length:var(--text-title)] leading-[1.02]">
+          <span className="block">{FOOTER.line[0]}</span>
+          <span className="block text-paper/45">{FOOTER.line[1]}</span>
         </p>
 
-        <div className="mt-14 grid gap-3 md:mt-20 md:grid-cols-2">
+        <div className="mt-14 grid gap-3 md:mt-20 lg:grid-cols-2">
           {BOOK_DOORS.map((d) => (
             <BookTrigger
               key={d.id}
               booking={d.booking}
               placement="footer"
-              className="group flex items-center gap-5 rounded-[24px] border border-line-dark p-5 text-left transition-[background-color,border-color] duration-200 hover:border-paper/30 hover:bg-ink-soft md:p-6"
+              className="group grid grid-cols-[1fr_auto] items-center gap-x-5 gap-y-4 rounded-[24px] border border-line-dark p-5 text-left transition-[background-color,border-color] duration-200 hover:border-paper/30 hover:bg-ink-soft sm:grid-cols-[auto_1fr_auto] md:p-6"
             >
-              <FaceStack ids={d.faces} size={52} ring="ink" />
-              <span className="min-w-0 flex-1">
+              <FaceStack
+                ids={d.faces}
+                size={52}
+                ring="ink"
+                className="col-start-1 row-start-1"
+              />
+              {/* phones: faces and arrow share the top row, words get the full width */}
+              <span className="col-span-2 row-start-2 min-w-0 sm:col-span-1 sm:col-start-2 sm:row-start-1">
                 <span className="block text-lg font-semibold">{d.title}</span>
                 <span className="block text-paper/60">{d.detail}</span>
               </span>
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-transform duration-200 group-hover:translate-x-0.5">
+              <span className="col-start-2 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-transform duration-200 group-hover:translate-x-0.5 sm:col-start-3">
                 <ArrowRight className="size-[18px]" />
               </span>
             </BookTrigger>
@@ -106,8 +113,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-line-dark pt-6 text-sm text-paper/45 sm:flex-row sm:items-center sm:justify-between">
-          <p className="flex flex-wrap items-center gap-x-5 gap-y-1">
+        <div className="mt-16 flex flex-col gap-3 border-t border-line-dark pt-6 text-sm text-paper/45 sm:flex-row sm:items-baseline sm:justify-between">
+          <p className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
             <span>
               © {year} {FOOTER.company}
             </span>

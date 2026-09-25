@@ -23,14 +23,27 @@ export type HeadlineToken =
  * stretch to any word without distorting a line width), wiped on left to
  * right once the words have risen.
  */
-export function MarkerStroke({ delay = 0 }: { delay?: number }) {
+export function MarkerStroke({
+  delay = 0,
+  bottom = "-0.16em",
+}: {
+  delay?: number;
+  /**
+   * Offset of the swipe from the word box's bottom. The box grows with the
+   * line height, so looser lines pass a smaller offset to keep the swipe
+   * hugging the baseline (0.06em to 0.24em below it).
+   */
+  bottom?: string;
+}) {
   return (
     <svg
       aria-hidden
       viewBox="0 0 200 24"
       preserveAspectRatio="none"
-      className="wipe pointer-events-none absolute -bottom-[0.16em] -left-[0.04em] h-[0.32em] w-[calc(100%+0.1em)]"
-      style={{ "--d": `${delay}ms`, "--dur": "760ms" } as React.CSSProperties}
+      className="wipe pointer-events-none absolute -left-[0.04em] h-[0.32em] w-[calc(100%+0.1em)]"
+      style={
+        { bottom, "--d": `${delay}ms`, "--dur": "760ms" } as React.CSSProperties
+      }
     >
       <path
         d="M2.5 17.8C38 10.4 104 7.2 197.2 9.6c1.5.1 1.6 2.4.1 2.6C112 14.8 50 17.6 4.4 22.4 1.4 22.7.2 18.5 2.5 17.8Z"
@@ -42,7 +55,7 @@ export function MarkerStroke({ delay = 0 }: { delay?: number }) {
 
 function Faces({ ids }: { ids: readonly FounderId[] }) {
   return (
-    <span className="inline-flex h-[0.84em] translate-y-[0.04em] items-center px-[0.06em] align-middle">
+    <span className="inline-flex h-[0.84em] -translate-y-[0.08em] items-center px-[0.06em] align-middle">
       <span className="sr-only">
         {ids.map((id) => FOUNDERS[id].first).join(" and ")}
       </span>
@@ -79,7 +92,7 @@ function IconTile({ name }: { name: InlineIcon }) {
   return (
     <span
       aria-hidden
-      className="inline-flex size-[0.8em] translate-y-[0.02em] items-center justify-center rounded-[0.2em] bg-ink align-middle text-paper"
+      className="inline-flex size-[0.8em] -translate-y-[0.08em] items-center justify-center rounded-[0.2em] bg-ink align-middle text-paper"
     >
       <svg
         viewBox="0 0 24 24"
@@ -167,7 +180,7 @@ export function InlineHeadline({
                       <RiseWord i={i++}>{w}</RiseWord>
                     </Fragment>
                   ))}
-                  <MarkerStroke delay={markDelay} />
+                  <MarkerStroke delay={markDelay} bottom="-0.08em" />
                 </span>
                 {t.after ? <RiseWord i={i - 1}>{t.after}</RiseWord> : null}
               </span>

@@ -19,7 +19,7 @@ export function Hero() {
 
   return (
     <Stage as="section" eager id="top" data-tone="paper" className="relative">
-      <Container className="pb-20 pt-32 sm:pt-36 md:pb-28 md:pt-44">
+      <Container className="flex flex-col justify-center pb-16 pt-28 sm:pt-32 lg:min-h-[100svh] lg:pb-14">
         <ChipRow
           chips={chips}
           className="fade"
@@ -36,7 +36,7 @@ export function Hero() {
         >
           <TwoDoor doors={doors} placement="home-hero" />
 
-          <p className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2">
+          <p className="mt-8 flex items-center gap-3">
             <span className="relative size-8 shrink-0 overflow-hidden rounded-full bg-paper-2 ring-2 ring-paper">
               <Image
                 src={by.photo}
@@ -46,11 +46,14 @@ export function Hero() {
                 className="object-cover object-top"
               />
             </span>
-            <span className="font-serif text-xl italic text-ink/80">
-              “{note.quote}”
-            </span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
-              {by.first}, {by.title.split(",")[0]}
+            {/* quote and signature share a baseline, not a box centre */}
+            <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="font-serif text-xl italic text-ink/80">
+                “{note.quote}”
+              </span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+                {by.first} · {by.title.split(",")[0]}
+              </span>
             </span>
           </p>
         </div>

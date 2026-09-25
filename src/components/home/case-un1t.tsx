@@ -70,10 +70,10 @@ export function CaseUn1t() {
             value={c.stat.value}
             label={c.stat.label}
             delay={300}
-            className="mx-auto max-w-[560px] lg:mr-0"
+            className="max-w-[560px] lg:ml-auto"
           />
           <p
-            className="fade mx-auto mt-14 flex max-w-[560px] items-baseline gap-4 border-t border-line-dark pt-6 lg:mr-0"
+            className="fade mt-14 flex max-w-[560px] items-baseline gap-4 border-t border-line-dark pt-6 lg:ml-auto"
             style={d(2500)}
           >
             <span className="display text-5xl text-paper">{c.side.value}</span>
