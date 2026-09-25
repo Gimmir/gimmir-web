@@ -194,4 +194,31 @@ export const home = {
       },
     ],
   },
+
+  // doc 09 ⑨. Heading from the live founders page; each line is the last
+  // sentence of their approved bio (Sanity), turned into the first person.
+  founders: {
+    label: "Nazar & Oleh",
+    title: "You work with us, directly.",
+    people: [
+      {
+        id: "nazar",
+        line: "I'm the one who pressure-tests your product thinking and your plan.",
+        cta: {
+          label: "Talk to Nazar",
+          note: "fitness brands",
+          booking: "costCheck",
+        },
+      },
+      {
+        id: "oleh",
+        line: "I own the technical judgment: how it's built, and whether it will scale.",
+        cta: {
+          label: "Talk to Oleh",
+          note: "product & tech",
+          booking: "founderReview",
+        },
+      },
+    ],
+  },
 } as const;
