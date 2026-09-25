@@ -18,21 +18,16 @@ export const home = {
       { label: "9 products", detail: "shipped", href: "/work" },
     ],
     headline: [
-      "We",
-      { faces: ["nazar", "oleh"] },
-      "build SaaS",
-      { icon: "app" },
-      "that founders",
+      "We build SaaS that founders",
       { mark: "own", after: "," },
       "and show you how it’s done.",
-      { icon: "pulse" },
-      "Fitness is where we go deepest.",
     ] satisfies HeadlineToken[],
+    sub: "Fitness is where we go deepest: member apps, coaching platforms and back offices, in your name from day one.",
     doors: [
       { id: "operators", label: "I run a fitness brand", href: "/operators" },
       { id: "saas", label: "I’m building a SaaS", href: "/build-your-saas" },
     ],
-    note: { quote: "Book a call with us, not a sales rep.", by: "nazar" },
+    caption: "Book a call with us, not a sales rep.",
   },
 
   manifesto: {

@@ -128,7 +128,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/45">
+        <p className="mt-10 text-sm font-medium text-paper/45">
           Book a call
         </p>
         <div className="mt-4 flex flex-col gap-3">
@@ -150,7 +150,7 @@ export function Header() {
         </div>
         <a
           href={`mailto:${CONTACT_EMAIL}`}
-          className="mt-auto pt-10 font-mono text-sm text-paper/60"
+          className="mt-auto pt-10 text-sm text-paper/60"
         >
           {CONTACT_EMAIL}
         </a>
@@ -256,7 +256,7 @@ export function Header() {
               <Link
                 href="/contact"
                 onClick={() => setBook(false)}
-                className="mt-1 flex items-center justify-between rounded-[18px] px-3.5 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors hover:text-ink"
+                className="mt-1 flex items-center justify-between rounded-[18px] px-3.5 py-3 text-sm text-muted transition-colors hover:text-ink"
               >
                 Not sure? Compare both calls
                 <ArrowRight className="size-3.5" />

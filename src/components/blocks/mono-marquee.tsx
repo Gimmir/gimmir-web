@@ -12,7 +12,7 @@ function Group({ items, hidden = false }: { items: readonly string[]; hidden?: b
         <Fragment key={i}>
           <span className="whitespace-nowrap">{item}</span>
           <span aria-hidden className="opacity-40">
-            /
+            ·
           </span>
         </Fragment>
       ))}
@@ -21,8 +21,8 @@ function Group({ items, hidden = false }: { items: readonly string[]; hidden?: b
 }
 
 /**
- * The mechanics, slowly passing: mono caps, pauses while hovered so it
- * can be read, still for reduced motion.
+ * The mechanics, slowly passing; pauses while hovered so it can be read,
+ * still for reduced motion.
  */
 export function MonoMarquee({
   items,
@@ -36,7 +36,7 @@ export function MonoMarquee({
   return (
     <div
       className={cn(
-        "marquee-track flex overflow-hidden border-t py-6 font-mono text-[13px] uppercase tracking-[0.14em] md:text-sm",
+        "marquee-track flex overflow-hidden border-t py-6 text-base font-medium md:text-lg",
         tone === "ink" ? "border-line-dark text-paper/60" : "border-line text-muted",
         className,
       )}

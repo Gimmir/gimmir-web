@@ -26,10 +26,8 @@ export function CaseUn1t() {
     >
       <Container className="relative grid min-h-[100svh] content-center gap-x-10 gap-y-16 py-28 md:py-36 lg:grid-cols-12">
         <div className="lg:col-span-6 lg:self-center">
-          <p className="fade flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-paper/50">
-            <span>{c.label}</span>
-            <span aria-hidden className="h-px w-8 bg-paper/30" />
-            <span className="text-paper/80">UN1T</span>
+          <p className="fade text-[15px] font-medium text-paper/50">
+            {c.label} · <span className="text-paper/85">UN1T</span>
           </p>
           <h2 className="display mt-8 text-[length:var(--text-title)] leading-[1.02]">
             <RiseText text={c.title} />
@@ -47,7 +45,7 @@ export function CaseUn1t() {
             {c.meta.map((m) => (
               <li
                 key={m}
-                className="rounded-full border border-line-dark px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-paper/65"
+                className="rounded-full border border-line-dark px-3.5 py-1.5 text-[13px] text-paper/70"
               >
                 {m}
               </li>
@@ -77,7 +75,7 @@ export function CaseUn1t() {
             style={d(2500)}
           >
             <span className="display text-5xl text-paper">{c.side.value}</span>
-            <span className="font-mono text-xs uppercase tracking-[0.12em] text-paper/60">
+            <span className="text-[15px] text-paper/60">
               {c.side.label}
             </span>
           </p>

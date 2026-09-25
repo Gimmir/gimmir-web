@@ -69,7 +69,7 @@ export function Footer() {
 
           {FOOTER.columns.map((col) => (
             <nav key={col.title} aria-label={col.title}>
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40">
+              <p className="text-sm font-medium text-paper/40">
                 {col.title}
               </p>
               <ul className="mt-5 space-y-3">
@@ -85,7 +85,7 @@ export function Footer() {
           ))}
 
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40">
+            <p className="text-sm font-medium text-paper/40">
               Talk to us
             </p>
             <ul className="mt-5 space-y-3">
@@ -125,7 +125,7 @@ export function Footer() {
             ))}
             <CookieSettingsLink className="transition-colors hover:text-paper" />
           </p>
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em]">
+          <p>
             Built in the open by Nazar &amp; Oleh
           </p>
         </div>

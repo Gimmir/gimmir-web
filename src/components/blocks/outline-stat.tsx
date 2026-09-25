@@ -75,7 +75,7 @@ export function OutlineStat({
 
       <figcaption
         className={cn(
-          "fade absolute -translate-y-1/2 text-right font-mono text-[13px] uppercase leading-snug tracking-[0.08em] sm:text-sm",
+          "fade absolute -translate-y-1/2 text-balance text-right text-[15px] leading-snug sm:text-base",
           tone === "ink" ? "text-paper/75" : "text-muted",
         )}
         style={{
