@@ -13,9 +13,9 @@ export const home = {
 
   hero: {
     chips: [
-      { label: "UN1T", detail: "10+ locations", href: "/work/un1t" },
-      { label: "Jimmy Coach", detail: "co-founded", href: "/work/jimmy-coach" },
-      { label: "9 products", detail: "shipped", href: "/work" },
+      { label: "UN1T", detail: "10+ locations", logo: "/design/un1t-logo.png", href: "/work/un1t" },
+      { label: "Jimmy Coach", detail: "co-founded", logo: "/design/jimmy-coach-logo.png", href: "/work/jimmy-coach" },
+      { label: "9 products", detail: "shipped", grid: true, href: "/work" },
     ],
     headline: [
       "We",

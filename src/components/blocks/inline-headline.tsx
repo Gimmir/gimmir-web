@@ -95,7 +95,7 @@ function Faces({ ids }: { ids: readonly FounderId[] }) {
 
 /** Real app icons, fanned slightly like cards on a table. */
 function AppIcons({ ids }: { ids: readonly AppId[] }) {
-  const tilt = ["-rotate-[6deg]", "rotate-[5deg]", "-rotate-[2deg]"];
+  const tilt = ["-6deg", "5deg", "-2deg"];
   return (
     <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle">
       <span className="sr-only">{ids.map((id) => APPS[id].name).join(" and ")}</span>
@@ -104,11 +104,12 @@ function AppIcons({ ids }: { ids: readonly AppId[] }) {
           key={id}
           data-name={APPS[id].name}
           className={cn(
-            "face-tip relative inline-block size-[0.8em] rounded-[0.2em] shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-paper",
-            tilt[n % tilt.length],
+            "face-tip relative inline-block size-[0.8em] rotate-(--tilt) rounded-[0.2em] shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-paper",
             n > 0 && "-ml-[0.16em]",
           )}
-          style={{ zIndex: ids.length - n }}
+          style={
+            { zIndex: ids.length - n, "--tilt": tilt[n % tilt.length] } as React.CSSProperties
+          }
         >
           <span className="absolute inset-0 overflow-hidden rounded-[0.2em]">
             <Image
