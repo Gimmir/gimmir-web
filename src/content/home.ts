@@ -34,9 +34,11 @@ export const home = {
   },
 
   manifesto: {
-    lead: "Your business runs on software.",
-    // the marked word gets the marker stroke
-    line: ["You should", "own it."],
+    // one sentence per pair of lines, set as four lines at every width;
+    // the last line gets the lime marker
+    lines: ["Your business", "runs on software.", "You should", "own it."],
+    // the note on the drawn key: the same claim as /pricing and /operators
+    key: "Code, repos and accounts in your name from day one",
     marquee: [
       "Member apps",
       "Bookings",
