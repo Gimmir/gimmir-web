@@ -21,7 +21,7 @@ export function Footer() {
     <footer data-tone="ink" className="border-t border-line-dark bg-ink text-paper">
       <Container className="pb-10 pt-20 md:pt-28">
         <p className="display text-balance text-[length:var(--text-title)] leading-[1.02]">
-          {FOOTER.title}
+          {FOOTER.headline}
         </p>
 
         <div className="mt-14 grid gap-3 md:mt-20 lg:grid-cols-2">
