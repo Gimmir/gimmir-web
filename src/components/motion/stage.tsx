@@ -22,15 +22,12 @@ type Tag = "div" | "section" | "figure" | "header" | "span";
 export function Stage({
   as = "div",
   eager = false,
-  threshold = 0.25,
   className,
   children,
   ...rest
 }: {
   as?: Tag;
   eager?: boolean;
-  /** Share of the element that must be visible before it plays. */
-  threshold?: number;
   className?: string;
   children: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLElement>, "children" | "className">) {
@@ -55,11 +52,14 @@ export function Stage({
         el.dataset.stage = "in"; // stable end state: plays once, never replays
         io.disconnect();
       },
-      { threshold, rootMargin: "0px 0px -6% 0px" },
+      // Plays once its top is a quarter of the way up the screen. Not a
+      // share of the element: on phones a section can be taller than the
+      // screen and would otherwise sit blank while being read.
+      { threshold: 0, rootMargin: "0px 0px -25% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [eager, threshold]);
+  }, [eager]);
 
   // typed as a div for JSX; renders whichever tag was asked for
   const Tag = as as "div";

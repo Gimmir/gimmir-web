@@ -138,7 +138,6 @@ export function InlineHeadline({
   tokens: readonly HeadlineToken[];
   start?: number;
 }) {
-  let i = start;
   const total =
     start +
     tokens.reduce<number>(
@@ -154,60 +153,82 @@ export function InlineHeadline({
   // the marker lands just after the last word has settled
   const markDelay = total * 40 + 420;
 
-  return (
-    <>
-      {tokens.map((t, n) => {
-        const space =
-          n === 0 || (typeof t === "string" && HUGS_PREVIOUS.test(t))
-            ? null
-            : " ";
+  const nodes: React.ReactNode[] = [];
+  let i = start;
+  // An object (faces, app icons) binds to the word after it, so a line
+  // never ends on a picture with its word left on the next line.
+  let carried = false;
 
-        if (typeof t === "string") {
-          const words = t.split(/\s+/).filter(Boolean);
-          return (
-            <Fragment key={n}>
-              {space}
-              {words.map((w, k) => (
-                <Fragment key={k}>
-                  {k > 0 ? " " : null}
-                  <RiseWord i={i++}>{w}</RiseWord>
-                </Fragment>
-              ))}
-            </Fragment>
-          );
-        }
+  const risen = (words: string[], key: string) =>
+    words.map((w, k) => (
+      <Fragment key={`${key}-${k}`}>
+        {k > 0 ? " " : null}
+        <RiseWord i={i + k}>{w}</RiseWord>
+      </Fragment>
+    ));
 
-        if ("mark" in t) {
-          const words = t.mark.split(/\s+/).filter(Boolean);
-          return (
-            <Fragment key={n}>
-              {space}
-              {/* the marked words and any punctuation after them never part */}
-              <span className="whitespace-nowrap">
-                <span className="relative inline-block">
-                  {words.map((w, k) => (
-                    <Fragment key={k}>
-                      {k > 0 ? " " : null}
-                      <RiseWord i={i++}>{w}</RiseWord>
-                    </Fragment>
-                  ))}
-                  <MarkerStroke delay={markDelay} bottom="-0.08em" />
-                </span>
-                {t.after ? <RiseWord i={i - 1}>{t.after}</RiseWord> : null}
-              </span>
-            </Fragment>
-          );
-        }
+  for (let n = 0; n < tokens.length; n++) {
+    const t = tokens[n];
+    const space =
+      n === 0 || (typeof t === "string" && HUGS_PREVIOUS.test(t)) ? null : " ";
 
-        return (
-          <Fragment key={n}>
-            {space}
-            <RiseWord i={i++}>
-              {"faces" in t ? <Faces ids={t.faces} /> : <AppIcons ids={t.apps} />}
-            </RiseWord>
-          </Fragment>
-        );
-      })}
-    </>
-  );
+    if (typeof t === "string") {
+      const words = t.split(/\s+/).filter(Boolean).slice(carried ? 1 : 0);
+      nodes.push(
+        <Fragment key={n}>
+          {words.length ? space : null}
+          {risen(words, `w${n}`)}
+        </Fragment>,
+      );
+      i += words.length;
+      carried = false;
+      continue;
+    }
+
+    if ("mark" in t) {
+      const words = t.mark.split(/\s+/).filter(Boolean);
+      const last = i + words.length - 1;
+      nodes.push(
+        <Fragment key={n}>
+          {space}
+          {/* the marked words and any punctuation after them never part */}
+          <span className="whitespace-nowrap">
+            <span className="relative inline-block">
+              {risen(words, `m${n}`)}
+              <MarkerStroke delay={markDelay} bottom="-0.08em" />
+            </span>
+            {t.after ? <RiseWord i={last}>{t.after}</RiseWord> : null}
+          </span>
+        </Fragment>,
+      );
+      i += words.length;
+      continue;
+    }
+
+    const next = tokens[n + 1];
+    const nextWord =
+      typeof next === "string" && !HUGS_PREVIOUS.test(next)
+        ? next.split(/\s+/).filter(Boolean)[0]
+        : undefined;
+    nodes.push(
+      <Fragment key={n}>
+        {space}
+        <span className="whitespace-nowrap">
+          <RiseWord i={i}>
+            {"faces" in t ? <Faces ids={t.faces} /> : <AppIcons ids={t.apps} />}
+          </RiseWord>
+          {nextWord ? (
+            <>
+              {" "}
+              <RiseWord i={i + 1}>{nextWord}</RiseWord>
+            </>
+          ) : null}
+        </span>
+      </Fragment>,
+    );
+    i += nextWord ? 2 : 1;
+    carried = Boolean(nextWord);
+  }
+
+  return <>{nodes}</>;
 }

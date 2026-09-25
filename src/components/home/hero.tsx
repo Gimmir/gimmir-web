@@ -24,7 +24,7 @@ export function Hero() {
   return (
     <Stage as="section" eager id="top" data-tone="paper" className="relative">
       <HeroBackdrop />
-      <Container className="relative flex flex-col justify-center pb-16 pt-28 sm:pt-32 lg:min-h-[100svh] lg:pb-10 lg:pt-24">
+      <Container className="relative flex min-h-[100svh] flex-col pb-16 pt-28 sm:pt-32 md:min-h-0 lg:min-h-[100svh] lg:justify-center lg:pb-10 lg:pt-24">
         <ChipRow chips={chips} className="fade" style={d(0)} />
 
         <h1 className="mt-8 text-[clamp(2.3rem,0.8rem+5.1vw,5.25rem)] font-extrabold leading-[1.04] tracking-[-0.038em] [font-stretch:106%] md:mt-10">
@@ -40,6 +40,7 @@ export function Hero() {
                 src={by.photo}
                 alt=""
                 fill
+                loading="eager"
                 sizes="64px"
                 className="object-cover object-top"
               />

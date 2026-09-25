@@ -21,10 +21,9 @@ export function Manifesto() {
     <Stage
       as="section"
       data-tone="ink"
-      threshold={0.35}
       className="bg-ink text-paper"
     >
-      <Container className="py-28 md:py-40">
+      <Container className="py-20 md:py-40">
         <p className="fade text-[15px] font-medium text-paper/50">
           What we believe
         </p>

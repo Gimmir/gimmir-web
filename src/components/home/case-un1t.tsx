@@ -21,10 +21,9 @@ export function CaseUn1t() {
     <Stage
       as="section"
       data-tone="ink"
-      threshold={0.3}
       className="relative overflow-hidden border-t border-line-dark bg-ink text-paper"
     >
-      <Container className="relative grid min-h-[100svh] content-center gap-x-10 gap-y-16 py-28 md:py-36 lg:grid-cols-12">
+      <Container className="relative grid content-center gap-x-10 gap-y-16 py-20 md:py-36 lg:min-h-[100svh] lg:grid-cols-12">
         <div className="lg:col-span-6 lg:self-center">
           <p className="fade text-[15px] font-medium text-paper/50">
             {c.label} · <span className="text-paper/85">UN1T</span>

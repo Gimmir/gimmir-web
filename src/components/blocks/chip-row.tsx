@@ -42,6 +42,7 @@ export function ChipRow({
                 alt=""
                 width={28}
                 height={28}
+                loading="eager"
                 className="size-7 rounded-full max-sm:size-[26px]"
               />
             ) : c.grid ? (
