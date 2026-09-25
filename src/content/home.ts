@@ -160,4 +160,38 @@ export const home = {
     ],
     link: { label: "All mechanics", href: "/what-we-build" },
   },
+
+  // doc 09 ⑦. Card lines reuse claims already on the site (offer ladder,
+  // trust answers, Care); the UI fragments are illustrations, no amounts
+  // and no uptime figures.
+  get: {
+    title: "What you get.",
+    cards: [
+      {
+        id: "code",
+        title: "Your code, day one",
+        body: "Code, repos and accounts in your name from the first commit.",
+      },
+      {
+        id: "milestones",
+        title: "Fixed price per milestone",
+        body: "Priced and delivered against milestones you approve.",
+      },
+      {
+        id: "founders",
+        title: "Founders on your project",
+        body: "You work with Nazar and Oleh directly, backed by a senior team we've shipped with before.",
+      },
+      {
+        id: "steps",
+        title: "You see every step",
+        body: "Every step shown as it's built, with a runbook at every milestone.",
+      },
+      {
+        id: "after",
+        title: "We stay after launch",
+        body: "Ongoing build and maintenance once you're live.",
+      },
+    ],
+  },
 } as const;
