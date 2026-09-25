@@ -27,7 +27,7 @@ export function Hero() {
               times: a licence per location, a margin on every card payment,
               and a roadmap you don&apos;t control. We moved UN1T, a fitness
               franchise with 10+ locations, onto an app and back office they
-              own. About $10k a month stayed in the business.
+              own. Head office now sees every member and every payment.
             </p>
             <div className="flex shrink-0 flex-col gap-3.5">
               <div className="flex flex-wrap gap-3.5">

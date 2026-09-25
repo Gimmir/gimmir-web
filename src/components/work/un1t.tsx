@@ -105,10 +105,15 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
                   UN1T ran its members, bookings, and payments on a{" "}
                   <strong className="font-semibold text-ink">
                     white-label platform
-                  </strong>
-                  . As the franchise grew across locations, that meant renting
-                  software they could not fully control, and about $10k a
-                  month leaving the business in platform and payment fees.
+                  </strong>{" "}
+                  and a stack of third-party tools. Memberships sat in one
+                  place, bookings in another, payments somewhere else.
+                </p>
+                <p>
+                  As the franchise grew across locations, head office saw
+                  whatever each site sent over. Royalties came from reports,
+                  not from the payments themselves, and the software that ran
+                  the whole business was rented.
                 </p>
               </div>
             </Reveal>
@@ -139,6 +144,53 @@ export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* how it works */}
+      <section className="border-t border-line py-20 md:py-28">
+        <Container>
+          <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:items-start md:gap-16">
+            <Reveal>
+              <SectionHeader
+                index="03"
+                titleMax="max-w-[14ch]"
+                title="One system. Every site."
+              />
+            </Reveal>
+            <Reveal delay={80}>
+              <div className="space-y-6 text-lg leading-relaxed text-muted md:text-xl">
+                <p>
+                  In 12 weeks we built two products connected into one system: a
+                  member app for iOS and Android, with Apple Health and Health
+                  Connect built in, and a CRM that franchisees run their whole
+                  business on.
+                </p>
+                <p>
+                  Every member books classes, buys memberships and pays
+                  through the app. So{" "}
+                  <strong className="font-semibold text-ink">
+                    head office knows every member at every site
+                  </strong>
+                  , and royalties are calculated from what members actually
+                  paid. No spreadsheets, no end-of-month reports.
+                </p>
+                <p>UN1T owns the code, the data and the roadmap.</p>
+                <ul className="flex flex-wrap gap-2.5 pt-2">
+                  {["React Native (Expo)", "TypeScript", "Supabase", "Apple Health", "Health Connect"].map(
+                    (t) => (
+                      <li
+                        key={t}
+                        className="rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-sm text-ink"
+                      >
+                        {t}
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
+            </Reveal>
           </div>
         </Container>
       </section>
