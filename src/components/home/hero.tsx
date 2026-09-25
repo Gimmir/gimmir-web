@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { ChipRow } from "@/components/blocks/chip-row";
+import { HeroBackdrop } from "@/components/home/hero-backdrop";
 import { InlineHeadline } from "@/components/blocks/inline-headline";
 import { TwoDoor } from "@/components/blocks/two-door";
 import { Stage } from "@/components/motion/stage";
@@ -12,7 +13,8 @@ import { FOUNDERS } from "@/lib/founders";
  * ① The front door, as one sentence with the evidence inside it: the two
  * founders' faces, the real apps next to "Fitness", and "own" marked in
  * lime. Then two doors, one per buyer. From lg the whole thing sits inside
- * one screen; the headline is capped so it stays at four lines.
+ * one screen; the headline is capped so it stays at four lines. Soft lime
+ * light behind it (HeroBackdrop).
  */
 export function Hero() {
   const { chips, headline, doors, note } = home.hero;
@@ -21,7 +23,8 @@ export function Hero() {
 
   return (
     <Stage as="section" eager id="top" data-tone="paper" className="relative">
-      <Container className="flex flex-col justify-center pb-16 pt-28 sm:pt-32 lg:min-h-[100svh] lg:pb-10 lg:pt-24">
+      <HeroBackdrop />
+      <Container className="relative flex flex-col justify-center pb-16 pt-28 sm:pt-32 lg:min-h-[100svh] lg:pb-10 lg:pt-24">
         <ChipRow chips={chips} className="fade" style={d(0)} />
 
         <h1 className="mt-8 text-[clamp(2.3rem,0.8rem+5.1vw,5.25rem)] font-extrabold leading-[1.04] tracking-[-0.038em] [font-stretch:106%] md:mt-10">
