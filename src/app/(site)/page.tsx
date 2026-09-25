@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { CaseJimmy } from "@/components/home/case-jimmy";
 import { CaseUn1t } from "@/components/home/case-un1t";
+import { Compare } from "@/components/home/compare";
 import { Hero } from "@/components/home/hero";
 import { Manifesto } from "@/components/home/manifesto";
 import { home } from "@/content/home";
@@ -20,8 +21,8 @@ export const metadata: Metadata = {
 };
 
 // V2 home, built section by section: ① hero, ② manifesto, ③ UN1T,
-// ④ Jimmy Coach. Next: comparison, hover list, bento, build log, founders,
-// voices, final CTA.
+// ④ Jimmy Coach, ⑤ comparison. Next: hover list, bento, build log,
+// founders, voices, final CTA.
 export default function HomePage() {
   return (
     <>
@@ -29,6 +30,7 @@ export default function HomePage() {
       <Manifesto />
       <CaseUn1t />
       <CaseJimmy />
+      <Compare />
     </>
   );
 }

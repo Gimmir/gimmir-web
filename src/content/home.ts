@@ -71,9 +71,7 @@ export const home = {
     name: "Jimmy Coach",
     // doc 09 ④, without its dash
     title: ["A coach asked us for software.", "We saw a market and invested."],
-    // DRAFT for Nazar to confirm or rewrite: built only from what
-    // /work/jimmy-coach already says (WhatsApp, spreadsheets and PDFs;
-    // co-founded with a working coach; built as owners, not by the hour)
+    // approved by Nazar 2026-09-25
     quote: {
       text: "Coaches were running their business across WhatsApp, spreadsheets and PDFs, and losing clients in the gaps. So we co-founded Jimmy with one of them and built it as owners, not by the hour.",
       by: "nazar",
@@ -82,5 +80,28 @@ export const home = {
     link: { label: "Read the story", href: "/work/jimmy-coach" },
     stat: { value: "100+", label: "coaches on Jimmy in its first month" },
     side: { value: "300+", label: "users in the first month" },
+  },
+
+  // doc 09 ⑤. "Every step" drops the doc's "(build log)" until the build
+  // log is public (P2).
+  compare: {
+    title: "Three ways to get your software.",
+    columns: ["Rent a platform", "Agency by the hour", "Gimmir"],
+    rows: [
+      {
+        label: "Who owns the code",
+        values: ["Vendor", "Often unclear", "You, from day one"],
+      },
+      {
+        label: "Cost as you grow",
+        values: ["Rises per location or user", "Rises per hour", "Fixed per milestone"],
+      },
+      { label: "Your brand", values: ["Their template", "Yours", "Yours"] },
+      { label: "Your data", values: ["Their system", "Yours, if you ask", "Yours"] },
+      {
+        label: "What you see",
+        values: ["Nothing", "A demo at the end", "Every step"],
+      },
+    ],
   },
 } as const;
