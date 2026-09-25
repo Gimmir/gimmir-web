@@ -59,7 +59,7 @@ export function MarkerStroke({
   );
 }
 
-function Faces({ ids }: { ids: readonly FounderId[] }) {
+export function Faces({ ids }: { ids: readonly FounderId[] }) {
   return (
     <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.06em] align-middle">
       <span className="sr-only">

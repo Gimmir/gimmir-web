@@ -1,6 +1,7 @@
 import { BookTrigger } from "@/components/blocks/book-trigger";
-import { InlineHeadline } from "@/components/blocks/inline-headline";
+import { Faces } from "@/components/blocks/inline-headline";
 import { Stage } from "@/components/motion/stage";
+import { RiseText, RiseWord, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { ArrowRight, LinkedIn } from "@/components/ui/icons";
 import { home } from "@/content/home";
@@ -11,11 +12,15 @@ import { FOUNDERS } from "@/lib/founders";
  * their faces ("You work with [face] Nazar and [face] Oleh, directly."),
  * and under it one column each: name and title, one line in their own
  * voice (serif, the way people speak on this site), a call signed with
- * their name and their LinkedIn.
+ * their name and their LinkedIn. "[face] Nazar and [face] Oleh," never
+ * breaks (from 360px up), so the two faces always sit side by side on one
+ * line instead of stacking at the start of two.
  */
 export function Founders() {
   const { label, headline, people } = home.founders;
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+  const [a, b] = people.map((p) => FOUNDERS[p.id]);
+  const n = wordCount(headline.before);
 
   return (
     <Stage
@@ -26,10 +31,22 @@ export function Founders() {
       <Container className="py-20 md:py-28">
         <p className="fade text-[15px] font-medium text-paper/50">{label}</p>
         <h2
-          className="mt-8 max-w-[18ch] text-[clamp(2.1rem,1rem+3.6vw,4.5rem)] font-extrabold leading-[1.06] tracking-[-0.035em] [font-stretch:108%]"
+          className="mt-8 text-[clamp(1.625rem,0.7rem+3.9vw,4.25rem)] font-extrabold leading-[1.1] tracking-[-0.035em] [font-stretch:108%]"
           style={{ "--face-ring": "var(--color-ink)" } as React.CSSProperties}
         >
-          <InlineHeadline tokens={headline} />
+          <RiseText text={headline.before} />{" "}
+          <span className="min-[360px]:whitespace-nowrap">
+            <RiseWord i={n}>
+              <Faces ids={[a.id]} />
+            </RiseWord>{" "}
+            <RiseWord i={n + 1}>{a.first}</RiseWord>{" "}
+            <RiseWord i={n + 2}>and</RiseWord>{" "}
+            <RiseWord i={n + 3}>
+              <Faces ids={[b.id]} />
+            </RiseWord>{" "}
+            <RiseWord i={n + 4}>{b.first},</RiseWord>
+          </span>{" "}
+          <RiseText text={headline.after} start={n + 5} />
         </h2>
 
         <ul className="mt-14 grid gap-x-10 gap-y-12 md:mt-16 md:grid-cols-2">

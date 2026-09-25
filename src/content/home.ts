@@ -199,14 +199,9 @@ export const home = {
   // sentence of their approved bio (Sanity), turned into the first person.
   founders: {
     label: "Nazar & Oleh",
-    // Nazar's pick (V1): the live heading with the two of you in it
-    headline: [
-      "You work with",
-      { faces: ["nazar"] },
-      "Nazar and",
-      { faces: ["oleh"] },
-      "Oleh, directly.",
-    ],
+    // Nazar's pick (V1): the live heading with the two of you in it,
+    // "You work with [face] Nazar and [face] Oleh, directly."
+    headline: { before: "You work with", after: "directly." },
     people: [
       {
         id: "nazar",
