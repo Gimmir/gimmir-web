@@ -47,7 +47,7 @@ export function ChipRow({
             ) : c.grid ? (
               <span
                 aria-hidden
-                className="grid size-[26px] grid-cols-3 place-content-center gap-[2px] rounded-full bg-ink sm:size-7"
+                className="grid size-[26px] grid-cols-[repeat(3,3px)] place-content-center gap-[2.5px] rounded-full bg-ink sm:size-7"
               >
                 {Array.from({ length: 9 }, (_, n) => (
                   <span key={n} className="size-[3px] rounded-full bg-paper" />
