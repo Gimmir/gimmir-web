@@ -26,13 +26,13 @@ export function ChipRow({
   style?: React.CSSProperties;
 }) {
   return (
-    <ul className={cn("flex flex-wrap gap-1.5 sm:gap-2", className)} style={style}>
+    <ul className={cn("flex flex-wrap gap-1 sm:gap-2", className)} style={style}>
       {chips.map((c) => (
         <li key={c.label}>
           <Link
             href={c.href}
             className={cn(
-              "group inline-flex h-9 items-center gap-1.5 rounded-full border border-line bg-surface/70 pr-2.5 text-[12.5px] transition-colors duration-200 hover:border-ink/40 sm:h-10 sm:gap-2.5 sm:pr-4 sm:text-[13.5px]",
+              "group flex h-9 items-center gap-1.5 rounded-full border border-line bg-surface/70 pr-2.5 text-[13px] transition-colors duration-200 hover:border-ink/40 sm:h-10 sm:gap-2.5 sm:pr-4 sm:text-[13.5px]",
               c.logo || c.grid ? "pl-1 sm:pl-[5px]" : "pl-2.5 sm:pl-4",
             )}
           >
@@ -55,10 +55,12 @@ export function ChipRow({
               </span>
             ) : null}
             <span className="font-semibold text-ink">{c.label}</span>
-            <span aria-hidden className="text-faint">
+            {/* phones: icon + name only, so all three sit on one row; the
+                detail stays for screen readers */}
+            <span aria-hidden className="text-faint max-sm:hidden">
               ·
             </span>
-            <span className="text-muted">{c.detail}</span>
+            <span className="text-muted max-sm:sr-only">{c.detail}</span>
           </Link>
         </li>
       ))}
