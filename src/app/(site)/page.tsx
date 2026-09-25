@@ -5,6 +5,7 @@ import { CaseUn1t } from "@/components/home/case-un1t";
 import { Compare } from "@/components/home/compare";
 import { Hero } from "@/components/home/hero";
 import { Manifesto } from "@/components/home/manifesto";
+import { WhatWeBuild } from "@/components/home/what-we-build";
 import { home } from "@/content/home";
 import { socialMetadata } from "@/lib/seo";
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 // V2 home, built section by section: ① hero, ② manifesto, ③ UN1T,
-// ④ Jimmy Coach, ⑤ comparison. Next: hover list, bento, build log,
+// ④ Jimmy Coach, ⑤ comparison, ⑥ what we build. Next: bento, build log,
 // founders, voices, final CTA.
 export default function HomePage() {
   return (
@@ -31,6 +32,7 @@ export default function HomePage() {
       <CaseUn1t />
       <CaseJimmy />
       <Compare />
+      <WhatWeBuild />
     </>
   );
 }
