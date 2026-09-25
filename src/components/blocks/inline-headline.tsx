@@ -5,17 +5,22 @@ import { HUGS_PREVIOUS, RiseWord, wordCount } from "@/components/motion/words";
 import { cn } from "@/lib/cn";
 import { FOUNDERS, type FounderId } from "@/lib/founders";
 
-export type InlineIcon = "app" | "pulse";
+/** Products that can sit inside a sentence as their real app icons. */
+const APPS = {
+  un1t: { name: "UN1T", icon: "/design/un1t-logo.png" },
+  jimmy: { name: "Jimmy Coach", icon: "/design/jimmy-coach-logo.png" },
+} as const;
+export type AppId = keyof typeof APPS;
 
 /**
  * A headline written as a sentence with objects inside it: plain text,
- * founders' faces, small icon tiles, and one `mark`ed word that gets the
- * lime marker stroke (the one lime thing on the screen).
+ * founders' faces, real product icons, and one `mark`ed word that gets
+ * the lime marker stroke (the one lime thing on the screen).
  */
 export type HeadlineToken =
   | string
   | { faces: readonly FounderId[] }
-  | { icon: InlineIcon }
+  | { apps: readonly AppId[] }
   | { mark: string; after?: string };
 
 /**
@@ -55,7 +60,7 @@ export function MarkerStroke({
 
 function Faces({ ids }: { ids: readonly FounderId[] }) {
   return (
-    <span className="inline-flex h-[0.84em] -translate-y-[0.08em] items-center px-[0.06em] align-middle">
+    <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.06em] align-middle">
       <span className="sr-only">
         {ids.map((id) => FOUNDERS[id].first).join(" and ")}
       </span>
@@ -66,8 +71,8 @@ function Faces({ ids }: { ids: readonly FounderId[] }) {
             key={id}
             data-name={`${f.first} · ${f.title.split(",")[0]}`}
             className={cn(
-              "face-tip relative inline-block size-[0.84em] rounded-full ring-[0.05em] ring-paper",
-              n > 0 && "-ml-[0.2em]",
+              "face-tip relative inline-block size-[0.9em] rounded-full ring-[0.05em] ring-paper",
+              n > 0 && "-ml-[0.22em]",
             )}
             style={{ zIndex: ids.length - n }}
           >
@@ -88,30 +93,35 @@ function Faces({ ids }: { ids: readonly FounderId[] }) {
   );
 }
 
-function IconTile({ name }: { name: InlineIcon }) {
+/** Real app icons, fanned slightly like cards on a table. */
+function AppIcons({ ids }: { ids: readonly AppId[] }) {
+  const tilt = ["-rotate-[6deg]", "rotate-[5deg]", "-rotate-[2deg]"];
   return (
-    <span
-      aria-hidden
-      className="inline-flex size-[0.8em] -translate-y-[0.08em] items-center justify-center rounded-[0.2em] bg-ink align-middle text-paper"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="size-[0.46em]"
-      >
-        {name === "app" ? (
-          <>
-            <rect x="3" y="4" width="18" height="16" rx="3" />
-            <path d="M3 9h18M7.5 13.5h4M7.5 16.5h7" />
-          </>
-        ) : (
-          <path d="M2.5 12.5h4l2.2-5.5 4.3 11 2.6-7h5.9" />
-        )}
-      </svg>
+    <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle">
+      <span className="sr-only">{ids.map((id) => APPS[id].name).join(" and ")}</span>
+      {ids.map((id, n) => (
+        <span
+          key={id}
+          data-name={APPS[id].name}
+          className={cn(
+            "face-tip relative inline-block size-[0.8em] rounded-[0.2em] shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-paper",
+            tilt[n % tilt.length],
+            n > 0 && "-ml-[0.16em]",
+          )}
+          style={{ zIndex: ids.length - n }}
+        >
+          <span className="absolute inset-0 overflow-hidden rounded-[0.2em]">
+            <Image
+              src={APPS[id].icon}
+              alt=""
+              fill
+              loading="eager"
+              sizes="120px"
+              className="object-cover"
+            />
+          </span>
+        </span>
+      ))}
     </span>
   );
 }
@@ -192,7 +202,7 @@ export function InlineHeadline({
           <Fragment key={n}>
             {space}
             <RiseWord i={i++}>
-              {"faces" in t ? <Faces ids={t.faces} /> : <IconTile name={t.icon} />}
+              {"faces" in t ? <Faces ids={t.faces} /> : <AppIcons ids={t.apps} />}
             </RiseWord>
           </Fragment>
         );

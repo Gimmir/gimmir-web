@@ -29,7 +29,10 @@ export function ChipRow({
         <li key={c.label}>
           <Link
             href={c.href}
-            className="group inline-flex h-9 items-center gap-2 rounded-full border border-line bg-surface/70 pl-1 pr-3 text-[12.5px] transition-colors duration-200 hover:border-ink/40 sm:h-10 sm:gap-2.5 sm:pl-1.5 sm:pr-4 sm:text-[13.5px]"
+            className={cn(
+              "group inline-flex h-9 items-center gap-1.5 rounded-full border border-line bg-surface/70 pr-2.5 text-[12.5px] transition-colors duration-200 hover:border-ink/40 sm:h-10 sm:gap-2.5 sm:pr-4 sm:text-[13.5px]",
+              c.logo ? "pl-1 sm:pl-1.5" : "pl-2.5 sm:pl-4",
+            )}
           >
             {c.logo ? (
               <Image
@@ -39,16 +42,7 @@ export function ChipRow({
                 height={28}
                 className="size-7 rounded-[8px] max-sm:size-[26px]"
               />
-            ) : (
-              <span
-                aria-hidden
-                className="grid size-[26px] grid-cols-3 place-content-center gap-[2px] rounded-[8px] bg-ink p-[6px] sm:size-7 sm:p-[7px]"
-              >
-                {Array.from({ length: 9 }, (_, n) => (
-                  <span key={n} className="size-[3px] rounded-[1px] bg-paper" />
-                ))}
-              </span>
-            )}
+            ) : null}
             <span className="font-semibold text-ink">{c.label}</span>
             <span aria-hidden className="text-faint">
               ·

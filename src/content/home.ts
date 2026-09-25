@@ -13,21 +13,24 @@ export const home = {
 
   hero: {
     chips: [
-      { label: "UN1T", detail: "10+ locations", logo: "/design/un1t-logo.png", href: "/work/un1t" },
-      { label: "Jimmy Coach", detail: "co-founded", logo: "/design/jimmy-coach-logo.png", href: "/work/jimmy-coach" },
+      { label: "UN1T", detail: "10+ locations", href: "/work/un1t" },
+      { label: "Jimmy Coach", detail: "co-founded", href: "/work/jimmy-coach" },
       { label: "9 products", detail: "shipped", href: "/work" },
     ],
     headline: [
-      "We build SaaS that founders",
+      "We",
+      { faces: ["nazar", "oleh"] },
+      "build SaaS that founders",
       { mark: "own", after: "," },
       "and show you how it’s done.",
+      { apps: ["un1t", "jimmy"] },
+      "Fitness is where we go deepest.",
     ] satisfies HeadlineToken[],
-    sub: "Fitness is where we go deepest: member apps, coaching platforms and back offices, in your name from day one.",
     doors: [
       { id: "operators", label: "I run a fitness brand", href: "/operators" },
       { id: "saas", label: "I’m building a SaaS", href: "/build-your-saas" },
     ],
-    caption: "Book a call with us, not a sales rep.",
+    note: { quote: "Book a call with us, not a sales rep.", by: "nazar" },
   },
 
   manifesto: {
