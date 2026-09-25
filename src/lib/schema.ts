@@ -243,7 +243,8 @@ export function serviceSchema({
   name: string;
   description: string;
   path: string;
-  offers: OfferId[];
+  /** Priced offers; V2 pages leave them out (no prices on the site). */
+  offers?: OfferId[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -254,7 +255,9 @@ export function serviceSchema({
     url: `${SITE_URL}${path}`,
     provider: { "@id": ORG_ID },
     areaServed: "Worldwide",
-    offers: offers.map((o) => offerNode(OFFERS[o], path)),
+    ...(offers?.length
+      ? { offers: offers.map((o) => offerNode(OFFERS[o], path)) }
+      : {}),
   };
 }
 

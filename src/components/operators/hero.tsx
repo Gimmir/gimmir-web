@@ -1,53 +1,65 @@
-import { BookingCta } from "@/components/shared/booking-cta";
-import { FounderChip } from "@/components/shared/founder-chip";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+
+import { BookTrigger } from "@/components/blocks/book-trigger";
+import { InlineHeadline } from "@/components/blocks/inline-headline";
+import { HeroBackdrop } from "@/components/home/hero-backdrop";
+import { Stage } from "@/components/motion/stage";
 import { Container } from "@/components/ui/container";
-import { Mark } from "@/components/ui/mark";
-import { Pill } from "@/components/ui/pill";
-import { Reveal } from "@/components/ui/reveal";
-import { BOOKINGS } from "@/lib/booking";
+import { ArrowRight } from "@/components/ui/icons";
+import { operators } from "@/content/operators";
+import { FOUNDERS } from "@/lib/founders";
 
-export function Hero() {
+/**
+ * /operators ①, the home hero's language for operators: the rented
+ * platform drawn as a padlock inside the sentence, "yours." marked, and
+ * one call signed with Nazar's face.
+ */
+export function OperatorsHero() {
+  const { headline, sub, cta } = operators.hero;
+  const nazar = FOUNDERS.nazar;
+  const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+
   return (
-    <section id="top" className="relative overflow-hidden">
-      <Container className="pb-14 pt-28 sm:pt-32 md:pb-20 md:pt-36">
-        <Reveal eager>
-          <Pill>For operators &amp; franchisors with 8+ locations</Pill>
-        </Reveal>
-
-        <Reveal eager delay={60}>
-          <h1 className="display mt-8 text-[1.7rem] leading-[1.2] sm:text-hero sm:leading-[0.98]">
-            Stop renting your fitness platform. <Mark>Own it.</Mark>
-          </h1>
-        </Reveal>
-
-        <Reveal eager delay={140}>
-          <div className="mt-10 flex flex-col gap-9 md:flex-row md:items-end md:justify-between md:gap-12">
-            <div className="max-w-[48ch]">
-              <p className="text-lg leading-relaxed text-muted md:text-xl">
-                At eight sites and up, you pay for your booking platform three
-                times: a licence per location, a margin on every card payment,
-                and a roadmap you don&apos;t control. I&apos;m Nazar. We moved
-                UN1T, a fitness franchise with 10+ locations, onto an app and
-                back office they own.
-              </p>
-              <FounderChip id="nazar" className="mt-7" />
-            </div>
-            <div className="flex shrink-0 flex-col gap-3.5">
-              <div className="flex flex-col gap-3 sm:items-start">
-                <BookingCta booking="costCheck" placement="hero" />
-                <Button href="#ladder" variant="outline">
-                  Start with a Platform Fee Teardown
-                </Button>
-              </div>
-              <p className="max-w-[40ch] text-sm text-faint">
-                Free, {BOOKINGS.costCheck.minutes} minutes. Bring your last
-                platform invoice and you leave with your number.
-              </p>
-            </div>
-          </div>
-        </Reveal>
+    <Stage as="section" eager data-tone="paper" className="relative">
+      <HeroBackdrop />
+      <Container className="relative flex min-h-[100svh] flex-col justify-center pb-16 pt-28 sm:pt-32 md:min-h-0 md:py-40 lg:min-h-[100svh] lg:pb-10 lg:pt-24">
+        <h1 className="max-w-[17ch] text-[clamp(2.3rem,0.8rem+5.1vw,5.25rem)] font-extrabold leading-[1.04] tracking-[-0.038em] [font-stretch:106%]">
+          <InlineHeadline tokens={headline} />
+        </h1>
+        <p
+          className="fade mt-7 text-lg text-muted md:mt-9 md:text-xl"
+          style={d(900)}
+        >
+          {sub}
+        </p>
+        <div className="fade mt-10 md:mt-12" style={d(1100)}>
+          <BookTrigger
+            booking="costCheck"
+            placement="operators-hero"
+            className="group flex w-full items-center gap-4 rounded-full bg-ink p-2 text-left text-paper transition-[background-color,color,transform] duration-200 ease-[cubic-bezier(.23,1,.32,1)] hover:bg-lime hover:text-ink active:scale-[.97] sm:inline-flex sm:w-auto sm:pr-2"
+          >
+            <span className="relative size-12 shrink-0 overflow-hidden rounded-full bg-paper-2 ring-2 ring-paper/20 sm:size-[52px]">
+              <Image
+                src={nazar.photo}
+                alt=""
+                fill
+                sizes="104px"
+                loading="eager"
+                className="object-cover object-top"
+              />
+            </span>
+            <span className="flex min-w-0 flex-col pr-2">
+              <span className="text-[16px] font-semibold leading-tight sm:text-[17px]">
+                {cta.label}
+              </span>
+              <span className="mt-0.5 text-sm opacity-70">{cta.by}</span>
+            </span>
+            <span className="ml-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-colors duration-200 group-hover:bg-ink group-hover:text-paper sm:ml-4 sm:size-[52px]">
+              <ArrowRight className="size-5" />
+            </span>
+          </BookTrigger>
+        </div>
       </Container>
-    </section>
+    </Stage>
   );
 }

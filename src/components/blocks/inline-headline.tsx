@@ -22,6 +22,7 @@ export type HeadlineToken =
   | string
   | { faces: readonly FounderId[] }
   | { apps: readonly AppId[] }
+  | { tile: "lock" }
   | { mark: string; after?: string };
 
 /**
@@ -134,6 +135,37 @@ function AppIcons({ ids }: { ids: readonly AppId[] }) {
 }
 
 /**
+ * A rented thing, drawn: a small paper tile with a padlock in the site's
+ * thin line, tilted like the app icons. No platform is ever named, and
+ * it's decoration, so the heading reads as plain words.
+ */
+function LockTile() {
+  return (
+    <span
+      aria-hidden
+      className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle"
+    >
+      <span className="relative inline-flex size-[0.8em] -rotate-6 items-center justify-center rounded-[0.2em] bg-surface shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-[var(--face-ring,var(--color-paper))]">
+        <svg
+          viewBox="0 0 100 100"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={6}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="size-[0.56em] text-ink"
+        >
+          <path d="M35 46V34a15 15 0 0 1 30 0v12" />
+          <path d="M30 46h40a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V52a6 6 0 0 1 6-6Z" />
+          <circle cx="50" cy="61" r="4" />
+          <path d="M50 65v8" />
+        </svg>
+      </span>
+    </span>
+  );
+}
+
+/**
  * Renders the tokens as rising words for a <Stage>. Returns the sentence
  * inline, so the caller picks the heading tag and size.
  */
@@ -224,7 +256,13 @@ export function InlineHeadline({
         {space}
         <span className="whitespace-nowrap">
           <RiseWord i={i}>
-            {"faces" in t ? <Faces ids={t.faces} /> : <AppIcons ids={t.apps} />}
+            {"faces" in t ? (
+              <Faces ids={t.faces} />
+            ) : "apps" in t ? (
+              <AppIcons ids={t.apps} />
+            ) : (
+              <LockTile />
+            )}
           </RiseWord>
           {nextWord ? (
             <>
