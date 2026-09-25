@@ -316,6 +316,16 @@
   }
 }
 
+/* ⑤ on phones: an answer swapped in when the comparison switches; the
+   blur carries the eye across the change instead of showing two texts. */
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
 /* Marquee pauses while it is being read. */
 .marquee-track:hover > * {
   animation-play-state: paused;
