@@ -23,9 +23,10 @@ export const metadata: Metadata = {
   }),
 };
 
-// V2 home, built section by section: ① hero, ② manifesto, ③ UN1T,
-// ④ Jimmy Coach, ⑤ comparison, ⑥ what we build, ⑦ what you get,
-// ⑨ founders (⑧ build log waits for P2). Next: voices, final CTA.
+// V2 home: ① hero, ② manifesto, ③ UN1T, ④ Jimmy Coach, ⑤ comparison,
+// ⑥ what we build, ⑦ what you get, ⑨ founders; the footer closes it (no
+// separate final CTA, Nazar 2026-09-25). ⑧ build log waits for P2, ⑩
+// voices for three real, approved quotes.
 export default function HomePage() {
   return (
     <>
