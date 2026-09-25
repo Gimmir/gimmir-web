@@ -14,6 +14,8 @@ import "./globals.css";
 
 const archivo = Archivo({
   subsets: ["latin"],
+  // width axis: the manifesto type sets wide (font-stretch) at display sizes
+  axes: ["wdth"],
   variable: "--font-archivo",
   display: "swap",
 });

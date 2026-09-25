@@ -22,10 +22,15 @@
   --font-mono: var(--font-mono-ui), ui-monospace, "SF Mono", Menlo, monospace;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
   --text-hero: clamp(2.5rem, 1rem + 4.4vw, 5rem);
   --text-display: clamp(1.85rem, 1rem + 3.2vw, 3.25rem);
+  /* V2 manifesto scale: one idea per screen */
+  --text-mega: clamp(4rem, 0.6rem + 10.4vw, 12.5rem);
+  --text-headline: clamp(2.3rem, 0.8rem + 5.1vw, 7rem);
+  --text-title: clamp(2rem, 0.9rem + 3.3vw, 4.5rem);
 
   --animate-marquee: marquee 38s linear infinite;
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
@@ -166,6 +171,145 @@
   letter-spacing: -0.03em;
   line-height: 0.98;
   font-stretch: 112%;
+}
+
+/* The manifesto cut: wider, tighter, stacked close. */
+@utility mega {
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  font-stretch: 118%;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Stage (src/components/motion/stage.tsx)                            */
+/*  One observer arms a whole composition; its parts choreograph off   */
+/*  the stage state with their own --i / --d offsets. The resting      */
+/*  state is always the finished one (no JS, reduced motion).          */
+/*                                                                     */
+/*    .rw > .rwi   a word rising out of its own clipped line box       */
+/*    .draw        an SVG path with pathLength="1" drawing itself      */
+/*    .draw-text   SVG text outlines drawing (--len in user units)     */
+/*    .wipe        a filled mark revealed left to right (clip-path)    */
+/*    .fade        a label settling in after the drawing               */
+/* ------------------------------------------------------------------ */
+.rw {
+  display: inline-block;
+  overflow: clip;
+  /* room for ascenders/descenders without moving the line box */
+  padding-block: 0.1em 0.16em;
+  margin-block: -0.1em -0.16em;
+  vertical-align: bottom;
+}
+.rwi {
+  display: inline-block;
+}
+.draw {
+  stroke-dasharray: 1 1;
+}
+.draw-text {
+  stroke-dasharray: var(--len, 2000) var(--len, 2000);
+}
+
+[data-stage="pending"] .rwi {
+  transform: translate3d(0, 112%, 0);
+}
+[data-stage="pending"] .draw {
+  stroke-dashoffset: 1;
+}
+[data-stage="pending"] .draw-text {
+  stroke-dashoffset: var(--len, 2000);
+}
+[data-stage="pending"] .wipe {
+  clip-path: inset(0 100% 0 0);
+}
+[data-stage="pending"] .fade {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+}
+
+[data-stage="in"] .rwi {
+  transition: transform 1000ms var(--ease-out)
+    calc(var(--d, 0ms) + var(--i, 0) * 40ms);
+}
+[data-stage="in"] .draw,
+[data-stage="in"] .draw-text {
+  transition: stroke-dashoffset var(--dur, 1200ms) var(--ease-in-out)
+    var(--d, 0ms);
+}
+[data-stage="in"] .wipe {
+  transition: clip-path var(--dur, 800ms) var(--ease-in-out) var(--d, 0ms);
+}
+[data-stage="in"] .fade {
+  transition:
+    opacity 700ms var(--ease-out) var(--d, 0ms),
+    transform 700ms var(--ease-out) var(--d, 0ms);
+}
+
+/* above the fold: plain CSS on first paint, no waiting for hydration */
+@keyframes stage-rise {
+  from {
+    transform: translate3d(0, 112%, 0);
+  }
+}
+@keyframes stage-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes stage-draw-text {
+  from {
+    stroke-dashoffset: var(--len, 2000);
+  }
+}
+@keyframes stage-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+@keyframes stage-fade {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+}
+[data-stage="eager"] .rwi {
+  animation: stage-rise 1000ms var(--ease-out)
+    calc(var(--d, 0ms) + var(--i, 0) * 40ms) both;
+}
+[data-stage="eager"] .draw {
+  animation: stage-draw var(--dur, 1200ms) var(--ease-in-out) var(--d, 0ms)
+    both;
+}
+[data-stage="eager"] .draw-text {
+  animation: stage-draw-text var(--dur, 1200ms) var(--ease-in-out)
+    var(--d, 0ms) both;
+}
+[data-stage="eager"] .wipe {
+  animation: stage-wipe var(--dur, 800ms) var(--ease-in-out) var(--d, 0ms) both;
+}
+[data-stage="eager"] .fade {
+  animation: stage-fade 700ms var(--ease-out) var(--d, 0ms) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-stage] .rwi,
+  [data-stage] .draw,
+  [data-stage] .draw-text,
+  [data-stage] .wipe,
+  [data-stage] .fade {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+    clip-path: none !important;
+  }
+}
+
+/* Marquee pauses while it is being read. */
+.marquee-track:hover > * {
+  animation-play-state: paused;
 }
 
 /* ------------------------------------------------------------------ */
@@ -372,5 +516,36 @@
   }
   .w-card:hover .wi6-value {
     stroke-dashoffset: 0;
+  }
+}
+
+/* Founder faces inside a headline: name on hover (pointer devices only). */
+@media (hover: hover) and (pointer: fine) {
+  .rw:has(.face-tip:hover) {
+    overflow: visible;
+  }
+  .face-tip::after {
+    content: attr(data-name);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translate(-50%, 4px);
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font: 700 11px/1 var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 150ms ease,
+      transform 180ms var(--ease-out);
+  }
+  .face-tip:hover::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }

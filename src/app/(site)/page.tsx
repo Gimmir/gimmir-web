@@ -1,68 +1,32 @@
 import type { Metadata } from "next";
 
-import { RouteSelector } from "@/components/shared/route-selector";
-import { FaqSection } from "@/components/home/faq";
-import { FinalCta } from "@/components/home/final-cta";
-import { FoundersSection } from "@/components/home/founders";
+import { CaseUn1t } from "@/components/home/case-un1t";
 import { Hero } from "@/components/home/hero";
-import { OffersSnapshot } from "@/components/home/offers-snapshot";
-import { ProblemSection } from "@/components/home/problem";
-import { ProofSection } from "@/components/home/proof";
-import { JsonLd } from "@/components/seo/json-ld";
-import { faqPage, organizationGraph } from "@/lib/schema";
-import { BRAND, socialMetadata } from "@/lib/seo";
-import { sanityFetch } from "@/sanity/lib/live";
-import {
-  FOUNDERS_QUERY,
-  HOME_QUERY,
-  HOME_SEO_QUERY,
-  SETTINGS_QUERY,
-} from "@/sanity/lib/queries";
+import { Manifesto } from "@/components/home/manifesto";
+import { home } from "@/content/home";
+import { socialMetadata } from "@/lib/seo";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await sanityFetch({ query: HOME_SEO_QUERY, stega: false });
+export const metadata: Metadata = {
+  title: { absolute: home.meta.title },
+  description: home.meta.description,
+  alternates: { canonical: "/" },
+  ...socialMetadata({
+    title: home.meta.title,
+    description: home.meta.description,
+    path: "/",
+    image: "/opengraph-image",
+  }),
+};
 
-  return {
-    title: data?.seo?.metaTitle ? { absolute: data.seo.metaTitle } : undefined,
-    description: data?.seo?.metaDescription ?? undefined,
-    alternates: { canonical: "/" },
-    ...socialMetadata({
-      title: data?.seo?.metaTitle ?? BRAND,
-      description: data?.seo?.metaDescription,
-      path: "/",
-      image: "/opengraph-image",
-    }),
-  };
-}
-
-export default async function HomePage() {
-  const [{ data }, { data: founders }, { data: settings }] = await Promise.all([
-    sanityFetch({ query: HOME_QUERY }),
-    sanityFetch({ query: FOUNDERS_QUERY, stega: false }),
-    sanityFetch({ query: SETTINGS_QUERY, stega: false }),
-  ]);
-
-  if (!data) return null;
-
-  const faqLd = faqPage(data.faqItems ?? []);
-
+// V2 design slice: ① hero, ② manifesto, ③ UN1T. The remaining sections
+// (Jimmy, comparison, hover list, bento, build log, founders, voices, final
+// CTA) follow once the direction is signed off.
+export default function HomePage() {
   return (
     <>
-      <JsonLd
-        data={organizationGraph(founders, {
-          email: settings?.contactEmail,
-          description: settings?.description,
-        })}
-      />
-      {faqLd && <JsonLd data={faqLd} />}
-      <Hero data={data} />
-      <RouteSelector />
-      <ProblemSection data={data} />
-      <ProofSection data={data} />
-      <FoundersSection data={data} />
-      <OffersSnapshot heading={data.offersHeading} intro={data.offersIntro} />
-      <FaqSection data={data} />
-      <FinalCta data={data} />
+      <Hero />
+      <Manifesto />
+      <CaseUn1t />
     </>
   );
 }

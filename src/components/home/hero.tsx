@@ -1,83 +1,60 @@
-import { FoundersPortrait } from "@/components/home/founders-portrait";
-import { BookingCta } from "@/components/shared/booking-cta";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+
+import { ChipRow } from "@/components/blocks/chip-row";
+import { InlineHeadline } from "@/components/blocks/inline-headline";
+import { TwoDoor } from "@/components/blocks/two-door";
+import { Stage } from "@/components/motion/stage";
 import { Container } from "@/components/ui/container";
-import { Check } from "@/components/ui/icons";
-import { Mark } from "@/components/ui/mark";
-import { Pill } from "@/components/ui/pill";
-import { Reveal } from "@/components/ui/reveal";
-import { BOOKINGS } from "@/lib/booking";
-import type { HOME_QUERY_RESULT } from "@/sanity/types";
+import { home } from "@/content/home";
+import { FOUNDERS } from "@/lib/founders";
 
 /**
- * Split hero from xl up: the pitch and its call to action on the left, the
- * founders' faces on the right from the headline down, so the eye runs
- * headline → faces → button. Below xl the faces follow the buttons.
+ * ① The front door: who builds it (faces inside the sentence), what they
+ * build, and the one word that matters marked in lime. Then two doors, one
+ * per buyer. Plays as CSS on first paint.
  */
-export function Hero({ data }: { data: NonNullable<HOME_QUERY_RESULT> }) {
-  const trust = data.heroTrustStrip ?? [];
+export function Hero() {
+  const { chips, headline, doors, note } = home.hero;
+  const by = FOUNDERS[note.by];
 
   return (
-    <section id="top" className="relative overflow-hidden">
-      <Container className="pb-16 pt-28 sm:pt-32 md:pb-24 md:pt-36">
-        <div className="grid gap-14 xl:grid-cols-12 xl:gap-x-10">
-          <div className="xl:col-span-8">
-            <Reveal eager>
-              <Pill>{data.heroEyebrow}</Pill>
-            </Reveal>
+    <Stage as="section" eager id="top" data-tone="paper" className="relative">
+      <Container className="pb-20 pt-32 sm:pt-36 md:pb-28 md:pt-44">
+        <ChipRow
+          chips={chips}
+          className="fade"
+          style={{ "--d": "0ms" } as React.CSSProperties}
+        />
 
-            <Reveal eager delay={60}>
-              <h1 className="display mt-8 text-[1.9rem] leading-[1.2] sm:text-hero sm:leading-[0.98] xl:text-[4.4rem]">
-                {data.heroHeading}
-                {data.heroAccent ? (
-                  <>
-                    {" "}
-                    {/* the highlighted promise always gets its own line in the split */}
-                    <br className="hidden xl:block" />
-                    <Mark>{data.heroAccent}</Mark>
-                  </>
-                ) : null}
-              </h1>
-            </Reveal>
+        <h1 className="mt-9 text-[length:var(--text-headline)] font-extrabold leading-[1.02] tracking-[-0.038em] [font-stretch:106%] md:mt-12">
+          <InlineHeadline tokens={headline} start={2} />
+        </h1>
 
-            <Reveal eager delay={140}>
-              <p className="mt-9 max-w-[50ch] text-lg leading-relaxed text-muted md:mt-10 md:text-xl">
-                {data.heroSubhead}
-              </p>
+        <div
+          className="fade mt-12 md:mt-16"
+          style={{ "--d": "760ms" } as React.CSSProperties}
+        >
+          <TwoDoor doors={doors} placement="home-hero" />
 
-              <div className="mt-9 flex flex-wrap gap-3 sm:gap-3.5">
-                <BookingCta
-                  booking="costCheck"
-                  placement="hero"
-                  label={BOOKINGS.costCheck.short}
-                />
-                <Button
-                  href={data.heroSecondaryCtaHref ?? "/work"}
-                  variant="outline"
-                >
-                  {data.heroSecondaryCtaLabel ?? "See the work"}
-                </Button>
-              </div>
-
-              {trust.length ? (
-                <ul className="mt-9 flex max-w-[640px] flex-wrap gap-x-6 gap-y-2.5 border-t border-line pt-6 text-sm text-muted">
-                  {trust.map((item) => (
-                    <li key={item} className="flex items-center gap-2">
-                      <span className="flex size-[18px] items-center justify-center rounded-full bg-lime text-ink">
-                        <Check className="size-3" />
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
-            </Reveal>
-          </div>
-
-          {/* faces earn the trust the button asks for */}
-          <FoundersPortrait className="w-full max-w-[420px] xl:col-span-4 xl:mt-[5.5rem] xl:max-w-none" />
+          <p className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="relative size-8 shrink-0 overflow-hidden rounded-full bg-paper-2 ring-2 ring-paper">
+              <Image
+                src={by.photo}
+                alt=""
+                fill
+                sizes="64px"
+                className="object-cover object-top"
+              />
+            </span>
+            <span className="font-serif text-xl italic text-ink/80">
+              “{note.quote}”
+            </span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-faint">
+              {by.first}, {by.title.split(",")[0]}
+            </span>
+          </p>
         </div>
       </Container>
-    </section>
+    </Stage>
   );
 }

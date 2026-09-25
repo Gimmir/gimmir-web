@@ -1,19 +1,12 @@
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { HeaderThemeProvider } from "@/components/site/header-theme";
-import { sanityFetch } from "@/sanity/lib/live";
-import { NAVIGATION_QUERY, SETTINGS_QUERY } from "@/sanity/lib/queries";
 
 /**
  * Header, footer and skip link around site content. Shared by the (site)
  * layout and the root not-found page, which renders outside that layout.
  */
-export async function SiteShell({ children }: { children: React.ReactNode }) {
-  const [{ data: nav }, { data: settings }] = await Promise.all([
-    sanityFetch({ query: NAVIGATION_QUERY }),
-    sanityFetch({ query: SETTINGS_QUERY }),
-  ]);
-
+export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <HeaderThemeProvider>
       <a
@@ -22,9 +15,9 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
       >
         Skip to content
       </a>
-      <Header nav={nav} />
+      <Header />
       <main id="main">{children}</main>
-      <Footer nav={nav} settings={settings} />
+      <Footer />
     </HeaderThemeProvider>
   );
 }
