@@ -45,16 +45,16 @@ export const CASES: CaseStudy[] = [
       "We moved a global fitness franchise off a white-label platform onto their own app and back office, with full control over every location.",
     seoTitle: "UN1T Case Study: A 10+ Site Franchise on Its Own Platform",
     seoDescription:
-      "How a global gym franchise moved off a white-label fitness platform onto its own custom app and back office: 10+ locations, about $10k a month kept in platform and payment fees.",
+      "How a global gym franchise moved off a white-label fitness platform onto its own member app and franchise CRM in 12 weeks: 10+ locations, every payment in one system.",
     services: [
       "Member app: iOS & Android",
-      "Back office & operations",
-      "Payments, fees & payouts",
+      "Franchise CRM & back office",
+      "Payments, royalties & payouts",
       "Multi-location data model",
     ],
     stats: [
       { value: 10, suffix: "+", label: "locations on one platform they own" },
-      { text: "~$10K", lime: true, label: "kept every month in platform and payment fees" },
+      { value: 12, lime: true, label: "weeks to rebuild the platform from scratch" },
     ],
   },
   {
