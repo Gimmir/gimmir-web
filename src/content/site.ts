@@ -45,7 +45,9 @@ export const BOOK_DOORS: BookDoor[] = [
 export const CONTACT_EMAIL = "hello@gimmir.com";
 
 export const FOOTER = {
-  line: ["Your business runs on software.", "You should own it."],
+  // doc 09 ⑪: the question the two calls below answer (the home page
+  // already says "Your business runs on software. You should own it.")
+  title: "Ready to own your software?",
   columns: [
     {
       title: "Site",

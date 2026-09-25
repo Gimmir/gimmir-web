@@ -10,8 +10,8 @@ import { BOOK_DOORS, CONTACT_EMAIL, FOOTER } from "@/content/site";
 import { FOUNDERS } from "@/lib/founders";
 
 /**
- * The manifesto once more, the two calls with the faces you'll meet, and
- * the plain facts: who we are legally, how to reach us.
+ * One question, the two calls with the faces you'll meet, and the plain
+ * facts: who we are legally, how to reach us.
  */
 export function Footer() {
   const year = new Date().getFullYear();
@@ -20,10 +20,8 @@ export function Footer() {
   return (
     <footer data-tone="ink" className="border-t border-line-dark bg-ink text-paper">
       <Container className="pb-10 pt-20 md:pt-28">
-        {/* one sentence per line, so the pair never breaks mid-thought */}
-        <p className="display text-[length:var(--text-title)] leading-[1.02]">
-          <span className="block">{FOOTER.line[0]}</span>
-          <span className="block text-paper/45">{FOOTER.line[1]}</span>
+        <p className="display text-balance text-[length:var(--text-title)] leading-[1.02]">
+          {FOOTER.title}
         </p>
 
         <div className="mt-14 grid gap-3 md:mt-20 lg:grid-cols-2">
