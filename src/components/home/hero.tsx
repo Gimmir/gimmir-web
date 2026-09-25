@@ -31,10 +31,10 @@ export function Hero() {
           <InlineHeadline tokens={headline} start={2} />
         </h1>
 
-        <div className="fade mt-10 md:mt-12" style={d(760)}>
-          <TwoDoor doors={doors} placement="home-hero" />
+        <div className="mt-10 md:mt-12">
+          <TwoDoor doors={doors} placement="home-hero" delay={640} />
 
-          <p className="mt-7 flex items-center gap-3">
+          <p className="fade mt-7 flex items-center gap-3" style={d(1500)}>
             <span className="relative size-8 shrink-0 overflow-hidden rounded-full bg-paper-2 ring-2 ring-paper">
               <Image
                 src={by.photo}

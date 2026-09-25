@@ -220,8 +220,8 @@
 }
 /* layers promoted up front while a stage is still to play (dropped once it
    has: Stage flips an eager stage to "done") */
-[data-stage="pending"] :is(.rwi, .wipe, .fade),
-[data-stage="eager"] :is(.rwi, .wipe, .fade) {
+[data-stage="pending"] :is(.rwi, .wipe, .fade, .door-fill, .door-track, .door-knob),
+[data-stage="eager"] :is(.rwi, .wipe, .fade, .door-fill, .door-track, .door-knob) {
   will-change: transform;
 }
 [data-stage="pending"] .draw {
@@ -593,5 +593,92 @@
   .cookie-card[data-state="closing"] {
     animation: none;
     opacity: 0;
+  }
+}
+
+/* Door (src/components/blocks/two-door.tsx): the knob lands on the left,
+   rides right drawing the pill behind it (the pill slides in clipped by
+   the button's own rounded box), and the label types in letter by letter.
+   Transform and opacity only, so it stays smooth on phones. */
+.door {
+  --knob-w: 64px; /* knob + its inset on both sides */
+}
+@media (min-width: 640px) {
+  .door {
+    --knob-w: 68px;
+  }
+}
+.door-knob {
+  display: block;
+}
+@keyframes door-knob {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+/* hold at the knob while it lands (0-24%), then ride right (24-100%) */
+@keyframes door-fill-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
+    animation-timing-function: var(--ease-out);
+  }
+  24% {
+    opacity: 1;
+    transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
+    animation-timing-function: var(--ease-in-out);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes door-track-in {
+  0%,
+  24% {
+    transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
+    animation-timing-function: var(--ease-in-out);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes door-type {
+  from {
+    opacity: 0;
+  }
+}
+[data-stage="pending"] .door-knob {
+  opacity: 0;
+  transform: scale(0.5);
+}
+[data-stage="pending"] :is(.door-fill, .door-track) {
+  transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
+}
+[data-stage="pending"] .door-fill {
+  opacity: 0;
+}
+[data-stage="pending"] .door-char {
+  opacity: 0;
+}
+:is([data-stage="eager"], [data-stage="in"]) .door-knob {
+  animation: door-knob 340ms var(--ease-out) var(--d, 0ms) both;
+}
+:is([data-stage="eager"], [data-stage="in"]) .door-fill {
+  animation: door-fill-in 1080ms linear var(--d, 0ms) both;
+}
+:is([data-stage="eager"], [data-stage="in"]) .door-track {
+  animation: door-track-in 1080ms linear var(--d, 0ms) both;
+}
+:is([data-stage="eager"], [data-stage="in"]) .door-char {
+  animation: door-type 1ms step-end
+    calc(var(--d, 0ms) + 420ms + var(--c, 0) * 32ms) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-stage] :is(.door-knob, .door-fill, .door-track, .door-char) {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

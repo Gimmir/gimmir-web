@@ -11,6 +11,11 @@ const STATIC_REDIRECTS = [
 ];
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // The dev filesystem cache kept serving a stale globals.css (edits to
+    // it silently never reached the browser until the cache was wiped).
+    turbopackFileSystemCacheForDev: false,
+  },
   // Pin the workspace root (a stray lockfile lives in $HOME).
   turbopack: {
     root: import.meta.dirname,
