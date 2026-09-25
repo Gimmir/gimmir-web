@@ -122,28 +122,41 @@ export const home = {
     ],
   },
 
-  // doc 09 ⑥ as one sentence (Nazar's pick, 2026-09-25): the kinds of
-  // software as chips, the two public cases named. Counts as on the rest
-  // of the site (Portfolio v4): 9 shipped, 4 in fitness, 7 under NDA.
+  // doc 09 ⑥ as "9" and a list (Nazar's pick, 2026-09-25). The NDA lines
+  // are the anonymous wording from Portfolio v4 (no names, logos, numbers
+  // or links); the omni-channel scope is still unconfirmed there.
   build: {
     label: "What we build",
-    lead: "We build",
-    items: [
-      { label: "franchise platforms", product: "UN1T", href: "/work/un1t" },
+    stat: { value: "9", label: "products shipped, 4 in fitness" },
+    rows: [
       {
-        label: "coaching apps",
+        title: "Franchise & multi-location platforms",
+        product: "UN1T",
+        href: "/work/un1t",
+        body: "Member app and franchise CRM on one system: head office sees every member at every site.",
+      },
+      {
+        title: "Coaching, community & progress",
         product: "Jimmy Coach",
         href: "/work/jimmy-coach",
+        body: "Client app, coach app and web dashboard. Co-founded, co-owned, live in both stores.",
       },
-      { label: "device companions", href: "/what-we-build" },
-      { label: "marketplaces", href: "/what-we-build" },
-      { label: "omni-channel SaaS", href: "/what-we-build" },
-      { label: "fan communities", href: "/what-we-build" },
-    ],
-    facts: [
-      { value: "9", label: "products shipped" },
-      { value: "4", label: "in fitness" },
-      { value: "7", label: "under NDA" },
+      {
+        title: "Connected-device companion apps",
+        body: "A companion app for a European connected-fitness brand: device connectivity and game-based workouts.",
+      },
+      {
+        title: "Two-sided marketplaces & product ecosystems",
+        body: "A European services marketplace plus invoicing, time tracking and hiring, all on shared data.",
+      },
+      {
+        title: "SaaS & omni-channel platforms",
+        body: "An omni-channel-as-a-service platform for an AI startup: web app and backend.",
+      },
+      {
+        title: "Communities & fan engagement",
+        body: "A gamified fan-engagement platform for a US entertainment-tech startup, built from scratch.",
+      },
     ],
     link: { label: "All mechanics", href: "/what-we-build" },
   },

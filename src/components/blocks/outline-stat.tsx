@@ -25,6 +25,14 @@ const LAYOUTS = {
     from: "M962 250C1084 250 1086 478",
     end: { x: 880, y: 504 },
   },
+  // one glyph ("9"); the curve leaves from its right shoulder and lands
+  // below the glyph, so its note sits on one line clear of the "9"
+  single: {
+    box: { w: 520, h: 470 },
+    text: { x: -14, y: 400, size: 560 },
+    from: "M300 180C434 180 452 424",
+    end: { x: 420, y: 446 },
+  },
 } as const;
 
 export function OutlineStat({
