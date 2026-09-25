@@ -15,7 +15,8 @@ export type AppId = keyof typeof APPS;
 /**
  * A headline written as a sentence with objects inside it: plain text,
  * founders' faces, real product icons, and one `mark`ed word that gets
- * the lime marker stroke (the one lime thing on the screen).
+ * the lime marker stroke (the one lime thing on the screen). The objects
+ * are ringed in paper; a dark section sets `--face-ring` to ink.
  */
 export type HeadlineToken =
   | string
@@ -71,7 +72,7 @@ function Faces({ ids }: { ids: readonly FounderId[] }) {
             key={id}
             data-name={`${f.first} · ${f.title.split(",")[0]}`}
             className={cn(
-              "face-tip relative inline-block size-[0.9em] rounded-full ring-[0.05em] ring-paper",
+              "face-tip relative inline-block size-[0.9em] rounded-full ring-[0.05em] ring-[var(--face-ring,var(--color-paper))]",
               n > 0 && "-ml-[0.22em]",
             )}
             style={{ zIndex: ids.length - n }}
@@ -98,17 +99,22 @@ function AppIcons({ ids }: { ids: readonly AppId[] }) {
   const tilt = ["-6deg", "5deg", "-2deg"];
   return (
     <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle">
-      <span className="sr-only">{ids.map((id) => APPS[id].name).join(" and ")}</span>
+      <span className="sr-only">
+        {ids.map((id) => APPS[id].name).join(" and ")}
+      </span>
       {ids.map((id, n) => (
         <span
           key={id}
           data-name={APPS[id].name}
           className={cn(
-            "face-tip relative inline-block size-[0.8em] rotate-(--tilt) rounded-[0.2em] shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-paper",
+            "face-tip relative inline-block size-[0.8em] rotate-(--tilt) rounded-[0.2em] shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-[var(--face-ring,var(--color-paper))]",
             n > 0 && "-ml-[0.16em]",
           )}
           style={
-            { zIndex: ids.length - n, "--tilt": tilt[n % tilt.length] } as React.CSSProperties
+            {
+              zIndex: ids.length - n,
+              "--tilt": tilt[n % tilt.length],
+            } as React.CSSProperties
           }
         >
           <span className="absolute inset-0 overflow-hidden rounded-[0.2em]">
@@ -173,7 +179,10 @@ export function InlineHeadline({
       n === 0 || (typeof t === "string" && HUGS_PREVIOUS.test(t)) ? null : " ";
 
     if (typeof t === "string") {
-      const words = t.split(/\s+/).filter(Boolean).slice(carried ? 1 : 0);
+      const words = t
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(carried ? 1 : 0);
       nodes.push(
         <Fragment key={n}>
           {words.length ? space : null}
