@@ -37,20 +37,6 @@ export const home = {
     lead: "Your business runs on software.",
     // the marked word gets the marker stroke
     line: ["You should", "own it."],
-    // what "own it" means on day one; the same claims as /how-we-work and
-    // the trust answers, nothing new
-    deed: {
-      label: "From day one",
-      title: "In your name",
-      items: [
-        "Code and repositories",
-        "Cloud accounts",
-        "App store listings",
-        "Customer data",
-      ],
-      note: "No lock-in. That’s the point.",
-      by: ["nazar", "oleh"],
-    },
     marquee: [
       "Member apps",
       "Bookings",

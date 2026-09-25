@@ -31,8 +31,12 @@ export type HeadlineToken =
 export function MarkerStroke({
   delay = 0,
   bottom = "-0.16em",
+  height = "0.32em",
 }: {
   delay?: number;
+  /** The swipe's box; its stroke is a fraction of it. Poster-size words
+   *  pass less, so the stroke stays a pen line rather than a slab. */
+  height?: string;
   /**
    * Offset of the swipe from the word box's bottom. The box grows with the
    * line height, so looser lines pass a smaller offset to keep the swipe
@@ -45,9 +49,14 @@ export function MarkerStroke({
       aria-hidden
       viewBox="0 0 200 24"
       preserveAspectRatio="none"
-      className="wipe pointer-events-none absolute -left-[0.04em] h-[0.32em] w-[calc(100%+0.1em)]"
+      className="wipe pointer-events-none absolute -left-[0.04em] w-[calc(100%+0.1em)]"
       style={
-        { bottom, "--d": `${delay}ms`, "--dur": "760ms" } as React.CSSProperties
+        {
+          bottom,
+          height,
+          "--d": `${delay}ms`,
+          "--dur": "760ms",
+        } as React.CSSProperties
       }
     >
       <path
