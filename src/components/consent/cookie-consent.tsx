@@ -29,13 +29,12 @@ function readChoice(): Choice | null {
  */
 export function CookieConsent() {
   const [choice, setChoice] = useState<Choice | null>(null);
-  // null = deciding whether to show; the banner enters via a CSS transition
-  // armed one frame after mount ("open" flips a data attribute).
-  const [visible, setVisible] = useState(false);
-  const [open, setOpen] = useState(false);
+  // "open" mounts the card, which then plays its entrance as a CSS
+  // animation on mount (no second state flip that React could batch into
+  // the same frame); "closing" plays the shorter exit before unmounting.
+  const [phase, setPhase] = useState<"hidden" | "open" | "closing">("hidden");
 
   useEffect(() => {
-    let raf = 0;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
     // Read the stored choice off the initial render pass (keeps the effect
@@ -43,24 +42,15 @@ export function CookieConsent() {
     const init = requestAnimationFrame(() => {
       const saved = readChoice();
       setChoice(saved);
-      if (!saved) {
-        // Let the hero entrance finish before the banner slides in.
-        timer = setTimeout(() => {
-          setVisible(true);
-          raf = requestAnimationFrame(() => setOpen(true));
-        }, 1200);
-      }
+      // Let the hero finish its entrance before the card slides in.
+      if (!saved) timer = setTimeout(() => setPhase("open"), 1600);
     });
 
-    const reopen = () => {
-      setVisible(true);
-      raf = requestAnimationFrame(() => setOpen(true));
-    };
+    const reopen = () => setPhase("open");
     window.addEventListener(CONSENT_REOPEN_EVENT, reopen);
     return () => {
       cancelAnimationFrame(init);
       if (timer) clearTimeout(timer);
-      cancelAnimationFrame(raf);
       window.removeEventListener(CONSENT_REOPEN_EVENT, reopen);
     };
   }, []);
@@ -69,11 +59,11 @@ export function CookieConsent() {
     try {
       localStorage.setItem(STORAGE_KEY, value);
     } catch {
-      // storage unavailable — the banner will return next visit
+      // storage unavailable: the banner will return next visit
     }
     setChoice(value);
-    setOpen(false); // slide out…
-    setTimeout(() => setVisible(false), 240); // …then unmount
+    setPhase("closing");
+    setTimeout(() => setPhase("hidden"), 240);
   };
 
   return (
@@ -85,43 +75,36 @@ export function CookieConsent() {
         </>
       )}
 
-      {visible && (
+      {phase !== "hidden" && (
         <aside
           aria-label="Cookie consent"
-          data-open={open || undefined}
-          className="fixed bottom-4 left-4 right-4 z-[70] translate-y-4 opacity-0 transition-[transform,opacity] duration-[360ms] ease-[cubic-bezier(.23,1,.32,1)] data-open:translate-y-0 data-open:opacity-100 motion-reduce:translate-y-0 motion-reduce:transition-[opacity] sm:left-6 sm:right-auto sm:bottom-6 sm:max-w-sm"
+          data-state={phase}
+          className="cookie-card fixed inset-x-3 bottom-3 z-[70] sm:inset-x-auto sm:bottom-6 sm:left-6 sm:w-[380px]"
         >
-          <div className="relative overflow-hidden rounded-2xl bg-ink p-6 text-paper shadow-[0_24px_60px_-24px_rgba(21,20,14,0.55)]">
-            {/* atmosphere, echoing the CTA panels */}
+          <div className="relative overflow-hidden rounded-[24px] bg-ink p-5 text-paper shadow-[0_30px_70px_-30px_rgba(21,20,14,0.7)] ring-1 ring-paper/10 sm:p-6">
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 [background-image:radial-gradient(rgba(246,244,238,0.05)_1px,transparent_1.5px)] [background-size:22px_22px]"
+              className="pointer-events-none absolute -right-20 -top-24 size-52 rounded-full bg-lime/20 blur-[70px]"
             />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -right-16 -top-20 size-44 rounded-full bg-lime/25 blur-[70px]"
-            />
-
             <div className="relative">
-              <p className="font-mono text-xs uppercase tracking-widest text-lime">
-                Cookies
+              <p className="text-[15px] font-semibold">
+                Cookies, only for analytics
               </p>
-              <p className="mt-3 text-sm leading-relaxed text-[#c9c6bc]">
-                We use analytics cookies (Google Analytics, Microsoft Clarity)
-                to understand how the site is used. No marketing cookies,
-                nothing sold.{" "}
+              <p className="mt-2 text-sm leading-relaxed text-paper/65">
+                Google Analytics and Microsoft Clarity show us how the site is
+                used. No marketing cookies, nothing sold.{" "}
                 <Link
                   href="/privacy"
-                  className="font-semibold text-paper underline underline-offset-4 transition-colors hover:text-lime"
+                  className="text-paper underline decoration-paper/40 underline-offset-4 transition-colors hover:decoration-paper"
                 >
                   Privacy policy
                 </Link>
               </p>
-
-              <div className="mt-5 flex items-center gap-3">
+              <div className="mt-5 flex gap-2.5">
                 <Button
                   variant="lime"
                   size="sm"
+                  className="flex-1 sm:flex-none"
                   onClick={() => decide("granted")}
                 >
                   Accept
@@ -129,6 +112,7 @@ export function CookieConsent() {
                 <Button
                   variant="outlineLight"
                   size="sm"
+                  className="flex-1 sm:flex-none"
                   onClick={() => decide("denied")}
                 >
                   Decline

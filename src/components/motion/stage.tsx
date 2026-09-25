@@ -42,8 +42,11 @@ export function Stage({
     ) {
       return;
     }
-    // Already scrolled past (restored scroll, anchor link): leave it finished.
-    if (el.getBoundingClientRect().bottom < 0) return;
+    // Only arm what is still wholly below the fold. Anything already on
+    // screen (or scrolled past) has been seen in its server-rendered,
+    // finished state; hiding it now to replay the entrance reads as a
+    // flicker, worst on a slow phone where hydration lands late.
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
 
     el.dataset.stage = "pending";
     const io = new IntersectionObserver(

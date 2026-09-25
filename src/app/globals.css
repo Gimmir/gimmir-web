@@ -549,3 +549,40 @@
     transform: translate(-50%, 0) rotate(calc(var(--tilt, 0deg) * -1));
   }
 }
+
+/* Cookie card (src/components/consent/cookie-consent.tsx): enters on
+   mount, leaves faster than it came. Animations, not a state-flipped
+   transition, so the entrance can't be batched away. */
+@keyframes cookie-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.97);
+  }
+}
+@keyframes cookie-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.98);
+  }
+}
+.cookie-card {
+  transform-origin: bottom left;
+  animation: cookie-in 620ms var(--ease-drawer) both;
+}
+.cookie-card[data-state="closing"] {
+  animation: cookie-out 220ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+@keyframes cookie-fade {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cookie-card {
+    animation: cookie-fade 200ms ease both;
+  }
+  .cookie-card[data-state="closing"] {
+    animation: none;
+    opacity: 0;
+  }
+}
