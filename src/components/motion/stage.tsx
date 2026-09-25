@@ -33,6 +33,22 @@ export function Stage({
 } & Omit<React.HTMLAttributes<HTMLElement>, "children" | "className">) {
   const ref = useRef<HTMLElement>(null);
 
+  // Eager stages: once every part has played, settle into a plain resting
+  // state so the promoted layers (will-change) are released.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !eager || typeof el.getAnimations !== "function") return;
+    let cancelled = false;
+    Promise.all(el.getAnimations({ subtree: true }).map((a) => a.finished))
+      .then(() => {
+        if (!cancelled) el.dataset.stage = "done";
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [eager]);
+
   useArmEffect(() => {
     const el = ref.current;
     if (!el || eager) return;

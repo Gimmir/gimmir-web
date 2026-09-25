@@ -190,7 +190,8 @@
 /*    .rw > .rwi   a word rising out of its own clipped line box       */
 /*    .draw        an SVG path with pathLength="1" drawing itself      */
 /*    .draw-text   SVG text outlines drawing (--len in user units)     */
-/*    .wipe        a filled mark revealed left to right (clip-path)    */
+/*    .wipe        a filled mark drawn left to right (scaleX: runs on  */
+/*                 the compositor, unlike clip-path in Safari)         */
 /*    .fade        a label settling in after the drawing               */
 /* ------------------------------------------------------------------ */
 .rw {
@@ -210,9 +211,18 @@
 .draw-text {
   stroke-dasharray: var(--len, 2000) var(--len, 2000);
 }
+.wipe {
+  transform-origin: left center;
+}
 
 [data-stage="pending"] .rwi {
   transform: translate3d(0, 112%, 0);
+}
+/* layers promoted up front while a stage is still to play (dropped once it
+   has: Stage flips an eager stage to "done") */
+[data-stage="pending"] :is(.rwi, .wipe, .fade),
+[data-stage="eager"] :is(.rwi, .wipe, .fade) {
+  will-change: transform;
 }
 [data-stage="pending"] .draw {
   stroke-dashoffset: 1;
@@ -221,7 +231,7 @@
   stroke-dashoffset: var(--len, 2000);
 }
 [data-stage="pending"] .wipe {
-  clip-path: inset(0 100% 0 0);
+  transform: scaleX(0);
 }
 [data-stage="pending"] .fade {
   opacity: 0;
@@ -238,7 +248,7 @@
     var(--d, 0ms);
 }
 [data-stage="in"] .wipe {
-  transition: clip-path var(--dur, 800ms) var(--ease-in-out) var(--d, 0ms);
+  transition: transform var(--dur, 800ms) var(--ease-in-out) var(--d, 0ms);
 }
 [data-stage="in"] .fade {
   transition:
@@ -264,7 +274,7 @@
 }
 @keyframes stage-wipe {
   from {
-    clip-path: inset(0 100% 0 0);
+    transform: scaleX(0);
   }
 }
 @keyframes stage-fade {
@@ -303,7 +313,6 @@
     transform: none !important;
     opacity: 1 !important;
     stroke-dashoffset: 0 !important;
-    clip-path: none !important;
   }
 }
 
