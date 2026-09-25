@@ -28,20 +28,32 @@ export const operators = {
 
   pain: {
     title: "Sound familiar?",
+    // the cards tick; the bar under them counts and offers the check
+    lead: "Tick what’s true for your network.",
     items: [
       {
+        id: "fees",
         title: "Fees that grow with every location.",
         body: "Per-member and per-location fees rise with every site, whether or not it's profitable yet.",
       },
       {
+        id: "silos",
         title: "Every studio on its own, no one view of the network.",
         body: "Memberships, bookings and payments sit in separate tools, and head office sees what each site sends.",
       },
       {
+        id: "same",
         title: "An app that looks like everyone’s.",
         body: "Your members get the same experience as every other studio on the platform, and it changes when the vendor decides.",
       },
     ],
+    check: {
+      none: "None ticked yet.",
+      some: "Worth a look.",
+      all: "Worth a call.",
+      line: "I'll tell you in 20 minutes if there's real money to save.",
+      cta: "Book a free platform check",
+    },
   },
 
   un1t: {
