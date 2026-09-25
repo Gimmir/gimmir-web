@@ -46,8 +46,9 @@ export const CONTACT_EMAIL = "hello@gimmir.com";
 
 export const FOOTER = {
   // Nazar's pick; the home page already says "Your business runs on
-  // software. You should own it.", so the footer must not repeat it
-  headline: "Fitness platforms your members love, and you actually own.",
+  // software. You should own it.", so the footer must not repeat it.
+  // The second part gets the lime marker.
+  headline: ["Fitness platforms your members love,", "and you actually own."],
   columns: [
     {
       title: "Site",

@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { BookTrigger } from "@/components/blocks/book-trigger";
 import { FaceStack } from "@/components/blocks/face-stack";
+import { MarkerStroke } from "@/components/blocks/inline-headline";
 import { CookieSettingsLink } from "@/components/consent/cookie-settings-link";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
@@ -20,8 +21,13 @@ export function Footer() {
   return (
     <footer data-tone="ink" className="border-t border-line-dark bg-ink text-paper">
       <Container className="pb-10 pt-20 md:pt-28">
-        <p className="display text-balance text-[length:var(--text-title)] leading-[1.02]">
-          {FOOTER.headline}
+        {/* phones: a touch smaller, so the marked phrase stays one line */}
+        <p className="display text-balance text-[length:var(--text-title)] leading-[1.02] max-sm:text-[min(2rem,7.4vw)]">
+          {FOOTER.headline[0]}{" "}
+          <span className="relative inline-block whitespace-nowrap">
+            {FOOTER.headline[1]}
+            <MarkerStroke bottom="-0.08em" />
+          </span>
         </p>
 
         <div className="mt-14 grid gap-3 md:mt-20 lg:grid-cols-2">
