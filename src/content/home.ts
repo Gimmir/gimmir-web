@@ -13,8 +13,18 @@ export const home = {
 
   hero: {
     chips: [
-      { label: "UN1T", detail: "10+ locations", logo: "/design/un1t-logo.png", href: "/work/un1t" },
-      { label: "Jimmy Coach", detail: "co-founded", logo: "/design/jimmy-coach-logo.png", href: "/work/jimmy-coach" },
+      {
+        label: "UN1T",
+        detail: "10+ locations",
+        logo: "/design/un1t-logo.png",
+        href: "/work/un1t",
+      },
+      {
+        label: "Jimmy Coach",
+        detail: "co-founded",
+        logo: "/design/jimmy-coach-logo.png",
+        href: "/work/jimmy-coach",
+      },
       { label: "9 products", detail: "shipped", grid: true, href: "/work" },
     ],
     headline: [
@@ -94,10 +104,17 @@ export const home = {
       },
       {
         label: "Cost as you grow",
-        values: ["Rises per location or user", "Rises per hour", "Fixed per milestone"],
+        values: [
+          "Rises per location or user",
+          "Rises per hour",
+          "Fixed per milestone",
+        ],
       },
       { label: "Your brand", values: ["Their template", "Yours", "Yours"] },
-      { label: "Your data", values: ["Their system", "Yours, if you ask", "Yours"] },
+      {
+        label: "Your data",
+        values: ["Their system", "Yours, if you ask", "Yours"],
+      },
       {
         label: "What you see",
         values: ["Nothing", "A demo at the end", "Every step"],
@@ -105,9 +122,7 @@ export const home = {
     ],
   },
 
-  // doc 09 ⑥. NDA work never gets screenshots and UN1T's screens wait for
-  // Rob's OK, so those rows reveal a drawing; Jimmy's screen is already
-  // public on /work/jimmy-coach.
+  // doc 09 ⑥, without the hover pictures (Nazar, 2026-09-25)
   build: {
     label: "What we build",
     rows: [
@@ -115,33 +130,27 @@ export const home = {
         title: "Franchise & multi-location platforms",
         product: "UN1T",
         href: "/work/un1t",
-        art: "network",
       },
       {
         title: "Coaching, community & progress",
         product: "Jimmy Coach",
         href: "/work/jimmy-coach",
-        art: "jimmy",
       },
       {
         title: "Connected-device companion apps",
         href: "/what-we-build",
-        art: "devices",
       },
       {
         title: "Two-sided marketplaces & product ecosystems",
         href: "/what-we-build",
-        art: "marketplace",
       },
       {
         title: "SaaS & omni-channel platforms",
         href: "/what-we-build",
-        art: "omni",
       },
       {
         title: "Communities & fan engagement",
         href: "/what-we-build",
-        art: "community",
       },
     ],
     link: { label: "All mechanics", href: "/what-we-build" },
