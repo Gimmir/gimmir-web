@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 import { Dot, Glyph, type GlyphKind } from "@/components/home/compare-art";
 import { Logomark } from "@/components/ui/logomark";
@@ -14,9 +14,10 @@ const SWAP =
   "animate-[swap-in_300ms_var(--ease-out)_both] motion-reduce:animate-none";
 
 /**
- * ⑤ on phones: the desktop table in two columns, ours always on the right
- * as the dark card, theirs on the left, switched by a tap (renting or an
- * agency). Answers change in place, so the eye stays on one comparison.
+ * ⑤ on phones: each question with two answers side by side, ours always
+ * on the right in a dark tile, theirs on the left, switched by a tap
+ * (renting or an agency). Answers change in place, so the eye stays on
+ * one comparison.
  */
 export function CompareOnPhone({
   columns,
@@ -65,91 +66,78 @@ export function CompareOnPhone({
         ))}
       </div>
 
-      {/* Both of their answers sit stacked in one cell, only the picked one
-          visible, so every row is as tall as its longest answer and the
-          toggle never moves anything. Our cell repeats the row label
-          invisibly, so both answers start on the same line. */}
-      <div className="fade mt-6 grid grid-cols-2" style={d(delay + 80)}>
-        <div className="flex flex-col justify-end gap-3 pb-5 pr-4">
-          <span className="grid">
-            {THEIRS.map((kind, i) => (
-              <span
-                key={i === them ? `on-${i}` : `off-${i}`}
-                className={cn(
-                  "[grid-area:1/1]",
-                  i === them ? touched && SWAP : "invisible",
-                )}
-              >
-                <Glyph kind={kind} delay={delay + 200} className="size-14" />
-              </span>
-            ))}
-          </span>
-          <span className="grid text-[15px] font-semibold leading-snug">
-            {[0, 1].map((i) => (
-              <span
-                key={i === them ? `on-${i}` : `off-${i}`}
-                aria-hidden={i !== them || undefined}
-                className={cn(
-                  "[grid-area:1/1]",
-                  i === them ? touched && SWAP : "invisible",
-                )}
-              >
-                {columns[i]}
-              </span>
-            ))}
-          </span>
-        </div>
-        <div className="flex flex-col justify-end gap-3 rounded-t-[20px] bg-ink px-4 pb-5 pt-5 text-paper">
-          <Glyph kind="key" delay={delay + 420} className="size-14" />
-          <span className="flex items-center gap-2 text-[15px] font-semibold leading-snug">
-            <Logomark className="size-5" />
-            {columns[2]}
-          </span>
+      {/* Each question runs the full width, its two answers side by side
+          under it: theirs plain, ours a dark tile, so dark only sits where
+          there is text. Both of their answers are stacked in one cell with
+          only the picked one visible, so a row is as tall as its longest
+          answer and the toggle never moves anything. */}
+      <div className="fade mt-6" style={d(delay + 80)}>
+        <div className="grid grid-cols-2 items-end gap-3 pb-5">
+          <div className="flex flex-col gap-3 pb-4 pt-5">
+            <span className="grid">
+              {THEIRS.map((kind, i) => (
+                <span
+                  key={i === them ? `on-${i}` : `off-${i}`}
+                  className={cn(
+                    "[grid-area:1/1]",
+                    i === them ? touched && SWAP : "invisible",
+                  )}
+                >
+                  <Glyph kind={kind} delay={delay + 200} className="size-14" />
+                </span>
+              ))}
+            </span>
+            <span className="grid text-[15px] font-semibold leading-snug">
+              {[0, 1].map((i) => (
+                <span
+                  key={i === them ? `on-${i}` : `off-${i}`}
+                  aria-hidden={i !== them || undefined}
+                  className={cn(
+                    "[grid-area:1/1]",
+                    i === them ? touched && SWAP : "invisible",
+                  )}
+                >
+                  {columns[i]}
+                </span>
+              ))}
+            </span>
+          </div>
+          <div className="flex flex-col gap-3 rounded-[20px] bg-ink px-4 pb-4 pt-5 text-paper">
+            <Glyph kind="key" delay={delay + 420} className="size-14" />
+            <span className="flex items-center gap-2 text-[15px] font-semibold leading-snug">
+              <Logomark className="size-5" />
+              {columns[2]}
+            </span>
+          </div>
         </div>
 
-        {rows.map((r, n) => {
-          const last = n === rows.length - 1;
-          return (
-            <Fragment key={r.label}>
-              <div className="border-t border-line py-4 pr-4">
-                <span className="block text-[13px] font-semibold leading-snug">
-                  {r.label}
-                </span>
-                <span className="mt-2 grid text-[15px] leading-snug">
-                  {[0, 1].map((i) => (
-                    <span
-                      key={i === them ? `on-${i}` : `off-${i}`}
-                      aria-hidden={i !== them || undefined}
-                      className={cn(
-                        "[grid-area:1/1]",
-                        i === them ? touched && SWAP : "invisible",
-                      )}
-                    >
-                      {r.values[i]}
-                    </span>
-                  ))}
-                </span>
-              </div>
-              <div
-                className={cn(
-                  "border-t border-line-dark bg-ink px-4 py-4 text-paper",
-                  last && "rounded-b-[20px] pb-5",
-                )}
-              >
-                <span
-                  aria-hidden
-                  className="invisible block text-[13px] font-semibold leading-snug"
-                >
-                  {r.label}
-                </span>
-                <span className="mt-2 flex gap-2 text-[15px] font-semibold leading-snug">
-                  <Dot top="0.42em" />
-                  {r.values[2]}
-                </span>
-              </div>
-            </Fragment>
-          );
-        })}
+        {rows.map((r) => (
+          <div key={r.label} className="border-t border-line py-4">
+            <p className="text-[13px] font-semibold leading-snug">{r.label}</p>
+            {/* same vertical padding on both sides, so both answers start
+                on the same line */}
+            <div className="mt-2 grid grid-cols-2 items-start gap-3 text-[15px] leading-snug">
+              <span className="grid py-3">
+                {[0, 1].map((i) => (
+                  <span
+                    key={i === them ? `on-${i}` : `off-${i}`}
+                    aria-hidden={i !== them || undefined}
+                    className={cn(
+                      "[grid-area:1/1]",
+                      i === them ? touched && SWAP : "invisible",
+                    )}
+                  >
+                    {r.values[i]}
+                  </span>
+                ))}
+              </span>
+              <span className="flex gap-2 rounded-2xl bg-ink px-4 py-3 font-semibold text-paper">
+                <Dot top="0.42em" />
+                {r.values[2]}
+              </span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
