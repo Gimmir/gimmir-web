@@ -65,4 +65,22 @@ export const home = {
     },
     side: { value: "10+", label: "locations on one system" },
   },
+
+  jimmy: {
+    label: "Case 02",
+    name: "Jimmy Coach",
+    // doc 09 ④, without its dash
+    title: ["A coach asked us for software.", "We saw a market and invested."],
+    // DRAFT for Nazar to confirm or rewrite: built only from what
+    // /work/jimmy-coach already says (WhatsApp, spreadsheets and PDFs;
+    // co-founded with a working coach; built as owners, not by the hour)
+    quote: {
+      text: "Coaches were running their business across WhatsApp, spreadsheets and PDFs, and losing clients in the gaps. So we co-founded Jimmy with one of them and built it as owners, not by the hour.",
+      by: "nazar",
+    },
+    meta: ["Coaching platform", "Co-founded", "Client app + coach app + web"],
+    link: { label: "Read the story", href: "/work/jimmy-coach" },
+    stat: { value: "100+", label: "coaches on Jimmy in its first month" },
+    side: { value: "300+", label: "users in the first month" },
+  },
 } as const;

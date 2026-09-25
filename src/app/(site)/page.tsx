@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { CaseJimmy } from "@/components/home/case-jimmy";
 import { CaseUn1t } from "@/components/home/case-un1t";
 import { Hero } from "@/components/home/hero";
 import { Manifesto } from "@/components/home/manifesto";
@@ -18,15 +19,16 @@ export const metadata: Metadata = {
   }),
 };
 
-// V2 design slice: ① hero, ② manifesto, ③ UN1T. The remaining sections
-// (Jimmy, comparison, hover list, bento, build log, founders, voices, final
-// CTA) follow once the direction is signed off.
+// V2 home, built section by section: ① hero, ② manifesto, ③ UN1T,
+// ④ Jimmy Coach. Next: comparison, hover list, bento, build log, founders,
+// voices, final CTA.
 export default function HomePage() {
   return (
     <>
       <Hero />
       <Manifesto />
       <CaseUn1t />
+      <CaseJimmy />
     </>
   );
 }
