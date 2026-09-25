@@ -220,8 +220,8 @@
 }
 /* layers promoted up front while a stage is still to play (dropped once it
    has: Stage flips an eager stage to "done") */
-[data-stage="pending"] :is(.rwi, .wipe, .fade, .door-reveal, .door-fill, .door-track, .door-knob),
-[data-stage="eager"] :is(.rwi, .wipe, .fade, .door-reveal, .door-fill, .door-track, .door-knob) {
+[data-stage="pending"] :is(.rwi, .wipe, .fade, .door-track, .door-win, .door-win-in, .door-knob),
+[data-stage="eager"] :is(.rwi, .wipe, .fade, .door-track, .door-win, .door-win-in, .door-knob) {
   will-change: transform;
 }
 [data-stage="pending"] .draw {
@@ -596,60 +596,61 @@
   }
 }
 
-/* Door (src/components/blocks/two-door.tsx): the knob lands on the left
-   and rides right, opening the pill and its label behind it (the text is
-   uncovered, not animated). The pill is a window (.door-reveal, rounded, clipping) that
-   slides in with the knob over a surface (.door-fill) counter-sliding by
-   the same amount, so the surface stays put: an outline keeps its left
-   cap while it is drawn. Transform and opacity only (smooth on phones). */
+/* Door (src/components/blocks/two-door.tsx): the pill grows out of its
+   arrow knob. A fixed left cap; a right cap that rides with the knob on
+   one track; between them the straight middle and the label stand still
+   and a window uncovers them, its edge moving exactly with the track (the
+   same distance, W - 2r, on the same timing), so the pill is whole at
+   every frame. The door fades in as one group (fading the pieces one by
+   one showed the cap through the half-faded knob), holds 0-24% while the
+   knob lands, then rides. Transform and opacity only. --r is the pill's end radius (knob centre to edge). */
 .door {
-  --knob-w: 64px; /* knob + its inset on both sides */
+  --r: 32px;
 }
 @media (min-width: 640px) {
   .door {
-    --knob-w: 68px;
+    --r: 34px;
   }
 }
 .door-knob {
   display: block;
 }
+/* The knob stays opaque (the door fades as a group) so it covers the
+   first letter under it from the very first frame. */
 @keyframes door-knob {
   from {
-    opacity: 0;
     transform: scale(0.5);
   }
 }
-/* hold at the knob while it lands (0-24%), then ride right (24-100%) */
-@keyframes door-reveal-in {
-  0% {
+@keyframes door-seed {
+  from {
     opacity: 0;
-    transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
-    animation-timing-function: var(--ease-out);
-  }
-  24% {
-    opacity: 1;
-    transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
-    animation-timing-function: var(--ease-in-out);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes door-counter-in {
-  0%,
-  24% {
-    transform: translate3d(calc(100% - var(--knob-w)), 0, 0);
-    animation-timing-function: var(--ease-in-out);
-  }
-  100% {
-    transform: none;
   }
 }
 @keyframes door-track-in {
   0%,
   24% {
-    transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
+    transform: translate3d(calc(-100% + 2 * var(--r)), 0, 0);
+    animation-timing-function: var(--ease-in-out);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes door-win-open {
+  0%,
+  24% {
+    transform: translate3d(calc(-100% + var(--r)), 0, 0);
+    animation-timing-function: var(--ease-in-out);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes door-win-counter {
+  0%,
+  24% {
+    transform: translate3d(calc(100% - var(--r)), 0, 0);
     animation-timing-function: var(--ease-in-out);
   }
   100% {
@@ -657,32 +658,38 @@
   }
 }
 [data-stage="pending"] .door-knob {
-  opacity: 0;
   transform: scale(0.5);
 }
-[data-stage="pending"] :is(.door-reveal, .door-track) {
-  transform: translate3d(calc(-100% + var(--knob-w)), 0, 0);
-}
-[data-stage="pending"] .door-reveal {
+[data-stage="pending"] .door {
   opacity: 0;
 }
-[data-stage="pending"] .door-fill {
-  transform: translate3d(calc(100% - var(--knob-w)), 0, 0);
+[data-stage="pending"] .door-track {
+  transform: translate3d(calc(-100% + 2 * var(--r)), 0, 0);
+}
+[data-stage="pending"] .door-win {
+  transform: translate3d(calc(-100% + var(--r)), 0, 0);
+}
+[data-stage="pending"] .door-win-in {
+  transform: translate3d(calc(100% - var(--r)), 0, 0);
 }
 :is([data-stage="eager"], [data-stage="in"]) .door-knob {
   animation: door-knob 340ms var(--ease-out) var(--d, 0ms) both;
 }
-:is([data-stage="eager"], [data-stage="in"]) .door-reveal {
-  animation: door-reveal-in 1080ms linear var(--d, 0ms) both;
-}
-:is([data-stage="eager"], [data-stage="in"]) .door-fill {
-  animation: door-counter-in 1080ms linear var(--d, 0ms) both;
+:is([data-stage="eager"], [data-stage="in"]) .door {
+  animation: door-seed 260ms var(--ease-out) var(--d, 0ms) both;
 }
 :is([data-stage="eager"], [data-stage="in"]) .door-track {
   animation: door-track-in 1080ms linear var(--d, 0ms) both;
 }
+:is([data-stage="eager"], [data-stage="in"]) .door-win {
+  animation: door-win-open 1080ms linear var(--d, 0ms) both;
+}
+:is([data-stage="eager"], [data-stage="in"]) .door-win-in {
+  animation: door-win-counter 1080ms linear var(--d, 0ms) both;
+}
 @media (prefers-reduced-motion: reduce) {
-  [data-stage] :is(.door-knob, .door-reveal, .door-fill, .door-track) {
+  [data-stage]
+    :is(.door, .door-knob, .door-track, .door-win, .door-win-in) {
     animation: none !important;
     transform: none !important;
     opacity: 1 !important;
