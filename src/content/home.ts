@@ -122,36 +122,28 @@ export const home = {
     ],
   },
 
-  // doc 09 ⑥, without the hover pictures (Nazar, 2026-09-25)
+  // doc 09 ⑥ as one sentence (Nazar's pick, 2026-09-25): the kinds of
+  // software as chips, the two public cases named. Counts as on the rest
+  // of the site (Portfolio v4): 9 shipped, 4 in fitness, 7 under NDA.
   build: {
     label: "What we build",
-    rows: [
+    lead: "We build",
+    items: [
+      { label: "franchise platforms", product: "UN1T", href: "/work/un1t" },
       {
-        title: "Franchise & multi-location platforms",
-        product: "UN1T",
-        href: "/work/un1t",
-      },
-      {
-        title: "Coaching, community & progress",
+        label: "coaching apps",
         product: "Jimmy Coach",
         href: "/work/jimmy-coach",
       },
-      {
-        title: "Connected-device companion apps",
-        href: "/what-we-build",
-      },
-      {
-        title: "Two-sided marketplaces & product ecosystems",
-        href: "/what-we-build",
-      },
-      {
-        title: "SaaS & omni-channel platforms",
-        href: "/what-we-build",
-      },
-      {
-        title: "Communities & fan engagement",
-        href: "/what-we-build",
-      },
+      { label: "device companions", href: "/what-we-build" },
+      { label: "marketplaces", href: "/what-we-build" },
+      { label: "omni-channel SaaS", href: "/what-we-build" },
+      { label: "fan communities", href: "/what-we-build" },
+    ],
+    facts: [
+      { value: "9", label: "products shipped" },
+      { value: "4", label: "in fitness" },
+      { value: "7", label: "under NDA" },
     ],
     link: { label: "All mechanics", href: "/what-we-build" },
   },
