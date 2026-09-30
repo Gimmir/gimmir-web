@@ -137,11 +137,26 @@ export const saas = {
     ],
   },
 
+  // an honest filter (Nazar's pick o3, 2026-09-30): what passes, what
+  // stops and why. DRAFT: lede, chips and advice, for Nazar to edit.
   notFor: {
-    title: "Who it's not for.",
+    title: "Who it’s not for.",
+    lede: "An honest filter, before you book.",
+    filter: "Our filter",
+    pass: ["Coaching app", "Member app", "Marketplace", "B2B SaaS"],
+    to: { title: "We build it.", line: "In your name, from the first commit." },
+    stopped: "Stopped at the filter",
     items: [
-      "Ideas without a budget for a first release.",
-      "Regulated clinical products.",
+      {
+        chip: "Idea, no budget",
+        line: "Ideas without a budget for a first release.",
+        advice: "Test it with a no-code prototype first.",
+      },
+      {
+        chip: "Clinical device",
+        line: "Regulated clinical products.",
+        advice: "Wellness, yes. Clinical, no.",
+      },
     ],
   },
 

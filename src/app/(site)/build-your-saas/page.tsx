@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 
 import { SaasClose } from "@/components/saas/close";
 import { SaasHero } from "@/components/saas/hero";
-import {
-  SaasFit,
-  SaasNotFor,
-  SaasOwn,
-  SaasStart,
-} from "@/components/saas/sections";
+import { SaasNotFor } from "@/components/saas/not-for";
+import { SaasFit, SaasOwn, SaasStart } from "@/components/saas/sections";
 import { SaasStory } from "@/components/saas/story";
 import { JsonLd } from "@/components/seo/json-ld";
 import { saas } from "@/content/saas";

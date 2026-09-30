@@ -5,7 +5,6 @@ import { RepoFragment } from "@/components/home/what-you-get";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
-import { X } from "@/components/ui/icons";
 import { saas } from "@/content/saas";
 import { AudienceArt, PatchArt, ShelfArt } from "./fit-art";
 import { FOUNDERS } from "@/lib/founders";
@@ -319,38 +318,6 @@ export function SaasOwn() {
               </li>
             );
           })}
-        </ul>
-      </Container>
-    </Stage>
-  );
-}
-
-/** ⑦ The honest filter, on ink. */
-export function SaasNotFor() {
-  const { title, items } = saas.notFor;
-  const after = wordCount(title) * 40 + 300;
-  return (
-    <Stage as="section" data-tone="ink" className="bg-ink text-paper">
-      <Container className="grid gap-x-10 gap-y-10 py-20 md:py-24 lg:grid-cols-12 lg:items-end">
-        <h2 className="display text-[length:var(--text-title)] leading-[1.02] lg:col-span-5">
-          <RiseText text={title} />
-        </h2>
-        <ul className="flex flex-col lg:col-span-7">
-          {items.map((it, i) => (
-            <li
-              key={it}
-              className="fade flex items-center gap-4 border-t border-line-dark py-5 text-[clamp(1.25rem,1rem+0.8vw,1.75rem)] font-semibold tracking-[-0.01em] last:border-b"
-              style={d(after + i * 90)}
-            >
-              <span
-                aria-hidden
-                className="flex size-8 shrink-0 items-center justify-center rounded-full border border-line-dark text-paper/60"
-              >
-                <X className="size-3.5" />
-              </span>
-              {it}
-            </li>
-          ))}
         </ul>
       </Container>
     </Stage>
