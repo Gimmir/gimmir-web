@@ -2,8 +2,8 @@
  * /build-your-saas, V2 (doc 09 §3.3): buyer B, founders building or owning
  * a SaaS, in Nazar and Oleh's voice. Facts only where the site already has
  * them: Jimmy's coach had 250+ clients, 100+ coaches in the first month,
- * co-founded and co-owned; the coach isn't named (needs his OK). No prices
- * and no budget floor on the page.
+ * co-founded and co-owned. Quentin OK'd being named (2026-09-30). No
+ * prices and no budget floor on the page.
  */
 import type { HeadlineToken } from "@/components/blocks/inline-headline";
 
@@ -34,7 +34,7 @@ export const saas = {
     label: "How Jimmy Coach started",
     chapters: [
       {
-        line: "A coach with 250+ clients couldn't find good software.",
+        line: "Quentin, a coach with 250+ clients, couldn't find good software.",
         visual: "chaos",
       },
       {
