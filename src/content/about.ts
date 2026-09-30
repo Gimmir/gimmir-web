@@ -35,30 +35,40 @@ export const about = {
     ],
   },
 
-  // DRAFT, from the approved bios and Nazar's facts
+  // DRAFT, from the approved bios and Nazar's facts. Roles sit in the
+  // header (FOUNDERS); each cell leads with its key phrase (`b`).
   who: {
     title: "Who does what.",
     rows: [
       {
-        label: "Role",
-        nazar: "CEO, Gimmir. Co-founder & CTO, Jimmy Coach.",
-        oleh: "CTO, Gimmir.",
-      },
-      {
         label: "Owns",
-        nazar:
-          "Product and business: your plan, your roadmap, what to build first.",
-        oleh: "Architecture and delivery: how it’s built, and whether it will scale.",
+        nazar: {
+          b: "Product and business",
+          rest: ": your plan, your roadmap, what to build first.",
+        },
+        oleh: {
+          b: "Architecture and delivery",
+          rest: ": how it’s built, and whether it will scale.",
+        },
       },
       {
         label: "Built",
-        nazar: "Jimmy Coach, co-founded with Quentin on his own money.",
-        oleh: "The architecture of UN1T’s platform, across 10+ locations.",
+        nazar: {
+          b: "Jimmy Coach",
+          rest: ", co-founded with Quentin on his own money.",
+        },
+        oleh: {
+          b: "UN1T’s platform",
+          rest: ": its architecture, across 10+ locations.",
+        },
       },
       {
         label: "Leads",
-        nazar: "The Review, and the first call with fitness brands.",
-        oleh: "The build, from the first commit to launch.",
+        nazar: {
+          b: "The Review",
+          rest: ", and the first call with fitness brands.",
+        },
+        oleh: { b: "The build", rest: ", from the first commit to launch." },
       },
     ],
     // the last row is a call with each of them
