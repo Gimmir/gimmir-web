@@ -1,30 +1,28 @@
+import { InlineHeadline } from "@/components/blocks/inline-headline";
+import { Stage } from "@/components/motion/stage";
 import { Container } from "@/components/ui/container";
-import { Mark } from "@/components/ui/mark";
-import { Pill } from "@/components/ui/pill";
-import { Reveal } from "@/components/ui/reveal";
+import { contact } from "@/content/contact";
 
-/** The /contact hero: no CTA of its own, the booking hub sits right below it. */
+/**
+ * /contact ①: the promise as a sentence with the two founders' faces in
+ * it (the home hero's hand). No CTA of its own; the doors sit right below,
+ * under the same backdrop (the page draws it behind both).
+ */
 export function Hero() {
+  const { headline, sub } = contact.hero;
   return (
-    <section id="top" className="relative overflow-hidden">
-      <Container className="pb-14 pt-28 sm:pt-32 md:pb-16 md:pt-36">
-        <Reveal eager>
-          <Pill>Book a call</Pill>
-        </Reveal>
-
-        <Reveal eager delay={60}>
-          <h1 className="display mt-8 text-[1.7rem] leading-[1.2] sm:text-hero sm:leading-[0.98]">
-            Book a call. <Mark>Talk to the people who&rsquo;ll build it.</Mark>
-          </h1>
-        </Reveal>
-
-        <Reveal eager delay={140}>
-          <p className="mt-8 max-w-[46ch] text-lg leading-relaxed text-muted md:text-xl">
-            Twenty to thirty minutes. No pitch deck. If we&rsquo;re not the
-            right team, we&rsquo;ll say so.
-          </p>
-        </Reveal>
+    <Stage as="section" eager id="top" data-tone="paper" className="relative">
+      <Container className="relative pb-12 pt-32 md:pb-16 md:pt-40">
+        <h1 className="max-w-[18ch] text-[clamp(2.3rem,0.8rem+4.6vw,5rem)] font-extrabold leading-[1.04] tracking-[-0.038em] [font-stretch:106%]">
+          <InlineHeadline tokens={headline} />
+        </h1>
+        <p
+          className="fade mt-7 max-w-[46ch] text-lg leading-relaxed text-muted md:mt-9 md:text-xl"
+          style={{ "--d": "900ms" } as React.CSSProperties}
+        >
+          {sub}
+        </p>
       </Container>
-    </section>
+    </Stage>
   );
 }

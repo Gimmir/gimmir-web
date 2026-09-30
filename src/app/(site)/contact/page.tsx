@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 
 import { JsonLd } from "@/components/seo/json-ld";
 import { CONTACT_FAQ_ITEMS, ContactFaq } from "@/components/contact/faq";
-import { ContactTabs } from "@/components/contact/contact-tabs";
+import { Doors } from "@/components/contact/doors";
 import { EmailLine } from "@/components/contact/email-line";
 import { Hero } from "@/components/contact/hero";
+import { HeroBackdrop } from "@/components/home/hero-backdrop";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { BOOKINGS } from "@/lib/booking";
 import { hostNames } from "@/lib/founders";
 import { breadcrumbs, contactPage, faqPage } from "@/lib/schema";
@@ -46,17 +46,15 @@ export default async function ContactPage() {
       <JsonLd data={contactPage()} />
       {faqLd && <JsonLd data={faqLd} />}
 
-      <Hero />
-
-      <section className="pb-20 md:pb-28">
-        <Container>
-          <Reveal delay={80}>
-            <ContactTabs />
-          </Reveal>
-          <EmailLine email={email} />
-        </Container>
-      </section>
-
+      {/* one backdrop behind the hero and the doors, so no seam between them */}
+      <div className="relative">
+        <HeroBackdrop />
+        <Hero />
+        <Doors />
+      </div>
+      <Container className="pb-20 md:pb-24">
+        <EmailLine email={email} />
+      </Container>
       <ContactFaq />
     </>
   );

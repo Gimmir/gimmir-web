@@ -1,9 +1,10 @@
-import { FaqList, type FaqItem } from "@/components/shared/faq-list";
+import { Accordion, type AccordionItem } from "@/components/blocks/accordion";
+import { Stage } from "@/components/motion/stage";
+import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
-import { SectionHeader } from "@/components/ui/section-header";
+import { contact } from "@/content/contact";
 
-export const CONTACT_FAQ_ITEMS: FaqItem[] = [
+export const CONTACT_FAQ_ITEMS: AccordionItem[] = [
   {
     key: "what-happens",
     question: "What happens on the call?",
@@ -23,16 +24,23 @@ export const CONTACT_FAQ_ITEMS: FaqItem[] = [
   },
 ];
 
+/** /contact ③, what people ask before they book, as the V2 accordion. */
 export function ContactFaq() {
+  const { title } = contact.faq;
+  const after = wordCount(title) * 40 + 300;
   return (
-    <section className="border-t border-line py-20 md:py-28">
-      <Container>
-        <Reveal>
-          <SectionHeader index="01" title="Before you book." />
-        </Reveal>
-
-        <FaqList items={CONTACT_FAQ_ITEMS} className="mt-12" />
+    <Stage as="section" data-tone="paper" className="border-t border-line">
+      <Container className="grid gap-x-10 gap-y-10 py-20 md:py-28 lg:grid-cols-12">
+        <h2 className="display text-[length:var(--text-title)] leading-[1.02] lg:col-span-5">
+          <RiseText text={title} />
+        </h2>
+        <div
+          className="fade lg:col-span-7"
+          style={{ "--d": `${after}ms` } as React.CSSProperties}
+        >
+          <Accordion items={CONTACT_FAQ_ITEMS} />
+        </div>
       </Container>
-    </section>
+    </Stage>
   );
 }
