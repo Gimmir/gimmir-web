@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { HowHero } from "@/components/how/hero";
 import {
   HOW_ANSWERS,
-  HowOwn,
   HowPricing,
   HowRisk,
   HowStandards,
 } from "@/components/how/sections";
+import { SaasOwn } from "@/components/saas/sections";
 import { JsonLd } from "@/components/seo/json-ld";
 import { how } from "@/content/how";
 import { breadcrumbs, faqPage } from "@/lib/schema";
@@ -43,7 +43,7 @@ export default function HowWeWorkPage() {
       <JsonLd data={faqPage([TWO_FOUNDERS_ANSWER, ...HOW_ANSWERS])!} />
       <HowHero />
       <HowPricing />
-      <HowOwn />
+      <SaasOwn title={how.own.title} />
       <HowStandards />
       <HowRisk />
     </>

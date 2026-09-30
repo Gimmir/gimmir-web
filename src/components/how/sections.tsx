@@ -1,12 +1,9 @@
-import Link from "next/link";
-
 import { Accordion } from "@/components/blocks/accordion";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
-import { ArrowRight, Check } from "@/components/ui/icons";
+import { Check } from "@/components/ui/icons";
 import { how } from "@/content/how";
-import { saas } from "@/content/saas";
 import { cn } from "@/lib/cn";
 import {
   CONTRACT_ANSWER,
@@ -17,8 +14,9 @@ import {
   UNAVAILABLE_ANSWER,
 } from "@/lib/trust-answers";
 
-/* /how-we-work ② to ⑤ (doc 09 §3.8): how we price, what's yours, the
-   standards we build to, and the two-person risk answered straight. */
+/* /how-we-work ②, ④ and ⑤ (doc 09 §3.8): how we price, the standards we
+   build to, and the two-person risk answered straight. ③, what's yours, is
+   /build-your-saas "What you own" (SaasOwn) under this page's title. */
 
 const at = (ms: number, dur?: number) =>
   ({
@@ -230,54 +228,6 @@ export function HowPricing() {
             </li>
           ))}
         </ol>
-      </Container>
-    </Stage>
-  );
-}
-
-/**
- * ③ What stays yours: the four things from /build-your-saas "What you
- * own", in one line each, with the way to the full picture.
- */
-export function HowOwn() {
-  const { title, link } = how.own;
-  const { cards } = saas.own;
-  const after = wordCount(title) * 40 + 300;
-
-  return (
-    <Stage as="section" data-tone="paper">
-      <Container className="py-20 md:py-28">
-        <h2 className="display text-[length:var(--text-title)] leading-[1.02]">
-          <RiseText text={title} />
-        </h2>
-        <ul className="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 md:mt-16 lg:grid-cols-4">
-          {cards.map((c, i) => (
-            <li
-              key={c.id}
-              className="fade border-t border-ink pt-5"
-              style={at(after + i * 90)}
-            >
-              <span
-                aria-hidden
-                className="flex size-7 items-center justify-center rounded-full bg-lime text-ink"
-              >
-                <Check className="size-3.5" />
-              </span>
-              <h3 className="mt-5 text-xl font-bold tracking-[-0.01em]">
-                {c.title}
-              </h3>
-              <p className="mt-2 leading-relaxed text-muted">{c.body}</p>
-            </li>
-          ))}
-        </ul>
-        <Link
-          href={link.href}
-          className="fade group mt-12 inline-flex items-center gap-3 text-lg font-semibold"
-          style={at(after + cards.length * 90 + 100)}
-        >
-          <span className="link-mark">{link.label}</span>
-          <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
-        </Link>
       </Container>
     </Stage>
   );

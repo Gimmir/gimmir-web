@@ -91,11 +91,11 @@ export const how = {
     ],
   },
 
-  // doc 09: code, IP, accounts, docs, yours from day one (the items are
-  // /build-your-saas "What you own", so the wording never drifts)
+  // doc 09: code, IP, accounts, docs, yours from day one. The section is
+  // /build-your-saas "What you own" (Nazar's pick o3, 2026-09-30) under
+  // this title, so the two pages never drift apart.
   own: {
     title: "Yours from day one.",
-    link: { label: "See what you own", href: "/build-your-saas#own" },
   },
 
   // doc 09, verbatim but for the dash; no client named

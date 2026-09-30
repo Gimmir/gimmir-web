@@ -284,9 +284,12 @@ const OWN_UI: Record<string, () => React.ReactNode> = {
   roadmap: RoadmapFragment,
 };
 
-/** ⑤ What stays yours, each with a slice of it drawn in code. */
-export function SaasOwn() {
-  const { title, cards } = saas.own;
+/**
+ * ⑤ What stays yours, each with a slice of it drawn in code. Also on
+ * /how-we-work, under its own title, so the two never drift apart.
+ */
+export function SaasOwn({ title = saas.own.title }: { title?: string }) {
+  const { cards } = saas.own;
   const after = wordCount(title) * 40 + 300;
   return (
     <Stage as="section" id="own" data-tone="paper" className="scroll-mt-20">
