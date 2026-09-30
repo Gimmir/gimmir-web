@@ -3,8 +3,6 @@ import { stegaClean } from "next-sanity";
 import { CASES, type CaseStudy } from "@/lib/cases";
 import { FOUNDERS } from "@/lib/founders";
 import { BRAND, SITE_URL } from "@/lib/seo";
-import { urlFor } from "@/sanity/lib/image";
-import type { FOUNDERS_QUERY_RESULT } from "@/sanity/types";
 
 /**
  * schema.org builders for the site's JSON-LD blocks. All Sanity-sourced
@@ -16,8 +14,6 @@ const ORG_ID = `${SITE_URL}/#organization`;
 
 /** Stable @id for a founder's Person node, keyed by their Sanity _id. */
 export const personId = (founderId: string) => `${SITE_URL}/about#${founderId}`;
-
-type Founder = FOUNDERS_QUERY_RESULT[number];
 
 /** What each founder is the authority on (schema.org `knowsAbout`). */
 const FOUNDER_KNOWS_ABOUT: Record<string, string[]> = {
@@ -40,31 +36,31 @@ const FOUNDER_KNOWS_ABOUT: Record<string, string[]> = {
   ],
 };
 
-function personNode(f: Founder, role?: string) {
+/** A founder's Person node, from the fixed identity in `lib/founders`. */
+function founderPerson(f: (typeof FOUNDERS)[keyof typeof FOUNDERS]) {
   return {
     "@type": "Person",
-    "@id": personId(f._id),
-    name: stegaClean(f.name) ?? undefined,
-    jobTitle: role,
-    knowsAbout: FOUNDER_KNOWS_ABOUT[f._id],
+    "@id": personId(f.sanityId),
+    name: f.name,
+    jobTitle: f.title,
+    knowsAbout: FOUNDER_KNOWS_ABOUT[f.sanityId],
     url: `${SITE_URL}/about`,
-    image: f.photo
-      ? urlFor(f.photo).width(800).height(800).fit("crop").url()
-      : undefined,
-    sameAs: f.linkedinUrl ? [stegaClean(f.linkedinUrl)] : undefined,
+    image: `${SITE_URL}${f.photo}`,
+    sameAs: [f.linkedin],
     worksFor: { "@id": ORG_ID },
   };
 }
 
-/** Organization + WebSite + founder Person nodes, for the home page. */
-export function organizationGraph(
-  founders: FOUNDERS_QUERY_RESULT,
-  opts: { email?: string | null; description?: string | null },
-) {
-  const roles: Record<string, string> = {
-    founderNazar: "CEO",
-    founderOleh: "CTO",
-  };
+/**
+ * Organization + WebSite + the founders' Person nodes, for the home page
+ * (doc 09 §6: founders as Person, `knowsAbout` the stack and the domains;
+ * no Offer with a price).
+ */
+export function organizationGraph(opts: {
+  email: string;
+  description: string;
+}) {
+  const founders = Object.values(FOUNDERS);
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -80,29 +76,31 @@ export function organizationGraph(
         },
         url: SITE_URL,
         logo: `${SITE_URL}/logo/Logo-Gimmir.svg`,
-        description: stegaClean(opts.description) ?? undefined,
-        email: stegaClean(opts.email) ?? undefined,
-        contactPoint: opts.email
-          ? {
-              "@type": "ContactPoint",
-              contactType: "sales",
-              email: stegaClean(opts.email),
-              url: `${SITE_URL}/contact`,
-              availableLanguage: "English",
-            }
-          : undefined,
+        description: opts.description,
+        email: opts.email,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: opts.email,
+          url: `${SITE_URL}/contact`,
+          availableLanguage: "English",
+        },
         knowsAbout: [
+          "SaaS product development",
           "Sport and fitness software",
           "Member and booking platforms",
           "Fitness franchise platforms",
           "Coaching apps",
           "Wellness and prevention apps",
-          "Apple HealthKit and Android Health Connect integrations",
           "iOS and Android apps",
+          "React Native",
+          "Next.js",
+          "Supabase",
+          "Stripe",
         ],
-        founder: founders.map((f) => ({ "@id": personId(f._id) })),
+        founder: founders.map((f) => ({ "@id": personId(f.sanityId) })),
       },
-      ...founders.map((f) => personNode(f, roles[f._id])),
+      ...founders.map(founderPerson),
       {
         "@type": "WebSite",
         "@id": `${SITE_URL}/#website`,
@@ -149,17 +147,7 @@ export function faqPage(
 export function aboutGraph() {
   return {
     "@context": "https://schema.org",
-    "@graph": Object.values(FOUNDERS).map((f) => ({
-      "@type": "Person",
-      "@id": personId(f.sanityId),
-      name: f.name,
-      jobTitle: f.title,
-      knowsAbout: FOUNDER_KNOWS_ABOUT[f.sanityId],
-      url: `${SITE_URL}/about`,
-      image: `${SITE_URL}${f.photo}`,
-      sameAs: [f.linkedin],
-      worksFor: { "@id": ORG_ID },
-    })),
+    "@graph": Object.values(FOUNDERS).map(founderPerson),
   };
 }
 
