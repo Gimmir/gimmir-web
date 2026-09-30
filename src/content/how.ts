@@ -99,10 +99,28 @@ export const how = {
   },
 
   // doc 09, verbatim but for the dash; no client named
+  // each gate drawn as a slice of the real thing (Nazar's pick o3); the
+  // line and the three bodies confirmed true by Nazar (2026-09-30)
   standards: {
     title: "Big-team standards, founders on the build.",
-    line: "We’ve shipped inside a major European retailer’s engineering team, and we work to the same bar:",
-    items: ["Code review", "Release process", "QA gates"],
+    line: "We’ve shipped inside a major European retailer’s engineering team, and every build of ours clears the same three gates.",
+    items: [
+      {
+        id: "review",
+        title: "Code review",
+        body: "Every change read by a senior engineer before it merges.",
+      },
+      {
+        id: "qa",
+        title: "QA gates",
+        body: "Tests and a manual pass on real devices, before anything ships.",
+      },
+      {
+        id: "release",
+        title: "Release process",
+        body: "Staging first, then production, with a way back.",
+      },
+    ],
     stackLabel: "Our stack",
     stack: [
       "React",

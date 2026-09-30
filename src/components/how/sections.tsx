@@ -233,7 +233,109 @@ export function HowPricing() {
   );
 }
 
-/** ④ On ink: the standards we build to, and the stack we build with. */
+/** A lime tick, the sign a gate was passed. */
+function Tick() {
+  return (
+    <span
+      aria-hidden
+      className="flex size-5 shrink-0 items-center justify-center rounded-full bg-lime text-ink"
+    >
+      <Check className="size-3" />
+    </span>
+  );
+}
+
+// a slice of each gate, as it looks in the work (illustrative)
+const PANEL =
+  "w-full max-w-[340px] rounded-2xl bg-paper text-[13px] text-ink shadow-[0_20px_40px_-20px_rgba(0,0,0,0.7)]";
+const ROW = "flex items-center gap-2.5 border-b border-line px-3.5 py-2.5";
+
+function ReviewUi({ delay }: { delay: number }) {
+  return (
+    <div className={PANEL}>
+      <div className={cn(ROW, "justify-between font-semibold")}>
+        Review <span className="font-normal text-faint">payments.ts</span>
+      </div>
+      <div className={cn(ROW, "fade")} style={at(delay)}>
+        <span className="size-5 shrink-0 rounded-full bg-paper-2 ring-1 ring-line" />
+        Handle the retry when the card fails.
+      </div>
+      <div className={cn(ROW, "fade")} style={at(delay + 150)}>
+        <span className="size-5 shrink-0 rounded-full bg-lime" />
+        Done, and a test for it.
+      </div>
+      <div
+        className={cn(ROW, "fade border-b-0 font-semibold")}
+        style={at(delay + 300)}
+      >
+        <Tick /> Approved
+      </div>
+    </div>
+  );
+}
+
+function QaUi({ delay }: { delay: number }) {
+  const checks = [
+    "Unit and integration tests",
+    "iOS, on a real device",
+    "Android, on a real device",
+  ];
+  return (
+    <div className={PANEL}>
+      <div className={cn(ROW, "justify-between font-semibold")}>
+        QA <span className="font-normal text-faint">build 1.4.0</span>
+      </div>
+      {checks.map((c, k) => (
+        <div
+          key={c}
+          className={cn(
+            ROW,
+            "fade justify-between",
+            k === checks.length - 1 && "border-b-0",
+          )}
+          style={at(delay + k * 150)}
+        >
+          {c} <Tick />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ReleaseUi({ delay }: { delay: number }) {
+  return (
+    <div className={cn(PANEL, "p-4")}>
+      <p className="font-semibold">Release 1.4.0</p>
+      <div className="mt-3.5 flex items-center gap-2">
+        <span
+          className="fade flex-1 rounded-xl py-2.5 text-center font-semibold ring-1 ring-inset ring-line"
+          style={at(delay)}
+        >
+          Staging
+        </span>
+        <span aria-hidden className="fade text-faint" style={at(delay + 150)}>
+          →
+        </span>
+        <span
+          className="fade flex-1 rounded-xl bg-lime py-2.5 text-center font-semibold"
+          style={at(delay + 300)}
+        >
+          Production
+        </span>
+      </div>
+      <p className="fade mt-3 text-[11.5px] text-muted" style={at(delay + 450)}>
+        Rollback ready
+      </p>
+    </div>
+  );
+}
+
+const GATE_UI = { review: ReviewUi, qa: QaUi, release: ReleaseUi } as const;
+
+/**
+ * ④ On ink (Nazar's pick o3): the three gates every build clears, each
+ * with a slice of it as it looks in the work, then the stack.
+ */
 export function HowStandards() {
   const { title, line, items, stackLabel, stack } = how.standards;
   const after = wordCount(title) * 40 + 300;
@@ -250,27 +352,38 @@ export function HowStandards() {
         >
           {line}
         </p>
-        <ul className="mt-10 grid gap-3 sm:grid-cols-3">
-          {items.map((it, i) => (
-            <li
-              key={it}
-              className="fade flex items-center gap-4 rounded-[20px] bg-ink-soft px-5 py-5 ring-1 ring-line-dark"
-              style={at(after + 150 + i * 90)}
-            >
-              <span
-                aria-hidden
-                className="flex size-8 shrink-0 items-center justify-center rounded-full bg-lime text-ink"
+        <ul className="mt-12 grid gap-4 md:grid-cols-3">
+          {items.map((it, i) => {
+            const Ui = GATE_UI[it.id];
+            const t = after + 150 + i * 120;
+            return (
+              <li
+                key={it.id}
+                className="fade flex flex-col rounded-[24px] bg-ink-soft p-2 ring-1 ring-line-dark"
+                style={at(t)}
               >
-                <Check className="size-4" />
-              </span>
-              <span className="text-lg font-bold md:text-xl">{it}</span>
-            </li>
-          ))}
+                <div
+                  aria-hidden
+                  className="flex h-[220px] items-center justify-center rounded-[18px] bg-paper/[0.05] px-4 py-6"
+                >
+                  <Ui delay={t + 250} />
+                </div>
+                <div className="px-4 pb-4 pt-5">
+                  <h3 className="text-xl font-extrabold tracking-[-0.01em]">
+                    {it.title}
+                  </h3>
+                  <p className="mt-1.5 leading-relaxed text-paper/70">
+                    {it.body}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
         </ul>
 
         <p
           className="fade mt-14 text-[15px] font-medium text-paper/50"
-          style={at(after + 500)}
+          style={at(after + 700)}
         >
           {stackLabel}
         </p>
@@ -279,7 +392,7 @@ export function HowStandards() {
             <li
               key={s}
               className="fade rounded-full px-4 py-2 font-mono text-[13px] text-paper/85 ring-1 ring-line-dark"
-              style={at(after + 550 + i * 50)}
+              style={at(after + 750 + i * 50)}
             >
               {s}
             </li>
