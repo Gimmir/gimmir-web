@@ -7,25 +7,15 @@ import { Stage } from "@/components/motion/stage";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import { saas } from "@/content/saas";
+import { SaasHeroFlip } from "./hero-flip";
 import { FOUNDERS } from "@/lib/founders";
 import { cn } from "@/lib/cn";
 
-// Jimmy Coach, our own product: ours to show
-const SCREENS = [
-  {
-    src: "/screens-all/frame-4.jpg",
-    alt: "Jimmy Coach: direct chats between a client and their coach",
-  },
-  {
-    src: "/screens-all/frame-1.jpg",
-    alt: "Jimmy Coach: the member home screen with today’s workout, steps and weight progress",
-  },
-];
-
 /**
- * /build-your-saas ①: the claim as a sentence with the product we built
- * for ourselves inside it (the Jimmy icon), "ourselves" marked, one call
- * signed with Oleh's and Nazar's faces; beside it, that product's screens.
+ * /build-your-saas ①: the claim as a sentence with a drawn app tile in
+ * it, "ourselves" marked, one call signed with Oleh's and Nazar's faces;
+ * beside it, the business folding from its tools into its own SaaS
+ * (SaasHeroFlip), the way /operators draws rented → yours.
  */
 export function SaasHero() {
   const { headline, sub, cta } = saas.hero;
@@ -84,30 +74,8 @@ export function SaasHero() {
           </div>
         </div>
 
-        <div
-          aria-hidden
-          className="fade relative mx-auto flex w-full max-w-[460px] items-center justify-center lg:col-span-5"
-          style={d(900)}
-        >
-          {SCREENS.map((s, n) => (
-            <div
-              key={s.src}
-              className={cn(
-                "relative aspect-[1242/2688] overflow-hidden rounded-[24px] shadow-[0_30px_60px_-30px_rgba(21,20,14,0.45)] ring-1 ring-ink/10 md:rounded-[30px]",
-                n === 0
-                  ? "w-[46%] -rotate-[6deg] translate-y-[6%]"
-                  : "z-10 -ml-[10%] w-[52%] rotate-[3deg]",
-              )}
-            >
-              <Image
-                src={s.src}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 240px, 50vw"
-                className="object-cover"
-              />
-            </div>
-          ))}
+        <div className="lg:col-span-5">
+          <SaasHeroFlip delay={900} />
         </div>
       </Container>
     </Stage>

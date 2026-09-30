@@ -15,10 +15,10 @@ export const saas = {
   },
 
   hero: {
-    // doc 09's [▢] after "SaaS" is the Jimmy icon: the one we built for us
+    // doc 09's [▢] after "SaaS": a drawn app tile (Nazar: no Jimmy here)
     headline: [
       "You know your business. We know how to turn it into a SaaS",
-      { apps: ["jimmy"] },
+      { tile: "app" },
       "because we did it for",
       { mark: "ourselves", after: "." },
     ] satisfies HeadlineToken[],
