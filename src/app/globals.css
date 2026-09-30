@@ -1,6 +1,86 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
+/*  Fallback faces for the bold and wide Archivo                      */
+/* ------------------------------------------------------------------ */
+/* next/font's "Archivo Fallback" sizes Arial to Archivo's regular width,
+   but headlines set Archivo at 800 and stretched (106 to 118%), up to a
+   third wider, so until Archivo arrives they wrapped short and then grew,
+   pushing the page down (CLS 0.2+ on a slow phone). These faces join that
+   family, one per weight and stretch the site uses, each sized to Archivo
+   at that setting (measured in Chromium against real Arial Bold, on the
+   site's own headline text, 2026-09-30); the browser picks the one
+   matching the text's weight and font-stretch. Metrics overrides are
+   rescaled so line boxes stay the same. */
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 600;
+  size-adjust: 94.3%;
+  ascent-override: 93.11%;
+  descent-override: 22.27%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 700;
+  size-adjust: 97.4%;
+  ascent-override: 90.15%;
+  descent-override: 21.56%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 800 900;
+  size-adjust: 102.0%;
+  ascent-override: 86.08%;
+  descent-override: 20.59%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 800 900;
+  font-stretch: 106%;
+  size-adjust: 108.1%;
+  ascent-override: 81.22%;
+  descent-override: 19.43%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 800 900;
+  font-stretch: 108%;
+  size-adjust: 110.2%;
+  ascent-override: 79.68%;
+  descent-override: 19.06%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 800 900;
+  font-stretch: 112%;
+  size-adjust: 114.2%;
+  ascent-override: 76.89%;
+  descent-override: 18.39%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 800 900;
+  font-stretch: 118%;
+  size-adjust: 120.3%;
+  ascent-override: 72.99%;
+  descent-override: 17.46%;
+  line-gap-override: 0%;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Gimmir design tokens                                              */
 /* ------------------------------------------------------------------ */
 @theme {

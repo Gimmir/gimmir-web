@@ -138,9 +138,10 @@ export function HowHero() {
               <RiseText text={title} />
             </h1>
             <p
-              className="fade mt-7 max-w-[26ch] font-serif text-[clamp(1.3rem,1rem+0.8vw,1.75rem)] italic leading-snug text-muted"
-              // with the headline (on a phone it's the largest text)
-              style={at(150)}
+              // no fade: it's the largest text here, and a fade from zero
+              // (run on the GPU) isn't counted as shown until the whole hero
+              // has played, which held LCP back by seconds
+              className="mt-7 max-w-[26ch] font-serif text-[clamp(1.3rem,1rem+0.8vw,1.75rem)] italic leading-snug text-muted"
             >
               {lede}
             </p>

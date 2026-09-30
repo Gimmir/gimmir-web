@@ -82,10 +82,10 @@ function Hero({ data }: { data: CaseStudy }) {
             <RiseText text={title} />
           </h1>
           <p
-            className="fade mt-8 max-w-[56ch] text-lg leading-relaxed text-paper/70 md:text-xl"
-            // with the headline, not after it: on a phone this is the
-            // largest thing on screen, and it counts as loaded once it shows
-            style={d(150)}
+            // no fade: on a phone this is the largest thing on screen, and
+            // a fade from zero (run on the GPU) isn't counted as shown until
+            // the whole hero has played, which held LCP back by seconds
+            className="mt-8 max-w-[56ch] text-lg leading-relaxed text-paper/70 md:text-xl"
           >
             {sub}
           </p>

@@ -56,7 +56,6 @@ function Label({ children, dark }: { children: string; dark?: boolean }) {
 
 function Hero({ data }: { data: CaseStudy }) {
   const { title, sub } = jimmy.hero;
-  const after = wordCount(title) * 40 + 500;
   return (
     <Stage as="section" eager data-tone="paper" className="relative">
       <Container className="grid gap-14 pb-20 pt-28 sm:pt-32 md:pb-28 md:pt-36 lg:min-h-[92svh] lg:grid-cols-12 lg:items-center lg:gap-10">
@@ -94,10 +93,10 @@ function Hero({ data }: { data: CaseStudy }) {
             <RiseText text={title} />
           </h1>
           <p
-            className="fade mt-8 max-w-[52ch] text-lg leading-relaxed text-muted md:text-xl"
-            // with the headline, not after it: on a phone this is the
-            // largest thing on screen, and it counts as loaded once it shows
-            style={d(150)}
+            // no fade: on a phone this is the largest thing on screen, and
+            // a fade from zero (run on the GPU) isn't counted as shown until
+            // the whole hero has played, which held LCP back by seconds
+            className="mt-8 max-w-[52ch] text-lg leading-relaxed text-muted md:text-xl"
           >
             {sub}
           </p>
