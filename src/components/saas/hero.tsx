@@ -15,7 +15,7 @@ import { cn } from "@/lib/cn";
  * /build-your-saas ①: the claim as a sentence with the product we built
  * for ourselves inside it (the Jimmy icon), "ourselves" marked, one call
  * signed with Oleh's and Nazar's faces; beside it, the plan of the SaaS
- * they'd own, drawn on a grid (SaasHeroBlueprint).
+ * they'd own, drawn as a plan (SaasHeroBlueprint).
  */
 export function SaasHero() {
   const { headline, sub, cta } = saas.hero;

@@ -1,6 +1,6 @@
-/* The hero's promise as a plan on a drafting grid: "Your SaaS, in your
-   name" in the middle and the six parts it's built from around it, each
-   with its own line drawn in. Members' data keeps running down those
+/* The hero's promise as a plan: "Your SaaS, in your name" in the middle
+   and the six parts it's built from around it, each with its own line
+   drawn in. Members' data keeps running down those
    lines into the middle, which is the point: it all lands with you. */
 
 const W = 560;
@@ -50,36 +50,6 @@ export function SaasHeroBlueprint({ delay = 0 }: { delay?: number }) {
       viewBox={`0 0 ${W} ${H}`}
       className="mx-auto h-auto w-full max-w-[560px] overflow-visible"
     >
-      <defs>
-        {/* the grid fades out at the edges instead of ending in a box */}
-        <radialGradient id="bp-fade" cx="50%" cy="50%" r="55%">
-          <stop offset="55%" stopColor="#fff" />
-          <stop offset="100%" stopColor="#000" />
-        </radialGradient>
-        <mask id="bp-mask">
-          <rect width={W} height={H} fill="url(#bp-fade)" />
-        </mask>
-      </defs>
-
-      <g mask="url(#bp-mask)" className="fade" style={at(delay)}>
-        {Array.from({ length: W / 28 + 1 }, (_, k) => (
-          <path
-            key={`v${k}`}
-            d={`M${k * 28} 0V${H}`}
-            stroke={INK}
-            strokeOpacity={0.06}
-          />
-        ))}
-        {Array.from({ length: Math.ceil(H / 28) + 1 }, (_, k) => (
-          <path
-            key={`h${k}`}
-            d={`M0 ${k * 28}H${W}`}
-            stroke={INK}
-            strokeOpacity={0.06}
-          />
-        ))}
-      </g>
-
       {PARTS.map((p, i) => (
         <g key={p.label}>
           <path

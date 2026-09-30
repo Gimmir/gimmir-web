@@ -25,7 +25,8 @@ export const saas = {
     sub: "For founders building or owning a SaaS.",
     cta: {
       label: "Book a founder review",
-      by: "Free, 30 minutes, with Oleh & Nazar",
+      // the faces say who; the line stays one line on a phone
+      by: "Free, 30 minutes",
     },
   },
 
