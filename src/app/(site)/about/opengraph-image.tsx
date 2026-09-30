@@ -9,7 +9,7 @@ export default function Image() {
     line1: "Nazar & Oleh.",
     line2:
       "Two founders who build SaaS as owners. Fitness is where we go deepest.",
-    footer: "UN1T's engineering partner · Jimmy Coach co-owners",
+    footer: "Nine products shipped · four in fitness · one we co-own",
     faces: ["nazar", "oleh"],
   });
 }
