@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { BookTrigger } from "@/components/blocks/book-trigger";
 import { Faces } from "@/components/blocks/inline-headline";
 import { Stage } from "@/components/motion/stage";
@@ -17,7 +19,7 @@ import { FOUNDERS } from "@/lib/founders";
  * line instead of stacking at the start of two.
  */
 export function Founders() {
-  const { label, headline, people } = home.founders;
+  const { label, headline, people, link } = home.founders;
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
   const [a, b] = people.map((p) => FOUNDERS[p.id]);
   const n = wordCount(headline.before);
@@ -92,6 +94,17 @@ export function Founders() {
             );
           })}
         </ul>
+
+        <Link
+          href={link.href}
+          className="fade group mt-14 inline-flex items-center gap-3 text-lg font-semibold md:mt-16"
+          style={d(1000)}
+        >
+          <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-lime group-hover:text-lime">
+            {link.label}
+          </span>
+          <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
+        </Link>
       </Container>
     </Stage>
   );

@@ -226,5 +226,6 @@ export const home = {
         },
       },
     ],
+    link: { label: "More about us", href: "/about" },
   },
 } as const;

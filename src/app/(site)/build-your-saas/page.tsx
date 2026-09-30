@@ -7,7 +7,7 @@ import { SaasFit, SaasOwn, SaasStart } from "@/components/saas/sections";
 import { SaasStory } from "@/components/saas/story";
 import { JsonLd } from "@/components/seo/json-ld";
 import { saas } from "@/content/saas";
-import { breadcrumbs } from "@/lib/schema";
+import { breadcrumbs, serviceSchema } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -35,6 +35,14 @@ export default function BuildYourSaasPage() {
           ["Home", "/"],
           ["Build your SaaS", "/build-your-saas"],
         ])}
+      />
+      <JsonLd
+        data={serviceSchema({
+          id: "saas-build",
+          name: saas.meta.title,
+          description: saas.meta.description,
+          path: "/build-your-saas",
+        })}
       />
       <SaasHero />
       <SaasStory />

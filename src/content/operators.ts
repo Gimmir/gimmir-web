@@ -136,6 +136,7 @@ export const operators = {
       },
     ],
     note: "Typically four to six months from Blueprint to the last site switched over.",
+    link: { label: "How every build runs", href: "/how-we-work" },
   },
 
   guarantee: {

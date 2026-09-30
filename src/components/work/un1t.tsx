@@ -11,7 +11,12 @@ import {
   PaymentsFragment,
 } from "@/components/operators/networks";
 import { Container } from "@/components/ui/container";
-import { CaseBackLink, CaseQuote, QuickFacts } from "@/components/work/parts";
+import {
+  CaseAudienceLink,
+  CaseBackLink,
+  CaseQuote,
+  QuickFacts,
+} from "@/components/work/parts";
 import { un1t } from "@/content/un1t";
 import type { CaseStudy } from "@/lib/cases";
 import { cn } from "@/lib/cn";
@@ -43,8 +48,16 @@ function Hero({ data }: { data: CaseStudy }) {
     >
       <Container className="grid gap-14 pb-20 pt-28 sm:pt-32 md:pb-28 md:pt-36 lg:min-h-[88svh] lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className="lg:col-span-7">
-          <div className="fade" style={d(0)}>
+          <div
+            className="fade flex flex-wrap items-center gap-x-8 gap-y-3"
+            style={d(0)}
+          >
             <CaseBackLink onDark />
+            <CaseAudienceLink
+              href="/operators"
+              label="How we move brands onto their own software"
+              onDark
+            />
           </div>
           <p
             className="fade mt-10 flex flex-wrap items-center gap-3"

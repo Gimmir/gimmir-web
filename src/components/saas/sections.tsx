@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Check, Panel } from "@/components/blocks/ui-fragment";
 import { RepoFragment } from "@/components/home/what-you-get";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
+import { ArrowRight } from "@/components/ui/icons";
 import { saas } from "@/content/saas";
 import { AudienceArt, PatchArt, ShelfArt } from "./fit-art";
 import { FOUNDERS } from "@/lib/founders";
@@ -77,7 +79,7 @@ export function SaasFit() {
  * number draws itself (the first in lime, where it starts), then the words.
  */
 export function SaasStart() {
-  const { id, title, lede, steps } = saas.start;
+  const { id, title, lede, steps, link } = saas.start;
   const after = wordCount(title) * 40 + 300;
   const at = (ms: number, dur?: number) =>
     ({
@@ -181,6 +183,17 @@ export function SaasStart() {
             );
           })}
         </ol>
+
+        <Link
+          href={link.href}
+          className="fade group mt-12 inline-flex items-center gap-3 text-lg font-semibold"
+          style={at(after + steps.length * 220 + 300)}
+        >
+          <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-lime group-hover:text-lime">
+            {link.label}
+          </span>
+          <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
+        </Link>
       </Container>
     </Stage>
   );

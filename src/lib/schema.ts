@@ -75,6 +75,10 @@ export function organizationGraph(opts: {
           addressCountry: "US",
         },
         url: SITE_URL,
+        sameAs: [
+          "https://www.linkedin.com/company/gimmir",
+          "https://github.com/gimmir",
+        ],
         logo: `${SITE_URL}/logo/Logo-Gimmir.svg`,
         description: opts.description,
         email: opts.email,
@@ -167,6 +171,7 @@ export function caseStudyArticle(data: CaseStudy) {
     mainEntityOfPage: url,
     image: `${SITE_URL}${data.logo}`,
     datePublished: data.publishedAt,
+    dateModified: data.updatedAt ?? data.publishedAt,
     about: { "@type": "Thing", name: data.name, description: data.industry },
     author: { "@id": personId(data.author) },
     publisher: { "@id": ORG_ID },

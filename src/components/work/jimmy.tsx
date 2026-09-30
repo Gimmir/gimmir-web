@@ -8,7 +8,11 @@ import { BookTrigger } from "@/components/blocks/book-trigger";
 import { Chaos } from "@/components/saas/chaos";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
-import { CaseBackLink, CaseQuote } from "@/components/work/parts";
+import {
+  CaseAudienceLink,
+  CaseBackLink,
+  CaseQuote,
+} from "@/components/work/parts";
 import { jimmy } from "@/content/jimmy";
 import type { CaseStudy } from "@/lib/cases";
 import { FOUNDERS } from "@/lib/founders";
@@ -57,8 +61,15 @@ function Hero({ data }: { data: CaseStudy }) {
     <Stage as="section" eager data-tone="paper" className="relative">
       <Container className="grid gap-14 pb-20 pt-28 sm:pt-32 md:pb-28 md:pt-36 lg:min-h-[92svh] lg:grid-cols-12 lg:items-center lg:gap-10">
         <div className="lg:col-span-6">
-          <div className="fade" style={d(0)}>
+          <div
+            className="fade flex flex-wrap items-center gap-x-8 gap-y-3"
+            style={d(0)}
+          >
             <CaseBackLink />
+            <CaseAudienceLink
+              href="/build-your-saas"
+              label="Turn your business into a SaaS you own"
+            />
           </div>
           <p
             className="fade mt-10 flex flex-wrap items-center gap-3"
@@ -92,7 +103,6 @@ function Hero({ data }: { data: CaseStudy }) {
           </p>
         </div>
         <div
-          aria-hidden
           className="fade relative mx-auto flex w-full max-w-[600px] items-center justify-center lg:col-span-6"
           style={d(400)}
         >
@@ -108,7 +118,7 @@ function Hero({ data }: { data: CaseStudy }) {
             >
               <Image
                 src={s.src}
-                alt=""
+                alt={s.alt}
                 fill
                 priority={n === 1}
                 sizes="(min-width: 1024px) 240px, 38vw"
@@ -303,7 +313,10 @@ function Product() {
                   <div className="relative aspect-[1242/2688] w-[58%] translate-y-[18%] overflow-hidden rounded-t-[22px] shadow-[0_20px_40px_-20px_rgba(21,20,14,0.45)]">
                     <Image
                       src={c.screen}
-                      alt=""
+                      alt={
+                        HERO_SCREENS.find((s) => s.src === c.screen)?.alt ??
+                        `Jimmy Coach: ${c.title.toLowerCase()} app screen`
+                      }
                       fill
                       sizes="220px"
                       className="object-cover object-top"

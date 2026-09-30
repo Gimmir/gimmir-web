@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
+import { ArrowRight } from "@/components/ui/icons";
 import { operators } from "@/content/operators";
 
 import { MigrationRoute } from "./migration-route";
@@ -11,7 +14,7 @@ import { MigrationRoute } from "./migration-route";
  * thing takes said up front, under the title. No prices.
  */
 export function OperatorsMigration() {
-  const { title, note } = operators.migration;
+  const { title, note, link } = operators.migration;
   const after = wordCount(title) * 40 + 300;
 
   return (
@@ -27,6 +30,16 @@ export function OperatorsMigration() {
           {note}
         </p>
         <MigrationRoute after={after + 150} />
+        <Link
+          href={link.href}
+          className="fade group mt-14 inline-flex items-center gap-3 text-lg font-semibold md:mt-16"
+          style={{ "--d": `${after + 150}ms` } as React.CSSProperties}
+        >
+          <span className="border-b border-ink/30 pb-1 transition-colors group-hover:border-ink">
+            {link.label}
+          </span>
+          <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
+        </Link>
       </Container>
     </Stage>
   );

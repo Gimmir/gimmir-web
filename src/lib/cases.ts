@@ -30,6 +30,8 @@ export type CaseStudy = {
   author: "founderNazar" | "founderOleh";
   /** First published on the site, ISO date. */
   publishedAt: string;
+  /** Last substantive update, ISO date (schema dateModified, sitemap lastmod). */
+  updatedAt?: string;
   /** Client quote; only set once the client has approved the exact words. */
   quote?: { text: string; name: string; role: string };
   /** Structured narrative — drives the standard template. */
@@ -73,6 +75,7 @@ export const CASES: CaseStudy[] = [
     ],
     author: "founderNazar",
     publishedAt: "2026-07-14",
+    updatedAt: "2026-09-30",
   },
   {
     slug: "jimmy-coach",
@@ -106,6 +109,7 @@ export const CASES: CaseStudy[] = [
     ],
     author: "founderNazar",
     publishedAt: "2026-07-14",
+    updatedAt: "2026-09-30",
   },
 ];
 

@@ -18,6 +18,30 @@ export function CaseBackLink({ onDark = false }: { onDark?: boolean }) {
   );
 }
 
+/** The forward link from a case study to the page for its audience. */
+export function CaseAudienceLink({
+  href,
+  label,
+  onDark = false,
+}: {
+  href: string;
+  label: string;
+  onDark?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "group inline-flex items-center gap-2 text-sm font-medium transition-colors",
+        onDark ? "text-paper/55 hover:text-lime" : "text-muted hover:text-ink",
+      )}
+    >
+      <span className={onDark ? undefined : "link-mark"}>{label}</span>
+      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+    </Link>
+  );
+}
+
 /** The at-a-glance panel under a case study hero. */
 export function QuickFacts({
   facts,
