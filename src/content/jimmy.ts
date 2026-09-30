@@ -55,7 +55,8 @@ export const jimmy = {
     ],
   },
 
-  // DRAFT: Nazar to confirm or replace all three
+  // DRAFT: Nazar to confirm or replace all three (grounded in
+  // jimmycoach.com: connected AI, "five things", weekly releases)
   decisions: {
     label: "Three decisions we made as owners",
     items: [
@@ -64,12 +65,12 @@ export const jimmy = {
         body: "Jimmy connects to the coach's own Claude, ChatGPT or Perplexity instead of selling an AI tier on top.",
       },
       {
-        title: "Two apps, not one with modes.",
-        body: "Clients and coaches each get their own native app, so neither screen is a compromise.",
+        title: "Five things, done well.",
+        body: "Workouts, community, messaging, payments and courses. Jimmy isn't a feature factory; it does five things and stops there.",
       },
       {
-        title: "No new service unless we must.",
-        body: "Failed Stripe payments reach Slack through one webhook, built in an evening, instead of another tool to pay for.",
+        title: "Built in the open, with coaches.",
+        body: "A release every week, a public roadmap coaches vote on, and the founders on Discord to answer them.",
       },
     ],
   },
