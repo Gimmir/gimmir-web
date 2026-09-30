@@ -5,7 +5,7 @@ import { Panel } from "@/components/blocks/ui-fragment";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { BookTrigger } from "@/components/blocks/book-trigger";
-import { Chaos } from "@/components/saas/story";
+import { Chaos } from "@/components/saas/chaos";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import { CaseBackLink, CaseQuote } from "@/components/work/parts";

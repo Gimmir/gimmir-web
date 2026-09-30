@@ -30,33 +30,25 @@ export const saas = {
     },
   },
 
-  // doc 09 §3.3 ②, one screen per chapter
+  // doc 09 §3.3 ②, told in three numbers (Nazar's pick, 2026-09-30)
   story: {
     label: "How Jimmy Coach started",
-    chapters: [
+    title: "We did it for ourselves first.",
+    items: [
       {
-        line: "Quentin, a coach with 250+ clients, couldn't find good software.",
-        visual: "chaos",
+        value: "250+",
+        line: "clients Quentin was coaching across WhatsApp, spreadsheets and PDFs.",
+        tag: "01 · The request",
       },
       {
-        line: "He asked us to build his own.",
-        visual: "/screens-all/frame-5.jpg",
-        alt: "Jimmy Coach: a personal program with weekly progress and upcoming workouts",
+        value: "1",
+        line: "app Nazar built with him, paid for himself and co-owns.",
+        tag: "02 · The bet",
       },
       {
-        line: "We saw it was every coach's problem.",
-        visual: "/screens-all/frame-2.jpg",
-        alt: "Jimmy Coach: a workout broken into warm-up, power, strength and conditioning blocks",
-      },
-      {
-        line: "Nazar put his own money in and co-founded Jimmy Coach.",
-        visual: "/screens-all/frame-3.jpg",
-        alt: "Jimmy Coach: logging reps, weights and coach’s notes during a live session",
-      },
-      {
-        line: "200+ coaches two months after launch.",
-        visual: "/screens-all/frame-6.jpg",
-        alt: "Jimmy Coach: a client’s progress, steps and weight over time",
+        value: "200+",
+        line: "coaches on Jimmy two months after launch.",
+        tag: "03 · Today",
       },
     ],
     link: { label: "Read the story", href: "/work/jimmy-coach" },

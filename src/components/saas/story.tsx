@@ -1,169 +1,70 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 
 import { Stage } from "@/components/motion/stage";
+import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import { saas } from "@/content/saas";
-import { cn } from "@/lib/cn";
-
-type Chapter = (typeof saas.story.chapters)[number];
-
-/** Chapter one, before the product: the coach's business in three tools. */
-export function Chaos() {
-  const card =
-    "absolute rounded-2xl bg-paper p-4 text-[13px] text-ink shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)]";
-  return (
-    <div className="relative h-[340px] w-full max-w-[420px]">
-      <div className={cn(card, "left-0 top-4 w-[62%] -rotate-[5deg]")}>
-        <p className="flex items-center justify-between font-semibold">
-          Chats
-          <span className="rounded-full bg-ink px-2 py-0.5 text-[11px] text-paper">
-            Unread
-          </span>
-        </p>
-        {[
-          "Can we move Thursday?",
-          "Sent my check-in",
-          "Which program am I on?",
-        ].map((t) => (
-          <p
-            key={t}
-            className="mt-2 w-fit rounded-xl rounded-bl-sm bg-paper-2 px-3 py-1.5"
-          >
-            {t}
-          </p>
-        ))}
-      </div>
-      <div className={cn(card, "right-0 top-24 w-[58%] rotate-[4deg]")}>
-        <p className="font-semibold">clients_FINAL_v3.xlsx</p>
-        <div className="mt-3 grid grid-cols-4 gap-1">
-          {Array.from({ length: 16 }, (_, k) => (
-            <span
-              key={k}
-              className={cn(
-                "h-3 rounded-[3px]",
-                k < 4 ? "bg-ink/70" : "bg-paper-2",
-              )}
-            />
-          ))}
-        </div>
-      </div>
-      <div className={cn(card, "bottom-2 left-[14%] w-[54%] -rotate-[2deg]")}>
-        <p className="flex items-center gap-2 font-semibold">
-          <span className="rounded bg-ink px-1.5 py-0.5 text-[10px] text-paper">
-            PDF
-          </span>
-          Program_week_7.pdf
-        </p>
-        <p className="mt-2 text-muted">Sent to every client, one by one</p>
-      </div>
-    </div>
-  );
-}
-
-function Visual({ c, big }: { c: Chapter; big?: boolean }) {
-  if (c.visual === "chaos") return <Chaos />;
-  return (
-    <div
-      className={cn(
-        "relative aspect-[1242/2688] overflow-hidden rounded-[28px] ring-1 ring-paper/10",
-        big ? "h-[min(64vh,640px)]" : "mx-auto w-[62%] max-w-[260px]",
-      )}
-    >
-      <Image
-        src={c.visual}
-        alt={"alt" in c ? c.alt : ""}
-        fill
-        sizes={big ? "300px" : "62vw"}
-        className="object-cover"
-      />
-    </div>
-  );
-}
 
 /**
- * /build-your-saas ②, how Jimmy Coach started, one screen a chapter (doc
- * 09's scroll narrative, no scroll-jacking): on wide screens the lines
- * scroll past a pinned picture that changes with the chapter you're on;
- * on phones each line carries its own picture.
+ * /build-your-saas ②, how Jimmy Coach started, in three numbers drawn in
+ * lime outline (the site's "12" hand): the coach's 250+ clients, the one
+ * app Nazar paid for and co-owns, the 200+ coaches two months in, a
+ * dashed line running through them. The full story is one link away.
  */
 export function SaasStory() {
-  const { label, chapters, link } = saas.story;
-  const [active, setActive] = useState(0);
-  const refs = useRef<(HTMLLIElement | null)[]>([]);
-
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting)
-            setActive(Number((e.target as HTMLElement).dataset.i));
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px" },
-    );
-    refs.current.forEach((el) => el && io.observe(el));
-    return () => io.disconnect();
-  }, []);
+  const { label, title, items, link } = saas.story;
+  const after = wordCount(title) * 40 + 300;
+  const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
   return (
     <Stage as="section" data-tone="ink" className="bg-ink text-paper">
       <Container className="py-20 md:py-28">
         <p className="fade text-[15px] font-medium text-paper/50">{label}</p>
-        <div className="lg:grid lg:grid-cols-12 lg:gap-10">
-          <ol className="lg:col-span-6">
-            {chapters.map((c, i) => (
-              <li
-                key={c.line}
-                data-i={i}
-                ref={(el) => {
-                  refs.current[i] = el;
-                }}
-                className="flex flex-col justify-center border-b border-line-dark py-14 last:border-b-0 lg:min-h-[78vh] lg:border-b-0 lg:py-0"
+        <h2 className="display mt-6 text-[length:var(--text-title)] leading-[1.02]">
+          <RiseText text={title} />
+        </h2>
+
+        <div className="relative mt-14 grid gap-12 md:mt-24 md:grid-cols-3 md:gap-6">
+          <svg
+            aria-hidden
+            viewBox="0 0 1200 40"
+            preserveAspectRatio="none"
+            className="fade pointer-events-none absolute inset-x-0 -top-12 hidden h-10 w-full overflow-visible md:block"
+            style={d(after + 500)}
+          >
+            <path
+              d="M60 30C300 -10 520 50 700 20S1000 -10 1150 28"
+              fill="none"
+              stroke="var(--color-lime)"
+              strokeWidth={1.4}
+              strokeDasharray="4 6"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+          {items.map((it, i) => (
+            <div key={it.tag} className="fade" style={d(after + i * 140)}>
+              <p
+                aria-hidden
+                className="display text-[clamp(5rem,3rem+6vw,9.5rem)] leading-[0.85] tracking-[-0.04em] text-transparent [-webkit-text-stroke:1.4px_var(--color-lime)]"
               >
-                <span
-                  className={cn(
-                    "font-mono text-[12px] uppercase tracking-[0.04em] transition-colors duration-300",
-                    i === active ? "text-lime" : "text-paper/45",
-                  )}
-                >
-                  {String(i + 1).padStart(2, "0")} /{" "}
-                  {String(chapters.length).padStart(2, "0")}
-                </span>
-                <p className="mt-4 max-w-[18ch] font-serif text-[clamp(2rem,1rem+2.6vw,3.5rem)] italic leading-[1.1]">
-                  {c.line}
-                </p>
-                <div className="mt-10 lg:hidden">
-                  <Visual c={c} />
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div aria-hidden className="hidden lg:col-span-6 lg:block">
-            <div className="sticky top-[12vh] flex h-[76vh] items-center justify-center">
-              {chapters.map((c, i) => (
-                <div
-                  key={c.line}
-                  className={cn(
-                    "absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-500 ease-[cubic-bezier(.23,1,.32,1)] motion-reduce:transition-none",
-                    i === active
-                      ? "opacity-100"
-                      : "pointer-events-none translate-y-4 opacity-0",
-                  )}
-                >
-                  <Visual c={c} big />
-                </div>
-              ))}
+                {it.value}
+              </p>
+              <p className="mt-5 max-w-[17ch] font-serif text-[clamp(1.3rem,1rem+0.8vw,1.75rem)] italic leading-[1.25]">
+                <span className="sr-only">{it.value} </span>
+                {it.line}
+              </p>
+              <p className="mt-3 font-mono text-[12px] uppercase tracking-[0.04em] text-paper/45">
+                {it.tag}
+              </p>
             </div>
-          </div>
+          ))}
         </div>
+
         <Link
           href={link.href}
-          className="group mt-6 inline-flex items-center gap-3 text-lg font-semibold lg:mt-0"
+          className="fade group mt-14 inline-flex items-center gap-3 text-lg font-semibold md:mt-16"
+          style={d(after + 600)}
         >
           <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-lime group-hover:text-lime">
             {link.label}
