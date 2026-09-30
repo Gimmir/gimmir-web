@@ -7,11 +7,11 @@
  */
 export const operators = {
   meta: {
-    // searched (Google autocomplete, 2026-09-30): "custom gym app",
-    // "white label gym app"; the second is what they're leaving
-    title: "Custom Gym App for Franchises and Chains",
+    // brands are franchises and chains of any kind, fitness first: no
+    // gym-only wording here, whatever the keyword data says
+    title: "Own Your Platform: For Franchises and Chains",
     description:
-      "Renting a white-label gym app as you add sites? We move franchises and chains with 8+ locations onto their own member app, franchise CRM and payments.",
+      "Franchises and chains with 8+ locations: move off a rented white-label platform onto your own app, back office and payments, planned with Nazar.",
   },
 
   hero: {

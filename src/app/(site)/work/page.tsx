@@ -7,7 +7,7 @@ import { WorkNda } from "@/components/work/index/nda";
 import { breadcrumbs, caseStudyList } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 
-const WORK_TITLE = "Fitness Software Case Studies: UN1T & Jimmy Coach";
+const WORK_TITLE = "Our Work: Nine Products Shipped, Four in Fitness";
 const WORK_DESCRIPTION =
   "Nine products shipped, four in fitness. Two public case studies, UN1T and Jimmy Coach, and seven more products built under NDA.";
 

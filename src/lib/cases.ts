@@ -53,7 +53,7 @@ export const CASES: CaseStudy[] = [
     industry: "Boutique fitness franchise",
     summary:
       "We moved a London-founded boutique fitness franchise off a white-label platform onto their own app, back office and payments, across 10+ locations.",
-    seoTitle: "UN1T Case Study: White-Label to Their Own Gym App",
+    seoTitle: "UN1T Case Study: White-Label to Software It Owns",
     seoDescription:
       "How a London-founded boutique fitness franchise moved off a white-label app onto its own member app and franchise CRM in 12 weeks, across 10+ locations.",
     services: [

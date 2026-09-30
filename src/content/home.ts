@@ -6,10 +6,10 @@ import type { HeadlineToken } from "@/components/blocks/inline-headline";
 
 export const home = {
   meta: {
-    // Nazar's pick (2026-09-30), over doc 09's "Gimmir: SaaS founders own
-    // · Fitness first": the searched head term (Google autocomplete), then
-    // the position. Absolute, so the brand is written in.
-    title: "Fitness App Development Company: SaaS You Own · Gimmir",
+    // doc 09's title. Not a search phrase, on purpose: the position (SaaS
+    // founders own, fitness where we go deepest) outranks keyword data;
+    // "Fitness App Development Company" was tried and pulled (2026-09-30)
+    title: "Gimmir: SaaS founders own · Fitness first",
     description:
       "Nazar and Oleh build SaaS that founders own, from the first commit, and show every step. Nine products shipped, four in fitness, one we co-own.",
   },

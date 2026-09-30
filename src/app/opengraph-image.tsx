@@ -1,15 +1,15 @@
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og-card";
 
 export const alt =
-  "Gimmir: fitness & wellness app development, built by the founders";
+  "Gimmir: we build SaaS that founders own, and show you how it's done";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
 export default function Image() {
   return ogCard({
-    line1: "Fitness & wellness apps",
-    line2: "you actually own",
-    footer: "Built by the founders who ship them · your code from day one",
+    line1: "We build SaaS that founders own.",
+    line2: "Fitness is where we go deepest.",
+    footer: "Nine products shipped · code, accounts and IP in your name",
     faces: ["nazar", "oleh"],
   });
 }

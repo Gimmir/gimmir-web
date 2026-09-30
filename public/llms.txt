@@ -4,7 +4,7 @@
 
 We work with two kinds of clients:
 
-- Brands: fitness franchises and chains with 8+ locations that rent a white-label app platform whose fees grow with every site. We move them onto their own member app, franchise CRM and payments, site by site.
+- Brands: franchises and chains with 8+ locations that rent a white-label platform whose fees grow with every site. We move them onto their own app, back office and payments, site by site.
 - Founders: business owners with a business or an audience who want to turn it into a SaaS product they own. We did it for ourselves first, with Jimmy Coach.
 
 Wellness, yes; regulated clinical products, no.
@@ -12,7 +12,7 @@ Wellness, yes; regulated clinical products, no.
 ## Pages
 
 - [Home](https://gimmir.com/): who we are, what we build, both case studies and both ways in.
-- [For brands](https://gimmir.com/operators): owning your gym and studio software instead of renting it, the migration step by step, and a free platform check with Nazar.
+- [For brands](https://gimmir.com/operators): owning your platform instead of renting it, the migration step by step, and a free platform check with Nazar.
 - [For founders](https://gimmir.com/build-your-saas): turning a business into a SaaS you own, how every project starts, and who it is not for.
 - [Work](https://gimmir.com/work): nine products shipped, four in fitness; two public case studies and seven under NDA.
 - [How we work](https://gimmir.com/how-we-work): how a build runs, fixed price per milestone with no hourly billing, what you own from day one, our engineering standards, and the two-founder question answered.

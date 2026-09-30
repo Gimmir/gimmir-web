@@ -9,7 +9,7 @@ export default function Image() {
   return ogCard({
     line1: "For brands",
     line2: "Stop renting your platform",
-    footer: "Free cost check with Nazar · money-back Teardown",
+    footer: "Franchises and chains with 8+ locations",
     faces: ["nazar"],
   });
 }
