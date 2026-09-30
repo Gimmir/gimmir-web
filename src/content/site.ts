@@ -11,8 +11,7 @@ export type NavItem = { label: string; href: string; ready?: boolean };
 // 09's nav); an item shows once its V2 page exists.
 export const NAV: NavItem[] = [
   { label: "For fitness brands", href: "/operators" },
-  // once /build-your-saas is built (P1)
-  { label: "For SaaS founders", href: "/build-your-saas", ready: false },
+  { label: "For SaaS founders", href: "/build-your-saas" },
   { label: "Work", href: "/work" },
   // once its V2 page is built (P2)
   { label: "What we build", href: "/what-we-build", ready: false },
@@ -70,8 +69,7 @@ export const FOOTER = {
       title: "For",
       links: [
         { label: "Fitness brands", href: "/operators" },
-        // the SaaS door on /contact until /build-your-saas exists (P1)
-        { label: "SaaS founders", href: "/contact#founders" },
+        { label: "SaaS founders", href: "/build-your-saas" },
       ],
     },
   ],
