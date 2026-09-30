@@ -17,7 +17,7 @@ import { cn } from "@/lib/cn";
 /* ------------------------------------------------------------------ */
 
 /** A repository that belongs to the client from its first commit. */
-function RepoFragment() {
+export function RepoFragment() {
   const files: [string, string, boolean][] = [
     ["app", "Member app", true],
     ["api", "Bookings & payments", true],
