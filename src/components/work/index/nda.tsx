@@ -6,12 +6,10 @@ import { Container } from "@/components/ui/container";
 import { ArrowRight, ArrowUpRight } from "@/components/ui/icons";
 import { work } from "@/content/work";
 
-import { NdaArt } from "./nda-art";
-
 /**
- * /work ③, `#nda`: the seven we can't show, as text on ink with a line
- * silhouette of the kind of product and its category, grouped the way doc
- * 09 asks. Next to the one Enterprise card: the honesty note in serif and
+ * /work ③, `#nda`: the seven we can't show, as text on ink, each under
+ * its number drawn in lime outline with the site's thin curve (the hand
+ * of the "12" and the "9"), grouped the way doc 09 asks. Next to the one Enterprise card: the honesty note in serif and
  * the way to hear more. Then GAMMA5, the site we also built, in one line.
  */
 export function WorkNda() {
@@ -61,12 +59,48 @@ export function WorkNda() {
                     className="fade overflow-hidden rounded-[22px] bg-ink-soft ring-1 ring-line-dark"
                     style={d(at)}
                   >
-                    <div className="relative h-[150px] bg-ink-2">
-                      <NdaArt kind={it.kind} delay={at + 150} />
+                    <div
+                      aria-hidden
+                      className="flex h-[108px] items-start justify-between px-5 pt-4 md:h-[120px]"
+                    >
+                      <span className="display text-[4.5rem] leading-[0.8] tracking-[-0.04em] text-transparent [-webkit-text-stroke:1.2px_var(--color-lime)] md:text-[5.25rem]">
+                        {String(first0[gi] + k + 1).padStart(2, "0")}
+                      </span>
+                      <svg
+                        viewBox="0 0 90 70"
+                        className="mt-3 h-[62px] w-[80px] overflow-visible"
+                        style={
+                          {
+                            "--d": `${at + 200}ms`,
+                            "--dur": "700ms",
+                          } as React.CSSProperties
+                        }
+                      >
+                        <path
+                          d="M4 8C60 8 70 40 84 62"
+                          pathLength={1}
+                          fill="none"
+                          stroke="var(--color-lime)"
+                          strokeWidth={1.4}
+                          strokeLinecap="round"
+                          className="draw"
+                        />
+                        <circle
+                          cx="84"
+                          cy="62"
+                          r="3.5"
+                          fill="var(--color-lime)"
+                          className="fade"
+                          style={
+                            { "--d": `${at + 800}ms` } as React.CSSProperties
+                          }
+                        />
+                      </svg>
                     </div>
                     <div className="px-5 pb-6 pt-4">
                       <h3 className="font-mono text-[12px] uppercase tracking-[0.04em] text-paper/50">
                         {it.label}
+                        {"region" in it && it.region ? ` · ${it.region}` : ""}
                       </h3>
                       <p className="mt-2.5 text-[15.5px] leading-relaxed text-paper/85">
                         {it.text}

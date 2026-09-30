@@ -112,8 +112,6 @@ function Tile({
             href={link.href}
             className={cn(
               "fade group mt-10 inline-flex items-center gap-3 text-lg font-semibold",
-              !dark &&
-                "-mx-4 rounded-full px-4 py-2 transition-colors duration-200 hover:bg-lime",
             )}
             style={d(after + 120)}
           >
@@ -122,7 +120,7 @@ function Tile({
                 "border-b pb-1 transition-colors",
                 dark
                   ? "border-paper/40 group-hover:border-lime group-hover:text-lime"
-                  : "border-ink/30 group-hover:border-transparent",
+                  : "link-mark border-ink/30 group-hover:border-transparent",
               )}
             >
               {link.label}
