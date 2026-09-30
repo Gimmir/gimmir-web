@@ -48,12 +48,12 @@ export const saas = {
         alt: "Jimmy Coach: a workout broken into warm-up, power, strength and conditioning blocks",
       },
       {
-        line: "We invested and co-founded Jimmy Coach.",
+        line: "Nazar put his own money in and co-founded Jimmy Coach.",
         visual: "/screens-all/frame-3.jpg",
         alt: "Jimmy Coach: logging reps, weights and coach’s notes during a live session",
       },
       {
-        line: "100+ coaches in its first month.",
+        line: "200+ coaches two months after launch.",
         visual: "/screens-all/frame-6.jpg",
         alt: "Jimmy Coach: a client’s progress, steps and weight over time",
       },

@@ -4,9 +4,10 @@ import { OutlineStat } from "@/components/blocks/outline-stat";
 import { Panel } from "@/components/blocks/ui-fragment";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
-import { SaasClose } from "@/components/saas/close";
+import { BookTrigger } from "@/components/blocks/book-trigger";
 import { Chaos } from "@/components/saas/story";
 import { Container } from "@/components/ui/container";
+import { ArrowRight } from "@/components/ui/icons";
 import { CaseBackLink, CaseQuote } from "@/components/work/parts";
 import { jimmy } from "@/content/jimmy";
 import type { CaseStudy } from "@/lib/cases";
@@ -17,7 +18,7 @@ import { cn } from "@/lib/cn";
    case. The request → the decision to invest → the product (real client
    screens) → three decisions as owners → what we got wrong → the numbers
    with their date → Quentin's words once approved → the call signed by
-   Oleh and Nazar. */
+   Nazar (Jimmy is his; Oleh wasn't part of it). */
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
@@ -437,6 +438,52 @@ function Numbers({ data }: { data: CaseStudy }) {
   );
 }
 
+/** The call, signed by Nazar alone: Jimmy is his founder story. */
+function Close() {
+  const { title, line } = jimmy.close;
+  const nazar = FOUNDERS.nazar;
+  return (
+    <Stage as="section" data-tone="paper">
+      <Container className="py-20 md:py-28">
+        <div className="fade grid items-center gap-8 rounded-[32px] bg-ink p-7 text-paper sm:p-10 md:grid-cols-[auto_1fr] md:gap-12 md:p-14">
+          <div className="relative size-28 overflow-hidden rounded-full bg-ink-soft md:size-44">
+            <Image
+              src={nazar.photo}
+              alt={`${nazar.name}, ${nazar.also}`}
+              fill
+              sizes="176px"
+              className="object-cover object-top"
+            />
+          </div>
+          <div>
+            <h2 className="display text-[length:var(--text-title)] leading-[1.02]">
+              {title}
+            </h2>
+            <p className="mt-5 max-w-[40ch] font-serif text-2xl italic leading-snug text-paper/85">
+              “{line}”{" "}
+              <span className="whitespace-nowrap font-sans text-sm not-italic text-paper/60">
+                {nazar.first}, {nazar.also}
+              </span>
+            </p>
+            <BookTrigger
+              booking="founderReview"
+              placement="jimmy-close"
+              className="group mt-8 flex w-full items-center justify-between gap-3 rounded-full bg-paper py-2 pl-6 pr-2 text-left text-ink transition-colors duration-200 hover:bg-lime active:scale-[0.97] sm:inline-flex sm:w-auto"
+            >
+              <span className="text-base font-semibold leading-snug">
+                Book a founder review
+              </span>
+              <span className="flex size-10 items-center justify-center rounded-full bg-ink text-paper transition-transform duration-200 group-hover:translate-x-0.5">
+                <ArrowRight className="size-4" />
+              </span>
+            </BookTrigger>
+          </div>
+        </div>
+      </Container>
+    </Stage>
+  );
+}
+
 export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
   return (
     <article>
@@ -447,7 +494,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
       <Decisions />
       <Wrong />
       <Numbers data={data} />
-      <SaasClose />
+      <Close />
     </article>
   );
 }

@@ -86,7 +86,7 @@ export const home = {
       text: "Coaches were running their business across WhatsApp, spreadsheets and PDFs, and losing clients in the gaps. So we co-founded Jimmy with one of them and built it as owners, not by the hour.",
       by: "nazar",
     },
-    meta: ["Coaching platform", "Co-founded", "Client app + coach app + web"],
+    meta: ["Coaching platform", "Co-founded", "iOS & Android app + web"],
     link: { label: "Read the story", href: "/work/jimmy-coach" },
     stat: { value: "100+", label: "coaches on Jimmy in its first month" },
     side: { value: "300+", label: "users in the first month" },
@@ -139,7 +139,7 @@ export const home = {
         title: "Coaching, community & progress",
         product: "Jimmy Coach",
         href: "/work/jimmy-coach",
-        body: "Client app, coach app and web dashboard. Co-founded, co-owned, live in both stores.",
+        body: "One app for clients and coaches, and a web dashboard. Co-founded, co-owned, live in both stores.",
       },
       {
         title: "Connected-device companion apps",

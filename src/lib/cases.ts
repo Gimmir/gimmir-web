@@ -83,12 +83,12 @@ export const CASES: CaseStudy[] = [
     variant: "custom",
     industry: "Coaching platform",
     summary:
-      "A coaching platform we co-founded and co-own with a working coach: two native apps and a web dashboard, live in the App Store and Google Play.",
+      "A coaching platform co-founded and co-owned with a working coach: one native app for iOS and Android, and a web dashboard, live in the App Store and Google Play.",
     seoTitle: "Jimmy Coach Case Study: Building an Online Coaching App",
     seoDescription:
-      "An online coaching app we co-founded and built end to end: two native apps and web with programs, community, messaging and Stripe. 100+ coaches in month one.",
+      "An online coaching app co-founded and built end to end: one iOS & Android app and a web dashboard with programs, community, messaging and Stripe. 200+ coaches two months in.",
     services: [
-      "Two native apps: client & coach",
+      "One native app: client & coach",
       "Web dashboard & Stripe billing",
       "Community, courses & messaging",
       "Built from zero to launch",
@@ -100,11 +100,11 @@ export const CASES: CaseStudy[] = [
     facts: [
       ["Product", "Jimmy Coach, a coaching platform"],
       ["Co-founded with", "Quentin Randis, Hyrox & CrossFit coach (250+ clients)"],
-      ["Build", "Client app + coach app (native) + web dashboard"],
+      ["Build", "One iOS & Android app (client and coach) + web dashboard"],
       ["Stack", "React Native (Expo), Supabase, Next.js, Stripe"],
       ["Our role", "Co-founders, co-owners and builders"],
     ],
-    author: "founderOleh",
+    author: "founderNazar",
     publishedAt: "2026-07-14",
   },
 ];

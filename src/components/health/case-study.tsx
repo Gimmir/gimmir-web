@@ -16,7 +16,7 @@ export function CaseStudySection() {
             index="04"
             titleMax="max-w-[30ch]"
             title="We haven't published a wellness case study yet. Here's the nearest proof."
-            intro="Jimmy Coach is a coaching platform with the same engineering a wellness app needs: two native apps and web, subscriptions, community, messaging, progress tracking and branded apps. 100+ coaches and 300+ users in the first month. If you're building in wellness, this is the closest look at how we build."
+            intro="Jimmy Coach is a coaching platform with the same engineering a wellness app needs: one native iOS & Android app and a web dashboard, subscriptions, community, messaging, progress tracking and branded apps. 100+ coaches and 300+ users in the first month. If you're building in wellness, this is the closest look at how we build."
           />
         </Reveal>
 
