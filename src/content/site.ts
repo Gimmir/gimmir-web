@@ -18,7 +18,7 @@ export const NAV: NavItem[] = [
   { label: "How we work", href: "/how-we-work" },
   // shows once the first posts are in (P2)
   { label: "Build log", href: "/build-log", ready: false },
-  { label: "Nazar & Oleh", href: "/nazar-and-oleh" },
+  { label: "About us", href: "/about" },
 ];
 
 export type BookDoor = {
@@ -61,7 +61,7 @@ export const FOOTER = {
         { label: "Work", href: "/work" },
         { label: "What we build", href: "/what-we-build" },
         { label: "How we work", href: "/how-we-work" },
-        { label: "Nazar & Oleh", href: "/nazar-and-oleh" },
+        { label: "About us", href: "/about" },
         { label: "Contact", href: "/contact" },
       ],
     },

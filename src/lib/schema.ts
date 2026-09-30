@@ -10,6 +10,7 @@ import {
   type Offer,
   type OfferId,
 } from "@/lib/offers";
+import { FOUNDERS } from "@/lib/founders";
 import { BRAND, SITE_URL } from "@/lib/seo";
 import { urlFor } from "@/sanity/lib/image";
 import type { FOUNDERS_QUERY_RESULT } from "@/sanity/types";
@@ -23,8 +24,7 @@ import type { FOUNDERS_QUERY_RESULT } from "@/sanity/types";
 const ORG_ID = `${SITE_URL}/#organization`;
 
 /** Stable @id for a founder's Person node, keyed by their Sanity _id. */
-export const personId = (founderId: string) =>
-  `${SITE_URL}/founders#${founderId}`;
+export const personId = (founderId: string) => `${SITE_URL}/about#${founderId}`;
 
 type Founder = FOUNDERS_QUERY_RESULT[number];
 
@@ -56,7 +56,7 @@ function personNode(f: Founder, role?: string) {
     name: stegaClean(f.name) ?? undefined,
     jobTitle: role,
     knowsAbout: FOUNDER_KNOWS_ABOUT[f._id],
-    url: `${SITE_URL}/founders`,
+    url: `${SITE_URL}/about`,
     image: f.photo
       ? urlFor(f.photo).width(800).height(800).fit("crop").url()
       : undefined,
@@ -71,7 +71,7 @@ export function organizationGraph(
   opts: { email?: string | null; description?: string | null },
 ) {
   const roles: Record<string, string> = {
-    founderNazar: "Founder",
+    founderNazar: "CEO",
     founderOleh: "CTO",
   };
   return {
@@ -155,15 +155,21 @@ export function faqPage(
   };
 }
 
-/** Person nodes for the founders page. */
-export function foundersGraph(
-  cards: Array<{ role?: string | null; founder: Founder | null }>,
-) {
+/** Person nodes for the /about page, built from the fixed founder identity. */
+export function aboutGraph() {
   return {
     "@context": "https://schema.org",
-    "@graph": cards
-      .filter((c) => c.founder)
-      .map((c) => personNode(c.founder!, stegaClean(c.role) ?? undefined)),
+    "@graph": Object.values(FOUNDERS).map((f) => ({
+      "@type": "Person",
+      "@id": personId(f.sanityId),
+      name: f.name,
+      jobTitle: f.title,
+      knowsAbout: FOUNDER_KNOWS_ABOUT[f.sanityId],
+      url: `${SITE_URL}/about`,
+      image: `${SITE_URL}${f.photo}`,
+      sameAs: [f.linkedin],
+      worksFor: { "@id": ORG_ID },
+    })),
   };
 }
 
@@ -279,15 +285,18 @@ export function offerCatalog() {
   };
 }
 
-/** AboutPage for /founders, pointing at the founder Person nodes. */
-export function aboutPage(founderIds: string[]) {
+/** AboutPage for /about, pointing at the founder Person nodes. */
+export function aboutPage() {
   return {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "@id": `${SITE_URL}/founders#page`,
-    url: `${SITE_URL}/founders`,
+    "@id": `${SITE_URL}/about#page`,
+    url: `${SITE_URL}/about`,
     about: { "@id": ORG_ID },
-    mainEntity: founderIds.map((id) => ({ "@id": personId(id) })),
+    mainEntity: [
+      { "@id": personId(FOUNDERS.nazar.sanityId) },
+      { "@id": personId(FOUNDERS.oleh.sanityId) },
+    ],
   };
 }
 

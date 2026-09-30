@@ -4,8 +4,8 @@ import { fetchRedirects } from "./src/lib/redirects";
 
 /** Common guessed URLs; Sanity-managed redirects are appended after these. */
 const STATIC_REDIRECTS = [
-  { source: "/about", destination: "/founders", permanent: true },
-  { source: "/nazar-and-oleh", destination: "/founders", permanent: true },
+  { source: "/founders", destination: "/about", permanent: true },
+  { source: "/nazar-and-oleh", destination: "/about", permanent: true },
   { source: "/services", destination: "/how-we-work", permanent: true },
   { source: "/case-studies", destination: "/work", permanent: true },
 ];
