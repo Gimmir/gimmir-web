@@ -10,8 +10,11 @@ import type { HeadlineToken } from "@/components/blocks/inline-headline";
 
 export const work = {
   hero: {
+    // Nazar's pick o2 (2026-09-30): the four fitness products inside the
+    // sentence, the two we can show and the two under NDA (padlocked)
     headline: [
       "Nine products shipped. Four in",
+      { apps: ["un1t", "jimmy"], locked: 2 },
       { mark: "fitness", after: "." },
     ] satisfies HeadlineToken[],
   },

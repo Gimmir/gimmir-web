@@ -21,7 +21,7 @@ export type AppId = keyof typeof APPS;
 export type HeadlineToken =
   | string
   | { faces: readonly FounderId[] }
-  | { apps: readonly AppId[] }
+  | { apps: readonly AppId[]; locked?: number }
   | { tile: "lock" }
   | { mark: string; after?: string };
 
@@ -95,28 +95,39 @@ export function Faces({ ids }: { ids: readonly FounderId[] }) {
   );
 }
 
-/** Real app icons, fanned slightly like cards on a table. */
-function AppIcons({ ids }: { ids: readonly AppId[] }) {
-  const tilt = ["-6deg", "5deg", "-2deg"];
+/**
+ * Real app icons, fanned slightly like cards on a table; `locked` adds
+ * that many padlocked tiles to the fan (products we can't name).
+ */
+function AppIcons({
+  ids,
+  locked = 0,
+}: {
+  ids: readonly AppId[];
+  locked?: number;
+}) {
+  const tilt = ["-6deg", "5deg", "-2deg", "6deg"];
+  const count = ids.length + locked;
+  const tile =
+    "face-tip relative inline-block size-[0.8em] rotate-(--tilt) rounded-[0.2em] shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-[var(--face-ring,var(--color-paper))]";
+  const at = (n: number) =>
+    ({
+      zIndex: count - n,
+      "--tilt": tilt[n % tilt.length],
+    }) as React.CSSProperties;
   return (
     <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle">
       <span className="sr-only">
-        {ids.map((id) => APPS[id].name).join(" and ")}
+        {locked
+          ? `(${ids.map((id) => APPS[id].name).join(", ")} and ${locked} under NDA)`
+          : ids.map((id) => APPS[id].name).join(" and ")}
       </span>
       {ids.map((id, n) => (
         <span
           key={id}
           data-name={APPS[id].name}
-          className={cn(
-            "face-tip relative inline-block size-[0.8em] rotate-(--tilt) rounded-[0.2em] shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-[var(--face-ring,var(--color-paper))]",
-            n > 0 && "-ml-[0.16em]",
-          )}
-          style={
-            {
-              zIndex: ids.length - n,
-              "--tilt": tilt[n % tilt.length],
-            } as React.CSSProperties
-          }
+          className={cn(tile, n > 0 && "-ml-[0.16em]")}
+          style={at(n)}
         >
           <span className="absolute inset-0 overflow-hidden rounded-[0.2em]">
             <Image
@@ -130,7 +141,45 @@ function AppIcons({ ids }: { ids: readonly AppId[] }) {
           </span>
         </span>
       ))}
+      {Array.from({ length: locked }, (_, k) => {
+        const n = ids.length + k;
+        return (
+          <span
+            key={`locked-${k}`}
+            aria-hidden
+            data-name="Under NDA"
+            className={cn(
+              tile,
+              "inline-flex items-center justify-center bg-surface",
+              n > 0 && "-ml-[0.16em]",
+            )}
+            style={at(n)}
+          >
+            <Padlock />
+          </span>
+        );
+      })}
     </span>
+  );
+}
+
+/** The padlock, in the site's thin line. */
+function Padlock() {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={6}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="size-[0.56em] text-ink"
+    >
+      <path d="M35 46V34a15 15 0 0 1 30 0v12" />
+      <path d="M30 46h40a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V52a6 6 0 0 1 6-6Z" />
+      <circle cx="50" cy="61" r="4" />
+      <path d="M50 65v8" />
+    </svg>
   );
 }
 
@@ -146,20 +195,7 @@ function LockTile() {
       className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle"
     >
       <span className="relative inline-flex size-[0.8em] -rotate-6 items-center justify-center rounded-[0.2em] bg-surface shadow-[0_0.06em_0.18em_-0.06em_rgba(21,20,14,0.45)] ring-[0.04em] ring-[var(--face-ring,var(--color-paper))]">
-        <svg
-          viewBox="0 0 100 100"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={6}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="size-[0.56em] text-ink"
-        >
-          <path d="M35 46V34a15 15 0 0 1 30 0v12" />
-          <path d="M30 46h40a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V52a6 6 0 0 1 6-6Z" />
-          <circle cx="50" cy="61" r="4" />
-          <path d="M50 65v8" />
-        </svg>
+        <Padlock />
       </span>
     </span>
   );
@@ -259,7 +295,7 @@ export function InlineHeadline({
             {"faces" in t ? (
               <Faces ids={t.faces} />
             ) : "apps" in t ? (
-              <AppIcons ids={t.apps} />
+              <AppIcons ids={t.apps} locked={t.locked} />
             ) : (
               <LockTile />
             )}
