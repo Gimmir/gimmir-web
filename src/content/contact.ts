@@ -10,7 +10,7 @@ export const contact = {
   hero: {
     headline: [
       "Book a call. Talk to",
-      { faces: ["nazar", "oleh"] },
+      { faces: ["nazar", "oleh"], sr: "Nazar and Oleh," },
       "the people who’ll build it.",
     ] satisfies HeadlineToken[],
     sub: "Twenty to thirty minutes. No pitch deck. If we're not the right team, we'll say so.",

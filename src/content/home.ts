@@ -29,7 +29,7 @@ export const home = {
     ],
     headline: [
       "We",
-      { faces: ["nazar", "oleh"] },
+      { faces: ["nazar", "oleh"], sr: "(Nazar and Oleh)" },
       "build SaaS that founders",
       { mark: "own", after: "," },
       "and show you how it’s done.",

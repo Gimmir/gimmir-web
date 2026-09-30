@@ -20,7 +20,8 @@ export type AppId = keyof typeof APPS;
  */
 export type HeadlineToken =
   | string
-  | { faces: readonly FounderId[] }
+  // `sr`: how the faces read aloud (and to crawlers) inside the sentence
+  | { faces: readonly FounderId[]; sr?: string }
   | { apps: readonly AppId[]; locked?: number }
   | { tile: "lock" }
   | { mark: string; after?: string };
@@ -60,11 +61,17 @@ export function MarkerStroke({
   );
 }
 
-export function Faces({ ids }: { ids: readonly FounderId[] }) {
+export function Faces({
+  ids,
+  sr,
+}: {
+  ids: readonly FounderId[];
+  sr?: string;
+}) {
   return (
     <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.06em] align-middle">
       <span className="sr-only">
-        {ids.map((id) => FOUNDERS[id].first).join(" and ")}
+        {sr ?? ids.map((id) => FOUNDERS[id].first).join(" and ")}
       </span>
       {ids.map((id, n) => {
         const f = FOUNDERS[id];
@@ -97,7 +104,9 @@ export function Faces({ ids }: { ids: readonly FounderId[] }) {
 
 /**
  * Real app icons, fanned slightly like cards on a table; `locked` adds
- * that many padlocked tiles to the fan (products we can't name).
+ * that many padlocked tiles to the fan (products we can't name). Hidden
+ * from screen readers and crawlers: the sentence reads whole without them,
+ * and their names spoken mid-sentence broke the heading's text.
  */
 function AppIcons({
   ids,
@@ -116,12 +125,10 @@ function AppIcons({
       "--tilt": tilt[n % tilt.length],
     }) as React.CSSProperties;
   return (
-    <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle">
-      <span className="sr-only">
-        {locked
-          ? `(${ids.map((id) => APPS[id].name).join(", ")} and ${locked} under NDA)`
-          : ids.map((id) => APPS[id].name).join(" and ")}
-      </span>
+    <span
+      aria-hidden
+      className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.08em] align-middle"
+    >
       {ids.map((id, n) => (
         <span
           key={id}
@@ -293,7 +300,7 @@ export function InlineHeadline({
         <span className="whitespace-nowrap">
           <RiseWord i={i}>
             {"faces" in t ? (
-              <Faces ids={t.faces} />
+              <Faces ids={t.faces} sr={t.sr} />
             ) : "apps" in t ? (
               <AppIcons ids={t.apps} locked={t.locked} />
             ) : (
