@@ -92,7 +92,7 @@ export const saas = {
       {
         name: "The Review",
         time: "1–2 weeks",
-        lead: "oleh",
+        lead: "nazar",
         body: "A diagnostic of your architecture, code and plan, with a written report.",
         gets: "a report you can hand to your team or your board.",
       },

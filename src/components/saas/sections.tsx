@@ -73,7 +73,7 @@ export function SaasFit() {
 }
 
 /**
- * ④ `#diagnostic`: The Review first (Oleh's), then a sprint or V1, then
+ * ④ `#diagnostic`: The Review first (Nazar's), then a sprint or V1, then
  * Care, as three big steps. Each row's rule draws in, then its outline
  * number draws itself (the first in lime, where it starts), then the words.
  */
