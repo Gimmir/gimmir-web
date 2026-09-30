@@ -56,12 +56,29 @@ export const saas = {
     link: { label: "Read the story", href: "/work/jimmy-coach" },
   },
 
+  // doc 09 §3.3 ③, each situation drawn and answered (Nazar's pick o3,
+  // 2026-09-30). DRAFT answers, for Nazar to edit.
   fit: {
     title: "Is this you?",
     items: [
-      "Off-the-shelf software doesn't fit.",
-      "You're already patching your own tool.",
-      "You have an audience but no technical co-founder.",
+      {
+        id: "shelf",
+        line: "Off-the-shelf software doesn’t fit.",
+        answer:
+          "Then we build the one that fits how you already work, in your name.",
+      },
+      {
+        id: "patch",
+        line: "You’re already patching your own tool.",
+        answer:
+          "Good, your patches are the spec. We review what you have, then fix it or rebuild it.",
+      },
+      {
+        id: "audience",
+        line: "You have an audience but no technical co-founder.",
+        answer:
+          "That’s where Quentin was with 250+ clients. You bring the audience, we build the product.",
+      },
     ],
   },
 

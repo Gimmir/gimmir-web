@@ -7,6 +7,7 @@ import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { ArrowRight, X } from "@/components/ui/icons";
 import { saas } from "@/content/saas";
+import { AudienceArt, PatchArt, ShelfArt } from "./fit-art";
 import { FOUNDERS } from "@/lib/founders";
 import { cn } from "@/lib/cn";
 
@@ -16,7 +17,16 @@ import { cn } from "@/lib/cn";
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
-/** ③ Three statements a founder recognises, each on its own card. */
+const FIT_ART = {
+  shelf: ShelfArt,
+  patch: PatchArt,
+  audience: AudienceArt,
+} as const;
+
+/**
+ * ③ Three situations a founder recognises: each card draws the situation
+ * in scraps of UI, says it, then answers it in a line.
+ */
 export function SaasFit() {
   const { title, items } = saas.fit;
   const after = wordCount(title) * 40 + 300;
@@ -27,20 +37,35 @@ export function SaasFit() {
           <RiseText text={title} />
         </h2>
         <ul className="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
-          {items.map((it, i) => (
-            <li
-              key={it}
-              className="fade flex min-h-[220px] flex-col justify-between gap-8 rounded-[24px] bg-surface p-6 ring-1 ring-line md:p-7"
-              style={d(after + i * 90)}
-            >
-              <span className="display text-[3.5rem] leading-[0.85] text-transparent [-webkit-text-stroke:1.3px_var(--color-ink)]">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p className="display text-[clamp(1.5rem,1rem+1vw,2rem)] leading-[1.08]">
-                {it}
-              </p>
-            </li>
-          ))}
+          {items.map((it, i) => {
+            const Art = FIT_ART[it.id];
+            const at = after + i * 90;
+            return (
+              <li
+                key={it.id}
+                className="fade flex flex-col rounded-[26px] bg-surface p-3.5 ring-1 ring-line"
+                style={d(at)}
+              >
+                <div
+                  aria-hidden
+                  className="relative h-[210px] overflow-hidden rounded-[18px] bg-paper-2"
+                >
+                  <Art d={at + 250} />
+                </div>
+                <div className="flex flex-1 flex-col gap-3.5 px-3 pb-3.5 pt-5.5">
+                  <span className="font-mono text-[12px] uppercase tracking-[0.04em] text-faint">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="display text-[clamp(1.45rem,1rem+0.9vw,1.85rem)] leading-[1.06]">
+                    {it.line}
+                  </p>
+                  <p className="mt-auto border-t border-line pt-4 font-serif text-lg italic leading-snug text-muted">
+                    {it.answer}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </Container>
     </Stage>
