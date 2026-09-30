@@ -6,7 +6,7 @@ import { Pill } from "@/components/ui/pill";
 import { socialMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
-  "The terms for using gimmir.com: what the site is, how prices and guarantees work, booking calls, our content, and the law that applies.";
+  "The terms for using gimmir.com: what the site is, how work is agreed and guaranteed, booking calls, our content, and the law that applies.";
 
 export const metadata: Metadata = {
   title: "Terms of Use",
@@ -49,7 +49,7 @@ export default function TermsPage() {
             Terms of Use
           </h1>
           <p className="mt-4 font-mono text-sm uppercase tracking-wider text-faint">
-            Last updated: September 21, 2026
+            Last updated: September 30, 2026
           </p>
 
           <p className="mt-8 text-lg leading-relaxed text-muted">
@@ -61,21 +61,21 @@ export default function TermsPage() {
 
           <Section title="What this site is">
             <p>
-              The site describes who we are, what we build and what our standard
-              offers cost. It is information, not an offer we are bound by. Any
+              The site describes who we are, what we build and how we work. It
+              is information, not an offer we are bound by. Any
               work we do for you starts only with a written agreement signed by
               both sides, and that agreement governs the work, its scope, its
               price and any guarantee.
             </p>
           </Section>
 
-          <Section title="Prices and guarantees">
+          <Section title="Pricing and guarantees">
             <p>
-              Prices on the site are our current standard prices, in euros, and
-              may change. The price that applies to you is the one in your
-              signed agreement. Guarantees described on the site, such as the
-              Platform Fee Teardown money-back guarantee, apply as set out in
-              that agreement.
+              The site shows no prices. What you pay is set in your signed
+              agreement, after we have agreed the scope together. Guarantees
+              described on the site, such as not paying for a Teardown that
+              doesn&rsquo;t find savings bigger than its fee, apply as set out
+              in that agreement.
             </p>
           </Section>
 

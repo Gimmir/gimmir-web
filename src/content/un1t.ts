@@ -7,7 +7,8 @@
  */
 export const un1t = {
   hero: {
-    title: "From separate studios to one network on its own software.",
+    // not the home teaser's line (doc 09 ③), so the case has its own H1
+    title: "How UN1T became one network on software it owns.",
     sub: "We moved a London-founded boutique fitness franchise off a white-label platform onto their own app, back office and payments, across 10+ locations.",
     stat: { value: "10+", label: "locations on one system" },
   },

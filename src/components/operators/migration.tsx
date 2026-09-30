@@ -35,9 +35,8 @@ export function OperatorsMigration() {
           className="fade group mt-14 inline-flex items-center gap-3 text-lg font-semibold md:mt-16"
           style={{ "--d": `${after + 150}ms` } as React.CSSProperties}
         >
-          <span className="border-b border-ink/30 pb-1 transition-colors group-hover:border-ink">
-            {link.label}
-          </span>
+          {/* on paper, links take the lime marker on hover */}
+          <span className="link-mark">{link.label}</span>
           <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
         </Link>
       </Container>

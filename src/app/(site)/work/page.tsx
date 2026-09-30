@@ -9,7 +9,7 @@ import { socialMetadata } from "@/lib/seo";
 
 const WORK_TITLE = "Fitness Software Case Studies: UN1T & Jimmy Coach";
 const WORK_DESCRIPTION =
-  "Nine products shipped, four in fitness. Two public case studies, UN1T and Jimmy Coach, and seven more under NDA.";
+  "Nine products shipped, four in fitness. Two public case studies, UN1T and Jimmy Coach, and seven more products built under NDA.";
 
 export const metadata: Metadata = {
   title: WORK_TITLE,

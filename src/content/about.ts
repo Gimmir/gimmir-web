@@ -11,7 +11,8 @@ import type { FounderId } from "@/lib/founders";
 
 export const about = {
   meta: {
-    title: "About Us: Nazar & Oleh, the Founders Behind Gimmir",
+    // the title template adds " · Gimmir"
+    title: "About Us: Nazar & Oleh, the Two Founders",
     description:
       "Gimmir is two founders who build SaaS as owners, not by the hour. Nine products shipped, four in fitness, one we co-own. Meet Nazar and Oleh.",
   },

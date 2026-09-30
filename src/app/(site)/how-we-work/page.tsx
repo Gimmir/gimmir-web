@@ -40,7 +40,17 @@ export default function HowWeWorkPage() {
           ["How we work", "/how-we-work"],
         ])}
       />
-      <JsonLd data={faqPage([TWO_FOUNDERS_ANSWER, ...HOW_ANSWERS])!} />
+      {/* the two-founders answer sits under the section title on the page,
+          so that title is its question here (FAQPage marks up only what
+          a visitor can read) */}
+      <JsonLd
+        data={
+          faqPage([
+            { ...TWO_FOUNDERS_ANSWER, question: how.risk.title },
+            ...HOW_ANSWERS,
+          ])!
+        }
+      />
       <HowHero />
       <HowPricing />
       <SaasOwn title={how.own.title} />

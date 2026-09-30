@@ -9,9 +9,11 @@ import type { HeadlineToken } from "@/components/blocks/inline-headline";
 
 export const saas = {
   meta: {
-    title: "Turn Your Business into a SaaS You Own",
+    // searched (Google autocomplete, 2026-09-30): "custom saas development";
+    // "turn my business into a saas" has no demand, so it stays the H1
+    title: "Custom SaaS Development You Own",
     description:
-      "You know your business. Nazar and Oleh turn it into a SaaS you own, the way they did for themselves with Jimmy Coach: code, accounts and roadmap in your name.",
+      "Custom SaaS development for founders with a business or an audience. You own the code, accounts and IP. Jimmy Coach reached 200+ coaches in two months.",
   },
 
   hero: {

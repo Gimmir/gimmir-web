@@ -7,7 +7,7 @@
  */
 export const how = {
   meta: {
-    title: "How We Work: Fixed Price per Milestone, Your Code from Day One",
+    title: "How We Work: Fixed Price, Your Code from Day One",
     description:
       "No black box: how a Gimmir build runs from The Review to launch and care, how we price it by milestone with no hourly billing, and why everything is yours from day one.",
   },

@@ -53,9 +53,9 @@ export const CASES: CaseStudy[] = [
     industry: "Boutique fitness franchise",
     summary:
       "We moved a London-founded boutique fitness franchise off a white-label platform onto their own app, back office and payments, across 10+ locations.",
-    seoTitle: "UN1T Case Study: From White-Label to Their Own Gym App",
+    seoTitle: "UN1T Case Study: White-Label to Their Own Gym App",
     seoDescription:
-      "How a global gym franchise moved off a white-label fitness platform onto its own member app and franchise CRM in 12 weeks: 10+ locations, every payment in one system.",
+      "How a London-founded boutique fitness franchise moved off a white-label app onto its own member app and franchise CRM in 12 weeks, across 10+ locations.",
     services: [
       "Member app: iOS & Android",
       "Franchise CRM & back office",
@@ -87,9 +87,9 @@ export const CASES: CaseStudy[] = [
     industry: "Coaching platform",
     summary:
       "A coaching platform co-founded and co-owned with a working coach: one native app for iOS and Android, and a web dashboard, live in the App Store and Google Play.",
-    seoTitle: "Jimmy Coach Case Study: Building an Online Coaching App",
+    seoTitle: "Jimmy Coach: Online Coaching App Case Study",
     seoDescription:
-      "An online coaching app co-founded and built end to end: one iOS & Android app and a web dashboard with programs, community, messaging and Stripe. 200+ coaches two months in.",
+      "An online coaching app co-founded and built end to end: one iOS and Android app plus a web dashboard, and 200+ coaches two months after launch.",
     services: [
       "One native app: client & coach",
       "Web dashboard & Stripe billing",

@@ -1,0 +1,32 @@
+# Gimmir
+
+> Gimmir is two founders, Nazar Moroz and Oleh Palazhii, who build SaaS products their clients own outright: code, accounts, IP and roadmap in the client's name from the first commit. Nine products shipped, four of them in fitness, where we go deepest. Gimmir LLC is a Delaware (US) company; the team works from the EU.
+
+We work with two kinds of clients:
+
+- Brands: fitness franchises and chains with 8+ locations that rent a white-label app platform whose fees grow with every site. We move them onto their own member app, franchise CRM and payments, site by site.
+- Founders: business owners with a business or an audience who want to turn it into a SaaS product they own. We did it for ourselves first, with Jimmy Coach.
+
+Wellness, yes; regulated clinical products, no.
+
+## Pages
+
+- [Home](https://gimmir.com/): who we are, what we build, both case studies and both ways in.
+- [For brands](https://gimmir.com/operators): owning your gym and studio software instead of renting it, the migration step by step, and a free platform check with Nazar.
+- [For founders](https://gimmir.com/build-your-saas): turning a business into a SaaS you own, how every project starts, and who it is not for.
+- [Work](https://gimmir.com/work): nine products shipped, four in fitness; two public case studies and seven under NDA.
+- [How we work](https://gimmir.com/how-we-work): how a build runs, fixed price per milestone with no hourly billing, what you own from day one, our engineering standards, and the two-founder question answered.
+- [About us](https://gimmir.com/about): Nazar and Oleh, who does what, and the team of senior engineers and designers behind them.
+- [Contact](https://gimmir.com/contact): book a call with the founders.
+
+## Case studies
+
+- [UN1T](https://gimmir.com/work/un1t): a London-founded boutique fitness franchise with 10+ locations, moved off a white-label platform onto its own member app, franchise CRM and payments in 12 weeks. Oleh led the architecture.
+- [Jimmy Coach](https://gimmir.com/work/jimmy-coach): an online coaching app Nazar co-founded with Quentin Randis, a Hyrox and CrossFit coach, and one we co-own: one iOS and Android app and a web dashboard, with 200+ coaches two months after launch.
+
+## Contact
+
+- Email: hello@gimmir.com
+- Nazar Moroz on LinkedIn: https://www.linkedin.com/in/nazarmoroze/
+- Oleh Palazhii on LinkedIn: https://www.linkedin.com/in/oleh-palazh/
+- Company on LinkedIn: https://www.linkedin.com/company/gimmir

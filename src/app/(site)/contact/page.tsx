@@ -17,7 +17,7 @@ import { SETTINGS_QUERY } from "@/sanity/lib/queries";
 const TITLE = "Book a Call with Nazar & Oleh";
 // Minutes and names are pulled from `BOOKINGS` so this can't drift from the
 // calls actually on offer.
-const DESCRIPTION = `Book a free call with Gimmir’s founders. Operators: a ${BOOKINGS.costCheck.minutes}-minute platform cost check with ${hostNames(BOOKINGS.costCheck.hosts)}. Product and health founders: ${BOOKINGS.founderReview.minutes} minutes with ${hostNames(BOOKINGS.founderReview.hosts)}.`;
+const DESCRIPTION = `Book a free call with the founders. Brands with 8+ locations: a ${BOOKINGS.costCheck.minutes}-minute platform check with ${hostNames(BOOKINGS.costCheck.hosts)}. Founders building a SaaS: ${BOOKINGS.founderReview.minutes} minutes with ${hostNames(BOOKINGS.founderReview.hosts)}.`;
 
 export const metadata: Metadata = {
   title: TITLE,
