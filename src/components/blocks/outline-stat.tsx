@@ -25,6 +25,13 @@ const LAYOUTS = {
     from: "M962 250C1084 250 1086 478",
     end: { x: 880, y: 504 },
   },
+  // three glyphs ("404"); the curve leaves from the last glyph's bar
+  trio: {
+    box: { w: 860, h: 560 },
+    text: { x: -10, y: 400, size: 430 },
+    from: "M752 250C874 250 876 478",
+    end: { x: 672, y: 504 },
+  },
   // one glyph ("9"); the curve leaves from its right shoulder and lands
   // below the glyph, so its note sits on one line clear of the "9"
   single: {
@@ -41,6 +48,7 @@ export function OutlineStat({
   delay = 0,
   tone = "ink",
   layout = "narrow",
+  voice = false,
   className,
 }: {
   value: string;
@@ -50,6 +58,8 @@ export function OutlineStat({
   /** the background it sits on */
   tone?: "ink" | "paper";
   layout?: keyof typeof LAYOUTS;
+  /** the label as a handwritten aside, in the serif, instead of a caption */
+  voice?: boolean;
   className?: string;
 }) {
   const { box, text, from, end } = LAYOUTS[layout];
@@ -109,8 +119,15 @@ export function OutlineStat({
 
       <figcaption
         className={cn(
-          "fade absolute -translate-y-1/2 text-balance text-right text-[15px] leading-snug sm:text-base",
-          tone === "ink" ? "text-paper/75" : "text-muted",
+          "fade absolute -translate-y-1/2 text-balance text-right leading-snug",
+          voice
+            ? "font-serif text-[clamp(1.05rem,0.9rem+0.5vw,1.4rem)] italic"
+            : "text-[15px] sm:text-base",
+          tone === "ink"
+            ? "text-paper/75"
+            : voice
+              ? "text-ink"
+              : "text-muted",
         )}
         style={{
           ...vars(delay + 2150),
