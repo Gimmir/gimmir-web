@@ -1,46 +1,37 @@
 import type { Metadata } from "next";
 
-import { Hero } from "@/components/how-we-work/hero";
-import { FearsSection } from "@/components/how-we-work/fears";
-import { HowItRunsSection } from "@/components/how-we-work/runs";
-import { PricingPhilosophySection } from "@/components/how-we-work/pricing-philosophy";
-import { PrinciplesSection } from "@/components/how-we-work/principles";
+import { HowHero } from "@/components/how/hero";
 import {
-  STRAIGHT_ANSWERS,
-  StraightAnswersSection,
-} from "@/components/how-we-work/straight-answers";
-import { TwoPersonSection } from "@/components/how-we-work/two-person";
-import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
+  HOW_ANSWERS,
+  HowOwn,
+  HowPricing,
+  HowRisk,
+  HowStandards,
+} from "@/components/how/sections";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Marquee } from "@/components/ui/marquee";
+import { how } from "@/content/how";
 import { breadcrumbs, faqPage } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
-import { sanityFetch } from "@/sanity/lib/live";
-import { HOW_WE_WORK_QUERY, HOW_WE_WORK_SEO_QUERY } from "@/sanity/lib/queries";
+import { TWO_FOUNDERS_ANSWER } from "@/lib/trust-answers";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await sanityFetch({
-    query: HOW_WE_WORK_SEO_QUERY,
-    stega: false,
-  });
+export const metadata: Metadata = {
+  title: how.meta.title,
+  description: how.meta.description,
+  alternates: { canonical: "/how-we-work" },
+  ...socialMetadata({
+    title: how.meta.title,
+    description: how.meta.description,
+    path: "/how-we-work",
+  }),
+};
 
-  return {
-    title: data?.seo?.metaTitle ?? undefined,
-    description: data?.seo?.metaDescription ?? undefined,
-    alternates: { canonical: "/how-we-work" },
-    ...socialMetadata({
-      title: data?.seo?.metaTitle ?? "How we work",
-      description: data?.seo?.metaDescription,
-      path: "/how-we-work",
-    }),
-  };
-}
-
-export default async function HowWeWorkPage() {
-  const { data } = await sanityFetch({ query: HOW_WE_WORK_QUERY });
-
-  if (!data) return null;
-
+/**
+ * /how-we-work, V2 (doc 09 §3.8), built in code: no black box (the open
+ * box and how a build runs), how we price (#pricing, no numbers), what's
+ * yours, the standards and the stack, and the two-person risk answered
+ * straight. The footer's two doors are the call to action.
+ */
+export default function HowWeWorkPage() {
   return (
     <>
       <JsonLd
@@ -49,21 +40,12 @@ export default async function HowWeWorkPage() {
           ["How we work", "/how-we-work"],
         ])}
       />
-      <JsonLd data={faqPage(STRAIGHT_ANSWERS)!} />
-      <Hero data={data} />
-      <Marquee items={data.marquee ?? []} />
-      <HowItRunsSection data={data} />
-      <PrinciplesSection data={data} />
-      <TwoPersonSection data={data} />
-      <PricingPhilosophySection data={data} />
-      <FearsSection data={data} />
-      <StraightAnswersSection />
-      <FinalCtaPanel
-        eyebrow={data.finalCtaEyebrow!}
-        title={data.finalCtaHeading}
-        intro={data.finalCtaIntro!}
-        bookings={["costCheck", "founderReview"]}
-      />
+      <JsonLd data={faqPage([TWO_FOUNDERS_ANSWER, ...HOW_ANSWERS])!} />
+      <HowHero />
+      <HowPricing />
+      <HowOwn />
+      <HowStandards />
+      <HowRisk />
     </>
   );
 }

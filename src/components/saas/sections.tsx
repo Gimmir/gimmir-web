@@ -289,7 +289,7 @@ export function SaasOwn() {
   const { title, cards } = saas.own;
   const after = wordCount(title) * 40 + 300;
   return (
-    <Stage as="section" data-tone="paper">
+    <Stage as="section" id="own" data-tone="paper" className="scroll-mt-20">
       <Container className="py-20 md:py-28">
         <h2 className="display text-[length:var(--text-title)] leading-[1.02]">
           <RiseText text={title} />
