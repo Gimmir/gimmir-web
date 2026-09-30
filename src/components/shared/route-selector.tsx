@@ -15,12 +15,12 @@ const ROUTES = [
     dark: true,
   },
   {
-    href: "/the-review",
+    href: "/build-your-saas#diagnostic",
     title: "I’m building a fitness product",
     body: "You’ve raised money and need a V1 that won’t need rebuilding. Get a CTO-level review.",
   },
   {
-    href: "/health",
+    href: "/what-we-build",
     title: "I’m building a health & wellness app",
     body: "Sleep, nutrition, women’s health, longevity, metabolic, mental wellbeing. Prevention, not regulated clinical.",
   },

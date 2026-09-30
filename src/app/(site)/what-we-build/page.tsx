@@ -48,7 +48,6 @@ export default function WhatWeBuildPage() {
           description:
             "Member apps, coaching platforms, back offices and payments on iOS, Android and web, owned by the client from day one.",
           path: "/what-we-build",
-          offers: ["costCheck", "reviewCall", "build", "care"],
         })}
       />
       <Hero />

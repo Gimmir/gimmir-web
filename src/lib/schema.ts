@@ -1,15 +1,6 @@
 import { stegaClean } from "next-sanity";
 
 import { CASES, type CaseStudy } from "@/lib/cases";
-import {
-  CURRENCY,
-  OFFERS,
-  OPERATOR_LADDER,
-  FOUNDER_LADDER,
-  ONGOING,
-  type Offer,
-  type OfferId,
-} from "@/lib/offers";
 import { FOUNDERS } from "@/lib/founders";
 import { BRAND, SITE_URL } from "@/lib/seo";
 import { urlFor } from "@/sanity/lib/image";
@@ -110,7 +101,6 @@ export function organizationGraph(
           "iOS and Android apps",
         ],
         founder: founders.map((f) => ({ "@id": personId(f._id) })),
-        hasOfferCatalog: offerCatalog(),
       },
       ...founders.map((f) => personNode(f, roles[f._id])),
       {
@@ -138,7 +128,7 @@ export function breadcrumbs(items: Array<[name: string, path: string]>) {
   };
 }
 
-/** FAQPage mirroring the visible Q&A on /the-review. */
+/** FAQPage mirroring the visible Q&A on a page. */
 export function faqPage(
   items: Array<{ question?: string | null; answer?: string | null }>,
 ) {
@@ -209,33 +199,8 @@ export function caseStudyList() {
   };
 }
 
-/** One schema.org Offer from `lib/offers.ts`; ranges become a PriceSpecification. */
-function offerNode(offer: Offer, path: string) {
-  const base = {
-    "@type": "Offer",
-    name: offer.name,
-    description: offer.summary,
-    url: `${SITE_URL}${path}`,
-    availability: "https://schema.org/InStock",
-  };
-  if (typeof offer.price === "number") {
-    return { ...base, price: String(offer.price), priceCurrency: CURRENCY };
-  }
-  const [minPrice, maxPrice] = offer.price;
-  return {
-    ...base,
-    priceSpecification: {
-      "@type": offer.per ? "UnitPriceSpecification" : "PriceSpecification",
-      minPrice,
-      maxPrice,
-      priceCurrency: CURRENCY,
-      ...(offer.per ? { unitText: offer.per.toUpperCase() } : {}),
-    },
-  };
-}
-
 /**
- * A Service page's offer: what the page sells, with its fixed-price offers.
+ * A Service page's offer: what the page sells. No prices (site rule).
  * Not a Google rich result; it's for entity and AI-answer understanding.
  */
 export function serviceSchema({
@@ -243,14 +208,11 @@ export function serviceSchema({
   name,
   description,
   path,
-  offers,
 }: {
   id: string;
   name: string;
   description: string;
   path: string;
-  /** Priced offers; V2 pages leave them out (no prices on the site). */
-  offers?: OfferId[];
 }) {
   return {
     "@context": "https://schema.org",
@@ -261,27 +223,6 @@ export function serviceSchema({
     url: `${SITE_URL}${path}`,
     provider: { "@id": ORG_ID },
     areaServed: "Worldwide",
-    ...(offers?.length
-      ? { offers: offers.map((o) => offerNode(OFFERS[o], path)) }
-      : {}),
-  };
-}
-
-/** Every offer, grouped by audience, for the Organization node. */
-export function offerCatalog() {
-  const group = (name: string, ids: OfferId[]) => ({
-    "@type": "OfferCatalog",
-    name,
-    itemListElement: ids.map((o) => offerNode(OFFERS[o], "/pricing")),
-  });
-  return {
-    "@type": "OfferCatalog",
-    name: "Gimmir pricing",
-    itemListElement: [
-      group("For fitness operators", OPERATOR_LADDER),
-      group("For product & health founders", FOUNDER_LADDER),
-      group("Ongoing", ONGOING),
-    ],
   };
 }
 

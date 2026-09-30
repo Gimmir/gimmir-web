@@ -8,6 +8,14 @@ const STATIC_REDIRECTS = [
   { source: "/nazar-and-oleh", destination: "/about", permanent: true },
   { source: "/services", destination: "/how-we-work", permanent: true },
   { source: "/case-studies", destination: "/work", permanent: true },
+  // Old price pages; V2 shows no prices anywhere.
+  { source: "/pricing", destination: "/how-we-work#pricing", permanent: true },
+  {
+    source: "/the-review",
+    destination: "/build-your-saas#diagnostic",
+    permanent: true,
+  },
+  { source: "/health", destination: "/what-we-build", permanent: true },
 ];
 
 const nextConfig: NextConfig = {
