@@ -19,16 +19,16 @@ import { cn } from "@/lib/cn";
 // Jimmy Coach store screens (our own product)
 const JIMMY_SCREENS = [
   {
-    src: "/screens-all/frame-5.jpg",
-    alt: "Jimmy Coach: a personal program with weekly progress and upcoming workouts",
+    src: "/jimmy/store-timers.jpg",
+    alt: "Jimmy Coach in the App Store: five timers in one session, rest, EMOM, intervals, AMRAP and a stopwatch",
   },
   {
-    src: "/screens-all/frame-1.jpg",
-    alt: "Jimmy Coach: the member home screen with today’s workout, steps and weight progress",
+    src: "/jimmy/store-week.jpg",
+    alt: "Jimmy Coach in the App Store: the client’s week, already planned, with today’s workout, steps and weight",
   },
   {
-    src: "/screens-all/frame-4.jpg",
-    alt: "Jimmy Coach: direct chats between a client and their coach",
+    src: "/jimmy/store-chat.jpg",
+    alt: "Jimmy Coach in the App Store: a client’s chat with their coach",
   },
 ];
 
