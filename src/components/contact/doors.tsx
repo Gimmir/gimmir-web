@@ -47,10 +47,9 @@ export function Doors() {
                     <span
                       key={id}
                       className={cn(
-                        "relative overflow-hidden rounded-full bg-paper-2 ring-4 transition-[box-shadow] duration-300 group-hover:ring-lime",
-                        k === 0
-                          ? "size-24 md:size-28"
-                          : "-ml-5 size-16 md:size-20",
+                        "relative size-24 overflow-hidden rounded-full bg-paper-2 ring-4 transition-[box-shadow] duration-300 group-hover:ring-lime md:size-28",
+                        // two founders are two equals, side by side
+                        k > 0 && "-ml-6 md:-ml-8",
                         filled ? "ring-ink" : "ring-surface",
                       )}
                     >

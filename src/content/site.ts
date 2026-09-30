@@ -42,7 +42,8 @@ export const BOOK_DOORS: BookDoor[] = [
     id: "saas",
     booking: "founderReview",
     title: "I’m building a SaaS",
-    detail: "A 30-minute call with Oleh & Nazar",
+    // short enough for one line beside two faces; the names never part
+    detail: "30 minutes with Oleh\u00a0&\u00a0Nazar",
     faces: ["oleh", "nazar"],
   },
 ];
