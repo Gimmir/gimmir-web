@@ -11,6 +11,7 @@ import {
   CaseAudienceLink,
   CaseBackLink,
   CaseQuote,
+  ProductLinks,
 } from "@/components/work/parts";
 import { jimmy } from "@/content/jimmy";
 import type { CaseStudy } from "@/lib/cases";
@@ -115,6 +116,11 @@ function Hero({ data }: { data: CaseStudy }) {
           >
             {sub}
           </p>
+          <ProductLinks
+            links={jimmy.links}
+            className="fade mt-8"
+            style={d(300)}
+          />
         </div>
         <div
           className="fade relative mx-auto flex w-full max-w-[600px] items-center justify-center lg:col-span-6"

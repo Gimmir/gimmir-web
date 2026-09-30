@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ArrowRight } from "@/components/ui/icons";
+import { ArrowRight, ArrowUpRight } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 
 export function CaseBackLink({ onDark = false }: { onDark?: boolean }) {
@@ -39,6 +39,39 @@ export function CaseAudienceLink({
       <span className={onDark ? undefined : "link-mark"}>{label}</span>
       <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
     </Link>
+  );
+}
+
+/** Where a live product can be seen: its site and its store pages. */
+export function ProductLinks({
+  links,
+  className,
+  style,
+}: {
+  links: readonly { label: string; href: string; aria: string }[];
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <ul
+      className={cn("flex flex-wrap gap-x-6 gap-y-2", className)}
+      style={style}
+    >
+      {links.map((l) => (
+        <li key={l.href}>
+          <a
+            href={l.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={l.aria}
+            className="group inline-flex items-center gap-1.5 text-[15px] font-medium text-ink"
+          >
+            <span className="link-mark">{l.label}</span>
+            <ArrowUpRight className="size-4 text-muted transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }
 

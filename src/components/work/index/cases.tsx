@@ -6,7 +6,9 @@ import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
+import { ProductLinks } from "@/components/work/parts";
 import { home } from "@/content/home";
+import { jimmy } from "@/content/jimmy";
 import { cn } from "@/lib/cn";
 
 /* /work ②, the two public cases as full-width, full-height screens (doc
@@ -39,6 +41,7 @@ function Tile({
   title,
   meta,
   link,
+  links,
   children,
 }: {
   id: string;
@@ -49,6 +52,8 @@ function Tile({
   title: readonly string[];
   meta: readonly string[];
   link: { label: string; href: string };
+  /** The live product, when there is one to visit. */
+  links?: React.ComponentProps<typeof ProductLinks>["links"];
   children: React.ReactNode;
 }) {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
@@ -127,6 +132,13 @@ function Tile({
             </span>
             <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
+          {links && (
+            <ProductLinks
+              links={links}
+              className="fade mt-6"
+              style={d(after + 200)}
+            />
+          )}
         </div>
         <div className="lg:col-span-6">{children}</div>
       </Container>
@@ -167,6 +179,7 @@ export function WorkCases() {
         title={j.title}
         meta={j.meta}
         link={j.link}
+        links={jimmy.links}
       >
         <figure
           className="fade"

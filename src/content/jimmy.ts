@@ -36,6 +36,25 @@ export const jimmy = {
     ],
   },
 
+  // the live product, with the URLs jimmy-web-app's own store badges use
+  links: [
+    {
+      label: "jimmycoach.com",
+      href: "https://jimmycoach.com",
+      aria: "Jimmy Coach’s website",
+    },
+    {
+      label: "App Store",
+      href: "https://apps.apple.com/us/app/jimmy-coach/id6746717819",
+      aria: "Jimmy Coach on the App Store",
+    },
+    {
+      label: "Google Play",
+      href: "https://play.google.com/store/apps/details?id=com.jimmycoach.jimmy",
+      aria: "Jimmy Coach on Google Play",
+    },
+  ],
+
   origin: {
     label: "The request",
     title: "A coach with 250+ clients asked us for his own app.",
