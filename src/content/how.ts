@@ -55,11 +55,22 @@ export const how = {
     ],
   },
 
-  // doc 09 `#pricing`, no numbers. DRAFT: lede and bodies
+  // doc 09 `#pricing`, no numbers, drawn as a track of what you pay for
+  // (Nazar's pick o1, 2026-09-30). DRAFT: lede, track tags, note, bodies
   pricing: {
     id: "pricing",
     title: "How we price.",
     lede: "No numbers here, on purpose: a price before the diagnostic would be a guess.",
+    track: [
+      { name: "The Review", tag: "The diagnostic" },
+      { name: "Milestone 1", tag: "Fixed price" },
+      { name: "Milestone 2", tag: "Fixed price" },
+      { name: "Milestone 3", tag: "Fixed price" },
+      { name: "Launch, then Care", tag: "Care, monthly" },
+    ],
+    credit: "credited to the build",
+    hourly: "no hourly billing",
+    note: "The exact proposal comes out of The Review.",
     rules: [
       {
         title: "Fixed price per milestone.",
