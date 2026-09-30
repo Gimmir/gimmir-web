@@ -1,12 +1,10 @@
 import Image from "next/image";
 
 import { OutlineStat } from "@/components/blocks/outline-stat";
-import { Panel } from "@/components/blocks/ui-fragment";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { BookTrigger } from "@/components/blocks/book-trigger";
 import { FaqSection } from "@/components/blocks/faq-section";
-import { Chaos } from "@/components/saas/chaos";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import {
@@ -20,27 +18,43 @@ import { FOUNDERS } from "@/lib/founders";
 import { cn } from "@/lib/cn";
 
 /* /work/jimmy-coach, V2 (doc 09 §3.6): a founder story, not a vendor
-   case. The request → the decision to invest → the product (real client
-   screens) → three decisions as owners → what we got wrong → the numbers
-   with their date → Quentin's words once approved → the call signed by
-   Nazar (Jimmy is his; Oleh wasn't part of it). */
+   case. The request (Jimmy's own before/after) → the decision to invest →
+   the product (client app, coach mode, web dashboard) → three decisions as
+   owners → what we got wrong, with its fix → the numbers with their date →
+   Quentin's words once approved → the call signed by Nazar (Jimmy is his;
+   Oleh wasn't part of it). Every picture is a real product screen. */
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
-const HERO_SCREENS = [
-  {
-    src: "/screens-all/frame-5.jpg",
-    alt: "Jimmy Coach: a personal program with weekly progress and upcoming workouts",
-  },
-  {
-    src: "/screens-all/frame-1.jpg",
-    alt: "Jimmy Coach: the member home screen with today’s workout, steps and weight progress",
-  },
-  {
-    src: "/screens-all/frame-6.jpg",
-    alt: "Jimmy Coach: a client’s progress, steps and weight over time",
-  },
-];
+type Screen = { src: string; alt: string; width: number; height: number };
+
+// the phone screens come in their device frame, with transparent corners,
+// so their shadow follows the frame instead of a box
+const PHONE_SHADOW = "drop-shadow-[0_24px_30px_rgba(21,20,14,0.22)]";
+
+function Shot({
+  screen,
+  sizes,
+  priority,
+  className,
+}: {
+  screen: Screen;
+  sizes: string;
+  priority?: boolean;
+  className?: string;
+}) {
+  return (
+    <Image
+      src={screen.src}
+      alt={screen.alt}
+      width={screen.width}
+      height={screen.height}
+      sizes={sizes}
+      priority={priority}
+      className={cn("h-auto w-full", className)}
+    />
+  );
+}
 
 function Label({ children, dark }: { children: string; dark?: boolean }) {
   return (
@@ -56,7 +70,7 @@ function Label({ children, dark }: { children: string; dark?: boolean }) {
 }
 
 function Hero({ data }: { data: CaseStudy }) {
-  const { title, sub } = jimmy.hero;
+  const { title, sub, screens } = jimmy.hero;
   return (
     <Stage as="section" eager data-tone="paper" className="relative">
       <Container className="grid gap-14 pb-20 pt-28 sm:pt-32 md:pb-28 md:pt-36 lg:min-h-[92svh] lg:grid-cols-12 lg:items-center lg:gap-10">
@@ -106,23 +120,21 @@ function Hero({ data }: { data: CaseStudy }) {
           className="fade relative mx-auto flex w-full max-w-[600px] items-center justify-center lg:col-span-6"
           style={d(400)}
         >
-          {HERO_SCREENS.map((s, n) => (
+          {screens.map((s, n) => (
             <div
               key={s.src}
               className={cn(
-                "relative aspect-[1242/2688] overflow-hidden rounded-[22px] shadow-[0_30px_60px_-30px_rgba(21,20,14,0.45)] ring-1 ring-ink/10 md:rounded-[28px]",
+                "relative",
                 n === 1 ? "z-10 w-[38%]" : "w-[31%]",
                 n === 0 && "-mr-[6%] -rotate-[5deg] translate-y-[6%]",
                 n === 2 && "-ml-[6%] rotate-[5deg] translate-y-[6%]",
               )}
             >
-              <Image
-                src={s.src}
-                alt={s.alt}
-                fill
+              <Shot
+                screen={s}
                 priority={n === 1}
-                sizes="(min-width: 1024px) 240px, 38vw"
-                className="object-cover"
+                sizes="(min-width: 1024px) 230px, 38vw"
+                className={PHONE_SHADOW}
               />
             </div>
           ))}
@@ -133,29 +145,38 @@ function Hero({ data }: { data: CaseStudy }) {
 }
 
 function Origin() {
-  const { label, title, body } = jimmy.origin;
+  const { label, title, body, screens } = jimmy.origin;
   const after = wordCount(title) * 40 + 300;
   return (
     <Stage as="section" data-tone="ink" className="bg-ink text-paper">
-      <Container className="grid gap-14 py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-10">
-        <div className="lg:col-span-6">
-          <Label dark>{label}</Label>
-          <h2 className="display mt-6 text-[length:var(--text-title)] leading-[1.02]">
-            <RiseText text={title} />
-          </h2>
+      <Container className="py-20 md:py-28">
+        <div className="grid gap-x-10 gap-y-8 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7">
+            <Label dark>{label}</Label>
+            <h2 className="display mt-6 text-[length:var(--text-title)] leading-[1.02]">
+              <RiseText text={title} />
+            </h2>
+          </div>
           <p
-            className="fade mt-8 max-w-[46ch] text-lg leading-relaxed text-paper/70 md:text-xl"
+            className="fade max-w-[46ch] text-lg leading-relaxed text-paper/70 md:text-xl lg:col-span-5"
             style={d(after)}
           >
             {body}
           </p>
         </div>
-        <div
-          aria-hidden
-          className="fade flex justify-center lg:col-span-6"
-          style={d(after + 150)}
-        >
-          <Chaos />
+        <div className="mt-12 grid max-w-[1000px] gap-4 md:mt-16 md:grid-cols-2">
+          {screens.map((s, i) => (
+            <div
+              key={s.src}
+              className="fade overflow-hidden rounded-[24px]"
+              style={d(after + 150 + i * 120)}
+            >
+              <Shot
+                screen={s}
+                sizes="(min-width: 1080px) 500px, (min-width: 768px) 50vw, 100vw"
+              />
+            </div>
+          ))}
         </div>
       </Container>
     </Stage>
@@ -203,182 +224,160 @@ function Invest() {
   );
 }
 
-function DashboardFragment() {
-  const rows: [string, string][] = [
-    ["Active clients", "Live"],
-    ["Programs", "Builder"],
-    ["Subscriptions", "Stripe"],
-  ];
+type ProductCard = (typeof jimmy.product.cards)[number];
+
+function CardText({ card }: { card: ProductCard }) {
   return (
-    <Panel className="w-full max-w-[340px]">
-      <div className="flex items-center justify-between border-b border-line px-4 py-3">
-        <span className="font-semibold">Dashboard</span>
-        <span className="text-[11px] text-faint">This month</span>
-      </div>
-      <div className="flex h-24 items-end gap-1.5 px-4 pt-4">
-        {[0.35, 0.5, 0.42, 0.66, 0.58, 0.8, 0.92].map((h, i) => (
-          <span
-            key={i}
-            className={cn(
-              "flex-1 rounded-t-md",
-              i === 6 ? "bg-lime ring-1 ring-ink/20" : "bg-ink/80",
-            )}
-            style={{ height: `${h * 100}%` }}
-          />
-        ))}
-      </div>
-      <ul className="mt-3">
-        {rows.map(([a, b]) => (
-          <li
-            key={a}
-            className="flex items-center justify-between border-t border-line px-4 py-2.5"
-          >
-            <span className="font-medium">{a}</span>
-            <span className="rounded-full bg-paper-2 px-2 py-0.5 text-[11px] text-muted">
-              {b}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </Panel>
+    <>
+      <p className="font-mono text-[12px] uppercase tracking-[0.04em] text-faint">
+        {card.tag}
+      </p>
+      <h3 className="mt-3 text-2xl font-bold tracking-[-0.01em] md:text-3xl">
+        {card.title}
+      </h3>
+    </>
   );
 }
 
-// Coach app and dashboard: drawn until their real screens are in
-function CoachFragment() {
-  const rows: [string, string, boolean][] = [
-    ["Client 01", "Check-in sent", false],
-    ["Client 02", "New PR", true],
-    ["Client 03", "Paid · renews", false],
-  ];
+/** Two phones in a tile, the second a step lower, both running off the
+ *  bottom edge. */
+function PhoneRow({ card, flip }: { card: ProductCard; flip?: boolean }) {
   return (
-    <Panel className="w-full max-w-[300px]">
-      <div className="flex items-center justify-between border-b border-line px-4 py-3">
-        <span className="font-semibold">Clients</span>
-        <span className="rounded-full bg-paper-2 px-2 py-0.5 text-[11px] text-muted">
-          Today
-        </span>
+    <Stage className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
+      <div className={cn("fade lg:col-span-4", flip && "lg:order-2")}>
+        <CardText card={card} />
+        <p className="mt-3 max-w-[40ch] text-lg leading-relaxed text-muted">
+          {card.body}
+        </p>
       </div>
-      <ul>
-        {rows.map(([name, note, on]) => (
-          <li
-            key={name}
-            className="flex items-center gap-3 border-b border-line px-4 py-3 last:border-b-0"
-          >
-            <span className="size-7 shrink-0 rounded-full bg-paper-2" />
-            <span className="font-medium">{name}</span>
-            <span
+      <div
+        className="fade relative aspect-[6/5] overflow-hidden rounded-[24px] bg-paper-2 ring-1 ring-line sm:aspect-[3/2] lg:col-span-8"
+        style={d(150)}
+      >
+        <div className="absolute inset-x-0 top-0 flex justify-center gap-[5%] px-6 pt-10 md:pt-14">
+          {card.screens.map((s, i) => (
+            <div
+              key={s.src}
               className={cn(
-                "ml-auto rounded-full px-2 py-0.5 text-[11px] font-semibold",
-                on ? "bg-lime text-ink" : "bg-paper-2 text-muted",
+                "w-[40%] max-w-[250px]",
+                i === 1 && "mt-10 md:mt-16",
               )}
             >
-              {note}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </Panel>
+              <Shot
+                screen={s}
+                sizes="(min-width: 1024px) 250px, 40vw"
+                className={PHONE_SHADOW}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </Stage>
   );
 }
 
-const DRAWN: Record<string, () => React.ReactNode> = {
-  coach: CoachFragment,
-  dashboard: DashboardFragment,
-};
+function DashboardRow({ card }: { card: ProductCard }) {
+  return (
+    <Stage>
+      <div className="fade grid gap-x-10 gap-y-3 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-4">
+          <CardText card={card} />
+        </div>
+        <p className="max-w-[56ch] text-lg leading-relaxed text-muted lg:col-span-8">
+          {card.body}
+        </p>
+      </div>
+      <figure className="fade mt-8" style={d(150)}>
+        <div className="rounded-[24px] bg-paper-2 p-2 ring-1 ring-line sm:p-4 md:p-6">
+          {card.screens.map((s) => (
+            <Shot
+              key={s.src}
+              screen={s}
+              sizes="(min-width: 1280px) 1180px, 94vw"
+            />
+          ))}
+        </div>
+        {"caption" in card && (
+          <figcaption className="mt-3 text-sm text-faint">
+            {card.caption}
+          </figcaption>
+        )}
+      </figure>
+    </Stage>
+  );
+}
 
 function Product() {
   const { label, title, cards } = jimmy.product;
-  const after = wordCount(title) * 40 + 300;
+  const [client, coach, dashboard] = cards;
   return (
-    <Stage
-      as="section"
-      data-tone="paper"
-      className="border-t border-line bg-paper-2/60"
-    >
+    <section data-tone="paper" className="border-t border-line bg-paper-2/60">
       <Container className="py-20 md:py-28">
-        <Label>{label}</Label>
-        <h2 className="display mt-6 max-w-[18ch] text-[length:var(--text-title)] leading-[1.02]">
-          <RiseText text={title} />
-        </h2>
-        <ul className="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
-          {cards.map((c, i) => (
-            <li
-              key={c.id}
-              className="fade flex flex-col rounded-[24px] bg-surface p-2 shadow-[0_1px_0_rgba(21,20,14,0.04),0_28px_56px_-36px_rgba(21,20,14,0.35)] ring-1 ring-line"
-              style={d(after + i * 90)}
-            >
-              <div className="relative flex h-[320px] items-end justify-center overflow-hidden rounded-[18px] bg-paper-2 px-5 pt-6">
-                {"screen" in c ? (
-                  <div className="relative aspect-[1242/2688] w-[58%] translate-y-[18%] overflow-hidden rounded-t-[22px] shadow-[0_20px_40px_-20px_rgba(21,20,14,0.45)]">
-                    <Image
-                      src={c.screen}
-                      alt={
-                        HERO_SCREENS.find((s) => s.src === c.screen)?.alt ??
-                        `Jimmy Coach: ${c.title.toLowerCase()} app screen`
-                      }
-                      fill
-                      sizes="220px"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center pb-6">
-                    {DRAWN[c.id]?.()}
-                  </div>
-                )}
-              </div>
-              <div className="px-4 pb-4 pt-5 md:px-5">
-                <p className="font-mono text-[12px] uppercase tracking-[0.04em] text-faint">
-                  {c.tag}
-                </p>
-                <h3 className="mt-2 text-xl font-bold tracking-[-0.01em]">
-                  {c.title}
-                </h3>
-                <p className="mt-1.5 leading-relaxed text-muted">{c.body}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <Stage>
+          <Label>{label}</Label>
+          <h2 className="display mt-6 max-w-[18ch] text-[length:var(--text-title)] leading-[1.02]">
+            <RiseText text={title} />
+          </h2>
+        </Stage>
+        <div className="mt-12 grid gap-16 md:mt-16 md:gap-24">
+          <PhoneRow card={client} />
+          <PhoneRow card={coach} flip />
+          <DashboardRow card={dashboard} />
+        </div>
       </Container>
-    </Stage>
+    </section>
   );
 }
 
 function Decisions() {
-  const { label, items } = jimmy.decisions;
+  const { label, items, screen, caption } = jimmy.decisions;
   return (
-    <Stage as="section" data-tone="ink" className="bg-ink text-paper">
+    <section data-tone="ink" className="bg-ink text-paper">
       <Container className="py-20 md:py-28">
-        <h2 className="display max-w-[16ch] text-[length:var(--text-title)] leading-[1.02]">
-          <RiseText text={label} />
-        </h2>
-        <ol className="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
-          {items.map((it, i) => (
-            <li
-              key={it.title}
-              className="fade flex flex-col gap-6 rounded-[24px] bg-ink-soft p-6 ring-1 ring-line-dark md:p-7"
-              style={d(wordCount(label) * 40 + 300 + i * 90)}
-            >
-              <span className="display text-[3.5rem] leading-[0.85] text-transparent [-webkit-text-stroke:1.2px_var(--color-lime)]">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="text-2xl font-bold tracking-[-0.01em]">
-                  {it.title}
-                </h3>
-                <p className="mt-3 leading-relaxed text-paper/70">{it.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <Stage>
+          <h2 className="display max-w-[16ch] text-[length:var(--text-title)] leading-[1.02]">
+            <RiseText text={label} />
+          </h2>
+          <ol className="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
+            {items.map((it, i) => (
+              <li
+                key={it.title}
+                className="fade flex flex-col gap-6 rounded-[24px] bg-ink-soft p-6 ring-1 ring-line-dark md:p-7"
+                style={d(wordCount(label) * 40 + 300 + i * 90)}
+              >
+                <span className="display text-[3.5rem] leading-[0.85] text-transparent [-webkit-text-stroke:1.2px_var(--color-lime)]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="text-2xl font-bold tracking-[-0.01em]">
+                    {it.title}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-paper/70">
+                    {it.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Stage>
+        <Stage as="figure" className="mt-4 md:mt-6">
+          <div className="fade rounded-[24px] bg-ink-soft p-2 ring-1 ring-line-dark sm:p-4 md:p-6">
+            <Shot screen={screen} sizes="(min-width: 1280px) 1180px, 94vw" />
+          </div>
+          <figcaption
+            className="fade mt-3 font-mono text-[12px] uppercase tracking-[0.04em] text-lime"
+            style={d(150)}
+          >
+            {caption}
+          </figcaption>
+        </Stage>
       </Container>
-    </Stage>
+    </section>
   );
 }
 
 function Wrong() {
-  const { label, items } = jimmy.wrong;
+  const { label, items, screen, caption } = jimmy.wrong;
   const after = wordCount(label) * 40 + 300;
   return (
     <Stage as="section" data-tone="paper">
@@ -386,7 +385,7 @@ function Wrong() {
         <h2 className="display text-[length:var(--text-title)] leading-[1.02] lg:col-span-5">
           <RiseText text={label} />
         </h2>
-        <ul className="lg:col-span-7">
+        <ul className="lg:col-span-7 lg:row-span-2">
           {items.map((it, i) => (
             <li
               key={it.title}
@@ -402,6 +401,21 @@ function Wrong() {
             </li>
           ))}
         </ul>
+        <figure
+          className="fade flex items-end gap-5 lg:col-span-5 lg:row-start-2 lg:gap-6"
+          style={d(after + items.length * 90 + 150)}
+        >
+          <div className="w-[46%] max-w-[230px] shrink-0">
+            <Shot
+              screen={screen}
+              sizes="(min-width: 1024px) 230px, 46vw"
+              className={PHONE_SHADOW}
+            />
+          </div>
+          <figcaption className="max-w-[30ch] pb-6 text-sm leading-relaxed text-muted">
+            {caption}
+          </figcaption>
+        </figure>
       </Container>
     </Stage>
   );

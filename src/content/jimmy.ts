@@ -7,17 +7,54 @@
  * custom MCP); launched July 2026, 100+ coaches in the first month, each
  * bringing 2–3 clients, the biggest with 20–40, 200+ coaches two months
  * in; all public. Quentin OK'd being named; his quote is still to come.
+ * Screens are the real product, from Nazar (2026-10-01), in public/jimmy.
  */
+
+const PHONE = { width: 489, height: 1018 };
+const BROWSER = { width: 2055, height: 1262 };
+
 export const jimmy = {
   hero: {
     title: "From a coach’s request to a SaaS we co-own.",
     sub: "A coaching platform co-founded and co-owned with a working coach: one native app for iOS and Android, and a web dashboard, live in both stores.",
+    screens: [
+      {
+        src: "/jimmy/coach-clients.png",
+        alt: "Jimmy Coach in coach mode: the client list, with inactive and overdue clients flagged",
+        ...PHONE,
+      },
+      {
+        src: "/jimmy/client-home.png",
+        alt: "Jimmy Coach: the client home screen with today’s workout, steps and weight",
+        ...PHONE,
+      },
+      {
+        src: "/jimmy/client-rest-timer.png",
+        alt: "Jimmy Coach: a workout in progress, with the rest timer",
+        ...PHONE,
+      },
+    ],
   },
 
   origin: {
     label: "The request",
     title: "A coach with 250+ clients asked us for his own app.",
     body: "Quentin Randis coaches Hyrox and CrossFit. He was running it across WhatsApp, spreadsheets and PDFs, and losing clients in the gaps.",
+    // from Jimmy's own site
+    screens: [
+      {
+        src: "/jimmy/without-jimmy.png",
+        alt: "Without Jimmy: client messages on WhatsApp, a training spreadsheet, manual payments and scheduling by hand",
+        width: 756,
+        height: 775,
+      },
+      {
+        src: "/jimmy/with-jimmy.png",
+        alt: "With Jimmy: messaging, the workout builder, Stripe payments and scheduling in one place",
+        width: 756,
+        height: 775,
+      },
+    ],
   },
 
   invest: {
@@ -39,19 +76,52 @@ export const jimmy = {
         tag: "Native app · iOS & Android",
         title: "For clients",
         body: "Where members train, every day: today's workout in clear blocks with timers and video cues, chat with the coach, community, streaks and PRs.",
-        screen: "/screens-all/frame-1.jpg",
+        screens: [
+          {
+            src: "/jimmy/client-swap.png",
+            alt: "Jimmy Coach: swapping an exercise mid-workout, with a video for each move",
+            ...PHONE,
+          },
+          {
+            src: "/jimmy/client-chat.png",
+            alt: "Jimmy Coach: a client’s chat with their coach",
+            ...PHONE,
+          },
+        ],
       },
       {
         id: "coach",
         tag: "Same app · coach login",
         title: "For coaches",
         body: "Log in as a coach and the same app turns into your controls: clients, programs, messages and payments, from the gym floor.",
+        screens: [
+          {
+            src: "/jimmy/coach-client-overview.png",
+            alt: "Jimmy Coach in coach mode: one client’s program, overdue payment and week",
+            ...PHONE,
+          },
+          {
+            src: "/jimmy/coach-client-activity.png",
+            alt: "Jimmy Coach in coach mode: a client’s workouts, set by set",
+            ...PHONE,
+          },
+        ],
       },
       {
         id: "dashboard",
         tag: "Web",
         title: "The dashboard",
         body: "Control of everything: workout and course builders, clients, Stripe subscriptions and revenue, in one place instead of five tools.",
+        screens: [
+          {
+            src: "/jimmy/dashboard.png",
+            alt: "The Jimmy Coach web dashboard: clients, active programs, monthly revenue and who needs attention",
+            ...BROWSER,
+          },
+        ],
+        // DRAFT (2026-10-01): the demo club's figures are small, so the
+        // caption says whose they are
+        caption: "One coach’s dashboard: their clients, programs and revenue.",
       },
     ],
   },
@@ -73,6 +143,13 @@ export const jimmy = {
         body: "A release every week, a public roadmap coaches vote on, and the founders on Discord to answer them.",
       },
     ],
+    // decision 01, as Jimmy's own site tells it
+    screen: {
+      src: "/jimmy/connected-ai.png",
+      alt: "jimmycoach.com: Jimmy connects to the coach’s own Claude, ChatGPT or Perplexity",
+      ...BROWSER,
+    },
+    caption: "01 · live on jimmycoach.com", // DRAFT (2026-10-01)
   },
 
   // confirmed by Nazar (2026-09-30)
@@ -88,6 +165,15 @@ export const jimmy = {
         body: "We rebuilt it again and again. We listened to every coach in the beta, let them vote, and shipped what helped, until it became one of the best workout builders on the market.",
       },
     ],
+    // the fix for the first item, as it looks today
+    screen: {
+      src: "/jimmy/live-activity.png",
+      alt: "A Jimmy Coach workout on the iPhone lock screen: the block and the time elapsed",
+      ...PHONE,
+    },
+    // DRAFT (2026-10-01)
+    caption:
+      "Lock the phone mid-session and the workout stays on the lock screen: the block you’re on and the time elapsed.",
   },
 
   numbers: {
