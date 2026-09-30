@@ -21,8 +21,8 @@ export const operators = {
     ],
     sub: "For fitness brands and franchisors with 8+ locations.",
     cta: {
-      label: "Book a free 20-minute platform check",
-      by: "with Nazar",
+      label: "Book a platform check",
+      by: "Free, 20 minutes, with Nazar",
     },
   },
 
@@ -177,6 +177,6 @@ export const operators = {
   close: {
     title: "Find your number first.",
     line: "I'll look at what you pay now and tell you if there's real money to save.",
-    fit: "Best fit: 8+ locations.",
+    fit: "Free, 20 minutes. Best fit: 8+ locations.",
   },
 } as const;
