@@ -61,6 +61,10 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
+      // Next 16 no longer drops the CSS smooth scroll during navigation on
+      // its own: without this, a new page glides up from the old scroll
+      // position, firing every section's entrance on the way
+      data-scroll-behavior="smooth"
       className={`${archivo.variable} ${newsreader.variable} ${spaceMono.variable}`}
     >
       <body>
