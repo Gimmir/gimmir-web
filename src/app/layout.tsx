@@ -7,7 +7,7 @@ import { VisualEditing } from "next-sanity/visual-editing";
 
 import { CalProvider } from "@/components/cal/cal-provider";
 import { CookieConsent } from "@/components/consent/cookie-consent";
-import { DisableDraftMode } from "@/components/disable-draft-mode";
+import { DisableDraftModeLazy } from "@/components/disable-draft-mode-lazy";
 import { SanityLive } from "@/sanity/lib/live";
 import { SITE_URL, socialMetadata } from "@/lib/seo";
 import "./globals.css";
@@ -85,7 +85,7 @@ export default async function RootLayout({
         <SanityLive />
         {isDraftMode && (
           <>
-            <DisableDraftMode />
+            <DisableDraftModeLazy />
             <VisualEditing />
           </>
         )}
