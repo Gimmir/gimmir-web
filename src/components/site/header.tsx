@@ -186,10 +186,10 @@ export function Header() {
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
-                  "-mx-3 whitespace-nowrap rounded-full px-3 py-1.5 text-[15px] font-medium transition-colors duration-200 hover:bg-lime hover:text-ink",
+                  "link-mark whitespace-nowrap text-[15px] font-medium transition-colors duration-200",
                   dark
-                    ? "text-paper/65 aria-[current=page]:text-paper"
-                    : "text-muted aria-[current=page]:text-ink",
+                    ? "text-paper/65 hover:text-paper aria-[current=page]:text-paper"
+                    : "text-muted hover:text-ink aria-[current=page]:text-ink",
                 )}
               >
                 {item.label}

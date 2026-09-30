@@ -173,6 +173,39 @@
   font-stretch: 112%;
 }
 
+/* A text link's hover: the headline's lime marker swipe wipes in under
+   the words, behind them (lime text wouldn't read on paper). Hovering the
+   element or its .group plays it. */
+.link-mark {
+  position: relative;
+  isolation: isolate;
+}
+.link-mark::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.06em;
+  right: -0.06em;
+  bottom: -0.1em;
+  height: 0.34em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 24' preserveAspectRatio='none'%3E%3Cpath d='M2.5 17.8C38 10.4 104 7.2 197.2 9.6c1.5.1 1.6 2.4.1 2.6C112 14.8 50 17.6 4.4 22.4 1.4 22.7.2 18.5 2.5 17.8Z' fill='%23c9f23d'/%3E%3C/svg%3E")
+    center / 100% 100% no-repeat;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 280ms var(--ease-out);
+}
+@media (hover: hover) {
+  .link-mark:hover::after,
+  .group:hover .link-mark::after {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-mark::after {
+    transition: none;
+  }
+}
+
 /* The manifesto cut: wider, tighter, stacked close. */
 @utility mega {
   font-weight: 800;

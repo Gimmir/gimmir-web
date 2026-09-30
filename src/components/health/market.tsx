@@ -51,7 +51,7 @@ export function Market() {
               href="https://www.grandviewresearch.com/industry-analysis/wellness-apps-market-report"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-line underline-offset-2 -mx-[0.2em] rounded-[0.35em] px-[0.2em] box-decoration-clone transition-colors duration-200 hover:bg-lime hover:text-ink"
+              className="underline decoration-line underline-offset-2 transition-colors duration-200 hover:decoration-lime hover:decoration-[0.18em] hover:text-ink"
             >
               Grand View Research, Wellness Apps Market Report (2025)
             </a>

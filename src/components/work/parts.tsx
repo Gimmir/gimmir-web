@@ -8,14 +8,12 @@ export function CaseBackLink({ onDark = false }: { onDark?: boolean }) {
     <Link
       href="/work"
       className={cn(
-        "group -mx-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-        onDark
-          ? "text-paper/55 hover:text-lime"
-          : "text-muted hover:bg-lime hover:text-ink",
+        "group inline-flex items-center gap-2 text-sm font-medium transition-colors",
+        onDark ? "text-paper/55 hover:text-lime" : "text-muted hover:text-ink",
       )}
     >
       <ArrowRight className="size-4 -translate-x-0 rotate-180 transition-transform group-hover:-translate-x-0.5" />
-      All case studies
+      <span className={onDark ? undefined : "link-mark"}>All case studies</span>
     </Link>
   );
 }

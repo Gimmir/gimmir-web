@@ -37,7 +37,7 @@ function Section({
 }
 
 const link =
-  "font-semibold text-ink underline underline-offset-4 -mx-[0.2em] rounded-[0.35em] px-[0.2em] box-decoration-clone transition-colors duration-200 hover:bg-lime";
+  "font-semibold text-ink underline underline-offset-4 transition-colors duration-200 hover:decoration-lime hover:decoration-[0.18em]";
 
 export default function TermsPage() {
   return (
