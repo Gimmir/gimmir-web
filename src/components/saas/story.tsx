@@ -13,7 +13,7 @@ import { cn } from "@/lib/cn";
 type Chapter = (typeof saas.story.chapters)[number];
 
 /** Chapter one, before the product: the coach's business in three tools. */
-function Chaos() {
+export function Chaos() {
   const card =
     "absolute rounded-2xl bg-paper p-4 text-[13px] text-ink shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)]";
   return (
