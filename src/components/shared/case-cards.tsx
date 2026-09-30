@@ -96,7 +96,7 @@ export function CaseCard({
               "flex size-11 shrink-0 items-center justify-center rounded-full transition-[transform,background-color] duration-300 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5",
               dark
                 ? "bg-paper/10 text-paper group-hover:bg-lime group-hover:text-ink"
-                : "bg-paper-2 text-ink group-hover:bg-ink group-hover:text-paper",
+                : "bg-paper-2 text-ink group-hover:bg-lime",
             )}
             aria-hidden
           >

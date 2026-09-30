@@ -5,7 +5,7 @@ export function EmailLine({ email }: { email: string }) {
       Prefer email?{" "}
       <a
         href={`mailto:${email}`}
-        className="font-semibold text-ink underline decoration-line underline-offset-4 transition-colors hover:text-muted"
+        className="font-semibold text-ink underline decoration-line underline-offset-4 -mx-[0.2em] rounded-[0.35em] px-[0.2em] box-decoration-clone transition-colors duration-200 hover:bg-lime"
       >
         {email}
       </a>{" "}

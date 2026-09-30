@@ -9,12 +9,12 @@ type Variant = "solid" | "outline" | "outlineLight" | "lime";
 type Size = "md" | "sm";
 
 const base =
-  "group inline-flex items-center justify-center gap-2.5 rounded-full font-semibold transition-[background-color,color,transform] duration-200 ease-[cubic-bezier(.23,1,.32,1)] active:scale-[.97]";
+  "group inline-flex items-center justify-center gap-2.5 rounded-full font-semibold transition-[background-color,border-color,color,transform] duration-200 ease-[cubic-bezier(.23,1,.32,1)] active:scale-[.97]";
 
 const variants: Record<Variant, string> = {
   solid: "bg-ink text-paper hover:bg-lime hover:text-ink",
-  outline: "border border-ink text-ink hover:bg-ink hover:text-paper",
-  outlineLight: "border border-paper/25 text-paper hover:bg-paper hover:text-ink",
+  outline: "border border-ink text-ink hover:border-lime hover:bg-lime",
+  outlineLight: "border border-paper/25 text-paper hover:border-lime hover:bg-lime hover:text-ink",
   lime: "bg-lime text-ink hover:bg-lime-deep",
 };
 

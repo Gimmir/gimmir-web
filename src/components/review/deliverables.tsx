@@ -39,7 +39,7 @@ export function DeliverablesSection({
             {items.map((d, i) => (
               <div
                 key={d._key}
-                className="group grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-1.5 border-t border-line px-6 py-5 transition-colors duration-200 first:border-t-0 hover:bg-paper-2/60 md:grid-cols-[auto_minmax(0,0.8fr)_minmax(0,1.5fr)] md:gap-x-8 md:px-8 md:py-6"
+                className="group grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-1.5 border-t border-line px-6 py-5 transition-colors duration-200 first:border-t-0 hover:bg-lime/30 md:grid-cols-[auto_minmax(0,0.8fr)_minmax(0,1.5fr)] md:gap-x-8 md:px-8 md:py-6"
               >
                 <span className="inline-flex items-center justify-center rounded-md bg-lime px-2.5 py-1 text-xs font-extrabold tabular-nums text-ink">
                   {String(i + 1).padStart(2, "0")}

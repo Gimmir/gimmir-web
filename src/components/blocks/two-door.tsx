@@ -40,7 +40,7 @@ export function TwoDoor({
         // read darker where two of them meet.
         const surface = filled
           ? "bg-ink group-hover:bg-lime"
-          : "border-[color-mix(in_srgb,var(--color-ink)_80%,var(--color-paper))] group-hover:border-ink group-hover:bg-ink";
+          : "border-[color-mix(in_srgb,var(--color-ink)_80%,var(--color-paper))] group-hover:border-lime group-hover:bg-lime";
         const piece =
           "transition-[background-color,border-color] duration-200";
         return (
@@ -88,7 +88,7 @@ export function TwoDoor({
                     "relative flex h-full items-center pl-7 transition-colors duration-200",
                     filled
                       ? "text-paper group-hover:text-ink"
-                      : "text-ink group-hover:text-paper",
+                      : "text-ink",
                   )}
                 >
                   <span className="whitespace-nowrap">{door.label}</span>
@@ -117,7 +117,7 @@ export function TwoDoor({
                       "flex size-12 items-center justify-center rounded-full transition-[transform,background-color,color] duration-300 ease-[cubic-bezier(.23,1,.32,1)] group-hover:translate-x-0.5 sm:size-[52px]",
                       filled
                         ? "bg-paper text-ink group-hover:bg-ink group-hover:text-paper"
-                        : "bg-ink text-paper group-hover:bg-paper group-hover:text-ink",
+                        : "bg-ink text-paper",
                     )}
                   >
                     <ArrowRight className="size-5" />

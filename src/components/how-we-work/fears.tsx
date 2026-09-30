@@ -78,7 +78,7 @@ export function FearsSection({
                       "relative flex w-full items-center gap-3.5 overflow-hidden rounded-xl border px-4 py-4 text-left transition-[background-color,border-color,box-shadow] duration-200 ease-out",
                       on
                         ? "border-line bg-surface shadow-[0_14px_34px_-24px_rgba(21,20,14,0.4)]"
-                        : "border-transparent hover:bg-paper-2/60",
+                        : "border-transparent hover:bg-lime/30",
                     )}
                   >
                     {on && (

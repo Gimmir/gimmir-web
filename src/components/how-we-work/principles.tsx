@@ -38,7 +38,7 @@ export function PrinciplesSection({
             {principles.map((p, i) => (
               <li
                 key={i}
-                className="flex items-center gap-4 border-t border-line px-6 py-5 transition-colors duration-200 first:border-t-0 hover:bg-paper-2/50 md:gap-5 md:px-8 md:py-6"
+                className="flex items-center gap-4 border-t border-line px-6 py-5 transition-colors duration-200 first:border-t-0 hover:bg-lime/30 md:gap-5 md:px-8 md:py-6"
               >
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
                   <Check className="size-4" />

@@ -47,7 +47,7 @@ export function Accordion({
                     "flex size-11 shrink-0 items-center justify-center rounded-full border transition-[background-color,border-color] duration-200",
                     isOpen
                       ? "border-lime bg-lime"
-                      : "border-line group-hover:border-ink/40",
+                      : "border-line group-hover:border-lime group-hover:bg-lime",
                   )}
                 >
                   <Plus

@@ -83,7 +83,7 @@ export function Founders() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${f.first} on LinkedIn`}
-                    className="flex size-11 shrink-0 items-center justify-center rounded-full border border-line-dark text-paper/80 transition-colors duration-200 hover:border-paper/50 hover:text-paper"
+                    className="flex size-11 shrink-0 items-center justify-center rounded-full border border-line-dark text-paper/80 transition-colors duration-200 hover:border-lime hover:bg-lime hover:text-ink"
                   >
                     <LinkedIn className="size-[18px]" />
                   </a>

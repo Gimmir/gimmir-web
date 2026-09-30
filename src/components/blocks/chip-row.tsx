@@ -32,7 +32,7 @@ export function ChipRow({
           <Link
             href={c.href}
             className={cn(
-              "group flex h-9 items-center gap-1.5 rounded-full border border-line bg-surface/70 pr-2.5 text-[13px] transition-colors duration-200 hover:border-ink/40 sm:h-10 sm:gap-2.5 sm:pr-4 sm:text-[13.5px]",
+              "group flex h-9 items-center gap-1.5 rounded-full border border-line bg-surface/70 pr-2.5 text-[13px] transition-colors duration-200 hover:border-lime hover:bg-lime sm:h-10 sm:gap-2.5 sm:pr-4 sm:text-[13.5px]",
               c.logo || c.grid ? "pl-1 sm:pl-[5px]" : "pl-2.5 sm:pl-4",
             )}
           >

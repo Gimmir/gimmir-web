@@ -68,7 +68,7 @@ export function PeopleSection({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${f.founder?.name} on LinkedIn`}
-                    className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-ink hover:text-ink"
+                    className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-lime hover:bg-lime hover:text-ink"
                   >
                     <LinkedIn className="size-[18px]" />
                   </a>

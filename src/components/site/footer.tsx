@@ -16,7 +16,7 @@ import { FOUNDERS } from "@/lib/founders";
  */
 export function Footer() {
   const year = new Date().getFullYear();
-  const muted = "text-[15px] text-paper/60 transition-colors hover:text-paper";
+  const muted = "text-[15px] text-paper/60 transition-colors hover:text-lime";
 
   return (
     <footer data-tone="ink" className="border-t border-line-dark bg-ink text-paper">
@@ -36,7 +36,7 @@ export function Footer() {
               key={d.id}
               booking={d.booking}
               placement="footer"
-              className="group grid grid-cols-[1fr_auto] items-center gap-x-5 gap-y-4 rounded-[24px] border border-line-dark p-5 text-left transition-[background-color,border-color] duration-200 hover:border-paper/30 hover:bg-ink-soft sm:grid-cols-[auto_1fr_auto] md:p-6"
+              className="group grid grid-cols-[1fr_auto] items-center gap-x-5 gap-y-4 rounded-[24px] border border-line-dark p-5 text-left transition-[background-color,border-color,color] duration-200 hover:border-lime hover:bg-lime hover:text-ink sm:grid-cols-[auto_1fr_auto] md:p-6"
             >
               <FaceStack
                 ids={d.faces}
@@ -47,9 +47,9 @@ export function Footer() {
               {/* phones: faces and arrow share the top row, words get the full width */}
               <span className="col-span-2 row-start-2 min-w-0 sm:col-span-1 sm:col-start-2 sm:row-start-1">
                 <span className="block text-lg font-semibold">{d.title}</span>
-                <span className="block text-paper/60">{d.detail}</span>
+                <span className="block text-paper/60 transition-colors duration-200 group-hover:text-ink/70">{d.detail}</span>
               </span>
-              <span className="col-start-2 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-[transform,background-color] duration-200 group-hover:translate-x-0.5 group-hover:bg-lime sm:col-start-3">
+              <span className="col-start-2 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-[transform,background-color,color] duration-200 group-hover:translate-x-0.5 group-hover:bg-ink group-hover:text-paper sm:col-start-3">
                 <ArrowRight className="size-[18px]" />
               </span>
             </BookTrigger>
@@ -96,7 +96,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="text-[15px] font-semibold text-paper transition-colors hover:text-paper/70"
+                  className="text-[15px] font-semibold text-paper transition-colors hover:text-lime"
                 >
                   {CONTACT_EMAIL}
                 </a>
@@ -123,11 +123,11 @@ export function Footer() {
               © {year} {FOOTER.company}
             </span>
             {FOOTER.legal.map((l) => (
-              <Link key={l.href} href={l.href} className="transition-colors hover:text-paper">
+              <Link key={l.href} href={l.href} className="transition-colors hover:text-lime">
                 {l.label}
               </Link>
             ))}
-            <CookieSettingsLink className="transition-colors hover:text-paper" />
+            <CookieSettingsLink className="transition-colors hover:text-lime" />
           </p>
           <p>
             Built in the open by Nazar &amp; Oleh

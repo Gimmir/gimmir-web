@@ -186,10 +186,10 @@ export function Header() {
                 href={item.href}
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
-                  "whitespace-nowrap text-[15px] font-medium transition-colors duration-200",
+                  "-mx-3 whitespace-nowrap rounded-full px-3 py-1.5 text-[15px] font-medium transition-colors duration-200 hover:bg-lime hover:text-ink",
                   dark
-                    ? "text-paper/65 hover:text-paper aria-[current=page]:text-paper"
-                    : "text-muted hover:text-ink aria-[current=page]:text-ink",
+                    ? "text-paper/65 aria-[current=page]:text-paper"
+                    : "text-muted aria-[current=page]:text-ink",
                 )}
               >
                 {item.label}
@@ -243,7 +243,7 @@ export function Header() {
                   booking={d.booking}
                   placement="header-menu"
                   onClick={() => setBook(false)}
-                  className="group flex w-full items-center gap-4 rounded-[18px] p-3.5 text-left transition-colors duration-150 hover:bg-paper"
+                  className="group flex w-full items-center gap-4 rounded-[18px] p-3.5 text-left transition-colors duration-150 hover:bg-lime"
                 >
                   <FaceStack ids={d.faces} size={44} ring="surface" />
                   <span className="min-w-0 flex-1">
@@ -256,7 +256,7 @@ export function Header() {
               <Link
                 href="/contact"
                 onClick={() => setBook(false)}
-                className="mt-1 flex items-center justify-between rounded-[18px] px-3.5 py-3 text-sm text-muted transition-colors hover:text-ink"
+                className="mt-1 flex items-center justify-between rounded-[18px] px-3.5 py-3 text-sm text-muted transition-colors hover:bg-lime hover:text-ink"
               >
                 Not sure? Compare both calls
                 <ArrowRight className="size-3.5" />

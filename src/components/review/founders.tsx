@@ -68,7 +68,7 @@ export function FoundersSection({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${f.founder?.name} on LinkedIn`}
-                    className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-paper/15 text-paper/70 transition-colors hover:border-lime hover:text-lime"
+                    className="inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-paper/15 text-paper/70 transition-colors hover:border-lime hover:bg-lime hover:text-ink"
                   >
                     <LinkedIn className="size-[18px]" />
                   </a>

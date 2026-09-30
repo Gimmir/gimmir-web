@@ -103,10 +103,10 @@ export function CaseJimmy() {
             </ul>
             <Link
               href={c.link.href}
-              className="fade group mt-10 inline-flex items-center gap-3 text-lg font-semibold"
+              className="fade group -mx-4 mt-8 inline-flex items-center gap-3 rounded-full px-4 py-2 text-lg font-semibold transition-colors duration-200 hover:bg-lime"
               style={d(after + 160)}
             >
-              <span className="border-b border-ink/30 pb-1 transition-colors group-hover:border-ink">
+              <span className="border-b border-ink/30 pb-1 transition-colors group-hover:border-transparent">
                 {c.link.label}
               </span>
               <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />

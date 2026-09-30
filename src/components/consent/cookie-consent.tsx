@@ -95,7 +95,7 @@ export function CookieConsent() {
                 used. No marketing cookies, nothing sold.{" "}
                 <Link
                   href="/privacy"
-                  className="text-paper underline decoration-paper/40 underline-offset-4 transition-colors hover:decoration-paper"
+                  className="text-paper underline decoration-paper/40 underline-offset-4 transition-colors hover:text-lime hover:decoration-lime"
                 >
                   Privacy policy
                 </Link>

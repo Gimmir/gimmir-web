@@ -34,7 +34,7 @@ export function WhatWeBuild() {
             className="fade group mt-12 hidden w-fit items-center gap-3 text-lg font-semibold lg:mt-auto lg:inline-flex"
             style={d(900)}
           >
-            <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-paper">
+            <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-lime group-hover:text-lime">
               {link.label}
             </span>
             <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />
@@ -88,7 +88,7 @@ export function WhatWeBuild() {
           className="fade group inline-flex w-fit items-center gap-3 text-lg font-semibold lg:hidden"
           style={d(900)}
         >
-          <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-paper">
+          <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-lime group-hover:text-lime">
             {link.label}
           </span>
           <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />

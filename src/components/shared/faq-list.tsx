@@ -47,7 +47,7 @@ export function FaqList({
                   <span
                     className={cn(
                       "flex size-9 shrink-0 items-center justify-center rounded-full text-ink transition-[background-color,transform] duration-200 ease-[var(--ease-out)] active:scale-90",
-                      isOpen ? "bg-lime" : "group-hover:bg-paper-2",
+                      isOpen ? "bg-lime" : "group-hover:bg-lime",
                     )}
                   >
                     <Plus

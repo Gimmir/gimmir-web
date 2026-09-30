@@ -55,7 +55,7 @@ export function CaseUn1t() {
             className="fade group mt-12 inline-flex items-center gap-3 text-lg font-semibold text-paper"
             style={d(after + 160)}
           >
-            <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-paper">
+            <span className="border-b border-paper/40 pb-1 transition-colors group-hover:border-lime group-hover:text-lime">
               {c.link.label}
             </span>
             <ArrowRight className="size-5 transition-transform duration-200 group-hover:translate-x-1" />

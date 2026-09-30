@@ -37,7 +37,7 @@ export function PainCheck({ after }: { after: number }) {
             <li key={it.id} className="fade" style={d(after + i * 90)}>
               <div
                 data-on={on[i]}
-                className="group relative flex h-full flex-col rounded-[24px] bg-surface p-2 shadow-[0_1px_0_rgba(21,20,14,0.04),0_28px_56px_-36px_rgba(21,20,14,0.35)] ring-1 ring-line transition-[box-shadow,transform] duration-200 ease-out has-[:active]:scale-[0.985] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-ink data-[on=false]:hover:ring-ink/30 data-[on=true]:ring-[1.5px] data-[on=true]:ring-ink"
+                className="group relative flex h-full flex-col rounded-[24px] bg-surface p-2 shadow-[0_1px_0_rgba(21,20,14,0.04),0_28px_56px_-36px_rgba(21,20,14,0.35)] ring-1 ring-line transition-[box-shadow,transform] duration-200 ease-out has-[:active]:scale-[0.985] has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-4 has-[:focus-visible]:outline-ink data-[on=false]:hover:ring-2 data-[on=false]:hover:ring-lime data-[on=true]:ring-[1.5px] data-[on=true]:ring-ink"
               >
                 <label className="absolute inset-0 z-10 cursor-pointer rounded-[24px]">
                   <input

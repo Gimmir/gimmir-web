@@ -49,10 +49,10 @@ export function RouteSelector() {
               <Link
                 href={r.href}
                 className={cn(
-                  "group flex h-full flex-col justify-between gap-6 rounded-2xl border p-6 transition-[background-color,border-color,transform] duration-200 ease-[var(--ease-out)] active:scale-[.98] sm:p-8",
+                  "group flex h-full flex-col justify-between gap-6 rounded-2xl border p-6 transition-[background-color,border-color,color,transform] duration-200 ease-[var(--ease-out)] active:scale-[.98] sm:p-8",
                   r.dark
-                    ? "border-ink bg-ink text-paper hover:bg-ink/90"
-                    : "border-line bg-surface text-ink hover:border-ink",
+                    ? "border-ink bg-ink text-paper hover:border-lime hover:bg-lime hover:text-ink"
+                    : "border-line bg-surface text-ink hover:border-lime hover:bg-lime",
                 )}
               >
                 <span className="text-xl font-bold leading-snug tracking-tight sm:text-2xl">
@@ -61,14 +61,16 @@ export function RouteSelector() {
                 <span
                   className={cn(
                     "flex items-end justify-between gap-4 leading-relaxed",
-                    r.dark ? "text-paper/65" : "text-muted",
+                    r.dark
+                      ? "text-paper/65 transition-colors duration-200 group-hover:text-ink/70"
+                      : "text-muted",
                   )}
                 >
                   {r.body}
                   <ArrowRight
                     className={cn(
                       "size-5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5",
-                      r.dark ? "text-lime" : "text-ink",
+                      r.dark ? "text-lime group-hover:text-ink" : "text-ink",
                     )}
                   />
                 </span>

@@ -122,7 +122,7 @@ export function ContactTabs() {
                 "group flex flex-col justify-between gap-3 rounded-2xl border p-5 text-left transition-[background-color,border-color,transform] duration-200 ease-[var(--ease-out)] active:scale-[.98] sm:p-7",
                 isActive
                   ? "border-ink bg-ink text-paper"
-                  : "border-line bg-surface text-ink hover:border-ink",
+                  : "border-line bg-surface text-ink hover:border-lime hover:bg-lime",
               )}
             >
               <span className="text-[15px] font-bold leading-snug tracking-tight sm:text-xl">
