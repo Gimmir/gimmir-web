@@ -149,6 +149,13 @@ export const operators = {
   objections: {
     title: "What operators ask first.",
     items: [
+      // the whole route in one quotable answer (AI search reads FAQs)
+      {
+        key: "move",
+        question: "How do we move off a rented platform?",
+        answer:
+          "Step by step. A free 20-minute cost check shows whether there's money to save, and a five-day Teardown puts it in writing. A three-week Migration Blueprint plans the build and the switch-over. Then we build your own app, back office and payments, and move sites in waves without interrupting billing. Typically four to six months from Blueprint to the last site.",
+      },
       {
         key: "members",
         question: "Will members get lost?",

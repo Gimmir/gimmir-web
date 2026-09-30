@@ -5,8 +5,9 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { JimmyCaseStudy } from "@/components/work/jimmy";
 import { StandardCaseStudy } from "@/components/work/standard";
 import { Un1tCaseStudy } from "@/components/work/un1t";
+import { jimmy } from "@/content/jimmy";
 import { caseSlugs, getCaseBySlug } from "@/lib/cases";
-import { breadcrumbs, caseStudyArticle } from "@/lib/schema";
+import { breadcrumbs, caseStudyArticle, faqPage } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -66,6 +67,7 @@ export default async function CaseStudyPage({
     return (
       <>
         {jsonLd}
+        <JsonLd data={faqPage([...jimmy.faq.items])!} />
         <JimmyCaseStudy data={data} />
       </>
     );

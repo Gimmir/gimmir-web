@@ -5,6 +5,7 @@ import { Panel } from "@/components/blocks/ui-fragment";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { BookTrigger } from "@/components/blocks/book-trigger";
+import { FaqSection } from "@/components/blocks/faq-section";
 import { Chaos } from "@/components/saas/chaos";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
@@ -508,6 +509,7 @@ export function JimmyCaseStudy({ data }: { data: CaseStudy }) {
       <Decisions />
       <Wrong />
       <Numbers data={data} />
+      <FaqSection title={jimmy.faq.title} items={jimmy.faq.items} />
       <Close />
     </article>
   );

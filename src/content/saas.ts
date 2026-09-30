@@ -140,6 +140,45 @@ export const saas = {
     ],
   },
 
+  // short, self-contained answers (approved by Nazar, 2026-10-01), also
+  // FAQPage. No price figures; The Review's fee credit stays unsaid until
+  // confirmed.
+  faq: {
+    title: "What founders ask first.",
+    items: [
+      {
+        key: "how",
+        question: "How do I turn my business into a SaaS?",
+        answer:
+          "Start from what already works: your clients, your process, the tools you've patched together. We begin with The Review, one to two weeks with Nazar and a written plan for what to build first. Then we build it milestone by milestone, in your name from the first commit, and keep it moving after launch.",
+      },
+      {
+        key: "own",
+        question: "Who owns the code?",
+        answer:
+          "You do. Code, repos and IP are in your name from the first commit, and the App Store, Stripe and cloud accounts are yours, not ours. Every milestone comes with a runbook, so any competent team could pick it up.",
+      },
+      {
+        key: "price",
+        question: "How is it priced?",
+        answer:
+          "A fixed price per milestone, agreed after The Review. No hourly billing.",
+      },
+      {
+        key: "fitness",
+        question: "Do you only build fitness products?",
+        answer:
+          "No. Fitness is where we go deepest: four of our nine products are in fitness. We build coaching apps, member apps, marketplaces and B2B SaaS. Wellness, yes; regulated clinical products, no.",
+      },
+      {
+        key: "cofounder",
+        question: "What if I don't have a technical co-founder?",
+        answer:
+          "That's where Quentin was, with 250+ clients. You bring the business and the audience; we bring the product and the engineering, and you work with the two founders who build it.",
+      },
+    ],
+  },
+
   // an honest filter (Nazar's pick o3, 2026-09-30): what passes, what
   // stops and why. DRAFT: lede, chips and advice, for Nazar to edit.
   notFor: {

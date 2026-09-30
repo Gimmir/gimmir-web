@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { FaqSection } from "@/components/blocks/faq-section";
 import { SaasClose } from "@/components/saas/close";
 import { SaasHero } from "@/components/saas/hero";
 import { SaasNotFor } from "@/components/saas/not-for";
@@ -7,7 +8,7 @@ import { SaasFit, SaasOwn, SaasStart } from "@/components/saas/sections";
 import { SaasStory } from "@/components/saas/story";
 import { JsonLd } from "@/components/seo/json-ld";
 import { saas } from "@/content/saas";
-import { breadcrumbs, serviceSchema } from "@/lib/schema";
+import { breadcrumbs, faqPage, serviceSchema } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -44,11 +45,13 @@ export default function BuildYourSaasPage() {
           path: "/build-your-saas",
         })}
       />
+      <JsonLd data={faqPage([...saas.faq.items])!} />
       <SaasHero />
       <SaasStory />
       <SaasFit />
       <SaasStart />
       <SaasOwn />
+      <FaqSection title={saas.faq.title} items={saas.faq.items} divided />
       <SaasNotFor />
       <SaasClose />
     </>

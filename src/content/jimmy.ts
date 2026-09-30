@@ -103,6 +103,26 @@ export const jimmy = {
     ],
   },
 
+  // the case in two quotable answers (approved by Nazar, 2026-10-01),
+  // also FAQPage
+  faq: {
+    title: "Jimmy Coach, in short.",
+    items: [
+      {
+        key: "what",
+        question: "What's in an online coaching app like Jimmy Coach?",
+        answer:
+          "Five things, done well: workouts, community, messaging, payments and courses. Clients train in one app for iOS and Android, coaches switch the same app into coach mode, and a web dashboard builds programs and tracks Stripe subscriptions and revenue. 200+ coaches were on it two months after launch.",
+      },
+      {
+        key: "who",
+        question: "Who built Jimmy Coach?",
+        answer:
+          "Nazar co-founded it with Quentin Randis, a Hyrox and CrossFit coach with 250+ clients, and paid for it himself instead of billing by the hour. Gimmir built it and co-owns it.",
+      },
+    ],
+  },
+
   close: {
     title: "Building your own SaaS?",
     line: "I've been through every cycle with Jimmy. Tell me what you're building.",
