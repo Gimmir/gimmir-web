@@ -64,7 +64,7 @@ export const operators = {
       items: ["Separate studios", "A rented platform", "No single data"],
     },
     after: {
-      label: "After",
+      label: "After, on software UN1T owns",
       items: ["One network", "Own app & back office", "One data model"],
     },
   },

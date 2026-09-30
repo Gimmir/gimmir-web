@@ -4,14 +4,14 @@ import { OutlineStat } from "@/components/blocks/outline-stat";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
-import { ArrowRight } from "@/components/ui/icons";
+import { ArrowRight, Check, X } from "@/components/ui/icons";
 import { home } from "@/content/home";
 import { operators } from "@/content/operators";
 
 /**
  * /operators ③, UN1T full-bleed on ink: the home's case (title, story,
  * the drawn "12") told a little longer for operators, then the network
- * before and after in one strip.
+ * before and after as two panels, the after one on lime.
  */
 export function OperatorsUn1t() {
   const c = home.un1t;
@@ -68,41 +68,56 @@ export function OperatorsUn1t() {
           </div>
         </div>
 
-        {/* the network, before and after */}
-        <div
-          className="fade mt-16 grid items-center gap-6 rounded-[28px] border border-line-dark p-6 md:mt-20 md:grid-cols-[1fr_auto_1fr] md:gap-8 md:p-8"
-          style={d(t + 300)}
-        >
-          <div>
-            <p className="text-[13px] font-semibold text-paper/50">
+        {/* the network, before and after: what they left, dashed and
+            crossed out, beside what they own now, on lime */}
+        <div className="mt-16 grid gap-3 md:mt-20 md:grid-cols-2 md:gap-4">
+          <div
+            className="fade flex flex-col rounded-[28px] border-[1.5px] border-dashed border-paper/20 p-6 sm:p-8 md:min-h-[320px]"
+            style={d(t + 300)}
+          >
+            <p className="text-sm font-semibold text-paper/50">
               {before.label}
             </p>
-            <ul className="mt-3 flex flex-wrap gap-2">
+            <ul className="mt-7 flex flex-col gap-3.5 md:mt-auto">
               {before.items.map((it) => (
                 <li
                   key={it}
-                  className="rounded-full border border-line-dark px-3.5 py-1.5 text-[15px] text-paper/60"
+                  className="display flex items-center gap-3.5 text-[clamp(1.5rem,0.8rem+1.8vw,2.6rem)] leading-[1.05] text-paper/40"
                 >
+                  <span
+                    aria-hidden
+                    className="flex size-[30px] shrink-0 items-center justify-center rounded-full border border-line-dark text-paper/50"
+                  >
+                    <X className="size-3" />
+                  </span>
                   {it}
                 </li>
               ))}
             </ul>
           </div>
-          <span
-            aria-hidden
-            className="flex size-11 items-center justify-center justify-self-start rounded-full bg-lime text-ink md:justify-self-center"
+          <div
+            className="fade relative flex flex-col overflow-hidden rounded-[28px] bg-lime p-6 text-ink sm:p-8 md:min-h-[320px]"
+            style={d(t + 420)}
           >
-            <ArrowRight className="size-5 rotate-90 md:rotate-0" />
-          </span>
-          <div>
-            <p className="text-[13px] font-semibold text-lime">{after.label}</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
+            <span
+              aria-hidden
+              className="display pointer-events-none absolute -right-3 -top-6 select-none text-[clamp(8rem,4rem+10vw,12.5rem)] leading-none text-transparent [-webkit-text-stroke:1.5px_rgb(21_20_14/0.22)]"
+            >
+              UN1T
+            </span>
+            <p className="relative text-sm font-semibold">{after.label}</p>
+            <ul className="relative mt-7 flex flex-col gap-3.5 md:mt-auto">
               {after.items.map((it) => (
                 <li
                   key={it}
-                  className="flex items-center gap-2 rounded-full bg-paper px-3.5 py-1.5 text-[15px] font-medium text-ink"
+                  className="display flex items-center gap-3.5 text-[clamp(1.5rem,0.8rem+1.8vw,2.6rem)] leading-[1.05]"
                 >
-                  <span className="size-1.5 rounded-full bg-lime ring-1 ring-ink/20" />
+                  <span
+                    aria-hidden
+                    className="flex size-[30px] shrink-0 items-center justify-center rounded-full bg-ink text-lime"
+                  >
+                    <Check className="size-3.5" />
+                  </span>
                   {it}
                 </li>
               ))}
