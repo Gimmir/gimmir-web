@@ -1,254 +1,263 @@
 import Image from "next/image";
-import Link from "next/link";
 
-import { FinalCtaPanel } from "@/components/shared/final-cta-panel";
-import { HeaderDark } from "@/components/site/header-theme";
+import { OutlineStat } from "@/components/blocks/outline-stat";
+import { Stage } from "@/components/motion/stage";
+import { RiseText, wordCount } from "@/components/motion/words";
+import { OperatorsClose } from "@/components/operators/close";
+import {
+  AppFragment,
+  DataFragment,
+  OfficeFragment,
+  PaymentsFragment,
+} from "@/components/operators/networks";
 import { Container } from "@/components/ui/container";
-import { CountUp } from "@/components/ui/count-up";
-import { ArrowRight } from "@/components/ui/icons";
-import { Reveal } from "@/components/ui/reveal";
-import { SectionHeader } from "@/components/ui/section-header";
 import { CaseBackLink, CaseQuote, QuickFacts } from "@/components/work/parts";
-import { BOOKINGS } from "@/lib/booking";
+import { un1t } from "@/content/un1t";
 import type { CaseStudy } from "@/lib/cases";
+import { cn } from "@/lib/cn";
 
-const dots =
-  "[background-image:radial-gradient(rgba(246,244,238,0.05)_1px,transparent_1.5px)] [background-size:22px_22px]";
+/* /work/un1t, V2 (doc 09 §3.5): the case in full, ink and paper taking
+   turns. Hero → the franchise → the problem → what we built (bento) →
+   the drawn 12 with the stack → Rob's words once approved → Nazar's
+   signed call. The bento draws its UI in code until the cleared product
+   screens arrive (content/un1t.ts `screens`). */
+
+const FRAGMENTS: Record<string, () => React.ReactNode> = {
+  app: AppFragment,
+  office: OfficeFragment,
+  payments: PaymentsFragment,
+  data: DataFragment,
+};
+
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+
+function Hero({ data }: { data: CaseStudy }) {
+  const { title, sub } = un1t.hero;
+  const after = wordCount(title) * 40 + 500;
+  return (
+    <Stage
+      as="section"
+      eager
+      data-tone="ink"
+      className="relative overflow-hidden bg-ink text-paper"
+    >
+      <Container className="grid gap-14 pb-20 pt-28 sm:pt-32 md:pb-28 md:pt-36 lg:min-h-[88svh] lg:grid-cols-12 lg:items-center lg:gap-10">
+        <div className="lg:col-span-7">
+          <div className="fade" style={d(0)}>
+            <CaseBackLink onDark />
+          </div>
+          <p
+            className="fade mt-10 flex flex-wrap items-center gap-3"
+            style={d(80)}
+          >
+            <Image
+              src={data.logo}
+              alt=""
+              width={44}
+              height={44}
+              priority
+              className="size-11 rounded-xl object-cover ring-1 ring-paper/15"
+            />
+            <span className="text-xl font-extrabold tracking-tight">
+              {data.name}
+            </span>
+            <span className="rounded-full border border-line-dark px-3 py-1 text-[13px] text-paper/70">
+              {data.tag}
+            </span>
+          </p>
+          <h1 className="display mt-8 max-w-[18ch] text-[clamp(2.4rem,1rem+4.6vw,5.5rem)] leading-[1.0]">
+            <RiseText text={title} />
+          </h1>
+          <p
+            className="fade mt-8 max-w-[56ch] text-lg leading-relaxed text-paper/70 md:text-xl"
+            style={d(after)}
+          >
+            {sub}
+          </p>
+        </div>
+        <div className="lg:col-span-5">
+          {un1t.screens.length > 0 ? (
+            <div
+              className="fade flex gap-4 overflow-x-auto"
+              style={d(after + 200)}
+            >
+              {un1t.screens.map((s) => (
+                <div
+                  key={s.src}
+                  className="relative aspect-[9/19.5] w-[44%] shrink-0 overflow-hidden rounded-[24px] ring-1 ring-paper/10 sm:w-[30%] lg:w-[48%]"
+                >
+                  <Image
+                    src={s.src}
+                    alt={s.alt}
+                    fill
+                    sizes="(min-width: 1024px) 260px, 44vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <OutlineStat
+              value={un1t.hero.stat.value}
+              label={un1t.hero.stat.label}
+              layout="wide"
+              delay={400}
+              className="mx-auto max-w-[520px] lg:mr-0"
+            />
+          )}
+        </div>
+      </Container>
+    </Stage>
+  );
+}
+
+function Context({ data }: { data: CaseStudy }) {
+  const { label, title, body } = un1t.context;
+  const after = wordCount(title) * 40 + 300;
+  return (
+    <Stage as="section" data-tone="paper">
+      <Container className="grid gap-x-10 gap-y-8 py-20 md:py-28 lg:grid-cols-12">
+        <p className="fade text-[15px] font-medium text-faint lg:col-span-3">
+          {label}
+        </p>
+        <div className="lg:col-span-9">
+          <h2 className="display text-[length:var(--text-display)] leading-[1.04]">
+            <RiseText text={title} />
+          </h2>
+          <p
+            className="fade mt-6 max-w-[56ch] text-lg leading-relaxed text-muted md:text-xl"
+            style={d(after)}
+          >
+            {body}
+          </p>
+          <div className="fade" style={d(after + 120)}>
+            <QuickFacts facts={data.facts} className="mt-12" />
+          </div>
+        </div>
+      </Container>
+    </Stage>
+  );
+}
+
+function Problem() {
+  const { label, title, body } = un1t.problem;
+  const after = wordCount(title) * 40 + 300;
+  return (
+    <Stage as="section" data-tone="ink" className="bg-ink text-paper">
+      <Container className="grid gap-x-10 gap-y-10 py-20 md:py-28 lg:grid-cols-12 lg:items-end">
+        <div className="lg:col-span-7">
+          <p className="fade text-[15px] font-medium text-paper/50">{label}</p>
+          <h2 className="display mt-6 max-w-[16ch] text-[length:var(--text-title)] leading-[1.02]">
+            <RiseText text={title} />
+          </h2>
+        </div>
+        <div className="flex flex-col gap-6 lg:col-span-5">
+          {body.map((p, i) => (
+            <p
+              key={i}
+              className="fade max-w-[46ch] text-lg leading-relaxed text-paper/70 md:text-xl"
+              style={d(after + i * 80)}
+            >
+              {p}
+            </p>
+          ))}
+        </div>
+      </Container>
+    </Stage>
+  );
+}
+
+function Built() {
+  const { label, title, cards } = un1t.built;
+  const after = wordCount(title) * 40 + 300;
+  return (
+    <Stage as="section" data-tone="paper">
+      <Container className="py-20 md:py-28">
+        <p className="fade text-[15px] font-medium text-faint">{label}</p>
+        <h2 className="display mt-6 max-w-[18ch] text-[length:var(--text-title)] leading-[1.02]">
+          <RiseText text={title} />
+        </h2>
+        <ul className="mt-12 grid gap-4 md:mt-16 md:grid-cols-2">
+          {cards.map((c, i) => {
+            const Ui = FRAGMENTS[c.id];
+            return (
+              <li
+                key={c.id}
+                className="fade flex flex-col rounded-[24px] bg-surface p-2 shadow-[0_1px_0_rgba(21,20,14,0.04),0_28px_56px_-36px_rgba(21,20,14,0.35)] ring-1 ring-line"
+                style={d(after + i * 80)}
+              >
+                <div
+                  aria-hidden
+                  className="flex min-h-[250px] flex-1 items-center justify-center overflow-hidden rounded-[18px] bg-paper-2 px-5 py-6"
+                >
+                  <Ui />
+                </div>
+                <div className="px-4 pb-4 pt-5 md:px-5">
+                  <h3 className="text-xl font-bold tracking-[-0.01em]">
+                    {c.title}
+                  </h3>
+                  <p className="mt-1.5 leading-relaxed text-muted">{c.body}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </Container>
+    </Stage>
+  );
+}
+
+function Result({ data }: { data: CaseStudy }) {
+  const { stat, line, stack } = un1t.result;
+  return (
+    <Stage as="section" data-tone="ink" className="bg-ink text-paper">
+      <Container className="grid gap-14 py-20 md:py-28 lg:grid-cols-12 lg:items-center lg:gap-10">
+        <div className="lg:col-span-7">
+          <OutlineStat
+            value={stat.value}
+            label={stat.label}
+            delay={200}
+            className="max-w-[600px]"
+          />
+        </div>
+        <div className="lg:col-span-5">
+          <p
+            className="fade font-serif text-2xl italic leading-snug md:text-[1.75rem]"
+            style={d(900)}
+          >
+            {line}
+          </p>
+          <ul className="fade mt-8 flex flex-wrap gap-2" style={d(1000)}>
+            {stack.map((t) => (
+              <li
+                key={t}
+                className="rounded-full border border-line-dark px-3.5 py-1.5 font-mono text-[13px] text-paper/80"
+              >
+                {t}
+              </li>
+            ))}
+          </ul>
+          <CaseQuote
+            quote={data.quote}
+            className={cn("mt-12 [&_blockquote]:text-paper")}
+          />
+        </div>
+      </Container>
+    </Stage>
+  );
+}
 
 export function Un1tCaseStudy({ data }: { data: CaseStudy }) {
   return (
     <article>
-      <HeaderDark />
-      {/* hero — dark, cinematic */}
-      <section className="relative overflow-hidden bg-ink text-paper">
-        <div
-          aria-hidden
-          className={`pointer-events-none absolute inset-0 ${dots}`}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-24 -top-28 size-[26rem] rounded-full bg-lime/20 blur-[130px]"
-        />
-
-        <Container className="relative pb-16 pt-28 sm:pt-32 md:pb-24 md:pt-36">
-          <Reveal eager>
-            <CaseBackLink onDark />
-          </Reveal>
-
-          <Reveal eager delay={40}>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Image
-                src={data.logo}
-                alt={`${data.name} logo`}
-                width={52}
-                height={52}
-                priority
-                className="size-[52px] rounded-xl border border-paper/15 object-cover"
-              />
-              <span className="text-2xl font-extrabold tracking-tight">
-                {data.name}
-              </span>
-              <span className="rounded-full border border-lime/40 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-lime">
-                {data.tag}
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal eager delay={80}>
-            <h1 className="display mt-9 text-[2.1rem] leading-[1.06] sm:text-hero sm:leading-[0.98]">
-              UN1T kept about $10k a month
-              <br />
-              <span className="text-lime">by owning their platform.</span>
-            </h1>
-          </Reveal>
-
-          <Reveal eager delay={120}>
-            <p className="mt-8 max-w-[54ch] text-lg leading-relaxed text-paper/70 md:text-xl">
-              {data.summary}
-            </p>
-          </Reveal>
-
-          <Reveal eager delay={160}>
-            <QuickFacts facts={data.facts} onDark className="mt-14" />
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* the challenge */}
-      <section className="border-t border-line py-20 md:py-28">
-        <Container>
-          <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:items-start md:gap-16">
-            <Reveal>
-              <SectionHeader
-                index="01"
-                titleMax="max-w-[12ch]"
-                title="The challenge."
-              />
-            </Reveal>
-            <Reveal delay={80}>
-              <div className="space-y-6 text-lg leading-relaxed text-muted md:text-xl">
-                <p>
-                  UN1T had grown to 10+ locations on a rented{" "}
-                  <strong className="font-semibold text-ink">
-                    white-label platform
-                  </strong>{" "}
-                  and a stack of third-party tools. Memberships sat in one
-                  place, bookings in another, payments somewhere else.
-                </p>
-                <p>
-                  As the franchise grew across locations, head office saw
-                  whatever each site sent over. Royalties came from reports,
-                  not from the payments themselves, and the software that ran
-                  the whole business was rented.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
-
-      {/* what we built */}
-      <section className="border-t border-line py-20 md:py-28">
-        <Container>
-          <Reveal>
-            <SectionHeader
-              index="02"
-              titleMax="max-w-[22ch]"
-              title="Their own app and back office, end to end."
-              intro="We built UN1T their own member app (iOS & Android), a back office for classes, memberships and staff across locations, and payments with fees and payouts modeled around a multi-location franchise. Everything in UN1T’s name from day one."
-            />
-          </Reveal>
-
-          <div className="mt-12 grid gap-5 sm:grid-cols-2">
-            {data.services.map((s, i) => (
-              <Reveal key={s} delay={(i % 2) * 70} className="h-full">
-                <div className="flex h-full items-center gap-4 rounded-2xl border border-line bg-surface p-7">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-lime font-mono text-sm font-bold text-ink">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-lg font-semibold tracking-tight">{s}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* how it works */}
-      <section className="border-t border-line py-20 md:py-28">
-        <Container>
-          <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:items-start md:gap-16">
-            <Reveal>
-              <SectionHeader
-                index="03"
-                titleMax="max-w-[14ch]"
-                title="One system. Every site."
-              />
-            </Reveal>
-            <Reveal delay={80}>
-              <div className="space-y-6 text-lg leading-relaxed text-muted md:text-xl">
-                <p>
-                  In 12 weeks we built two products connected into one system: a
-                  member app for iOS and Android, with Apple Health and Health
-                  Connect built in, and a CRM that franchisees run their whole
-                  business on.
-                </p>
-                <p>
-                  Every member books classes, buys memberships and pays
-                  through the app. So{" "}
-                  <strong className="font-semibold text-ink">
-                    head office knows every member at every site
-                  </strong>
-                  , and royalties are calculated from what members actually
-                  paid. No spreadsheets, no end-of-month reports.
-                </p>
-                <p>UN1T owns the code, the data and the roadmap.</p>
-                <ul className="flex flex-wrap gap-2.5 pt-2">
-                  {["React Native (Expo)", "TypeScript", "Supabase", "Apple Health", "Health Connect"].map(
-                    (t) => (
-                      <li
-                        key={t}
-                        className="rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-sm text-ink"
-                      >
-                        {t}
-                      </li>
-                    ),
-                  )}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-        </Container>
-      </section>
-
-      {/* the result — dark band */}
-      <section className="border-t border-line py-20 md:py-28">
-        <Container>
-          <Reveal>
-            <div className="relative overflow-hidden rounded-[28px] bg-ink p-8 text-paper sm:p-10 md:p-14">
-              <div
-                aria-hidden
-                className={`pointer-events-none absolute inset-0 ${dots}`}
-              />
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -right-20 -top-24 size-80 rounded-full bg-lime/20 blur-[110px]"
-              />
-              <p className="relative font-mono text-sm uppercase tracking-widest text-lime">
-                The result
-              </p>
-              <div className="relative mt-8 grid gap-10 sm:grid-cols-2 md:gap-14">
-                {data.stats.map((s, i) => (
-                  <div key={i}>
-                    <div
-                      className={`display text-[clamp(3rem,7vw,4.5rem)] leading-none ${
-                        s.lime ? "text-lime" : "text-paper"
-                      }`}
-                    >
-                      {typeof s.value === "number" ? (
-                        <CountUp value={s.value} suffix={s.suffix} />
-                      ) : (
-                        s.text
-                      )}
-                    </div>
-                    <p className="mt-3 max-w-[26ch] leading-relaxed text-paper/70">
-                      {s.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <p className="relative mt-10 max-w-[60ch] text-lg leading-relaxed text-paper/75">
-                About $10k a month in platform and payment fees now stays
-                inside the business. UN1T owns their app, their data and their
-                member relationship.
-              </p>
-            </div>
-          </Reveal>
-
-          {data.quote ? (
-            <Reveal>
-              <CaseQuote quote={data.quote} className="mt-12" />
-            </Reveal>
-          ) : null}
-
-          <Reveal>
-            <Link
-              href="/operators"
-              className="group mt-8 inline-flex items-center gap-2 text-lg font-semibold text-ink"
-            >
-              Run 8+ locations? See your own number
-              <ArrowRight className="size-[18px] transition-transform duration-200 group-hover:translate-x-0.5" />
-            </Link>
-          </Reveal>
-        </Container>
-      </section>
-
-      <FinalCtaPanel
-        eyebrow="Platform cost check"
-        title="What would owning your platform keep in your business?"
-        intro={`${BOOKINGS.costCheck.minutes} minutes with Nazar. Bring your last platform invoice and processing statement, and you leave with your number.`}
-        bookings={["costCheck"]}
-      />
+      <Hero data={data} />
+      <Context data={data} />
+      <Problem />
+      <Built />
+      <Result data={data} />
+      <div className="pt-20 md:pt-28">
+        <OperatorsClose />
+      </div>
     </article>
   );
 }

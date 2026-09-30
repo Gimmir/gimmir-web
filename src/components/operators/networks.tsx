@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 /* Slices of the platform a network runs on, drawn in code. Sites are
    numbered, never named; nothing here is a real client's data. */
 
-function AppFragment() {
+export function AppFragment() {
   const classes: [string, string, "book" | "booked" | "wait"][] = [
     ["HIIT", "07:00", "booked"],
     ["Strength", "12:30", "book"],
@@ -53,7 +53,7 @@ function AppFragment() {
   );
 }
 
-function OfficeFragment() {
+export function OfficeFragment() {
   const sites = [0.82, 0.64, 0.9, 0.55];
   return (
     <Panel className="w-full max-w-[380px]">
@@ -85,7 +85,7 @@ function OfficeFragment() {
   );
 }
 
-function PaymentsFragment() {
+export function PaymentsFragment() {
   const rows: [string, string, string][] = [
     ["Membership", "Site 02", "Paid"],
     ["Payout", "Site 01", "Sent"],
@@ -116,7 +116,7 @@ function PaymentsFragment() {
   );
 }
 
-function DataFragment() {
+export function DataFragment() {
   return (
     <Panel className="w-full max-w-[320px] p-4">
       <div className="flex items-center gap-3">
