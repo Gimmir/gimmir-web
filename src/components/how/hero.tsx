@@ -139,7 +139,8 @@ export function HowHero() {
             </h1>
             <p
               className="fade mt-7 max-w-[26ch] font-serif text-[clamp(1.3rem,1rem+0.8vw,1.75rem)] italic leading-snug text-muted"
-              style={at(words + 250)}
+              // with the headline (on a phone it's the largest text)
+              style={at(150)}
             >
               {lede}
             </p>

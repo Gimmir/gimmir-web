@@ -70,7 +70,9 @@ function Hero({ data }: { data: CaseStudy }) {
           </h1>
           <p
             className="fade mt-8 max-w-[56ch] text-lg leading-relaxed text-paper/70 md:text-xl"
-            style={d(after)}
+            // with the headline, not after it: on a phone this is the
+            // largest thing on screen, and it counts as loaded once it shows
+            style={d(150)}
           >
             {sub}
           </p>

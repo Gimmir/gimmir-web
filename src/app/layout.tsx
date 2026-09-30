@@ -20,11 +20,15 @@ const archivo = Archivo({
   display: "swap",
 });
 
+// Only Archivo is preloaded: on a slow phone the five preloads shared the
+// line and Archivo landed after first paint, reflowing every headline (the
+// fallback can't set the wide stretch). The serif is only ever italic.
 const newsreader = Newsreader({
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  style: ["italic"],
   variable: "--font-newsreader",
   display: "swap",
+  preload: false,
 });
 
 const spaceMono = Space_Mono({
@@ -32,6 +36,7 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
   variable: "--font-mono-ui",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
