@@ -34,15 +34,17 @@ export const saas = {
   story: {
     label: "How Jimmy Coach started",
     title: "We did it for ourselves first.",
+    // the promise the three numbers prove
+    sub: "So when we build yours, we build it like owners, not by the hour.",
     items: [
       {
         value: "250+",
-        line: "clients Quentin was coaching across WhatsApp, spreadsheets and PDFs.",
+        line: "clients, and Quentin was running them all on WhatsApp, spreadsheets and PDFs.",
         tag: "01 · The request",
       },
       {
         value: "1",
-        line: "app Nazar built with him, paid for himself and co-owns.",
+        line: "SaaS we built as his co-founders, on Nazar's own money. No invoice, all the risk.",
         tag: "02 · The bet",
       },
       {
