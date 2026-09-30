@@ -7,9 +7,15 @@ import type { FounderId } from "@/lib/founders";
 
 export type NavItem = { label: string; href: string; ready?: boolean };
 
+// Each buyer's way in comes first (Nazar's call, 2026-09-30, beyond doc
+// 09's nav); an item shows once its V2 page exists.
 export const NAV: NavItem[] = [
+  { label: "For fitness brands", href: "/operators" },
+  // once /build-your-saas is built (P1)
+  { label: "For SaaS founders", href: "/build-your-saas", ready: false },
   { label: "Work", href: "/work" },
-  { label: "What we build", href: "/what-we-build" },
+  // once its V2 page is built (P2)
+  { label: "What we build", href: "/what-we-build", ready: false },
   { label: "How we work", href: "/how-we-work" },
   // shows once the first posts are in (P2)
   { label: "Build log", href: "/build-log", ready: false },
@@ -64,7 +70,8 @@ export const FOOTER = {
       title: "For",
       links: [
         { label: "Fitness brands", href: "/operators" },
-        { label: "SaaS founders", href: "/build-your-saas" },
+        // the SaaS door on /contact until /build-your-saas exists (P1)
+        { label: "SaaS founders", href: "/contact#founders" },
       ],
     },
   ],
