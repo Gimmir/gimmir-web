@@ -54,6 +54,10 @@ export const metadata: Metadata = {
     path: "/",
     image: "/opengraph-image",
   }),
+  // Search Console ownership (Nazar's property, 2026-09-30)
+  verification: {
+    google: "lSElBP7s1KuJxk0w9ZIeRnYoWn_9VlorG0Og7ojrWVc",
+  },
 };
 
 export default async function RootLayout({
