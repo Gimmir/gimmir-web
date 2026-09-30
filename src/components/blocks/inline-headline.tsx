@@ -22,7 +22,7 @@ export type HeadlineToken =
   | string
   | { faces: readonly FounderId[] }
   | { apps: readonly AppId[] }
-  | { tile: "lock" | "app" }
+  | { tile: "lock" }
   | { mark: string; after?: string };
 
 /**
@@ -135,12 +135,11 @@ function AppIcons({ ids }: { ids: readonly AppId[] }) {
 }
 
 /**
- * A thing drawn on a small paper tile in the site's thin line, tilted like
- * the app icons: a padlock for a rented platform, a grid of app squares
- * (one lime) for "your own app". No product is ever named, and it's
- * decoration, so the heading reads as plain words.
+ * A rented thing, drawn: a small paper tile with a padlock in the site's
+ * thin line, tilted like the app icons. No platform is ever named, and
+ * it's decoration, so the heading reads as plain words.
  */
-function Tile({ kind }: { kind: "lock" | "app" }) {
+function LockTile() {
   return (
     <span
       aria-hidden
@@ -156,28 +155,10 @@ function Tile({ kind }: { kind: "lock" | "app" }) {
           strokeLinejoin="round"
           className="size-[0.56em] text-ink"
         >
-          {kind === "lock" ? (
-            <>
-              <path d="M35 46V34a15 15 0 0 1 30 0v12" />
-              <path d="M30 46h40a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V52a6 6 0 0 1 6-6Z" />
-              <circle cx="50" cy="61" r="4" />
-              <path d="M50 65v8" />
-            </>
-          ) : (
-            <>
-              <rect x="22" y="22" width="24" height="24" rx="7" />
-              <rect x="54" y="22" width="24" height="24" rx="7" />
-              <rect x="22" y="54" width="24" height="24" rx="7" />
-              <rect
-                x="54"
-                y="54"
-                width="24"
-                height="24"
-                rx="7"
-                fill="var(--color-lime)"
-              />
-            </>
-          )}
+          <path d="M35 46V34a15 15 0 0 1 30 0v12" />
+          <path d="M30 46h40a6 6 0 0 1 6 6v28a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6V52a6 6 0 0 1 6-6Z" />
+          <circle cx="50" cy="61" r="4" />
+          <path d="M50 65v8" />
         </svg>
       </span>
     </span>
@@ -280,7 +261,7 @@ export function InlineHeadline({
             ) : "apps" in t ? (
               <AppIcons ids={t.apps} />
             ) : (
-              <Tile kind={t.tile} />
+              <LockTile />
             )}
           </RiseWord>
           {nextWord ? (

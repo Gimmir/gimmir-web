@@ -7,15 +7,15 @@ import { Stage } from "@/components/motion/stage";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import { saas } from "@/content/saas";
-import { SaasHeroFlip } from "./hero-flip";
+import { SaasHeroBlueprint } from "./hero-blueprint";
 import { FOUNDERS } from "@/lib/founders";
 import { cn } from "@/lib/cn";
 
 /**
- * /build-your-saas ①: the claim as a sentence with a drawn app tile in
- * it, "ourselves" marked, one call signed with Oleh's and Nazar's faces;
- * beside it, the business folding from its tools into its own SaaS
- * (SaasHeroFlip), the way /operators draws rented → yours.
+ * /build-your-saas ①: the claim as a sentence with the product we built
+ * for ourselves inside it (the Jimmy icon), "ourselves" marked, one call
+ * signed with Oleh's and Nazar's faces; beside it, the plan of the SaaS
+ * they'd own, drawn on a grid (SaasHeroBlueprint).
  */
 export function SaasHero() {
   const { headline, sub, cta } = saas.hero;
@@ -75,7 +75,7 @@ export function SaasHero() {
         </div>
 
         <div className="lg:col-span-5">
-          <SaasHeroFlip delay={900} />
+          <SaasHeroBlueprint delay={900} />
         </div>
       </Container>
     </Stage>
