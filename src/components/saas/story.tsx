@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { withMentions } from "@/components/blocks/mention";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
@@ -117,7 +118,7 @@ export function SaasStory() {
                 style={at(start(i) + 650)}
               >
                 <span className="sr-only">{it.value} </span>
-                {it.line}
+                {withMentions(it.line, { onDark: true })}
               </p>
               <p
                 className="fade mt-3 font-mono text-[12px] uppercase tracking-[0.04em] text-paper/45"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { withMentions } from "@/components/blocks/mention";
 import { Check, Panel } from "@/components/blocks/ui-fragment";
 import { RepoFragment } from "@/components/home/what-you-get";
 import { Stage } from "@/components/motion/stage";
@@ -61,7 +62,7 @@ export function SaasFit() {
                     {it.line}
                   </p>
                   <p className="mt-auto border-t border-line pt-4 font-serif text-lg italic leading-snug text-muted">
-                    {it.answer}
+                    {withMentions(it.answer)}
                   </p>
                 </div>
               </li>

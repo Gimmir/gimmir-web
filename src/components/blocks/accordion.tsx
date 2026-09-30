@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 
+import { withMentions } from "@/components/blocks/mention";
 import { Plus } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 
@@ -63,6 +64,8 @@ export function Accordion({
               id={panel}
               role="region"
               aria-labelledby={trigger}
+              // a closed answer keeps its links out of the tab order
+              inert={!isOpen}
               className={cn(
                 "grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(.23,1,.32,1)] motion-reduce:transition-none",
                 isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
@@ -70,7 +73,7 @@ export function Accordion({
             >
               <div className="overflow-hidden">
                 <p className="max-w-[62ch] pb-7 text-lg leading-relaxed text-muted">
-                  {item.answer}
+                  {withMentions(item.answer)}
                 </p>
               </div>
             </div>

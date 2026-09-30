@@ -5,6 +5,7 @@ import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { BookTrigger } from "@/components/blocks/book-trigger";
 import { FaqSection } from "@/components/blocks/faq-section";
+import { withMentions } from "@/components/blocks/mention";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import {
@@ -167,7 +168,7 @@ function Origin() {
             className="fade max-w-[46ch] text-lg leading-relaxed text-paper/70 md:text-xl lg:col-span-5"
             style={d(after)}
           >
-            {body}
+            {withMentions(body, { onDark: true })}
           </p>
         </div>
         <div className="mt-12 grid max-w-[1000px] gap-4 md:mt-16 md:grid-cols-2">
@@ -205,7 +206,7 @@ function Invest() {
             className="fade mt-8 max-w-[48ch] text-lg leading-relaxed text-muted md:text-xl"
             style={d(after)}
           >
-            {body}
+            {withMentions(body)}
           </p>
         </div>
         <figure className="fade self-end lg:col-span-5" style={d(after + 150)}>
