@@ -37,7 +37,11 @@ export const home = {
       "Fitness is where we go deepest.",
     ] satisfies HeadlineToken[],
     doors: [
-      { id: "operators", label: "I run a fitness brand", href: "/operators" },
+      {
+        id: "operators",
+        label: "I run a franchise or a chain",
+        href: "/operators",
+      },
       { id: "saas", label: "I’m building a SaaS", href: "/build-your-saas" },
     ],
     note: { quote: "Book a call with us, not a sales rep.", by: "nazar" },
@@ -208,7 +212,7 @@ export const home = {
         line: "I'm the one who pressure-tests your product thinking and your plan.",
         cta: {
           label: "Talk to Nazar",
-          note: "fitness brands",
+          note: "brands",
           booking: "costCheck",
         },
       },

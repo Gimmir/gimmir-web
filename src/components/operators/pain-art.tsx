@@ -213,8 +213,8 @@ export function SilosArt({ d }: { d: number }) {
 /** 03: three studios, one app; yours is the one on the right. */
 export function SameAppArt({ d }: { d: number }) {
   const phones = [
-    { x: 18, label: "Studio A" },
-    { x: 121, label: "Studio B" },
+    { x: 18, label: "Site A" },
+    { x: 121, label: "Site B" },
     { x: 224, label: "Yours", you: true },
   ];
 

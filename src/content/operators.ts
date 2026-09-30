@@ -1,14 +1,15 @@
 /**
- * /operators, V2 (doc 09 §3.2): fitness brands and franchisors, in Nazar's
+ * /operators, V2 (doc 09 §3.2): brands with 8+ locations, franchises and
+ * chains (fitness first, UN1T the proof; Nazar widened it 2026-09-30), in Nazar's
  * voice. No prices, no $ figures; UN1T proof is 12 weeks and 10+
  * locations. Lines marked DRAFT are new wording for Nazar to confirm;
  * everything else is copy the site already carries.
  */
 export const operators = {
   meta: {
-    title: "Own Your Gym App: for Operators with 8+ Sites",
+    title: "Own Your Platform: for Franchises and Chains with 8+ Sites",
     description:
-      "Operators with 8+ locations: move off a rented white-label booking platform onto your own gym app, back office and payments, planned step by step with Nazar.",
+      "Franchises and chains with 8+ locations, from gyms and studios up: move off a rented white-label platform onto your own member app, back office and payments, planned step by step with Nazar.",
   },
 
   hero: {
@@ -19,7 +20,7 @@ export const operators = {
       "you rent. Let’s make it",
       { mark: "yours." },
     ],
-    sub: "For fitness brands and franchisors with 8+ locations.",
+    sub: "For franchises and chains with 8+ locations.",
     cta: {
       label: "Book a platform check",
       by: "Free, 20 minutes, with Nazar",
@@ -38,13 +39,13 @@ export const operators = {
       },
       {
         id: "silos",
-        title: "Every studio on its own, no one view of the network.",
+        title: "Every site on its own, no one view of the network.",
         body: "Memberships, bookings and payments sit in separate tools, and head office sees what each site sends.",
       },
       {
         id: "same",
         title: "An app that looks like everyone’s.",
-        body: "Your members get the same experience as every other studio on the platform, and it changes when the vendor decides.",
+        body: "Your members get the same experience as every other brand on the platform, and it changes when the vendor decides.",
       },
     ],
     check: {

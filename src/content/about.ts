@@ -66,7 +66,7 @@ export const about = {
         label: "Leads",
         nazar: {
           b: "The Review",
-          rest: ", and the first call with fitness brands.",
+          rest: ", and the first call with brands.",
         },
         oleh: { b: "The build", rest: ", from the first commit to launch." },
       },

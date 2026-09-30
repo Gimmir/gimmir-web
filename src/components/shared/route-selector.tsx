@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
 const ROUTES = [
   {
     href: "/operators",
-    title: "I run a fitness business (8+ locations)",
+    title: "I run a franchise or a chain (8+ locations)",
     body: "You’re renting a booking platform and the fees keep climbing. We move you onto your own app.",
     dark: true,
   },

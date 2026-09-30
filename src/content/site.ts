@@ -8,10 +8,11 @@ import type { FounderId } from "@/lib/founders";
 export type NavItem = { label: string; href: string; ready?: boolean };
 
 // Each buyer's way in comes first (Nazar's call, 2026-09-30, beyond doc
-// 09's nav); an item shows once its V2 page exists.
+// 09's nav), named broadly: brands (franchises and chains, fitness first)
+// and founders; an item shows once its V2 page exists.
 export const NAV: NavItem[] = [
-  { label: "For fitness brands", href: "/operators" },
-  { label: "For SaaS founders", href: "/build-your-saas" },
+  { label: "For brands", href: "/operators" },
+  { label: "For founders", href: "/build-your-saas" },
   { label: "Work", href: "/work" },
   // once its V2 page is built (P2)
   { label: "What we build", href: "/what-we-build", ready: false },
@@ -34,7 +35,7 @@ export const BOOK_DOORS: BookDoor[] = [
   {
     id: "operators",
     booking: "costCheck",
-    title: "I run a fitness brand",
+    title: "I run a franchise or a chain",
     detail: "A 20-minute platform check with Nazar",
     faces: ["nazar"],
   },
@@ -54,7 +55,7 @@ export const FOOTER = {
   // Nazar's pick; the home page already says "Your business runs on
   // software. You should own it.", so the footer must not repeat it.
   // The second part gets the lime marker.
-  headline: ["Fitness platforms your members love,", "and you actually own."],
+  headline: ["Platforms your members love,", "and you actually own."],
   columns: [
     {
       title: "Site",
@@ -69,8 +70,8 @@ export const FOOTER = {
     {
       title: "For",
       links: [
-        { label: "Fitness brands", href: "/operators" },
-        { label: "SaaS founders", href: "/build-your-saas" },
+        { label: "Brands", href: "/operators" },
+        { label: "Founders", href: "/build-your-saas" },
       ],
     },
   ],
