@@ -5,7 +5,7 @@ import { RepoFragment } from "@/components/home/what-you-get";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
-import { ArrowRight, X } from "@/components/ui/icons";
+import { X } from "@/components/ui/icons";
 import { saas } from "@/content/saas";
 import { AudienceArt, PatchArt, ShelfArt } from "./fit-art";
 import { FOUNDERS } from "@/lib/founders";
@@ -72,10 +72,19 @@ export function SaasFit() {
   );
 }
 
-/** ④ `#diagnostic`: The Review first (Oleh's), then a sprint or V1, then Care. */
+/**
+ * ④ `#diagnostic`: The Review first (Oleh's), then a sprint or V1, then
+ * Care, as three big steps. Each row's rule draws in, then its outline
+ * number draws itself (the first in lime, where it starts), then the words.
+ */
 export function SaasStart() {
-  const { id, title, steps } = saas.start;
+  const { id, title, lede, steps } = saas.start;
   const after = wordCount(title) * 40 + 300;
+  const at = (ms: number, dur?: number) =>
+    ({
+      "--d": `${ms}ms`,
+      ...(dur ? { "--dur": `${dur}ms` } : {}),
+    }) as React.CSSProperties;
   return (
     <Stage
       as="section"
@@ -84,59 +93,94 @@ export function SaasStart() {
       className="scroll-mt-20 bg-ink text-paper"
     >
       <Container className="py-20 md:py-28">
-        <h2 className="display text-[length:var(--text-title)] leading-[1.02]">
-          <RiseText text={title} />
-        </h2>
-        <ol className="mt-12 grid gap-4 md:mt-16 md:grid-cols-3">
-          {steps.map((s, i) => (
-            <li
-              key={s.name}
-              className="fade relative flex flex-col rounded-[24px] bg-ink-soft p-6 ring-1 ring-line-dark md:p-7"
-              style={d(after + i * 110)}
-            >
-              <div className="flex items-center justify-between">
-                <span
-                  className={cn(
-                    "flex size-9 items-center justify-center rounded-full text-[13px] font-semibold",
-                    i === 0
-                      ? "bg-lime text-ink"
-                      : "border border-paper/40 text-paper",
-                  )}
-                >
-                  {i + 1}
-                </span>
-                {"lead" in s && (
-                  <span className="flex items-center gap-2 text-[13px] text-paper/60">
-                    <span className="relative size-7 overflow-hidden rounded-full ring-2 ring-ink-soft">
-                      <Image
-                        src={FOUNDERS[s.lead].photo}
-                        alt=""
-                        fill
-                        sizes="56px"
-                        className="object-cover object-top"
-                      />
-                    </span>
-                    Led by {FOUNDERS[s.lead].first}
-                  </span>
-                )}
-              </div>
-              <h3 className="mt-8 text-2xl font-bold tracking-[-0.01em]">
-                {s.name}
-              </h3>
-              <p className="mt-2 w-fit rounded-full border border-line-dark px-2.5 py-1 text-[13px] text-paper/70">
-                {s.time}
-              </p>
-              <p className="mt-4 leading-relaxed text-paper/70">{s.body}</p>
-              {i < steps.length - 1 && (
+        <div className="grid gap-5 md:grid-cols-2 md:items-end md:gap-8">
+          <h2 className="display text-[length:var(--text-title)] leading-[1.02]">
+            <RiseText text={title} />
+          </h2>
+          <p
+            className="fade font-serif text-2xl italic leading-snug text-paper/70 md:text-[1.75rem]"
+            style={at(after - 200)}
+          >
+            {lede}
+          </p>
+        </div>
+
+        <ol className="mt-12 md:mt-16">
+          {steps.map((s, i) => {
+            const t = after + i * 220;
+            return (
+              <li
+                key={s.name}
+                className="relative grid gap-4 py-8 md:grid-cols-[9rem_1.1fr_1fr] md:gap-8 md:py-10"
+              >
                 <span
                   aria-hidden
-                  className="absolute -right-[18px] top-1/2 z-10 hidden size-8 -translate-y-1/2 items-center justify-center rounded-full bg-ink text-paper ring-1 ring-line-dark md:flex"
+                  className="wipe absolute inset-x-0 top-0 h-px bg-line-dark"
+                  style={at(t, 900)}
+                />
+                {/* the step number, an outline that draws itself */}
+                <svg
+                  aria-hidden
+                  viewBox="0 0 140 171"
+                  className="h-[clamp(5rem,3.2rem+4vw,9rem)] w-auto overflow-visible"
                 >
-                  <ArrowRight className="size-3.5" />
-                </span>
-              )}
-            </li>
-          ))}
+                  <text
+                    x={4}
+                    y={158}
+                    fill="none"
+                    stroke={
+                      i === 0 ? "var(--color-lime)" : "var(--color-paper)"
+                    }
+                    strokeWidth={1.8}
+                    strokeLinejoin="round"
+                    className="draw-text display"
+                    style={{
+                      ...at(t + 100, 1100),
+                      ["--len" as string]: 900,
+                      fontSize: 190,
+                    }}
+                  >
+                    {i + 1}
+                  </text>
+                </svg>
+                <div className="fade" style={at(t + 300)}>
+                  <h3 className="display text-[clamp(2rem,1rem+2.2vw,3.25rem)] leading-none">
+                    {s.name}
+                  </h3>
+                  <div className="mt-4 flex flex-wrap items-center gap-3">
+                    <span className="rounded-full border border-line-dark px-3 py-1 text-[13px] text-paper/70">
+                      {s.time}
+                    </span>
+                    {"lead" in s && (
+                      <span className="flex items-center gap-2 text-[13px] text-paper/70">
+                        <span className="relative size-7 overflow-hidden rounded-full">
+                          <Image
+                            src={FOUNDERS[s.lead].photo}
+                            alt=""
+                            fill
+                            sizes="56px"
+                            className="object-cover object-top"
+                          />
+                        </span>
+                        Led by {FOUNDERS[s.lead].first}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="fade" style={at(t + 450)}>
+                  <p className="text-[clamp(1.15rem,1rem+0.4vw,1.4rem)] leading-[1.35] text-paper/75">
+                    {s.body}
+                  </p>
+                  <p className="mt-3 text-[15px] text-paper/50">
+                    <span className="mr-2 font-mono text-[11px] uppercase tracking-[0.04em]">
+                      You get
+                    </span>
+                    {s.gets}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </Container>
     </Stage>

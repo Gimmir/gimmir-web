@@ -82,25 +82,31 @@ export const saas = {
     ],
   },
 
+  // three big steps (Nazar's pick o3, 2026-09-30). DRAFT: lede and the
+  // "You get" lines, for Nazar to edit.
   start: {
     id: "diagnostic",
     title: "How we start.",
+    lede: "Every project starts the same way.",
     steps: [
       {
         name: "The Review",
         time: "1–2 weeks",
         lead: "oleh",
-        body: "A diagnostic led by Oleh: architecture, code and plan, with a written report.",
+        body: "A diagnostic of your architecture, code and plan, with a written report.",
+        gets: "a report you can hand to your team or your board.",
       },
       {
         name: "Fix Sprint or V1",
         time: "2 weeks, or by milestone",
         body: "We fix the highest-risk issues ourselves, or build the real thing in your name.",
+        gets: "code and accounts in your name from the first commit.",
       },
       {
         name: "Care",
         time: "Monthly",
-        body: "Ongoing build and maintenance once you're live.",
+        body: "Ongoing build and maintenance once you’re live.",
+        gets: "a product that keeps moving after launch.",
       },
     ],
   },
