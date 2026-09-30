@@ -18,74 +18,80 @@ const LINE = {
   strokeLinejoin: "round",
 } as const;
 
-/* The box, in a 420 × 340 plan: two front faces, the opening (light
-   inside: nothing dark in there), and two flaps folded back. Each face is
-   a fill that settles in plus an outline that draws. */
-const FACES: [d: string, fill: string][] = [
-  ["M90 170 210 230 210 330 90 290Z", "var(--color-surface)"],
-  ["M210 230 330 170 330 290 210 330Z", "var(--color-surface)"],
-  ["M90 170 210 110 330 170 210 230Z", "var(--color-paper-2)"],
+/* The box, in a 420 × 340 plan. Painted back to front: the two flaps
+   folded back, the opening (light inside: nothing dark in there), the
+   cards standing in it, then the two front faces, which hide the cards'
+   lower halves so they sit inside the box with their tops out. Each face
+   is a fill that settles in plus an outline that draws. */
+type Face = [d: string, fill: string];
+const BACK: Face[] = [
   ["M90 170 40 120 160 60 210 110Z", "var(--color-paper-2)"],
   ["M330 170 380 120 260 60 210 110Z", "var(--color-paper-2)"],
+  ["M90 170 210 110 330 170 210 230Z", "var(--color-paper-2)"],
+];
+const FRONT: Face[] = [
+  ["M90 170 210 230 210 330 90 290Z", "var(--color-surface)"],
+  ["M210 230 330 170 330 290 210 330Z", "var(--color-surface)"],
 ];
 
-// what flies out, where it lands (centre x, top y); the last one is lime
-const OUT: [x: number, y: number][] = [
-  [150, 56],
-  [230, 30],
-  [186, 4],
-  [300, 70],
-];
+// where each card stands (centre x, top y), keyed by label; drawn from
+// the back row to the front, and the code is the lime one
+const CARD_W = 72;
+const CARD_H = 100;
+const SPOTS: Record<string, [x: number, y: number]> = {
+  Price: [245, 80],
+  Docs: [175, 88],
+  Code: [280, 112],
+  Plan: [140, 118],
+};
+
+function Faces({ faces, delay }: { faces: Face[]; delay: number }) {
+  return faces.map(([d, fill], i) => (
+    <g key={d}>
+      <path
+        d={d}
+        fill={fill}
+        className="fade"
+        style={at(delay + 300 + i * 80)}
+      />
+      <path
+        d={d}
+        pathLength={1}
+        {...LINE}
+        className="draw"
+        style={at(delay + i * 120, 800)}
+      />
+    </g>
+  ));
+}
 
 function OpenBox({ delay }: { delay: number }) {
   const { contents } = how.hero;
+  const cards = [...contents].sort((a, b) => SPOTS[a][1] - SPOTS[b][1]);
   return (
     <svg
       aria-hidden
-      viewBox="0 0 420 340"
+      viewBox="0 30 420 310"
       className="mx-auto h-auto w-full max-w-[460px] overflow-visible"
     >
-      {FACES.map(([d, fill], i) => (
-        <g key={d}>
-          <path
-            d={d}
-            fill={fill}
-            className="fade"
-            style={at(delay + 300 + i * 80)}
-          />
-          <path
-            d={d}
-            pathLength={1}
-            {...LINE}
-            className="draw"
-            style={at(delay + i * 120, 800)}
-          />
-        </g>
-      ))}
-      {contents.map((label, i) => {
-        const [x, y] = OUT[i];
-        const lime = i === contents.length - 1;
-        const t = delay + 1000 + i * 140;
+      <Faces faces={BACK} delay={delay} />
+      {cards.map((label, i) => {
+        const [x, y] = SPOTS[label];
+        const lime = label === "Code";
         return (
-          <g key={label} className="fade" style={at(t)}>
-            <path
-              d={`M${x} ${y + 28}V${y + 46}`}
-              {...LINE}
-              strokeWidth={1.2}
-              strokeDasharray="3 4"
-            />
+          <g key={label} className="fade" style={at(delay + 900 + i * 140)}>
             <rect
-              x={x - 34}
+              x={x - CARD_W / 2}
               y={y}
-              width={68}
-              height={28}
-              rx={14}
+              width={CARD_W}
+              height={CARD_H}
+              rx={10}
               {...LINE}
               fill={lime ? "var(--color-lime)" : "var(--color-surface)"}
             />
             <text
               x={x}
-              y={y + 18.5}
+              y={y + 22}
               textAnchor="middle"
               className="font-sans"
               fontSize={12.5}
@@ -94,17 +100,25 @@ function OpenBox({ delay }: { delay: number }) {
             >
               {label}
             </text>
+            {/* a couple of lines, so it reads as something written */}
+            <path
+              d={`M${x - 20} ${y + 36}h40M${x - 20} ${y + 45}h28`}
+              {...LINE}
+              strokeWidth={1.2}
+              strokeOpacity={0.35}
+            />
           </g>
         );
       })}
+      <Faces faces={FRONT} delay={delay + 240} />
     </svg>
   );
 }
 
 /**
  * /how-we-work ①, Nazar's pick o1: "No black box." beside a box drawn
- * open, with the plan, the price, the docs and the code (lime) coming out
- * of it; under them, how a build runs in five steps, each with what you
+ * open, with the plan, the price, the docs and the code (lime) standing
+ * in it in plain sight; under them, how a build runs in five steps, each with what you
  * get to see at that step. On a phone the steps run down a line.
  */
 export function HowHero() {
@@ -119,9 +133,7 @@ export function HowHero() {
       <Container className="relative pb-20 pt-28 sm:pt-32 md:pb-28 md:pt-40 lg:pt-36">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-6">
-            <p className="fade font-mono text-[13px] uppercase tracking-[0.08em] text-faint">
-              {label}
-            </p>
+            <p className="fade text-[15px] font-medium text-muted">{label}</p>
             <h1 className="display mt-5 text-[clamp(3.4rem,1rem+7vw,8.5rem)] leading-[0.95]">
               <RiseText text={title} />
             </h1>
@@ -138,12 +150,14 @@ export function HowHero() {
         </div>
 
         <p
-          className="fade mt-16 font-mono text-[12px] uppercase tracking-[0.04em] text-faint lg:mt-20"
+          className="fade mt-16 text-[15px] font-medium text-muted lg:mt-20"
           style={at(line - 200)}
         >
           {runs}
         </p>
-        <ol className="relative mt-6 grid gap-7 pl-8 lg:grid-cols-5 lg:gap-5 lg:pl-0">
+        {/* each step spans three shared rows (name, what you see, body),
+            so the "You see" chips line up even where a name wraps */}
+        <ol className="relative mt-6 grid gap-7 pl-8 lg:grid-cols-5 lg:grid-rows-[auto_auto_auto] lg:gap-x-5 lg:gap-y-0 lg:pl-0">
           {/* the line the steps sit on */}
           <span
             aria-hidden
@@ -153,7 +167,7 @@ export function HowHero() {
           {steps.map((s, i) => (
             <li
               key={s.name}
-              className="fade relative lg:pt-9"
+              className="fade relative flex flex-col items-start gap-3 lg:row-span-3 lg:grid lg:grid-rows-subgrid lg:pt-9"
               style={at(line + 150 + i * 150)}
             >
               <span
@@ -163,15 +177,15 @@ export function HowHero() {
               <h2 className="text-lg font-extrabold leading-tight tracking-[-0.01em] md:text-xl">
                 {s.name}
               </h2>
-              <p className="mt-2 max-w-[34ch] text-[15px] leading-snug text-muted">
-                {s.body}
-              </p>
-              <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-surface px-3 py-1.5 text-[13px] font-semibold ring-1 ring-line">
+              <p className="inline-flex w-fit items-baseline gap-2 self-start rounded-xl bg-surface px-3 py-1.5 text-[13px] font-semibold leading-snug ring-1 ring-line">
                 <span
                   aria-hidden
-                  className="size-1.5 rounded-full bg-lime ring-1 ring-ink/25"
+                  className="size-1.5 shrink-0 translate-y-[-1px] rounded-full bg-lime ring-1 ring-ink/25"
                 />
                 You see: {s.see}
+              </p>
+              <p className="max-w-[34ch] text-[15px] leading-snug text-muted">
+                {s.body}
               </p>
             </li>
           ))}

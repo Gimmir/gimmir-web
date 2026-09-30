@@ -74,7 +74,7 @@ export function AboutHero() {
       <Container className="pb-16 pt-28 sm:pt-32 md:pb-24 md:pt-36">
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5">
           <div>
-            <p className="fade font-mono text-[13px] uppercase tracking-[0.08em] text-paper/50">
+            <p className="fade text-[15px] font-medium text-paper/50">
               {label}
             </p>
             <h1 className="display mt-4 text-[clamp(3rem,1rem+5vw,6.5rem)] leading-[0.95]">

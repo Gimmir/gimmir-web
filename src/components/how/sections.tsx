@@ -169,7 +169,7 @@ export function HowStandards() {
         </ul>
 
         <p
-          className="fade mt-14 font-mono text-[12px] uppercase tracking-[0.04em] text-paper/45"
+          className="fade mt-14 text-[15px] font-medium text-paper/50"
           style={at(after + 500)}
         >
           {stackLabel}
