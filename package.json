@@ -9,7 +9,6 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "typegen": "sanity schema extract && sanity typegen generate",
-    "seed": "tsx scripts/seed.ts",
     "check:copy": "tsx scripts/check-copy.ts"
   },
   "dependencies": {

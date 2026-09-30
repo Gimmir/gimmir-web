@@ -1,5 +1,10 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 
+/**
+ * A build-log post's body: paragraphs, two heading levels under the post's
+ * title (h2, h3), quotes, lists, links, inline code, and images or
+ * diagrams with alt text and an optional caption.
+ */
 export const blockContentType = defineType({
   name: "blockContent",
   title: "Rich text",
@@ -9,8 +14,8 @@ export const blockContentType = defineType({
       type: "block",
       styles: [
         { title: "Normal", value: "normal" },
-        { title: "Heading", value: "h3" },
-        { title: "Subheading", value: "h4" },
+        { title: "Heading", value: "h2" },
+        { title: "Subheading", value: "h3" },
         { title: "Quote", value: "blockquote" },
       ],
       lists: [
@@ -34,7 +39,10 @@ export const blockContentType = defineType({
                 title: "URL",
                 type: "url",
                 validation: (rule) =>
-                  rule.uri({ scheme: ["http", "https", "mailto", "tel"] }),
+                  rule.uri({
+                    scheme: ["http", "https", "mailto", "tel"],
+                    allowRelative: true,
+                  }),
               }),
             ],
           }),
@@ -43,14 +51,24 @@ export const blockContentType = defineType({
     }),
     defineArrayMember({
       type: "image",
+      title: "Image or diagram",
       options: { hotspot: true },
       fields: [
         defineField({
           name: "alt",
           title: "Alternative text",
           type: "string",
+          description: "What the image shows, for screen readers and search.",
           validation: (rule) =>
-            rule.required().warning("Alt text is important for accessibility and SEO."),
+            rule
+              .required()
+              .warning("Alt text is important for accessibility and SEO."),
+        }),
+        defineField({
+          name: "caption",
+          title: "Caption",
+          type: "string",
+          description: "Optional line shown under the image.",
         }),
       ],
     }),

@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 
 import { JsonLd } from "@/components/seo/json-ld";
 import { JimmyCaseStudy } from "@/components/work/jimmy";
-import { StandardCaseStudy } from "@/components/work/standard";
 import { Un1tCaseStudy } from "@/components/work/un1t";
 import { jimmy } from "@/content/jimmy";
 import { caseSlugs, getCaseBySlug } from "@/lib/cases";
@@ -71,10 +70,6 @@ export default async function CaseStudyPage({
         <JimmyCaseStudy data={data} />
       </>
     );
-  return (
-    <>
-      {jsonLd}
-      <StandardCaseStudy data={data} />
-    </>
-  );
+  // every public case has its own page; anything else isn't a page
+  notFound();
 }

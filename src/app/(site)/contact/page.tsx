@@ -9,10 +9,9 @@ import { HeroBackdrop } from "@/components/home/hero-backdrop";
 import { Container } from "@/components/ui/container";
 import { BOOKINGS } from "@/lib/booking";
 import { hostNames } from "@/lib/founders";
+import { CONTACT_EMAIL } from "@/content/site";
 import { breadcrumbs, contactPage, faqPage } from "@/lib/schema";
 import { socialMetadata } from "@/lib/seo";
-import { sanityFetch } from "@/sanity/lib/live";
-import { SETTINGS_QUERY } from "@/sanity/lib/queries";
 
 const TITLE = "Book a Call with Nazar & Oleh";
 // Minutes and names are pulled from `BOOKINGS` so this can't drift from the
@@ -30,9 +29,7 @@ export const metadata: Metadata = {
   }),
 };
 
-export default async function ContactPage() {
-  const { data: settings } = await sanityFetch({ query: SETTINGS_QUERY });
-  const email = settings?.contactEmail ?? "hello@gimmir.com";
+export default function ContactPage() {
   const faqLd = faqPage(CONTACT_FAQ_ITEMS);
 
   return (
@@ -53,7 +50,7 @@ export default async function ContactPage() {
         <Doors />
       </div>
       <Container className="pb-20 md:pb-24">
-        <EmailLine email={email} />
+        <EmailLine email={CONTACT_EMAIL} />
       </Container>
       <ContactFaq />
     </>
