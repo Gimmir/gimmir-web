@@ -14,8 +14,6 @@ export const NAV: NavItem[] = [
   { label: "For brands", href: "/operators" },
   { label: "For founders", href: "/build-your-saas" },
   { label: "Work", href: "/work" },
-  // once its V2 page is built (P2)
-  { label: "What we build", href: "/what-we-build", ready: false },
   { label: "How we work", href: "/how-we-work" },
   // shows once the first posts are in (P2)
   { label: "Build log", href: "/build-log", ready: false },
@@ -61,7 +59,6 @@ export const FOOTER = {
       title: "Site",
       links: [
         { label: "Work", href: "/work" },
-        { label: "What we build", href: "/what-we-build" },
         { label: "How we work", href: "/how-we-work" },
         { label: "About us", href: "/about" },
         { label: "Contact", href: "/contact" },

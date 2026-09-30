@@ -162,7 +162,7 @@ export const home = {
         body: "A gamified fan-engagement platform for a US entertainment-tech startup, built from scratch.",
       },
     ],
-    link: { label: "All mechanics", href: "/what-we-build" },
+    link: { label: "All nine products", href: "/work" },
   },
 
   // doc 09 ⑦. Card lines reuse claims already on the site (offer ladder,

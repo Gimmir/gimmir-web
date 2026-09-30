@@ -49,8 +49,6 @@ export const BOOKINGS: Record<BookingId, Booking> = {
 const ROUTE_BOOKINGS: Array<[prefix: string, BookingId]> = [
   ["/operators", "costCheck"],
   ["/work/un1t", "costCheck"],
-  ["/the-review", "founderReview"],
-  ["/health", "founderReview"],
   ["/work/jimmy-coach", "founderReview"],
 ];
 

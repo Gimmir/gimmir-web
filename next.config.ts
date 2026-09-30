@@ -15,7 +15,10 @@ const STATIC_REDIRECTS = [
     destination: "/build-your-saas#diagnostic",
     permanent: true,
   },
-  { source: "/health", destination: "/what-we-build", permanent: true },
+  // /what-we-build repeated the home list and /work, so it went (Nazar,
+  // 2026-09-30); every product it listed is on /work
+  { source: "/what-we-build", destination: "/work", permanent: true },
+  { source: "/health", destination: "/work", permanent: true },
 ];
 
 const nextConfig: NextConfig = {

@@ -20,12 +20,12 @@ const ROUTES = [
     body: "You’ve raised money and need a V1 that won’t need rebuilding. Get a CTO-level review.",
   },
   {
-    href: "/what-we-build",
+    href: "/build-your-saas",
     title: "I’m building a health & wellness app",
     body: "Sleep, nutrition, women’s health, longevity, metabolic, mental wellbeing. Prevention, not regulated clinical.",
   },
   {
-    href: "/what-we-build",
+    href: "/contact",
     title: "Something else",
     body: "Not fitness or wellness? Tell us what you’re building.",
   },
