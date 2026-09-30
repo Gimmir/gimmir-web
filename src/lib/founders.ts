@@ -30,7 +30,7 @@ export const FOUNDERS: Record<FounderId, Founder> = {
     role: "Founder · product & business",
     title: "CEO, Gimmir",
     also: "Co-founder & CTO, Jimmy Coach",
-    photo: "/photo/nazar-m.jpg",
+    photo: "/photo/nazar.jpg",
     linkedin: "https://www.linkedin.com/in/nazarmoroze/",
   },
   oleh: {
@@ -40,7 +40,7 @@ export const FOUNDERS: Record<FounderId, Founder> = {
     first: "Oleh",
     role: "CTO · architecture & delivery",
     title: "CTO, Gimmir",
-    photo: "/photo/oleh-p.jpg",
+    photo: "/photo/oleh.jpg",
     linkedin: "https://www.linkedin.com/in/oleh-palazh/",
   },
 };
