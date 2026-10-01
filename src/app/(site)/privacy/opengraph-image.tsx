@@ -6,8 +6,8 @@ export const contentType = OG_CONTENT_TYPE;
 
 export default function Image() {
   return ogCard({
-    line1: "Privacy Policy",
-    line2: "how we handle your data",
-    footer: "Analytics, booking and contact data. Nothing sold",
+    label: "Legal",
+    headline: ["Privacy Policy"],
+    voice: "How we handle your data. Nothing sold.",
   });
 }

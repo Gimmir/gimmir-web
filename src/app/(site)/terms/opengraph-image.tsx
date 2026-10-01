@@ -6,8 +6,8 @@ export const contentType = OG_CONTENT_TYPE;
 
 export default function Image() {
   return ogCard({
-    line1: "Terms of Use",
-    line2: "the rules for using gimmir.com",
-    footer: "Gimmir LLC · Delaware, USA",
+    label: "Legal",
+    headline: ["Terms of Use"],
+    voice: "The rules for using gimmir.com. Gimmir LLC, Delaware, USA.",
   });
 }

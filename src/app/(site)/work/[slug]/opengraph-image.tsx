@@ -1,11 +1,37 @@
 import { notFound } from "next/navigation";
 
-import { getCaseBySlug } from "@/lib/cases";
-import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og-card";
+import { jimmy } from "@/content/jimmy";
+import { un1t } from "@/content/un1t";
+import { caseSlugs, getCaseBySlug } from "@/lib/cases";
+import { OG_CONTENT_TYPE, OG_SIZE, ogCard, type OgPicture } from "@/lib/og-card";
 
 export const alt = "Gimmir case study";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
+
+// rendered at build time, like the case pages: the card reads its fonts
+// and pictures from disk
+export function generateStaticParams() {
+  return caseSlugs.map((slug) => ({ slug }));
+}
+
+/** Each case's card: its own H1, one line and its own picture. */
+const CARDS: Record<string, Parameters<typeof ogCard>[0]> = {
+  un1t: {
+    label: "Case study · UN1T",
+    headline: [un1t.hero.title],
+    voice: "Off a white-label platform, onto its own app and back office.",
+    picture: { app: "un1t", stat: un1t.hero.stat.value } satisfies OgPicture,
+  },
+  "jimmy-coach": {
+    label: "Case study · Jimmy Coach",
+    headline: jimmy.hero.headline,
+    voice: "200+ coaches two months after launch.",
+    picture: {
+      phones: jimmy.hero.screens.map((s) => s.src) as [string, string, string],
+    },
+  },
+};
 
 export default async function Image({
   params,
@@ -16,13 +42,11 @@ export default async function Image({
   const data = getCaseBySlug(slug);
   if (!data) notFound();
 
-  // "UN1T Case Study: A 10+ Site Franchise on Its Own Platform" → the part
-  // after the colon becomes the lime line.
-  const angle = data.seoTitle.split(":")[1]?.trim().toLowerCase() ?? data.tag;
-
-  return ogCard({
-    line1: data.name,
-    line2: angle,
-    footer: `${data.industry} · built and still run in production`,
-  });
+  return ogCard(
+    CARDS[slug] ?? {
+      label: "Case study",
+      headline: [data.name],
+      voice: data.tag,
+    },
+  );
 }

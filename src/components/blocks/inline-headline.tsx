@@ -2,15 +2,9 @@ import { Fragment } from "react";
 import Image from "next/image";
 
 import { HUGS_PREVIOUS, RiseWord, wordCount } from "@/components/motion/words";
+import { APPS, type AppId } from "@/lib/apps";
 import { cn } from "@/lib/cn";
 import { person, type FaceId } from "@/lib/people";
-
-/** Products that can sit inside a sentence as their real app icons. */
-const APPS = {
-  un1t: { name: "UN1T", icon: "/design/un1t-logo.png" },
-  jimmy: { name: "Jimmy Coach", icon: "/design/jimmy-coach-logo.png" },
-} as const;
-export type AppId = keyof typeof APPS;
 
 /**
  * A headline written as a sentence with objects inside it: plain text,

@@ -1,20 +1,16 @@
+import { contact } from "@/content/contact";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard } from "@/lib/og-card";
-import { BOOKINGS } from "@/lib/booking";
 
-export const alt = "Book a call with Gimmir's founders";
+export const alt = "Book a call. Talk to the people who’ll build it: Nazar and Oleh.";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
 export default function Image() {
-  const minutes = [
-    BOOKINGS.costCheck.minutes,
-    BOOKINGS.founderReview.minutes,
-  ].sort((a, b) => a - b);
-
   return ogCard({
-    line1: "Book a call",
-    line2: "talk to the people who build it",
-    footer: `${minutes[0]} to ${minutes[1]} minutes · no pitch deck`,
-    faces: ["nazar", "oleh"],
+    label: "Contact",
+    // the H1 without its inline faces: the photos beside it are the faces
+    headline: contact.hero.headline.filter((t) => typeof t === "string"),
+    voice: "Twenty to thirty minutes. No pitch deck.",
+    picture: { people: ["nazar", "oleh"] },
   });
 }
