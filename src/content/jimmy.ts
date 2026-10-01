@@ -109,6 +109,31 @@ export const jimmy = {
       text: "I don't just build SaaS for clients, I put my own money into one.",
       by: "nazar",
     },
+    // Nazar's pick o1 (2026-10-01): the invoice he never sent beside what
+    // he did instead. No amounts, ever.
+    invoice: {
+      label: "The usual way",
+      title: "An invoice, by the hour.",
+      stamp: "Not sent",
+      rows: [
+        { term: "To", value: "Quentin Randis" },
+        { term: "For", value: "Building his app" },
+        { term: "Billed", value: "By the hour" },
+        { term: "My stake", value: "None" },
+      ],
+    },
+    cofounders: {
+      label: "What I did instead",
+      title: "Co-founders of Jimmy Coach.",
+      stamp: "Co-owned",
+      faces: ["quentin", "nazar"] satisfies FaceId[],
+      rows: [
+        // no-break spaces keep each name whole on a phone
+        { term: "Founders", value: "Quentin\u00a0Randis & Nazar\u00a0Moroz" },
+        { term: "Paid for by", value: "Nazar, no invoice" },
+        { term: "Owned by", value: "Both of us" },
+      ],
+    },
   },
 
   product: {

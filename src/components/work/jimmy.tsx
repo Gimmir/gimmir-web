@@ -333,8 +333,35 @@ function Origin() {
   );
 }
 
+/** A row of facts on one of the two decision cards. */
+function Facts({
+  rows,
+  termClassName,
+  valueClassName,
+}: {
+  rows: readonly { term: string; value: string }[];
+  termClassName?: string;
+  valueClassName?: string;
+}) {
+  return (
+    <dl className="mt-auto grid grid-cols-[auto_1fr] gap-x-5 gap-y-3 pt-8 text-[15px] sm:text-base">
+      {rows.map(({ term, value }) => (
+        <div key={term} className="contents">
+          <dt className={termClassName}>{term}</dt>
+          <dd className={cn("font-semibold", valueClassName)}>{value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+/** The stamp on a decision card: in the flow on a phone, pinned to the
+ *  top corner from sm up. Last in the DOM so it reads after the title. */
+const STAMP =
+  "order-first mb-4 self-start rounded-[10px] px-3 py-1.5 text-[13px] font-extrabold uppercase tracking-[0.06em] sm:absolute sm:right-7 sm:top-7 sm:mb-0";
+
 function Invest() {
-  const { label, title, body, quote } = jimmy.invest;
+  const { label, title, body, quote, invoice, cofounders } = jimmy.invest;
   const by = FOUNDERS[quote.by];
   const after = wordCount(title) * 40 + 300;
   return (
@@ -369,6 +396,70 @@ function Invest() {
             {by.first}, {by.also}
           </figcaption>
         </figure>
+
+        {/* the invoice he never sent, beside what he did instead */}
+        <div className="grid gap-3 md:grid-cols-2 md:gap-4 lg:col-span-12 lg:mt-6">
+          <div
+            className="fade relative flex min-h-[300px] flex-col rounded-[28px] bg-surface p-6 text-faint ring-1 ring-line sm:p-8"
+            style={d(after + 300)}
+          >
+            <div className="sm:pr-32">
+              <p className="text-sm font-semibold">{invoice.label}</p>
+              <h3 className="display mt-3 text-[clamp(1.5rem,1rem+1.2vw,2.1rem)] leading-[1.05] text-ink/45">
+                {invoice.title}
+              </h3>
+            </div>
+            <p
+              className={cn(
+                STAMP,
+                "-rotate-[8deg] border-2 border-ink/15 text-faint",
+              )}
+            >
+              {invoice.stamp}
+            </p>
+            <Facts
+              rows={invoice.rows}
+              valueClassName="line-through decoration-ink/30"
+            />
+          </div>
+
+          <div
+            className="fade relative flex min-h-[300px] flex-col rounded-[28px] bg-ink p-6 text-paper sm:p-8"
+            style={d(after + 420)}
+          >
+            <div className="sm:pr-32">
+              <p className="text-sm font-semibold text-paper/60">
+                {cofounders.label}
+              </p>
+              <h3 className="display mt-3 text-[clamp(1.5rem,1rem+1.2vw,2.1rem)] leading-[1.05]">
+                {cofounders.title}
+              </h3>
+            </div>
+            <p className={cn(STAMP, "rotate-[6deg] bg-lime text-ink")}>
+              {cofounders.stamp}
+            </p>
+            <div className="mt-5 flex">
+              {cofounders.faces.map((id, n) => (
+                <span
+                  key={id}
+                  className={cn(
+                    "relative size-12 overflow-hidden rounded-full bg-ink-soft ring-[3px] ring-ink",
+                    n > 0 && "-ml-3",
+                  )}
+                >
+                  <Image
+                    src={person(id).photo}
+                    alt=""
+                    fill
+                    sizes="48px"
+                    className="object-cover object-top"
+                  />
+                </span>
+              ))}
+            </div>
+            <Facts rows={cofounders.rows} termClassName="text-paper/60" />
+          </div>
+        </div>
       </Container>
     </Stage>
   );
