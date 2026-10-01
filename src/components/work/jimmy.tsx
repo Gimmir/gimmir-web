@@ -8,7 +8,7 @@ import { FaqSection } from "@/components/blocks/faq-section";
 import { InlineHeadline } from "@/components/blocks/inline-headline";
 import { withMentions } from "@/components/blocks/mention";
 import { Container } from "@/components/ui/container";
-import { ArrowRight } from "@/components/ui/icons";
+import { ArrowRight, Check, X } from "@/components/ui/icons";
 import {
   CaseAudienceLink,
   CaseBackLink,
@@ -176,9 +176,65 @@ function Hero({ data }: { data: CaseStudy }) {
   );
 }
 
+/** The tools in the before and after panels, in the site's thin line. */
+const TOOL_ICONS: Record<string, React.ReactNode> = {
+  chat: (
+    <path d="M5 5.5h14a2 2 0 0 1 2 2V15a2 2 0 0 1-2 2h-7l-4.5 3.2V17H5a2 2 0 0 1-2-2V7.5a2 2 0 0 1 2-2Z" />
+  ),
+  grid: (
+    <>
+      <rect x="3.5" y="4" width="17" height="16" rx="2" />
+      <path d="M3.5 9.5h17M3.5 14.5h17M9.5 4v16" />
+    </>
+  ),
+  doc: (
+    <>
+      <path d="M7 3h7.5L19 7.5V21H7Z" />
+      <path d="M14 3v5h5M10 13h6M10 17h4" />
+    </>
+  ),
+  card: (
+    <>
+      <rect x="3" y="5.5" width="18" height="13" rx="2" />
+      <path d="M3 10h18M7 15h4" />
+    </>
+  ),
+  dumbbell: <path d="M6.5 7.5v9M17.5 7.5v9M3.5 10v4M20.5 10v4M6.5 12h11" />,
+  people: (
+    <>
+      <circle cx="9" cy="8.5" r="3" />
+      <circle cx="17" cy="9.5" r="2.4" />
+      <path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5M15.5 14.6c2.8 0 5 1.6 5 4.4" />
+    </>
+  ),
+  play: (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="3" />
+      <path d="m10 9.5 4.5 2.5-4.5 2.5Z" />
+    </>
+  ),
+};
+
+function ToolIcon({ name }: { name: string }) {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="size-5"
+    >
+      {TOOL_ICONS[name]}
+    </svg>
+  );
+}
+
 function Origin() {
-  const { label, title, body, screens } = jimmy.origin;
-  const after = wordCount(title) * 40 + 300;
+  const { label, title, body, before, after } = jimmy.origin;
+  const t = wordCount(title) * 40 + 300;
   return (
     <Stage as="section" data-tone="ink" className="bg-ink text-paper">
       <Container className="py-20 md:py-28">
@@ -191,24 +247,86 @@ function Origin() {
           </div>
           <p
             className="fade max-w-[46ch] text-lg leading-relaxed text-paper/70 md:text-xl lg:col-span-5"
-            style={d(after)}
+            style={d(t)}
           >
             {withMentions(body, { onDark: true })}
           </p>
         </div>
-        <div className="mt-12 grid max-w-[1000px] gap-4 md:mt-16 md:grid-cols-2">
-          {screens.map((s, i) => (
-            <div
-              key={s.src}
-              className="fade overflow-hidden rounded-[24px]"
-              style={d(after + 150 + i * 120)}
-            >
-              <Shot
-                screen={s}
-                sizes="(min-width: 1080px) 500px, (min-width: 768px) 50vw, 100vw"
-              />
-            </div>
-          ))}
+
+        {/* before and after, as on UN1T: the tools he left, dashed and
+            crossed out, beside the one app he co-owns, on lime */}
+        <div className="mt-12 grid gap-3 md:mt-16 md:grid-cols-2 md:gap-4">
+          <div
+            className="fade rounded-[28px] border-[1.5px] border-dashed border-paper/20 p-6 sm:p-8"
+            style={d(t + 150)}
+          >
+            <p className="text-sm font-semibold text-paper/50">
+              {before.label}
+            </p>
+            <h3 className="display mt-3 text-[clamp(1.5rem,1rem+1.2vw,2.1rem)] leading-[1.05] text-paper/85">
+              {before.title}
+            </h3>
+            <ul className="mt-7 flex flex-col gap-2.5">
+              {before.items.map((it) => (
+                <li
+                  key={it.tool}
+                  className="flex items-center gap-3.5 rounded-2xl bg-paper/5 px-4 py-3.5"
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-[11px] bg-paper/8 text-paper/55">
+                    <ToolIcon name={it.icon} />
+                  </span>
+                  <span className="min-w-0 leading-tight">
+                    <s className="block font-bold text-paper/70 decoration-paper/50">
+                      {it.tool}
+                    </s>
+                    <span className="mt-1 block text-sm text-paper/50">
+                      {it.note}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className="ml-auto flex size-[30px] shrink-0 items-center justify-center rounded-full border border-line-dark text-paper/50"
+                  >
+                    <X className="size-3" />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div
+            className="fade rounded-[28px] bg-lime p-6 text-ink sm:p-8"
+            style={d(t + 270)}
+          >
+            <p className="text-sm font-semibold">{after.label}</p>
+            <h3 className="display mt-3 text-[clamp(1.5rem,1rem+1.2vw,2.1rem)] leading-[1.05]">
+              {after.title}
+            </h3>
+            <ul className="mt-7 flex flex-col gap-2.5">
+              {after.items.map((it) => (
+                <li
+                  key={it.tool}
+                  className="flex items-center gap-3.5 rounded-2xl bg-white/55 px-4 py-3.5"
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-[11px] bg-ink text-lime">
+                    <ToolIcon name={it.icon} />
+                  </span>
+                  <span className="min-w-0 leading-tight">
+                    <span className="block font-bold">{it.tool}</span>
+                    <span className="mt-1 block text-sm text-ink/65">
+                      {it.note}
+                    </span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className="ml-auto flex size-[30px] shrink-0 items-center justify-center rounded-full bg-ink text-lime"
+                  >
+                    <Check className="size-3.5" />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Container>
     </Stage>

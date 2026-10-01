@@ -75,21 +75,30 @@ export const jimmy = {
     label: "The request",
     title: "A coach with 250+ clients asked us for his own app.",
     body: "Quentin Randis coaches Hyrox and CrossFit. He was running it across WhatsApp, spreadsheets and PDFs, and losing clients in the gaps.",
-    // from Jimmy's own site
-    screens: [
-      {
-        src: "/jimmy/without-jimmy.png",
-        alt: "Without Jimmy: client messages on WhatsApp, a training spreadsheet, manual payments and scheduling by hand",
-        width: 756,
-        height: 775,
-      },
-      {
-        src: "/jimmy/with-jimmy.png",
-        alt: "With Jimmy: messaging, the workout builder, Stripe payments and scheduling in one place",
-        width: 756,
-        height: 775,
-      },
-    ],
+    // Nazar's pick o1 (2026-10-01): before and after, drawn in code like
+    // UN1T's. Before is what the paragraph names (plus payments by hand,
+    // from Jimmy's own site); after is the five things Jimmy does.
+    before: {
+      label: "Before",
+      title: "Four tools and the gaps between them.",
+      items: [
+        { icon: "chat", tool: "WhatsApp", note: "every message, every client" },
+        { icon: "grid", tool: "Spreadsheets", note: "programs updated by hand" },
+        { icon: "doc", tool: "PDFs", note: "plans resent on request" },
+        { icon: "card", tool: "Payments by hand", note: "chased one by one" },
+      ],
+    },
+    after: {
+      label: "After, in Jimmy",
+      title: "One app he co-owns.",
+      items: [
+        { icon: "chat", tool: "Messaging", note: "1:1 chat, built in" },
+        { icon: "dumbbell", tool: "Workout builder", note: "structured programs" },
+        { icon: "people", tool: "Community", note: "his clients in one place" },
+        { icon: "card", tool: "Payments", note: "Stripe subscriptions" },
+        { icon: "play", tool: "Courses", note: "built in the dashboard" },
+      ],
+    },
   },
 
   invest: {
