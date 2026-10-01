@@ -467,106 +467,127 @@ function Invest() {
 
 type ProductCard = (typeof jimmy.product.cards)[number];
 
-function CardText({ card }: { card: ProductCard }) {
+function CardText({ card, dark }: { card: ProductCard; dark?: boolean }) {
   return (
     <>
-      <p className="font-mono text-[12px] uppercase tracking-[0.04em] text-faint">
+      <p
+        className={cn(
+          "font-mono text-[12px] uppercase tracking-[0.04em]",
+          dark ? "text-paper/50" : "text-faint",
+        )}
+      >
         {card.tag}
       </p>
       <h3 className="mt-3 text-2xl font-bold tracking-[-0.01em] md:text-3xl">
         {card.title}
       </h3>
+      <p
+        className={cn(
+          "mt-3 max-w-[40ch] text-base leading-relaxed md:text-lg",
+          dark ? "text-paper/70" : "text-muted",
+        )}
+      >
+        {card.body}
+      </p>
     </>
   );
 }
 
-/** Two phones in a tile, the second a step lower, both running off the
- *  bottom edge. */
-function PhoneRow({ card, flip }: { card: ProductCard; flip?: boolean }) {
+/** A bento tile for one side of the app: its text, then two phones, the
+ *  second a step lower, running off the bottom edge. */
+function PhoneTile({
+  card,
+  dark,
+  style,
+}: {
+  card: ProductCard;
+  dark?: boolean;
+  style?: React.CSSProperties;
+}) {
   return (
-    <Stage className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
-      <div className={cn("fade lg:col-span-4", flip && "lg:order-2")}>
-        <CardText card={card} />
-        <p className="mt-3 max-w-[40ch] text-lg leading-relaxed text-muted">
-          {card.body}
-        </p>
+    <div
+      className={cn(
+        "fade relative flex h-[560px] flex-col overflow-hidden rounded-[28px] p-6 sm:p-8 md:h-[600px] lg:h-[640px]",
+        dark ? "bg-ink text-paper" : "bg-paper-2 ring-1 ring-line",
+      )}
+      style={style}
+    >
+      <CardText card={card} dark={dark} />
+      <div className="mt-10 flex justify-center gap-[5%]">
+        {card.screens.map((s, i) => (
+          <div
+            key={s.src}
+            className={cn("w-[38%] max-w-[250px]", i === 1 && "mt-12")}
+          >
+            <Shot
+              screen={s}
+              sizes="(min-width: 1024px) 240px, (min-width: 768px) 19vw, 38vw"
+              className={PHONE_SHADOW}
+            />
+          </div>
+        ))}
       </div>
-      <div
-        className="fade relative aspect-[6/5] overflow-hidden rounded-[24px] bg-paper-2 ring-1 ring-line sm:aspect-[3/2] lg:col-span-8"
-        style={d(150)}
-      >
-        <div className="absolute inset-x-0 top-0 flex justify-center gap-[5%] px-6 pt-10 md:pt-14">
-          {card.screens.map((s, i) => (
-            <div
-              key={s.src}
-              className={cn(
-                "w-[40%] max-w-[250px]",
-                i === 1 && "mt-10 md:mt-16",
-              )}
-            >
-              <Shot
-                screen={s}
-                sizes="(min-width: 1024px) 250px, 40vw"
-                className={PHONE_SHADOW}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </Stage>
+    </div>
   );
 }
 
-function DashboardRow({ card }: { card: ProductCard }) {
+/** The web dashboard across the top of the bento, its window running off
+ *  the right and bottom edges. */
+function DashboardTile({
+  card,
+  style,
+}: {
+  card: ProductCard;
+  style?: React.CSSProperties;
+}) {
   return (
-    <Stage>
-      <div className="fade grid gap-x-10 gap-y-3 lg:grid-cols-12 lg:items-end">
-        <div className="lg:col-span-4">
-          <CardText card={card} />
-        </div>
-        <p className="max-w-[56ch] text-lg leading-relaxed text-muted lg:col-span-8">
-          {card.body}
-        </p>
-      </div>
-      <figure className="fade mt-8" style={d(150)}>
-        <div className="rounded-[24px] bg-paper-2 p-2 ring-1 ring-line sm:p-4 md:p-6">
-          {card.screens.map((s) => (
-            <Shot
-              key={s.src}
-              screen={s}
-              sizes="(min-width: 1280px) 1180px, 94vw"
-            />
-          ))}
-        </div>
+    <div
+      className="fade grid overflow-hidden rounded-[28px] bg-surface ring-1 ring-line md:col-span-2 lg:h-[520px] lg:grid-cols-12"
+      style={style}
+    >
+      <div className="flex flex-col p-6 sm:p-8 lg:col-span-4 lg:p-10">
+        <CardText card={card} />
         {"caption" in card && (
-          <figcaption className="mt-3 text-sm text-faint">
-            {card.caption}
-          </figcaption>
+          <p className="mt-6 text-sm text-faint lg:mt-auto">{card.caption}</p>
         )}
-      </figure>
-    </Stage>
+      </div>
+      <div className="h-[260px] overflow-hidden pl-4 sm:h-[400px] sm:pl-6 lg:col-span-8 lg:h-auto lg:pl-0 lg:pt-8">
+        {/* wider than its column, so not <Shot>, whose w-full would win */}
+        {card.screens.map((s) => (
+          <Image
+            key={s.src}
+            src={s.src}
+            alt={s.alt}
+            width={s.width}
+            height={s.height}
+            sizes="(min-width: 1024px) 1110px, 180vw"
+            className="h-auto w-[180%] max-w-none sm:w-[150%] lg:w-[130%]"
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
 function Product() {
   const { label, title, cards } = jimmy.product;
   const [client, coach, dashboard] = cards;
+  const t = wordCount(title) * 40 + 300;
   return (
-    <section data-tone="paper" className="border-t border-line bg-paper-2/60">
+    <Stage as="section" data-tone="paper" className="border-t border-line">
       <Container className="py-20 md:py-28">
-        <Stage>
-          <Label>{label}</Label>
-          <h2 className="display mt-6 max-w-[18ch] text-[length:var(--text-title)] leading-[1.02]">
-            <RiseText text={title} />
-          </h2>
-        </Stage>
-        <div className="mt-12 grid gap-16 md:mt-16 md:gap-24">
-          <PhoneRow card={client} />
-          <PhoneRow card={coach} flip />
-          <DashboardRow card={dashboard} />
+        <Label>{label}</Label>
+        <h2 className="display mt-6 max-w-[18ch] text-[length:var(--text-title)] leading-[1.02]">
+          <RiseText text={title} />
+        </h2>
+        {/* Nazar's pick o2 (2026-10-01): the three sides as one bento */}
+        <div className="mt-12 grid gap-3 md:mt-16 md:grid-cols-2 md:gap-4">
+          <DashboardTile card={dashboard} style={d(t)} />
+          <PhoneTile card={client} style={d(t + 120)} />
+          <PhoneTile card={coach} dark style={d(t + 240)} />
         </div>
       </Container>
-    </section>
+    </Stage>
   );
 }
 
