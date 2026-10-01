@@ -10,12 +10,28 @@
  * Screens are the real product, from Nazar (2026-10-01), in public/jimmy.
  */
 
+import type { HeadlineToken } from "@/components/blocks/inline-headline";
+import type { FaceId } from "@/lib/people";
+
 const PHONE = { width: 489, height: 1018 };
 const BROWSER = { width: 2055, height: 1262 };
 
 export const jimmy = {
   hero: {
-    title: "From a coach’s request to a SaaS we co-own.",
+    // Nazar's pick o2 (2026-10-01): the two co-founders in the sentence,
+    // Quentin at the request, Nazar at the SaaS. Faces stay silent for
+    // readers and crawlers (the cards under it name them).
+    headline: [
+      "From",
+      { faces: ["quentin"], sr: "" },
+      "a coach’s request to a SaaS",
+      { faces: ["nazar"], sr: "" },
+      "we co-own.",
+    ] satisfies HeadlineToken[],
+    people: [
+      { id: "quentin", line: "Hyrox & CrossFit coach, 250+ clients" },
+      { id: "nazar", line: "Co-founder & CTO, Jimmy Coach" },
+    ] satisfies { id: FaceId; line: string }[],
     sub: "A coaching platform co-founded and co-owned with a working coach: one native app for iOS and Android, and a web dashboard, live in both stores.",
     screens: [
       {

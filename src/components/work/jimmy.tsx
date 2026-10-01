@@ -5,6 +5,7 @@ import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { BookTrigger } from "@/components/blocks/book-trigger";
 import { FaqSection } from "@/components/blocks/faq-section";
+import { InlineHeadline } from "@/components/blocks/inline-headline";
 import { withMentions } from "@/components/blocks/mention";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
@@ -17,6 +18,7 @@ import {
 import { jimmy } from "@/content/jimmy";
 import type { CaseStudy } from "@/lib/cases";
 import { FOUNDERS } from "@/lib/founders";
+import { person } from "@/lib/people";
 import { cn } from "@/lib/cn";
 
 /* /work/jimmy-coach, V2 (doc 09 §3.6): a founder story, not a vendor
@@ -72,20 +74,13 @@ function Label({ children, dark }: { children: string; dark?: boolean }) {
 }
 
 function Hero({ data }: { data: CaseStudy }) {
-  const { title, sub, screens } = jimmy.hero;
+  const { headline, people, sub, screens } = jimmy.hero;
   return (
     <Stage as="section" eager data-tone="paper" className="relative">
       <Container className="grid gap-14 pb-20 pt-28 sm:pt-32 md:pb-28 md:pt-36 lg:min-h-[92svh] lg:grid-cols-12 lg:items-center lg:gap-10">
-        <div className="lg:col-span-6">
-          <div
-            className="fade flex flex-wrap items-center gap-x-8 gap-y-3"
-            style={d(0)}
-          >
+        <div className="lg:col-span-7">
+          <div className="fade" style={d(0)}>
             <CaseBackLink />
-            <CaseAudienceLink
-              href="/build-your-saas"
-              label="Turn your business into a SaaS you own"
-            />
           </div>
           <p
             className="fade mt-10 flex flex-wrap items-center gap-3"
@@ -107,8 +102,38 @@ function Hero({ data }: { data: CaseStudy }) {
             </span>
           </p>
           <h1 className="display mt-8 text-[clamp(2.4rem,1rem+3.4vw,4.25rem)] leading-[1.0]">
-            <RiseText text={title} />
+            <InlineHeadline tokens={headline} />
           </h1>
+          {/* the two faces in the headline, named */}
+          <ul className="fade mt-8 flex flex-wrap gap-3" style={d(500)}>
+            {people.map(({ id, line }) => {
+              const p = person(id);
+              return (
+                <li
+                  key={id}
+                  className="flex items-center gap-3 rounded-[18px] bg-surface py-2.5 pl-2.5 pr-4 ring-1 ring-line"
+                >
+                  <span className="relative size-11 shrink-0 overflow-hidden rounded-full bg-paper-2">
+                    <Image
+                      src={p.photo}
+                      alt=""
+                      fill
+                      sizes="44px"
+                      className="object-cover object-top"
+                    />
+                  </span>
+                  <span className="leading-tight">
+                    <span className="block text-[15px] font-bold">
+                      {p.name}
+                    </span>
+                    <span className="mt-0.5 block text-[13px] text-muted">
+                      {line}
+                    </span>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
           <p
             // no fade: on a phone this is the largest thing on screen, and
             // a fade from zero (run on the GPU) isn't counted as shown until
@@ -124,7 +149,7 @@ function Hero({ data }: { data: CaseStudy }) {
           />
         </div>
         <div
-          className="fade relative mx-auto flex w-full max-w-[600px] items-center justify-center lg:col-span-6"
+          className="fade relative mx-auto flex w-full max-w-[600px] items-center justify-center lg:col-span-5"
           style={d(400)}
         >
           {screens.map((s, n) => (
@@ -513,6 +538,13 @@ function Close() {
                 <ArrowRight className="size-4" />
               </span>
             </BookTrigger>
+            <div className="mt-6">
+              <CaseAudienceLink
+                href="/build-your-saas"
+                label="Turn your business into a SaaS you own"
+                onDark
+              />
+            </div>
           </div>
         </div>
       </Container>

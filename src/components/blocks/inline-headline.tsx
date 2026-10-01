@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { HUGS_PREVIOUS, RiseWord, wordCount } from "@/components/motion/words";
 import { cn } from "@/lib/cn";
-import { FOUNDERS, type FounderId } from "@/lib/founders";
+import { person, type FaceId } from "@/lib/people";
 
 /** Products that can sit inside a sentence as their real app icons. */
 const APPS = {
@@ -21,7 +21,7 @@ export type AppId = keyof typeof APPS;
 export type HeadlineToken =
   | string
   // `sr`: how the faces read aloud (and to crawlers) inside the sentence
-  | { faces: readonly FounderId[]; sr?: string }
+  | { faces: readonly FaceId[]; sr?: string }
   | { apps: readonly AppId[]; locked?: number }
   | { tile: "lock" }
   | { mark: string; after?: string };
@@ -61,20 +61,21 @@ export function MarkerStroke({
   );
 }
 
+/** Faces in a sentence: the founders, or a guest such as Quentin. */
 export function Faces({
   ids,
   sr,
 }: {
-  ids: readonly FounderId[];
+  ids: readonly FaceId[];
   sr?: string;
 }) {
   return (
     <span className="inline-flex h-[0.9em] -translate-y-[0.08em] items-center px-[0.06em] align-middle">
       <span className="sr-only">
-        {sr ?? ids.map((id) => FOUNDERS[id].first).join(" and ")}
+        {sr ?? ids.map((id) => person(id).first).join(" and ")}
       </span>
       {ids.map((id, n) => {
-        const f = FOUNDERS[id];
+        const f = person(id);
         return (
           <span
             key={id}
