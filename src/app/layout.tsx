@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { VisualEditing } from "next-sanity/visual-editing";
 
 import { CalProvider } from "@/components/cal/cal-provider";
+import { CtaTracker } from "@/components/analytics/cta-tracker";
 import { CookieConsent } from "@/components/consent/cookie-consent";
 import { DisableDraftModeLazy } from "@/components/disable-draft-mode-lazy";
 import { SanityLive } from "@/sanity/lib/live";
@@ -79,6 +80,7 @@ export default async function RootLayout({
       <body>
         {children}
         <CalProvider />
+        <CtaTracker />
         <Analytics />
         <SpeedInsights />
         <CookieConsent />

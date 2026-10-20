@@ -6,9 +6,9 @@ type Gtag = (...args: unknown[]) => void;
 
 /**
  * Records a completed Cal.com booking: always as a cookieless Vercel
- * Analytics event, and as a GA4 `generate_lead` only when analytics cookies
- * were accepted (gtag exists only then). It never sends who booked, only
- * which call and where it was booked from.
+ * Analytics event, and as the GA4 key event `call_booked` only when
+ * analytics cookies were accepted (gtag exists only then). It never sends
+ * who booked, only which call and the page it was booked from.
  */
 export function recordBooking(
   booking: BookingId | "unknown",
@@ -16,5 +16,9 @@ export function recordBooking(
 ) {
   track("booking_completed", { booking, source });
   const gtag = (window as unknown as { gtag?: Gtag }).gtag;
-  gtag?.("event", "generate_lead", { booking, source });
+  gtag?.("event", "call_booked", {
+    booking,
+    source,
+    source_page: window.location.pathname,
+  });
 }
