@@ -25,6 +25,13 @@ const LAYOUTS = {
     from: "M962 250C1084 250 1086 478",
     end: { x: 880, y: 504 },
   },
+  // five glyphs ("$12k+"); the curve leaves from the plus
+  long: {
+    box: { w: 1200, h: 560 },
+    text: { x: -10, y: 400, size: 430 },
+    from: "M1162 250C1284 250 1286 478",
+    end: { x: 1080, y: 504 },
+  },
   // three glyphs ("404"); the curve leaves from the last glyph's bar
   trio: {
     box: { w: 860, h: 560 },

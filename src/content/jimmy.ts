@@ -4,14 +4,25 @@
  * his own money; Oleh wasn't part of it. Facts from Nazar (2026-09-30):
  * one iOS & Android app (coaches log in to a coach mode) plus a web
  * dashboard; AI through MCP (Claude, ChatGPT, Perplexity, or any AI via a
- * custom MCP); launched July 2026, 100+ coaches in the first month, each
- * bringing 2–3 clients, the biggest with 20–40, 200+ coaches two months
- * in; all public. Quentin OK'd being named; his quote is still to come.
+ * custom MCP). Every Jimmy figure comes from proof.ts (JIMMY) via
+ * `shown()`; a pending claim renders nothing. Quentin OK'd being named;
+ * his quote is still to come.
  * Screens are the real product, from Nazar (2026-10-01), in public/jimmy.
  */
 
 import type { HeadlineToken } from "@/components/blocks/inline-headline";
 import type { FaceId } from "@/lib/people";
+import { JIMMY, shown } from "@/content/proof";
+
+const mrr = shown(JIMMY.mrr);
+const mrrTimeline = shown(JIMMY.mrrTimeline);
+const coaches = shown(JIMMY.coaches);
+const clients = shown(JIMMY.clients);
+const liveSince = shown(JIMMY.liveSince);
+
+/** "$12,000+" as "$12k+": short enough to draw as the page's big number. */
+const compactUsd = (v: string) =>
+  v.replace(/^\$(\d+),000(\+?)$/, (_, n, plus) => `$${n}k${plus}`);
 
 const PHONE = { width: 489, height: 1018 };
 const BROWSER = { width: 2055, height: 1262 };
@@ -32,7 +43,15 @@ export const jimmy = {
       { id: "quentin", line: "Hyrox & CrossFit coach, 250+ clients" },
       { id: "nazar", line: "Co-founder & CTO, Jimmy Coach" },
     ] satisfies { id: FaceId; line: string }[],
-    sub: "A coaching platform co-founded and co-owned with a working coach: one native app for iOS and Android, and a web dashboard, live in both stores.",
+    sub: [
+      "A coaching app we co-founded with a Hyrox and CrossFit coach.",
+      // counts wait for sign-off (proof.ts): no sentence until both are in
+      coaches !== null && clients !== null
+        ? `${coaches} coaches and ${clients} clients use it today.`
+        : null,
+    ]
+      .filter(Boolean)
+      .join(" "),
     screens: [
       {
         src: "/jimmy/coach-clients.png",
@@ -204,7 +223,7 @@ export const jimmy = {
         body: "Jimmy works with the coach's own Claude, ChatGPT or Perplexity through MCP, and a custom MCP connects any other AI. Importing a program costs the coach nothing beyond their own AI subscription.",
       },
       {
-        title: "Five things, done well.",
+        title: `Five things, done well: workouts, community, messaging, payments and courses. Clients train in one app for iOS and Android, coaches switch the same app into coach mode, and a web dashboard builds programs and tracks Stripe subscriptions and revenue.${mrr ? ` It earns ${mrr} a month in recurring revenue.` : ""}`,
         body: "Workouts, community, messaging, payments and courses. Jimmy isn't a feature factory; it does five things and stops there.",
       },
       {
@@ -247,15 +266,16 @@ export const jimmy = {
 
   numbers: {
     label: "The numbers",
-    date: "Launched July 2026 · as of September 2026",
-    stat: { value: "200+", label: "coaches on Jimmy two months after launch" },
+    date: liveSince ? `Live on the App Store since ${liveSince}` : "",
+    stat: {
+      value: compactUsd(mrr ?? ""),
+      label: `a month in recurring revenue${mrrTimeline ? `, ${mrrTimeline}` : ""}`,
+    },
+    // coach and client counts wait for sign-off (proof.ts)
     side: [
-      {
-        value: "100+",
-        label: "coaches in the first month, each bringing 2–3 clients",
-      },
-      { value: "20–40", label: "clients each for the biggest coaches" },
-    ],
+      coaches !== null ? { value: String(coaches), label: "coaches" } : null,
+      clients !== null ? { value: String(clients), label: "clients" } : null,
+    ].filter((s): s is { value: string; label: string } => s !== null),
   },
 
   // the case in two quotable answers (approved by Nazar, 2026-10-01),
@@ -267,7 +287,7 @@ export const jimmy = {
         key: "what",
         question: "What's in an online coaching app like Jimmy Coach?",
         answer:
-          "Five things, done well: workouts, community, messaging, payments and courses. Clients train in one app for iOS and Android, coaches switch the same app into coach mode, and a web dashboard builds programs and tracks Stripe subscriptions and revenue. 200+ coaches were on it two months after launch.",
+          `Five things, done well: workouts, community, messaging, payments and courses. Clients train in one app for iOS and Android, coaches switch the same app into coach mode, and a web dashboard builds programs and tracks Stripe subscriptions and revenue.${mrr ? ` It earns ${mrr} a month in recurring revenue.` : ""}`,
       },
       {
         key: "who",
