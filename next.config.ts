@@ -22,6 +22,8 @@ const STATIC_REDIRECTS = [
   // /operators ("For brands") became /franchise
   { source: "/operators", destination: "/franchise", permanent: true },
   { source: "/operators/:path*", destination: "/franchise", permanent: true },
+  // the calculators moved onto /franchise, right under the hero
+  { source: "/franchise/numbers", destination: "/franchise#calculator", permanent: true },
 ];
 
 const nextConfig: NextConfig = {

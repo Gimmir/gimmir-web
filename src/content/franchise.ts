@@ -1,10 +1,10 @@
 /**
  * /franchise, the offer page (Oleh's website plan, 20 Oct 2026, pages 7 to
  * 11), as copy. Every price, plan figure, slot count, date and UN1T figure
- * is read from `offer.ts` and `proof.ts` and the worked example is summed
- * by `calcHqIncome`; none is typed here. Overrides decided by Nazar on 20
- * Oct 2026: the target is 3+ units (not 7+), the plans line, the set-up
- * line, "Is it for us?" and one new FAQ item.
+ * is read from `offer.ts` and `proof.ts`; none is typed here. The sums
+ * live in the calculators (`content/calculator.ts`). Overrides decided by
+ * Nazar on 20 Oct 2026: the target is 3+ units (not 7+), the plans line,
+ * the set-up line, "Is it for us?" and one new FAQ item.
  */
 
 import {
@@ -12,15 +12,10 @@ import {
   FOUNDING_PLAN,
   OFFER,
   PLANS,
-  WORKED_EXAMPLE,
+  VERSUS_EXAMPLE,
 } from "@/content/offer";
 import { UN1T, shown, type Claim } from "@/content/proof";
 import { BOOKINGS } from "@/lib/booking";
-import {
-  calcHqIncome,
-  formatMoney,
-  formatMonths,
-} from "@/lib/franchise-calc";
 
 const POUNDS = new Intl.NumberFormat("en-GB", {
   style: "currency",
@@ -51,10 +46,7 @@ const setup = gbp(OFFER.setupFee);
 const [deposit, onReady, onFlowing] = OFFER.payments;
 const grow = PLANS.find((p) => p.id === "grow");
 if (!grow) throw new Error("Grow must be in PLANS");
-const example = calcHqIncome(WORKED_EXAMPLE);
-const { units, techFee, members, avgPayment, feeRate } = WORKED_EXAMPLE;
-/** "about £20,600": a year, to the nearest £100. */
-const yearly = gbp(Math.round(example.yearly / 100) * 100);
+const { units, techFee } = VERSUS_EXAMPLE;
 const studios = approved(UN1T.studios);
 const memberCount = approved(UN1T.members);
 const platformFee = approved(UN1T.platformFeePerStudio);
@@ -68,7 +60,7 @@ export const franchise = {
   },
 
   cta: {
-    numbers: { label: "Work out my numbers", href: "/franchise/numbers" },
+    numbers: { label: "Work out my numbers", href: "#calculator" },
     call: { label: BOOKINGS.franchiseCall.label },
   },
 
@@ -83,84 +75,6 @@ export const franchise = {
         "its own app on the App Store",
       ],
     },
-  },
-
-  flow: {
-    title: "Where the money goes",
-    note: "2 new income lines, on top of royalties. A franchisee who doesn’t pay gets locked out: no invoices, no chasing.",
-  },
-
-  example: {
-    title: `What it means for a ${units}-studio franchise`,
-    monthLabel: "A month",
-    rows: [
-      {
-        id: "tech",
-        label: "Tech fee",
-        sum: `${units} studios × ${gbp(techFee)}`,
-        value: `+${formatMoney(example.techFeeIncome)}`,
-      },
-      {
-        id: "payments",
-        label: "Fee on every payment",
-        sum: `${units} × ${members} members × ${gbp(avgPayment)} × ${feeRate * 100}%`,
-        value: `+${formatMoney(example.paymentFeeIncome)}`,
-      },
-      {
-        id: "plan",
-        label: "Grow plan, founding rate",
-        sum: `minimum ${gbp(FOUNDING_PLAN.minimum)}`,
-        value: formatMoney(-example.plan),
-      },
-    ],
-    total: {
-      label: "HQ’s new income",
-      value: `about ${formatMoney(example.monthly)}`,
-    },
-    summary: `About ${yearly} a year. The ${setup} set-up comes back in about ${formatMonths(example.paybackMonths ?? 0)} months.`,
-    caveat: `This works once your franchisees pay HQ the tech fee. ${members} members a studio is UN1T’s average; your real numbers take 2 minutes.`,
-  },
-
-  get: {
-    title: "What you get",
-    groups: [
-      {
-        id: "app",
-        title: "Your app",
-        items: [
-          "Your app, designed for your brand",
-          "ClassPass and Wellhub connected, so their first-timers become your members",
-          "Merch, products and subscriptions sold in your app",
-        ],
-      },
-      {
-        id: "income",
-        title: "Your income",
-        items: [
-          "A monthly tech fee from every franchisee",
-          "A fee taken from every payment automatically",
-          "Each franchisee paid into their own Stripe account",
-        ],
-      },
-      {
-        id: "members",
-        title: "Your members",
-        items: [
-          "The first 90 days of every new member tracked and followed up",
-          "Failed payments chased on your schedule, not the platform’s fixed 4 retries",
-          "Your members’ data, yours to keep",
-        ],
-      },
-      {
-        id: "network",
-        title: "Your network",
-        items: [
-          "One screen for HQ with every studio’s revenue, retention and late payers",
-          "Your training and coaching run the same way in every studio",
-          "Features you ask for go into the product (and your own API if you want to build on top)",
-        ],
-      },
-    ],
   },
 
   proof: {
@@ -218,7 +132,7 @@ export const franchise = {
     price: `${setup} fixed to set your brand up on the core.`,
     payments: `Paid in ${OFFER.payments.length} parts: ${gbp(deposit.amount)} ${deposit.when}, ${gbp(onReady.amount)} ${onReady.when}, ${gbp(onFlowing.amount)} ${onFlowing.when}.`,
     // Nazar, 20 Oct 2026: the sum is for a 7-studio franchise
-    versus: `For a ${units}-studio franchise, the set-up costs less than a year of the tech fee your franchisees pay you (${units} × ${gbp(techFee)} × 12 = ${gbp(example.techFeeYear)}).`,
+    versus: `For a ${units}-studio franchise, the set-up costs less than a year of the tech fee your franchisees pay you (${units} × ${gbp(techFee)} × 12 = ${gbp(units * techFee * 12)}).`,
     give: {
       title: "What founding partners give",
       items: [

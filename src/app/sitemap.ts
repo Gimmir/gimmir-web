@@ -23,12 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: url("/franchise/numbers"),
-      lastModified: SITE_UPDATED,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
       url: url("/build-your-saas"),
       lastModified: SITE_UPDATED,
       changeFrequency: "monthly",

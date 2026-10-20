@@ -13,7 +13,7 @@ Wellness, yes; regulated clinical products, no.
 
 - [Home](https://gimmir.com/): who we are, what we build, both case studies and both ways in.
 - [For franchises](https://gimmir.com/franchise): a member app, booking and payments owned by the franchise HQ, how the HQ earns from every franchisee and every member payment, and a 30-minute call with Oleh.
-- [Franchise numbers](https://gimmir.com/franchise/numbers): the figures behind the offer.
+- [Franchise calculators](https://gimmir.com/franchise#calculator): what a network pays its platform today, the payback, and what keeping members longer adds.
 - [For founders](https://gimmir.com/build-your-saas): turning a business into a SaaS you own, how every project starts, and who it is not for.
 - [Work](https://gimmir.com/work): nine products shipped, four in fitness; two public case studies and seven under NDA.
 - [How we work](https://gimmir.com/how-we-work): how a build runs, fixed price per milestone with no hourly billing, what you own from day one, our engineering standards, and the two-founder question answered.

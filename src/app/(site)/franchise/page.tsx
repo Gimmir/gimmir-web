@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 
 import { FaqSection } from "@/components/blocks/faq-section";
+import { FranchiseCalculators } from "@/components/franchise/calculators";
 import { FranchiseClose } from "@/components/franchise/close";
 import { FranchiseFounding } from "@/components/franchise/founding";
 import { FranchiseGuarantees } from "@/components/franchise/guarantees";
 import { FranchiseHero } from "@/components/franchise/hero";
 import { FranchiseHowItWorks } from "@/components/franchise/how-it-works";
-import { FranchiseMoneyFlow } from "@/components/franchise/money-flow";
 import { FranchiseOwn } from "@/components/franchise/own";
 import { FranchisePlans } from "@/components/franchise/plans";
 import { FranchiseProof } from "@/components/franchise/proof";
-import { FranchiseWhatYouGet } from "@/components/franchise/what-you-get";
-import { FranchiseWorkedExample } from "@/components/franchise/worked-example";
+import { FranchiseWhatHqGets } from "@/components/franchise/what-hq-gets";
 import { JsonLd } from "@/components/seo/json-ld";
 import { franchise } from "@/content/franchise";
 import { FOUNDING, OFFER } from "@/content/offer";
@@ -31,11 +30,11 @@ export const metadata: Metadata = {
 // rebuilt every hour instead of frozen at the last deploy.
 export const revalidate = 3600;
 
-// The offer page every outreach link points to (Oleh's website plan, 20 Oct
-// 2026): a money argument top to bottom. ① hero, ② where the money goes,
-// ③ a worked example, ④ what you get, ⑤ UN1T, ⑥ what you own, ⑦
-// guarantees, ⑧ founding partners, ⑨ plans, ⑩ how it works, ⑪ questions,
-// ⑫ the last ask.
+// The offer page every outreach link points to (Oleh's website plan and
+// landing calculators, 20 Oct 2026): ① hero, ② the calculators (what the
+// current system costs and the payback, then what keeping members longer
+// adds), ③ what HQ gets, ④ UN1T, ⑤ what you own, ⑥ guarantees, ⑦ founding
+// partners, ⑧ plans, ⑨ how it works, ⑩ questions, ⑪ the last ask.
 export default function FranchisePage() {
   const faqLd = faqPage([...franchise.faq.items]);
 
@@ -58,9 +57,8 @@ export default function FranchisePage() {
         })}
       />
       <FranchiseHero />
-      <FranchiseMoneyFlow />
-      <FranchiseWorkedExample />
-      <FranchiseWhatYouGet />
+      <FranchiseCalculators />
+      <FranchiseWhatHqGets />
       <FranchiseProof />
       <FranchiseOwn />
       <FranchiseGuarantees />

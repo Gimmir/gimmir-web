@@ -1,92 +1,115 @@
 /**
- * Copy for /franchise/numbers, the HQ income calculator (Oleh's offer plan,
- * pages 11 to 13). Numbers come from `content/offer.ts`, `content/proof.ts`
- * and `lib/franchise-calc.ts`; only words live here.
+ * Copy for the two calculators on /franchise (Oleh's "Franchise HQ system:
+ * features and landing calculators", 20 Oct 2026, with Nazar's flow):
+ * ① what the network pays today and the payback, with the tech fee HQ sets;
+ * ② what keeping members longer adds, in an accordion under it.
+ * Numbers come from `content/offer.ts` and `lib/franchise-calc.ts`; only
+ * words live here.
  */
 
 import { OFFER } from "@/content/offer";
-import { shown, UN1T } from "@/content/proof";
 import { formatMoney } from "@/lib/franchise-calc";
 
 export const UNIT_WORDS = [
-  { plural: "studios", singular: "studio" },
-  { plural: "clubs", singular: "club" },
-  { plural: "gyms", singular: "gym" },
-  { plural: "schools", singular: "school" },
-  { plural: "venues", singular: "venue" },
-  { plural: "franchisees", singular: "franchisee" },
+  { id: "studios", one: "studio", many: "studios" },
+  { id: "clubs", one: "club", many: "clubs" },
+  { id: "schools", one: "school", many: "schools" },
 ] as const;
 
-export const PLATFORMS = [
-  "Mindbody",
-  "Glofox",
-  "Mariana Tek",
-  "TeamUp",
-  "ClassForKids",
-  "Other",
-] as const;
+export type UnitWord = (typeof UNIT_WORDS)[number];
 
-const glofoxFee = shown(UN1T.platformFeePerStudio);
+const setup = formatMoney(OFFER.setupFee);
 
 export const calculator = {
-  meta: {
-    title: "HQ income calculator: what your own app would earn",
-    description:
-      "5 numbers, 2 minutes: what your franchise HQ would earn from a tech fee and a fee on every payment with its own app.",
+  cost: {
+    eyebrow: "Your numbers",
+    title: "What does your current system cost you a year?",
+    lead: "6 answers, 2 minutes. Nothing you type leaves this page.",
+    steps: {
+      system: "Your current system",
+      units: (u: UnitWord) => `How many ${u.many} in your network?`,
+      unitWord: "We call them",
+      cost: (u: UnitWord, system: string) =>
+        `What does each ${u.one} pay ${system} a month?`,
+      costHint: "UN1T’s studios paid Glofox about £250.",
+      costEmpty: "Enter yours",
+      fee: "Payment fee you pay now",
+      feeStripe: "1.5% + 20p, Stripe’s standard UK rate",
+      feeMore: "My system charges more",
+      feeBack: "Back to Stripe’s rate",
+      volume: (u: UnitWord) => `Card payments per ${u.one} a month`,
+      volumeHint: "300 members × £60 is £18,000.",
+      other: "Other tech you pay each month",
+      otherHint: "A branded app add-on, marketing tools, integrations.",
+    },
+    receipt: {
+      label: "A year",
+      leaves: (system: string) => `leaves your network for ${system}.`,
+      system: (amount: string) =>
+        `Your own system: ${amount} a year, with every update and 10 hours a month of new features.`,
+      stays: (amount: string) => `${amount} a year stays with you`,
+      payback: (months: string) => `, and the ${setup} set-up is back in ${months} months.`,
+      noPayback: `. At these numbers the tech fee alone doesn’t pay back the ${setup}: the fee on every payment does, below.`,
+      line: (system: string) =>
+        `No new members, no price changes. Charge franchisees what they pay ${system} today and it becomes HQ’s income. Charge less and they keep the difference. Your choice.`,
+      empty: (u: UnitWord, system: string) =>
+        `Enter what each ${u.one} pays ${system} to see your numbers.`,
+    },
+    split: {
+      title: "What will each franchisee pay HQ a month?",
+      hq: "HQ earns",
+      franchisees: "Franchisees save",
+      franchiseesMore: "Franchisees pay more",
+      same: "Same as they pay today",
+      moreLine: (amount: string) =>
+        `Franchisees pay ${amount} more a year, and HQ earns it.`,
+      paybackLabel: "Set-up back in",
+      months: (months: string) => `${months} months`,
+      noPayback: "Not from the tech fee alone",
+      perYear: "a year",
+    },
+    writing: "Get these numbers in writing",
   },
-  hero: {
-    headline: "What would HQ earn from its own app?",
-    sub: "5 numbers, 2 minutes. Your figures stay private.",
+
+  retention: {
+    bar: {
+      title: "And what it adds to your profit",
+      live: (amount: string) => `about ${amount} a year more for HQ at your numbers`,
+      open: "Show how",
+      close: "Hide",
+    },
+    steps: {
+      members: (u: UnitWord) => `Members per ${u.one}, on average`,
+      membersHint: "UN1T’s average is 300.",
+      retention: "Members still with you after 12 months",
+      bill: "Average monthly bill per member",
+      fee: "Fee on every payment to HQ",
+      feeOn: "On",
+      royalty: "Your royalty on franchisee revenue",
+      royaltyHint: "Optional. Leave it at 0 if you charge a flat royalty.",
+      uplift: "Retention with your own app",
+    },
+    results: {
+      fee: "a year to HQ from the fee on every payment.",
+      kept: (members: string, revenue: string) =>
+        `${members} more members kept, ${revenue} more revenue for your franchisees.`,
+      gain: (amount: string) =>
+        `${amount} a year more to HQ from that revenue (royalty + fee).`,
+      total: (amount: string) => `All together: ${amount} a year for HQ`,
+      payback: (months: string) => `, set-up back in ${months} months.`,
+      noPayback: ".",
+      small:
+        "The retention buttons show what if, not a promise. On the call we use your real numbers. The fee on every payment goes on top of Stripe’s fee, and the franchisee pays it.",
+    },
   },
-  fields: {
-    units: {
-      label: "How many studios (clubs, schools) in your network?",
-      note: `Built for networks of ${OFFER.minUnits}+; under that, renting usually makes sense.`,
-      range: (min: number, max: number, used: number) =>
-        `Between ${min} and ${max}. Using ${used}.`,
-    },
-    unitWord: { label: "What do you call them?" },
-    platformFee: {
-      label: "What does each one pay its platform a month?",
-      hint: glofoxFee === null ? null : `UN1T’s studios paid Glofox about £${glofoxFee}`,
-    },
-    platform: { label: "Which platform is it? (optional)", none: "Choose one" },
-    techFee: {
-      label: "Tech fee each would pay HQ a month",
-      hint: "You set it. Start below what they pay today.",
-    },
-    members: {
-      label: "Members (or families) per site",
-      hint: "UN1T’s average is 300",
-    },
-    avgPayment: { label: "Average a member pays a month" },
-    feeRate: { label: "Fee on every payment" },
+
+  engine: {
+    open: "Show the list",
+    close: "Hide the list",
   },
-  result: {
-    heading: "HQ’s new income",
-    empty: "Fill in every number to see HQ’s income.",
-    perMonth: "a month",
-    perYear: "a year",
-    lines: {
-      techFee: "Tech fee",
-      paymentFee: "Fee on every payment",
-      plan: "Grow plan, founding rate",
-    },
-    payback: (months: string) =>
-      `The ${formatMoney(OFFER.setupFee)} set-up comes back in about ${months} months.`,
-    noPayback: "Doesn’t pay back at these numbers",
-    techFeeYear: (year: string) =>
-      `A year of the tech fee: ${year}, against the ${formatMoney(OFFER.setupFee)} set-up.`,
-    perUnit: {
-      less: (unit: string, amount: string) =>
-        `Each ${unit} pays ${amount} less a month than today.`,
-      more: (unit: string, amount: string) =>
-        `Each ${unit} pays ${amount} more a month; HQ’s choice.`,
-      same: (unit: string) => `Each ${unit} pays the same as today.`,
-    },
-    condition: "This works once your franchisees pay HQ the tech fee.",
-  },
-  next: {
-    back: "Back to the offer",
+
+  mail: {
+    to: "hello@gimmir.com",
+    subject: "My numbers from gimmir.com",
   },
 } as const;
