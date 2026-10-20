@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 
 /**
  * Parts for the slices of UI drawn in code on the V2 bento cards (home ⑦,
- * /operators): a white panel on the card's tinted stage, small line icons
+ * the UN1T case): a white panel on the card's tinted stage, small line icons
  * and a founder's face.
  */
 const icon = {
