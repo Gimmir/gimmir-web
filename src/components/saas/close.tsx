@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
 
 /**
  * /build-your-saas ⑧, the signed call with Oleh's and Nazar's portraits
- * (doc 09): a dark card on paper, like /operators' close with Nazar.
+ * (doc 09): a dark card on paper, like /franchise's close.
  */
 export function SaasClose() {
   const { title, line } = saas.close;

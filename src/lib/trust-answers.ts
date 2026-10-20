@@ -1,8 +1,8 @@
 import type { FaqItem } from "@/components/shared/faq-list";
 
 /**
- * The answers a careful buyer checks first. Shared by /operators and
- * /how-we-work so the wording never drifts between pages.
+ * The answers a careful buyer checks first. Shared by the pages that
+ * use them, such as /how-we-work, so the wording never drifts between pages.
  */
 export const DISAPPEAR_ANSWER: FaqItem = {
   key: "disappear",
