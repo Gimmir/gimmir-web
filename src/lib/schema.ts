@@ -219,6 +219,36 @@ export function serviceSchema({
   };
 }
 
+/**
+ * An Offer for a page that sells at one fixed price (the /franchise
+ * founding set-up). `availabilityEnds` is the ISO date the terms close.
+ */
+export function offerSchema({
+  name,
+  price,
+  currency,
+  path,
+  availabilityEnds,
+}: {
+  name: string;
+  price: number;
+  currency: string;
+  path: string;
+  availabilityEnds: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    "@id": `${SITE_URL}${path}#offer`,
+    name,
+    price,
+    priceCurrency: currency,
+    url: `${SITE_URL}${path}`,
+    seller: { "@id": ORG_ID },
+    availabilityEnds,
+  };
+}
+
 /** AboutPage for /about, pointing at the founder Person nodes. */
 export function aboutPage() {
   return {
