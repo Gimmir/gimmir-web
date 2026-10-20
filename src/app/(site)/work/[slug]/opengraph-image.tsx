@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { jimmy } from "@/content/jimmy";
+import { JIMMY, shown } from "@/content/proof";
 import { un1t } from "@/content/un1t";
 import { caseSlugs, getCaseBySlug } from "@/lib/cases";
 import { OG_CONTENT_TYPE, OG_SIZE, ogCard, type OgPicture } from "@/lib/og-card";
@@ -26,7 +27,9 @@ const CARDS: Record<string, Parameters<typeof ogCard>[0]> = {
   "jimmy-coach": {
     label: "Case study · Jimmy Coach",
     headline: jimmy.hero.headline,
-    voice: "200+ coaches two months after launch.",
+    voice: shown(JIMMY.mrr)
+      ? `${shown(JIMMY.mrr)} a month in recurring revenue.`
+      : "A coaching app we co-founded with a Hyrox and CrossFit coach.",
     picture: {
       phones: jimmy.hero.screens.map((s) => s.src) as [string, string, string],
     },

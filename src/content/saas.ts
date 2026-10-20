@@ -1,11 +1,18 @@
 /**
  * /build-your-saas, V2 (doc 09 §3.3): buyer B, founders building or owning
  * a SaaS, in Nazar and Oleh's voice. Facts only where the site already has
- * them: Jimmy's coach had 250+ clients, 100+ coaches in the first month,
- * co-founded and co-owned. Quentin OK'd being named (2026-09-30). No
+ * them: Jimmy's coach had 250+ clients, co-founded and co-owned. Jimmy
+ * Coach's own figures come from proof.ts (JIMMY) via `shown()`. Quentin OK'd being named (2026-09-30). No
  * prices and no budget floor on the page.
  */
 import type { HeadlineToken } from "@/components/blocks/inline-headline";
+import { JIMMY, shown } from "@/content/proof";
+
+const jimmyMrr = shown(JIMMY.mrr);
+
+/** "$12,000+" as "$12k+": short enough to draw as the story's big number. */
+const compactUsd = (v: string) =>
+  v.replace(/^\$(\d+),000(\+?)$/, (_, n, plus) => `$${n}k${plus}`);
 
 export const saas = {
   meta: {
@@ -13,7 +20,7 @@ export const saas = {
     // "turn my business into a saas" has no demand, so it stays the H1
     title: "Custom SaaS Development You Own",
     description:
-      "Custom SaaS development for founders with a business or an audience. You own the code, accounts and IP. Jimmy Coach reached 200+ coaches in two months.",
+      `Custom SaaS development for founders with a business or an audience. You own the code, accounts and IP.${jimmyMrr ? ` Jimmy Coach earns ${jimmyMrr} a month in recurring revenue.` : ""}`,
   },
 
   hero: {
@@ -49,11 +56,16 @@ export const saas = {
         line: "SaaS we built as his co-founders, on Nazar's own money. No invoice, all the risk.",
         tag: "02 · The bet",
       },
-      {
-        value: "200+",
-        line: "coaches on Jimmy two months after launch.",
-        tag: "03 · Today",
-      },
+      // a pending figure drops the stat (proof.ts), never a placeholder
+      ...(jimmyMrr
+        ? [
+            {
+              value: compactUsd(jimmyMrr),
+              line: "a month in recurring revenue on Jimmy Coach.",
+              tag: "03 · Today",
+            },
+          ]
+        : []),
     ],
     link: { label: "Read the story", href: "/work/jimmy-coach" },
   },

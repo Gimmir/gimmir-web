@@ -693,32 +693,36 @@ function Numbers({ data }: { data: CaseStudy }) {
           <OutlineStat
             value={stat.value}
             label={stat.label}
-            layout="wide"
+            layout="long"
             delay={300}
             className="mt-6 max-w-[620px]"
           />
         </div>
         <div className="lg:col-span-5">
-          <p
-            className="fade font-mono text-[12px] uppercase tracking-[0.04em] text-lime"
-            style={d(900)}
-          >
-            {date}
-          </p>
-          <div className="mt-6 grid grid-cols-2 gap-6">
-            {side.map((s, i) => (
-              <div
-                key={s.label}
-                className="fade border-t border-line-dark pt-4"
-                style={d(1000 + i * 90)}
-              >
-                <p className="display text-[clamp(2.5rem,1.5rem+2vw,3.5rem)] leading-none">
-                  {s.value}
-                </p>
-                <p className="mt-2 text-paper/65">{s.label}</p>
-              </div>
-            ))}
-          </div>
+          {date ? (
+            <p
+              className="fade font-mono text-[12px] uppercase tracking-[0.04em] text-lime"
+              style={d(900)}
+            >
+              {date}
+            </p>
+          ) : null}
+          {side.length > 0 ? (
+            <div className="mt-6 grid grid-cols-2 gap-6">
+              {side.map((s, i) => (
+                <div
+                  key={s.label}
+                  className="fade border-t border-line-dark pt-4"
+                  style={d(1000 + i * 90)}
+                >
+                  <p className="display text-[clamp(2.5rem,1.5rem+2vw,3.5rem)] leading-none">
+                    {s.value}
+                  </p>
+                  <p className="mt-2 text-paper/65">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
           <CaseQuote
             quote={data.quote}
             className="mt-12 [&_blockquote]:text-paper"

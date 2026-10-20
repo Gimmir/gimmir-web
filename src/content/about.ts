@@ -7,7 +7,10 @@
  * founders who build SaaS as owners, fitness where they go deepest.
  */
 import type { HeadlineToken } from "@/components/blocks/inline-headline";
+import { JIMMY, shown } from "@/content/proof";
 import type { FounderId } from "@/lib/founders";
+
+const jimmyMrr = shown(JIMMY.mrr);
 
 export const about = {
   meta: {
@@ -66,16 +69,25 @@ export const about = {
       {
         label: "Leads",
         nazar: {
-          b: "The Review",
-          rest: ", and the first call with brands.",
+          b: "SaaS founder reviews",
+          rest: ", and the first call with SaaS founders.",
         },
-        oleh: { b: "The build", rest: ", from the first commit to launch." },
+        oleh: {
+          b: "Franchise calls",
+          rest: ", and the build, from the first commit to launch.",
+        },
       },
     ],
     // the last row is a call with each of them
     talk: {
-      nazar: { label: "Talk to Nazar", booking: "franchiseCall" },
-      oleh: { label: "Talk to Oleh", booking: "founderReview" },
+      nazar: {
+        label: "Talk to Nazar (SaaS founders)",
+        booking: "founderReview",
+      },
+      oleh: {
+        label: "Talk to Oleh (franchises)",
+        booking: "franchiseCall",
+      },
     },
   },
 
@@ -88,7 +100,7 @@ export const about = {
     ] satisfies HeadlineToken[],
     body: [
       "We’ve built software together for years, first as a general-purpose agency: nine products shipped, four of them in fitness.",
-      "Two of them changed how we work. Oleh led the architecture that took UN1T, a 10+ location franchise, off a rented platform and onto its own. Nazar co-founded Jimmy Coach with Quentin, on his own money, and it reached 200+ coaches two months after launch.",
+      `Two of them changed how we work. Oleh led the architecture that took UN1T, a 10+ location franchise, off a rented platform and onto its own. Nazar co-founded Jimmy Coach with Quentin, on his own money.${jimmyMrr ? ` It earns ${jimmyMrr} a month in recurring revenue.` : ""}`,
       "Carrying the result, not the hours, is what we bring to every build now. Your SaaS, built as if it were ours, and yours from the first commit.",
     ],
   },

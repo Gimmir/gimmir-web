@@ -1,10 +1,12 @@
-import { shown, UN1T } from "@/content/proof";
+import { JIMMY, shown, UN1T } from "@/content/proof";
 
-// UN1T's figures live in proof.ts; a pending claim never reaches a page.
+// UN1T's and Jimmy's figures live in proof.ts; a pending claim never
+// reaches a page.
 const un1tStudios = shown(UN1T.studios) as number;
 const un1tFee = shown(UN1T.platformFeePerStudio) as number;
 const un1tMembers = shown(UN1T.members) as string;
 const un1tQuote = shown(UN1T.quote) as { text: string; name: string; org: string };
+const jimmyMrr = shown(JIMMY.mrr);
 
 export type CaseStat = {
   value?: number;
@@ -100,16 +102,26 @@ export const CASES: CaseStudy[] = [
       "A coaching platform co-founded and co-owned with a working coach: one native app for iOS and Android, and a web dashboard, live in the App Store and Google Play.",
     seoTitle: "Jimmy Coach: Online Coaching App Case Study",
     seoDescription:
-      "An online coaching app co-founded and built end to end: one iOS and Android app plus a web dashboard, and 200+ coaches two months after launch.",
+      `An online coaching app co-founded and built end to end: one iOS and Android app plus a web dashboard${jimmyMrr ? `, earning ${jimmyMrr} a month in recurring revenue` : ""}.`,
     services: [
       "One native app: client & coach",
       "Web dashboard & Stripe billing",
       "Community, courses & messaging",
       "Built from zero to launch",
     ],
+    // Jimmy's figures come from proof.ts; a pending claim drops its stat
     stats: [
-      { value: 100, suffix: "+", label: "active coaches" },
-      { value: 300, suffix: "+", label: "first-month users" },
+      ...(jimmyMrr
+        ? [{ text: jimmyMrr, label: "a month in recurring revenue" }]
+        : []),
+      ...(shown(JIMMY.liveSince)
+        ? [
+            {
+              text: shown(JIMMY.liveSince) as string,
+              label: "live on the App Store since",
+            },
+          ]
+        : []),
     ],
     facts: [
       ["Product", "Jimmy Coach, a coaching platform"],
