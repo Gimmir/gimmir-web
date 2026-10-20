@@ -18,6 +18,7 @@ export function FranchiseWorkedExample() {
   return (
     <Stage
       as="section"
+      id="worked-example"
       data-tone="ink"
       className="relative bg-ink text-paper"
     >

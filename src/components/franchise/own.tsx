@@ -14,7 +14,7 @@ export function FranchiseOwn() {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
   return (
-    <Stage as="section" data-tone="paper" className="relative">
+    <Stage as="section" id="own" data-tone="paper" className="relative">
       <Container className="grid gap-x-10 gap-y-10 py-20 md:py-28 lg:grid-cols-12">
         <h2 className="display text-[length:var(--text-title)] leading-[1.02] lg:col-span-5">
           <RiseText text={title} />

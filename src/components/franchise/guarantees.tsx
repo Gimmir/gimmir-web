@@ -14,6 +14,7 @@ export function FranchiseGuarantees() {
   return (
     <Stage
       as="section"
+      id="guarantees"
       data-tone="paper"
       className="relative border-t border-line bg-paper-2"
     >

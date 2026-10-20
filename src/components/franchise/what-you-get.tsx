@@ -13,7 +13,7 @@ export function FranchiseWhatYouGet() {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
   return (
-    <Stage as="section" data-tone="paper" className="relative">
+    <Stage as="section" id="what-you-get" data-tone="paper" className="relative">
       <Container className="py-20 md:py-28">
         <h2 className="display text-[length:var(--text-title)] leading-[1.02]">
           <RiseText text={title} />

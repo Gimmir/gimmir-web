@@ -14,6 +14,7 @@ export function FranchiseHowItWorks() {
   return (
     <Stage
       as="section"
+      id="how-it-works"
       data-tone="paper"
       className="relative border-t border-line"
     >

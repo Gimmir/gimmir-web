@@ -19,7 +19,7 @@ export function FranchiseHero() {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
   return (
-    <Stage as="section" eager data-tone="paper" className="relative">
+    <Stage as="section" id="hero" eager data-tone="paper" className="relative">
       <HeroBackdrop />
       <Container className="relative pb-16 pt-28 sm:pt-32 md:pb-24 md:pt-40">
         <h1 className="max-w-[20ch] text-[clamp(2.3rem,0.8rem+5.1vw,5.25rem)] font-extrabold leading-[1.04] tracking-[-0.038em] [font-stretch:106%] lg:max-w-[22ch] lg:text-[clamp(3.25rem,0.8rem+3.9vw,4.6rem)]">

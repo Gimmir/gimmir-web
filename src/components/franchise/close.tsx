@@ -13,7 +13,7 @@ export function FranchiseClose() {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
   return (
-    <Stage as="section" data-tone="paper">
+    <Stage as="section" id="close" data-tone="paper">
       <Container className="pb-20 md:pb-28">
         <div className="fade rounded-[32px] bg-ink p-7 text-paper sm:p-10 md:p-14">
           <h2 className="display max-w-[18ch] text-[length:var(--text-title)] leading-[1.02]">

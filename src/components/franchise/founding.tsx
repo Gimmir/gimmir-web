@@ -22,6 +22,7 @@ export function FranchiseFounding() {
   return (
     <Stage
       as="section"
+      id="founding"
       data-tone="ink"
       className="relative bg-ink text-paper"
     >

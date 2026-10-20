@@ -21,6 +21,7 @@ export function FranchiseProof() {
   return (
     <Stage
       as="section"
+      id="proof"
       data-tone="ink"
       className="relative bg-ink text-paper"
     >
