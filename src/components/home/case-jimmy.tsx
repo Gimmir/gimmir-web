@@ -13,7 +13,7 @@ import { FOUNDERS } from "@/lib/founders";
 /**
  * ④ Proof, on paper, after UN1T on ink: the title across the page, one
  * sentence a line; below it the number drawn in ink with its margin note
- * (the same hand as UN1T's "12" and the manifesto's key), and beside it
+ * (the same hand as UN1T's "10" and the manifesto's key), and beside it
  * how it started, in Nazar's words, in serif.
  */
 export function CaseJimmy() {
@@ -58,14 +58,19 @@ export function CaseJimmy() {
               tone="paper"
               layout="wide"
               delay={300}
+              // "$12k+" is a glyph wider than the layout's "100+": shrink the
+              // figure so the plus stays inside its column
+              className="max-w-[80%]"
             />
-            <p
-              className="fade mt-12 flex items-baseline gap-4 border-t border-line pt-6"
-              style={d(2500)}
-            >
-              <span className="display text-5xl">{c.side.value}</span>
-              <span className="text-[15px] text-muted">{c.side.label}</span>
-            </p>
+            {c.side && (
+              <p
+                className="fade mt-12 flex items-baseline gap-4 border-t border-line pt-6"
+                style={d(2500)}
+              >
+                <span className="display text-5xl">{c.side.value}</span>
+                <span className="text-[15px] text-muted">{c.side.label}</span>
+              </p>
+            )}
           </div>
 
           <div className="lg:col-span-5">

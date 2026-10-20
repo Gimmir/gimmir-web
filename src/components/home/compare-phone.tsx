@@ -14,7 +14,7 @@ const GLYPHS: GlyphKind[] = ["lock", "hourglass", "key"];
  * ⑤ on phones: the desktop's three columns as three cards in a native
  * swipe (scroll snap, so it moves at the finger's pace on any phone),
  * ours last and dark, the finale. The cards share their rows through a
- * subgrid, so a question sits at the same height on every card as you
+ * subgrid (a header row plus the 6 questions), so a question sits at the same height on every card as you
  * swipe. The dots follow the card in view and jump to one when tapped.
  */
 export function CompareOnPhone({
@@ -64,7 +64,7 @@ export function CompareOnPhone({
         ref={track}
         role="region"
         aria-label="Three ways compared, swipe for the next"
-        className="fade -mx-5 mt-8 grid auto-cols-[min(82%,320px)] grid-flow-col grid-rows-[repeat(6,auto)] gap-x-3 overflow-x-auto overscroll-x-contain px-5 pb-2 [scrollbar-width:none] snap-x snap-mandatory scroll-px-5 [&::-webkit-scrollbar]:hidden"
+        className="fade -mx-5 mt-8 grid auto-cols-[min(82%,320px)] grid-flow-col grid-rows-[repeat(7,auto)] gap-x-3 overflow-x-auto overscroll-x-contain px-5 pb-2 [scrollbar-width:none] snap-x snap-mandatory scroll-px-5 [&::-webkit-scrollbar]:hidden"
         style={d(delay)}
       >
         {columns.map((c, i) => {
@@ -75,7 +75,7 @@ export function CompareOnPhone({
               role="group"
               aria-label={`${i + 1} of ${columns.length}: ${c}`}
               className={cn(
-                "row-span-6 grid snap-start grid-rows-subgrid rounded-[24px] px-5 pb-2",
+                "row-span-7 grid snap-start grid-rows-subgrid rounded-[24px] px-5 pb-2",
                 ours ? "bg-ink text-paper" : "border border-line bg-surface",
               )}
             >

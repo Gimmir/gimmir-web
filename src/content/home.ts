@@ -1,34 +1,56 @@
 /**
  * Home page copy (V2). Facts follow the portfolio rules: 9 products shipped,
- * 4 in fitness, 1 co-owned; UN1T took 12 weeks; no prices, no $ figures.
+ * 4 in fitness, 1 co-owned. UN1T and Jimmy figures come from proof.ts and
+ * never from a typed number there; a pending claim doesn't render.
  */
 import type { HeadlineToken } from "@/components/blocks/inline-headline";
+import { JIMMY, PRODUCTS_SHIPPED, shown, UN1T } from "@/content/proof";
+
+const un1tStudios = shown(UN1T.studios);
+const un1tMembers = shown(UN1T.members);
+const jimmyMrr = shown(JIMMY.mrr);
+const jimmyClients = shown(JIMMY.clients);
+
+/** "$12,000+" as "$12k+": short enough to draw as the case's big number. */
+const compactUsd = (v: string) =>
+  v.replace(/^\$(\d+),000(\+?)$/, (_, n, plus) => `$${n}k${plus}`);
 
 export const home = {
   meta: {
-    // doc 09's title. Not a search phrase, on purpose: the position (SaaS
-    // founders own, fitness where we go deepest) outranks keyword data;
-    // "Fitness App Development Company" was tried and pulled (2026-09-30)
-    title: "Gimmir: SaaS founders own · Fitness first",
+    // Leads with the franchise offer (Oleh's offer plan, 20 Oct 2026); the
+    // SaaS-founder position stays in the hero.
+    title: "Gimmir: your franchise's own app, booking and payments",
     description:
-      "Nazar and Oleh build SaaS that founders own, from the first commit, and show every step. Nine products shipped, four in fitness, one we co-own.",
+      "Franchisees pay a platform every month. With your own app that money comes to HQ, plus a fee on every payment. Built for UN1T, a 10-studio franchise.",
   },
 
   hero: {
     chips: [
       {
         label: "UN1T",
-        detail: "10+ locations",
+        detail: [
+          un1tStudios && `${un1tStudios} studios`,
+          un1tMembers && `${un1tMembers} members`,
+        ]
+          .filter(Boolean)
+          .join(", "),
         logo: "/design/un1t-logo.png",
         href: "/work/un1t",
       },
       {
         label: "Jimmy Coach",
-        detail: "co-founded",
+        detail: jimmyMrr
+          ? `${compactUsd(jimmyMrr)} a month in revenue`
+          : "co-founded",
         logo: "/design/jimmy-coach-logo.png",
         href: "/work/jimmy-coach",
       },
-      { label: "9 products", detail: "shipped", grid: true, href: "/work" },
+      {
+        label: `${PRODUCTS_SHIPPED} products`,
+        detail: "shipped",
+        grid: true,
+        href: "/work",
+      },
     ],
     headline: [
       "We",
@@ -41,12 +63,14 @@ export const home = {
     ] satisfies HeadlineToken[],
     doors: [
       {
-        id: "operators",
-        label: "I run a franchise or a chain",
-        href: "/operators",
+        id: "franchise",
+        label: "I run a franchise",
+        href: "/franchise",
       },
       { id: "saas", label: "I’m building a SaaS", href: "/build-your-saas" },
     ],
+    // under the doors: why a franchise would click the first one
+    pitch: "Your franchisees pay a platform. With your own app, that money comes to HQ.",
     note: { quote: "Book a call with us, not a sales rep.", by: "nazar" },
   },
 
@@ -54,7 +78,7 @@ export const home = {
     // one sentence per pair of lines, set as four lines at every width;
     // the last line gets the lime marker
     lines: ["Your business", "runs on software.", "You should", "own it."],
-    // the note on the drawn key: the same claim as /pricing and /operators
+    // the note on the drawn key: the same claim as /pricing and /franchise
     key: "Code, repos and accounts in your name from day one",
     marquee: [
       "Member apps",
@@ -71,16 +95,17 @@ export const home = {
 
   un1t: {
     label: "Case 01",
-    meta: ["Fitness franchise", "10+ locations", "Member app + franchise CRM"],
-    title: "From separate studios to one network on its own software.",
+    meta: [
+      "Fitness franchise",
+      un1tStudios && `${un1tStudios} studios`,
+      "Member app + franchise CRM",
+    ].filter((m): m is string => Boolean(m)),
+    title: "UN1T's HQ now earns a fee on every studio payment.",
     story:
       "Each studio ran on a rented platform and its own stack of tools. We built one member app and franchise CRM that UN1T owns, so head office sees every member and every payment.",
     link: { label: "Read the case", href: "/work/un1t" },
-    stat: {
-      value: "12",
-      label: "weeks to move a 10+ location franchise onto software it owns",
-    },
-    side: { value: "10+", label: "locations on one system" },
+    stat: { value: String(un1tStudios ?? ""), label: "studios on one system" },
+    side: { value: un1tMembers ?? "", label: "members" },
   },
 
   jimmy: {
@@ -95,8 +120,14 @@ export const home = {
     },
     meta: ["Coaching platform", "Co-founded", "iOS & Android app + web"],
     link: { label: "Read the story", href: "/work/jimmy-coach" },
-    stat: { value: "100+", label: "coaches on Jimmy in its first month" },
-    side: { value: "300+", label: "users in the first month" },
+    stat: {
+      value: compactUsd(jimmyMrr ?? ""),
+      label: "a month in recurring revenue",
+    },
+    // coach and client counts wait for sign-off (proof.ts): no line until then
+    side: jimmyClients
+      ? { value: String(jimmyClients), label: "clients on Jimmy" }
+      : null,
   },
 
   // doc 09 ⑤. "Every step" drops the doc's "(build log)" until the build
@@ -114,8 +145,12 @@ export const home = {
         values: [
           "Rises per location or user",
           "Rises per hour",
-          "Fixed per milestone",
+          "One fixed set-up, then a plan your tech fee covers",
         ],
+      },
+      {
+        label: "Who earns from your members' payments",
+        values: ["Vendor", "–", "You"],
       },
       { label: "Your brand", values: ["Their template", "Yours", "Yours"] },
       {
@@ -139,7 +174,7 @@ export const home = {
       {
         title: "Franchise & multi-location platforms",
         product: "UN1T",
-        href: "/work/un1t",
+        href: "/franchise",
         body: "Member app and franchise CRM on one system: head office sees every member at every site.",
       },
       {
@@ -209,22 +244,23 @@ export const home = {
     // Nazar's pick (V1): the live heading with the two of you in it,
     // "You work with [face] Nazar and [face] Oleh, directly."
     headline: { before: "You work with", after: "directly." },
+    // Oleh first: the franchise call is the main road in
     people: [
-      {
-        id: "nazar",
-        line: "I'm the one who pressure-tests your product thinking and your plan.",
-        cta: {
-          label: "Talk to Nazar",
-          note: "brands",
-          booking: "franchiseCall",
-        },
-      },
       {
         id: "oleh",
         line: "I own the technical judgment: how it's built, and whether it will scale.",
         cta: {
           label: "Talk to Oleh",
-          note: "product & tech",
+          note: "franchises",
+          booking: "franchiseCall",
+        },
+      },
+      {
+        id: "nazar",
+        line: "I'm the one who pressure-tests your product thinking and your plan.",
+        cta: {
+          label: "Talk to Nazar",
+          note: "SaaS founders",
           booking: "founderReview",
         },
       },

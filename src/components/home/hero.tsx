@@ -17,7 +17,7 @@ import { FOUNDERS } from "@/lib/founders";
  * light behind it (HeroBackdrop).
  */
 export function Hero() {
-  const { chips, headline, doors, note } = home.hero;
+  const { chips, headline, doors, pitch, note } = home.hero;
   const by = FOUNDERS[note.by];
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
@@ -33,6 +33,13 @@ export function Hero() {
 
         <div className="mt-10 md:mt-12">
           <TwoDoor doors={doors} placement="home-hero" delay={640} />
+
+          <p
+            className="fade mt-5 max-w-[46ch] text-[15px] text-muted"
+            style={d(1100)}
+          >
+            {pitch}
+          </p>
 
           <p className="fade mt-7 flex items-center gap-3" style={d(1500)}>
             <span className="relative size-8 shrink-0 overflow-hidden rounded-full bg-paper-2 ring-2 ring-paper">

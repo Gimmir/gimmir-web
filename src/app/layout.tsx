@@ -42,15 +42,15 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Gimmir: SaaS founders own · Fitness first",
+    default: "Gimmir: your franchise's own app, booking and payments",
     template: "%s · Gimmir",
   },
   description:
-    "Nazar and Oleh build SaaS that founders own, from the first commit, and show every step. Nine products shipped, four in fitness.",
+    "Franchisees pay a platform every month. With your own app that money comes to HQ, plus a fee on every payment. Built for UN1T, a 10-studio franchise.",
   ...socialMetadata({
-    title: "Gimmir: SaaS founders own · Fitness first",
+    title: "Gimmir: your franchise's own app, booking and payments",
     description:
-      "Nazar and Oleh build SaaS that founders own, from the first commit, and show every step. Nine products shipped, four in fitness.",
+      "Franchisees pay a platform every month. With your own app that money comes to HQ, plus a fee on every payment. Built for UN1T, a 10-studio franchise.",
     path: "/",
     image: "/opengraph-image",
   }),
