@@ -4,6 +4,7 @@ import { calculator } from "@/content/calculator";
 import { formatMoney, formatPercent } from "@/lib/franchise-calc";
 
 import { CostInputs, CostReceipt, TechFeeSplit } from "./cost-calculator";
+import { MobileResultBar } from "./mobile-result-bar";
 import { RetentionCalculator, RetentionEngine } from "./retention-calculator";
 import { useCalculators, type Calculators } from "./use-calculators";
 
@@ -35,13 +36,14 @@ export function Calculators() {
     <>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] lg:gap-16">
         <CostInputs c={c} />
-        <div className="lg:sticky lg:top-28 lg:self-start">
+        <div id="calc-receipt" className="scroll-mt-24">
           <CostReceipt c={c} writingHref={writingHref(c)} />
         </div>
       </div>
       <TechFeeSplit c={c} />
       <RetentionCalculator c={c} />
       <RetentionEngine />
+      <MobileResultBar c={c} sectionId="calculator" receiptId="calc-receipt" />
     </>
   );
 }

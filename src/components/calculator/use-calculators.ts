@@ -81,8 +81,10 @@ const foundingOpen = () =>
   Date.now() <= new Date(`${FOUNDING.termsClose}T23:59:59Z`).getTime();
 
 /**
- * Both calculators' state and sums. Units carry from calculator 1 to 2,
- * and calculator 2's total adds the HQ income from the tech fee slider.
+ * Both calculators' state and sums. Units carry from calculator 1 to 2.
+ * HQ's income is the tech fee plus the fee on every payment (members and
+ * bill from calculator 2's fields); calculator 2's retention what-if adds
+ * to it.
  * GA4 gets `calc_start` on the first change and `calc_result` once 3
  * fields have changed, with a units bucket only (never the figures).
  */
@@ -170,11 +172,13 @@ export function useCalculators() {
             uplift: state.uplift,
           });
 
-    const retentionYear = retention
-      ? retention.feeIncomeYear + retention.hqGainYear
-      : null;
+    // HQ's own income with no change to members: the tech fee it sets plus
+    // the fee on every payment. Retention is the what-if on top.
+    const feeIncomeYear = retention?.feeIncomeYear ?? 0;
+    const hqYear = split === null ? null : split.hqIncomeYear + feeIncomeYear;
+    const retentionYear = retention ? retention.hqGainYear : null;
     const totalYear =
-      retentionYear === null ? null : retentionYear + (split?.hqIncomeYear ?? 0);
+      hqYear === null ? null : hqYear + (retentionYear ?? 0);
 
     return {
       unit,
@@ -187,6 +191,9 @@ export function useCalculators() {
       techFee,
       split,
       retention,
+      feeIncomeYear,
+      hqYear,
+      hqPayback: hqYear === null ? null : paybackMonths(hqYear),
       retentionYear,
       totalYear,
       totalPayback: totalYear === null ? null : paybackMonths(totalYear),

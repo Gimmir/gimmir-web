@@ -3,7 +3,7 @@
 import { calculator, UNIT_WORDS } from "@/content/calculator";
 import { CALC_LIMITS, SYSTEMS } from "@/content/offer";
 import { cn } from "@/lib/cn";
-import { formatMoney, formatMonths } from "@/lib/franchise-calc";
+import { formatMoney, formatMonths, formatPercent } from "@/lib/franchise-calc";
 
 import { Chips, NumberBox, Range, Step } from "./fields";
 import type { Calculators } from "./use-calculators";
@@ -146,10 +146,13 @@ function Row({
 }) {
   return (
     <div className="flex items-baseline gap-3 py-2.5">
-      <dt className={cn("shrink-0", strong ? "font-semibold" : "text-paper/75")}>
+      <dt className={cn("min-w-0", strong ? "font-semibold" : "text-paper/75")}>
         {label}
       </dt>
-      <span aria-hidden className="mb-1 h-px flex-1 border-b border-dotted border-paper/25" />
+      <span
+        aria-hidden
+        className="mb-1 h-px min-w-4 flex-1 border-b border-dotted border-paper/25"
+      />
       <dd className={cn("shrink-0 tabular-nums", strong && "font-semibold")}>
         {value}
       </dd>
@@ -159,7 +162,8 @@ function Row({
 
 /** Calculator 1's results, as a receipt on ink. */
 export function CostReceipt({ c, writingHref }: { c: Calculators; writingHref: string }) {
-  const { cost, split, unit, systemName } = c;
+  const { cost, split, unit, systemName, techFee, retention, feeIncomeYear, hqYear, hqPayback, state } =
+    c;
   const r = copy.receipt;
 
   return (
@@ -191,17 +195,40 @@ export function CostReceipt({ c, writingHref }: { c: Calculators; writingHref: s
           </p>
 
           <dl className="mt-5 border-t border-paper/15 pt-2 text-[15px]">
-            <Row label={`Today, ${systemName}`} value={formatMoney(cost.costTodayYear)} />
-            <Row label="Your own system" value={formatMoney(-cost.systemYear)} />
-            <Row label="Stays with you" value={formatMoney(cost.keptYear)} strong />
+            <Row label={r.rows.today(systemName)} value={formatMoney(cost.costTodayYear)} />
+            <Row label={r.rows.system} value={formatMoney(-cost.systemYear)} />
+            <Row label={r.rows.stays} value={formatMoney(cost.keptYear)} strong />
           </dl>
 
-          <p className="mt-5 text-lg font-semibold leading-snug">
-            {r.stays(formatMoney(cost.keptYear))}
-            {split?.paybackMonths != null
-              ? r.payback(formatMonths(split.paybackMonths))
-              : r.noPayback}
-          </p>
+          {split !== null && hqYear !== null ? (
+            <div className="mt-6 rounded-[20px] bg-paper/[0.06] p-5 ring-1 ring-paper/10">
+              <p className="font-mono text-[13px] uppercase tracking-[0.08em] text-paper/60">
+                {r.hq.label}
+              </p>
+              <dl className="mt-2 text-[15px]">
+                <Row
+                  label={r.hq.techFee(formatMoney(techFee))}
+                  value={formatMoney(split.hqIncomeYear)}
+                />
+                {retention !== null && state.feeOn ? (
+                  <Row
+                    label={r.hq.paymentFee(formatPercent((Number(state.feeRate) || 0) / 100))}
+                    value={`+${formatMoney(feeIncomeYear)}`}
+                  />
+                ) : null}
+                <Row label={r.hq.total} value={formatMoney(hqYear)} strong />
+              </dl>
+              <p className="mt-4 text-lg font-semibold leading-snug">
+                {r.hq.line(formatMoney(hqYear))}
+                {hqPayback !== null ? r.hq.payback(formatMonths(hqPayback)) : r.hq.noPayback}
+              </p>
+              {retention !== null && state.feeOn ? (
+                <p className="mt-2 text-sm leading-relaxed text-paper/60">
+                  {r.hq.note(state.members, formatMoney(Number(state.bill) || 0), unit)}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
 
           <p className="mt-4 text-[15px] leading-relaxed text-paper/75">
             {r.line(systemName)}

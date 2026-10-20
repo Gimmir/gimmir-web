@@ -150,9 +150,9 @@ export function RetentionCalculator({ c }: { c: Calculators }) {
             <div className="rounded-[24px] bg-paper p-6 ring-1 ring-line">
               <p>
                 <span className="display block text-[clamp(2.5rem,1.75rem+3vw,3.5rem)] leading-[0.95] tabular-nums">
-                  {formatMoney(retention.feeIncomeYear)}
+                  {formatMoney(retention.hqGainYear)}
                 </span>
-                <span className="mt-2 block font-semibold leading-snug">{r.fee}</span>
+                <span className="mt-2 block font-semibold leading-snug">{r.gain}</span>
               </p>
               <p className="mt-5 leading-snug">
                 {r.kept(
@@ -160,7 +160,6 @@ export function RetentionCalculator({ c }: { c: Calculators }) {
                   formatMoney(retention.extraRevenueYear),
                 )}
               </p>
-              <p className="mt-3 leading-snug">{r.gain(formatMoney(retention.hqGainYear))}</p>
               {totalYear !== null ? (
                 <p className="mt-5 border-t border-line pt-5 text-lg font-semibold leading-snug">
                   {r.total(formatMoney(totalYear))}
