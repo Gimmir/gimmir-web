@@ -19,6 +19,9 @@ const STATIC_REDIRECTS = [
   // 2026-09-30); every product it listed is on /work
   { source: "/what-we-build", destination: "/work", permanent: true },
   { source: "/health", destination: "/work", permanent: true },
+  // /operators ("For brands") became /franchise
+  { source: "/operators", destination: "/franchise", permanent: true },
+  { source: "/operators/:path*", destination: "/franchise", permanent: true },
 ];
 
 const nextConfig: NextConfig = {

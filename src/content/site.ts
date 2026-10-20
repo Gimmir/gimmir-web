@@ -8,10 +8,10 @@ import type { FounderId } from "@/lib/founders";
 export type NavItem = { label: string; href: string; ready?: boolean };
 
 // Each buyer's way in comes first (Nazar's call, 2026-09-30, beyond doc
-// 09's nav), named broadly: brands (franchises and chains, fitness first)
-// and founders; an item shows once its V2 page exists.
+// 09's nav): franchises (HQs with 3+ units) and founders; an item shows
+// once its V2 page exists.
 export const NAV: NavItem[] = [
-  { label: "For brands", href: "/operators" },
+  { label: "For franchises", href: "/franchise" },
   { label: "For founders", href: "/build-your-saas" },
   { label: "Work", href: "/work" },
   { label: "How we work", href: "/how-we-work" },
@@ -21,7 +21,7 @@ export const NAV: NavItem[] = [
 ];
 
 export type BookDoor = {
-  id: "operators" | "saas";
+  id: "franchise" | "saas";
   booking: BookingId;
   title: string;
   detail: string;
@@ -31,11 +31,12 @@ export type BookDoor = {
 /** The two calls, as offered by the header menu, footer and contact page. */
 export const BOOK_DOORS: BookDoor[] = [
   {
-    id: "operators",
+    id: "franchise",
     booking: "franchiseCall",
-    title: "I run a franchise or a chain",
-    detail: "A 20-minute platform check with Nazar",
-    faces: ["nazar"],
+    title: "I run a franchise",
+    // short enough for one line in the header menu beside the face
+    detail: "30 minutes with Oleh: your numbers",
+    faces: ["oleh"],
   },
   {
     id: "saas",
@@ -67,7 +68,7 @@ export const FOOTER = {
     {
       title: "For",
       links: [
-        { label: "Brands", href: "/operators" },
+        { label: "Franchises", href: "/franchise" },
         { label: "Founders", href: "/build-your-saas" },
       ],
     },

@@ -4,7 +4,7 @@
 
 We work with two kinds of clients:
 
-- Brands: franchises and chains with 8+ locations that rent a white-label platform whose fees grow with every site. We move them onto their own app, back office and payments, site by site.
+- Franchise HQs: franchisors with 3+ units (studios, clubs, schools) in the UK and Ireland, in fitness and kids' activities. We build the HQ its own member app, booking and payments. The HQ earns a monthly tech fee from every franchisee plus a fee on every member payment. £12,000 fixed set-up, ready in 12 weeks, 3 founding partner slots.
 - Founders: business owners with a business or an audience who want to turn it into a SaaS product they own. We did it for ourselves first, with Jimmy Coach.
 
 Wellness, yes; regulated clinical products, no.
@@ -12,7 +12,8 @@ Wellness, yes; regulated clinical products, no.
 ## Pages
 
 - [Home](https://gimmir.com/): who we are, what we build, both case studies and both ways in.
-- [For brands](https://gimmir.com/operators): owning your platform instead of renting it, the migration step by step, and a free platform check with Nazar.
+- [For franchises](https://gimmir.com/franchise): a member app, booking and payments owned by the franchise HQ, how the HQ earns from every franchisee and every member payment, and a 30-minute call with Oleh.
+- [Franchise numbers](https://gimmir.com/franchise/numbers): the figures behind the offer.
 - [For founders](https://gimmir.com/build-your-saas): turning a business into a SaaS you own, how every project starts, and who it is not for.
 - [Work](https://gimmir.com/work): nine products shipped, four in fitness; two public case studies and seven under NDA.
 - [How we work](https://gimmir.com/how-we-work): how a build runs, fixed price per milestone with no hourly billing, what you own from day one, our engineering standards, and the two-founder question answered.
@@ -21,8 +22,8 @@ Wellness, yes; regulated clinical products, no.
 
 ## Case studies
 
-- [UN1T](https://gimmir.com/work/un1t): a London-founded boutique fitness franchise with 10+ locations, moved off a white-label platform onto its own member app, franchise CRM and payments in 12 weeks. Oleh led the architecture.
-- [Jimmy Coach](https://gimmir.com/work/jimmy-coach): an online coaching app Nazar co-founded with Quentin Randis, a Hyrox and CrossFit coach, and one we co-own: one iOS and Android app and a web dashboard, with 200+ coaches two months after launch.
+- [UN1T](https://gimmir.com/work/un1t): a 10-studio fitness franchise with 3,000+ members and its own app on the App Store. Oleh led the architecture.
+- [Jimmy Coach](https://gimmir.com/work/jimmy-coach): an online coaching app Nazar co-founded with Quentin Randis, a Hyrox and CrossFit coach, and one we co-own: one iOS and Android app and a web dashboard, with more than $12,000 a month in recurring revenue.
 
 ## Contact
 

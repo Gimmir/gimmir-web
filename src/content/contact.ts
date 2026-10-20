@@ -1,6 +1,6 @@
 /**
- * /contact, V2 (doc 09 §3.11): two big doors with faces, Nazar for
- * fitness brands, Oleh (with Nazar) for founders building a SaaS. The
+ * /contact, V2 (doc 09 §3.11): two big doors with faces, Oleh for
+ * franchise HQs, Oleh (with Nazar) for founders building a SaaS. The
  * doors' titles, details and calls are the site-wide BOOK_DOORS; the lines
  * here are the page's own.
  */
@@ -18,7 +18,10 @@ export const contact = {
 
   // who each door is for (doc 09 §0, buyers A and B)
   doors: {
-    operators: { anchor: "operators", note: "Best fit: 8+ locations." },
+    franchise: {
+      anchor: "franchise",
+      note: "Best fit: franchise HQs with 3+ units.",
+    },
     saas: {
       anchor: "founders",
       note: "For founders building or owning a SaaS.",

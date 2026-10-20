@@ -4,7 +4,7 @@ import { CASES } from "@/lib/cases";
 import { SITE_URL } from "@/lib/seo";
 
 // The V2 release: the date every static page last changed.
-const SITE_UPDATED = "2026-09-30";
+const SITE_UPDATED = "2026-10-20";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string) => new URL(path, SITE_URL).toString();
@@ -17,10 +17,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: url("/operators"),
+      url: url("/franchise"),
       lastModified: SITE_UPDATED,
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: url("/franchise/numbers"),
+      lastModified: SITE_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: url("/build-your-saas"),

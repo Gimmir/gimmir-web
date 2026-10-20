@@ -15,7 +15,7 @@ export const notFound = {
   stat: { value: "404", note: "moved when we rebuilt the site" },
   // keyed by BOOK_DOORS id: the door's title and faces come from there
   doors: {
-    operators: { label: "For brands", href: "/operators" },
+    franchise: { label: "For franchises", href: "/franchise" },
     saas: { label: "For founders", href: "/build-your-saas" },
   },
   links: [
