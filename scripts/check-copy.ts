@@ -45,7 +45,8 @@ const RULE_ORDER = [
   "em-dash",
   "banned-word",
   "banned-word-soft",
-  "currency-gbp",
+  "offer-banned",
+  "fitness-banned",
   "currency-usd",
   "placeholder",
   "seo-trap",
@@ -68,6 +69,30 @@ function excerptAround(
   if (start > 0) excerpt = `…${excerpt}`;
   if (end < text.length) excerpt = `${excerpt}…`;
   return excerpt;
+}
+
+// Files whose copy sells the fitness/franchise offer (`fitness-banned` scope).
+const FITNESS_FILES = new Set([
+  "src/content/franchise.ts",
+  "src/content/kids.ts",
+  "src/content/un1t.ts",
+]);
+
+const FITNESS_PREFIXES = [
+  "src/components/franchise/",
+  "src/components/calculator/",
+  "src/app/(site)/franchise/",
+  "src/app/(site)/kids-activity/",
+];
+
+/** True if `location` ("<relPath>:<line>") is on the fitness path. Sanity locations never are. */
+function isFitnessLocation(location: string): boolean {
+  if (location.startsWith("sanity:")) return false;
+  const relPath = location.replace(/:\d+$/, "").split(path.sep).join("/");
+  return (
+    FITNESS_FILES.has(relPath) ||
+    FITNESS_PREFIXES.some((prefix) => relPath.startsWith(prefix))
+  );
 }
 
 /**
@@ -122,13 +147,14 @@ function checkText(
     }
   }
 
-  // 4. currency-gbp — ERROR.
+  // 4. offer-banned — ERROR. Wording the franchise offer retired.
   {
-    const re = /£/g;
+    const re =
+      /\b(?:or a chain|[78]\+\s+(?:locations|units)|teardown|blueprint|per booking|platform bill|white[- ]label|4 to 6 months|four to six months|12 weeks to move)\b/gi;
     let m: RegExpExecArray | null;
     while ((m = re.exec(text))) {
       findings.push({
-        rule: "currency-gbp",
+        rule: "offer-banned",
         severity: "ERROR",
         location,
         excerpt: excerptAround(text, m.index, m[0].length),
@@ -136,13 +162,40 @@ function checkText(
     }
   }
 
-  // 5. currency-usd — ERROR. `$` + digit, except the allowed "$10k" fact.
+  // 5. fitness-banned — ERROR. Software-studio wording, only on the fitness
+  // path (never Sanity docs). The phrase "service as software" is allowed.
+  if (isFitnessLocation(location)) {
+    // Blank the allowed phrase (same length, so match indexes stay valid).
+    const masked = text.replace(/service as software/gi, (s) =>
+      " ".repeat(s.length),
+    );
+    // "The Review", "Expo", "MVP" and "SaaS" are names: match case-sensitively.
+    const patterns = [
+      /\b(?:The Review|Expo|MVP|SaaS)\b/g,
+      /\b(?:milestones?|React Native|Supabase|Apple Health|Health Connect|custom software|platform-agnostic|digital transformation|solutions?)\b/gi,
+    ];
+    for (const re of patterns) {
+      let m: RegExpExecArray | null;
+      while ((m = re.exec(masked))) {
+        findings.push({
+          rule: "fitness-banned",
+          severity: "ERROR",
+          location,
+          excerpt: excerptAround(text, m.index, m[0].length),
+        });
+      }
+    }
+  }
+
+  // 6. currency-usd — ERROR. `$` + digit, except the allowed "$10k" fact and
+  // Jimmy Coach's approved revenue claim ("$12k+", "$12,000+").
   {
     const re = /\$\d/g;
     let m: RegExpExecArray | null;
     while ((m = re.exec(text))) {
       const window = text.slice(m.index, m.index + 8);
       if (/^\$10\s?k/i.test(window)) continue;
+      if (/^\$12k\+/i.test(window) || /^\$12,000\+/.test(window)) continue;
       findings.push({
         rule: "currency-usd",
         severity: "ERROR",
@@ -152,7 +205,7 @@ function checkText(
     }
   }
 
-  // 6. placeholder — ERROR. Unresolved template placeholder left in copy.
+  // 7. placeholder — ERROR. Unresolved template placeholder left in copy.
   {
     const re = /\{\{/g;
     let m: RegExpExecArray | null;
@@ -166,7 +219,7 @@ function checkText(
     }
   }
 
-  // 7. seo-trap — WARN. Only counts inside a meta-title context.
+  // 8. seo-trap — WARN. Only counts inside a meta-title context.
   if (isTitle) {
     const re = /fitness platform/gi;
     let m: RegExpExecArray | null;
@@ -382,6 +435,7 @@ function scanSource(findings: Finding[]) {
   for (const file of files) {
     const relPath = path.relative(process.cwd(), file);
     if (isExcludedPath(relPath)) continue;
+    if (/\.test\.tsx?$/.test(relPath)) continue; // tests aren't rendered copy
 
     const content = fs.readFileSync(file, "utf8");
     const sourceLines = content.split("\n");
