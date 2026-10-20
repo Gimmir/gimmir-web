@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Pill } from "@/components/ui/pill";
+import { gbp } from "@/content/franchise";
+import { OFFER } from "@/content/offer";
 import { socialMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
@@ -49,7 +51,7 @@ export default function TermsPage() {
             Terms of Use
           </h1>
           <p className="mt-4 font-mono text-sm uppercase tracking-wider text-faint">
-            Last updated: September 30, 2026
+            Last updated: October 20, 2026
           </p>
 
           <p className="mt-8 text-lg leading-relaxed text-muted">
@@ -71,11 +73,10 @@ export default function TermsPage() {
 
           <Section title="Pricing and guarantees">
             <p>
-              The site shows no prices. What you pay is set in your signed
-              agreement, after we have agreed the scope together. Guarantees
-              described on the site, such as not paying for a Teardown that
-              doesn&rsquo;t find savings bigger than its fee, apply as set out
-              in that agreement.
+              Prices shown on the site, such as the {gbp(OFFER.setupFee)} founding
+              set-up and the monthly plans, are what we offer when you read
+              them. What you pay is set in your signed agreement. Guarantees
+              described on the site apply as set out in that agreement.
             </p>
           </Section>
 
