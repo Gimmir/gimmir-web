@@ -13,8 +13,7 @@ import { cn } from "@/lib/cn";
 
 /* /work ②, the two public cases as full-width, full-height screens (doc
    09 "full-bleed cases"): UN1T on ink, Jimmy Coach on paper. UN1T shows
-   its drawn "12" until Rob clears product screens; Jimmy shows its own
-   app, which is ours to show. */
+   its drawn studio count; Jimmy shows its own app, which is ours to show. */
 
 // Jimmy Coach store screens (our own product)
 const JIMMY_SCREENS = [

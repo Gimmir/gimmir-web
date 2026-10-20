@@ -20,7 +20,7 @@ const CARDS: Record<string, Parameters<typeof ogCard>[0]> = {
   un1t: {
     label: "Case study · UN1T",
     headline: [un1t.hero.title],
-    voice: "Off a white-label platform, onto its own app and back office.",
+    voice: "Off Glofox, onto its own app, with a fee to HQ on every payment.",
     picture: { app: "un1t", stat: un1t.hero.stat.value } satisfies OgPicture,
   },
   "jimmy-coach": {
