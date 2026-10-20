@@ -31,10 +31,10 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 // The offer page every outreach link points to (Oleh's website plan and
-// landing calculators, 20 Oct 2026): ① hero, ② the calculators (what the
-// current system costs and the payback, then what keeping members longer
-// adds), ③ what HQ gets, ④ UN1T, ⑤ what you own, ⑥ guarantees, ⑦ founding
-// partners, ⑧ plans, ⑨ how it works, ⑩ questions, ⑪ the last ask.
+// landing calculators, 20 Oct 2026; order from Nazar's review): ① hero,
+// ② the calculators (the number first), ③ UN1T (why believe it), ④ what
+// HQ gets, ⑤ what you own, ⑥ the offer: founding terms, plans and, beside
+// the price, the guarantees, ⑦ how it works, ⑧ questions, ⑨ the last ask.
 export default function FranchisePage() {
   const faqLd = faqPage([...franchise.faq.items]);
 
@@ -58,12 +58,12 @@ export default function FranchisePage() {
       />
       <FranchiseHero />
       <FranchiseCalculators />
-      <FranchiseWhatHqGets />
       <FranchiseProof />
+      <FranchiseWhatHqGets />
       <FranchiseOwn />
-      <FranchiseGuarantees />
       <FranchiseFounding />
       <FranchisePlans />
+      <FranchiseGuarantees />
       <FranchiseHowItWorks />
       <FaqSection
         title={franchise.faq.title}
