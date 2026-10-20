@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 
 /**
  * ⑥ What we build, on ink: the "9" drawn in lime with its margin note (the
- * same hand as UN1T's "12"), and beside it the six kinds of software in a
+ * same hand as UN1T's "10"), and beside it the six kinds of software in a
  * compact list, each with one line on what we built. The two public cases
  * link to their stories; NDA work is described, never shown.
  */

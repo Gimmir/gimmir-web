@@ -21,7 +21,8 @@ import { FOUNDERS } from "@/lib/founders";
 export function Founders() {
   const { label, headline, people, link } = home.founders;
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
-  const [a, b] = people.map((p) => FOUNDERS[p.id]);
+  // the heading keeps its order; the cards below lead with Oleh
+  const [a, b] = [FOUNDERS.nazar, FOUNDERS.oleh];
   const n = wordCount(headline.before);
 
   return (

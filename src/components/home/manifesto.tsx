@@ -10,7 +10,7 @@ import { home } from "@/content/home";
 /**
  * ② The belief in one colour, set like the UN1T title, "own it." marked
  * like the hero's "deepest", and beside it a key drawn in the same hand as
- * UN1T's "12": one thin outline, a lime disc in its bow and a curve out to
+ * UN1T's "10": one thin outline, a lime disc in its bow and a curve out to
  * what owning it means. The mechanics pass underneath, as UN1T's second
  * stat sits under its rule.
  *

@@ -18,7 +18,7 @@ export function Dot({ top = "0.55em" }: { top?: string }) {
 export type GlyphKind = "lock" | "hourglass" | "key";
 
 /**
- * Each way to get software, drawn in the same thin hand as UN1T's "12" and
+ * Each way to get software, drawn in the same thin hand as UN1T's "10" and
  * the manifesto's key: renting locks you in, an agency bills the hours,
  * with us you hold the key. Drawn once the table has settled.
  */
