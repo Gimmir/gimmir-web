@@ -10,10 +10,10 @@ import { FOUNDERS } from "@/lib/founders";
 import { cn } from "@/lib/cn";
 
 /**
- * /contact ②, doc 09's two big doors with faces: the fitness-brand call
- * with Nazar (filled), the SaaS call with Oleh and Nazar (outlined), as
+ * /contact ②, doc 09's two big doors with faces: the franchise call
+ * with Oleh (filled), the SaaS call with Oleh and Nazar (outlined), as
  * the home's doors are. A door opens its Cal.com booking; both go lime on
- * hover. `#operators` and `#founders` still land on the right door.
+ * hover. `#franchise` and `#founders` still land on the right door.
  */
 export function Doors() {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
