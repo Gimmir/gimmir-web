@@ -6,7 +6,7 @@
 
 import type { FounderId } from "@/lib/founders";
 
-export type BookingId = "costCheck" | "founderReview";
+export type BookingId = "franchiseCall" | "founderReview";
 
 export type Booking = {
   id: BookingId;
@@ -24,15 +24,16 @@ export type Booking = {
 };
 
 export const BOOKINGS: Record<BookingId, Booking> = {
-  costCheck: {
-    id: "costCheck",
-    // Swap to "nazarmoroze/platform-cost-check" once that event exists in Cal.com.
+  franchiseCall: {
+    id: "franchiseCall",
+    // Oleh's own event ("Your numbers + UN1T live, 30 min, Oleh") replaces
+    // this link once it exists in Cal.com (Nazar, 20 Oct 2026).
     calLink: "nazarmoroze/founder-review",
-    hosts: ["nazar"],
-    minutes: 20,
-    label: "Book your free cost check with Nazar",
-    short: "Book 20 minutes with Nazar",
-    header: "Book with Nazar",
+    hosts: ["oleh"],
+    minutes: 30,
+    label: "Book 30 minutes with Oleh",
+    short: "Book 30 minutes with Oleh",
+    header: "Book with Oleh",
   },
   founderReview: {
     id: "founderReview",
@@ -47,8 +48,9 @@ export const BOOKINGS: Record<BookingId, Booking> = {
 
 /** Route prefixes whose visitors get a specific call; first match wins. */
 const ROUTE_BOOKINGS: Array<[prefix: string, BookingId]> = [
-  ["/operators", "costCheck"],
-  ["/work/un1t", "costCheck"],
+  ["/franchise", "franchiseCall"],
+  ["/kids-activity", "franchiseCall"],
+  ["/work/un1t", "franchiseCall"],
   ["/work/jimmy-coach", "founderReview"],
 ];
 

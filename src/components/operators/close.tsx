@@ -42,7 +42,7 @@ export function OperatorsClose() {
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <BookTrigger
-                booking="costCheck"
+                booking="franchiseCall"
                 placement="operators-close"
                 className="group flex w-full items-center justify-between gap-3 rounded-full bg-paper py-2 pl-6 pr-2 text-left text-ink transition-colors duration-200 hover:bg-lime active:scale-[0.97] sm:inline-flex sm:w-auto"
               >

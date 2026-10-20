@@ -115,7 +115,7 @@ export function PainCheck({ after }: { after: number }) {
           </div>
         </div>
         <BookTrigger
-          booking="costCheck"
+          booking="franchiseCall"
           placement="operators-pain"
           className="group inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-paper py-2 pl-6 pr-2 text-ink transition-[background-color,transform] duration-200 hover:bg-lime active:scale-[0.97] sm:self-auto"
         >

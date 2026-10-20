@@ -32,7 +32,7 @@ export type BookDoor = {
 export const BOOK_DOORS: BookDoor[] = [
   {
     id: "operators",
-    booking: "costCheck",
+    booking: "franchiseCall",
     title: "I run a franchise or a chain",
     detail: "A 20-minute platform check with Nazar",
     faces: ["nazar"],

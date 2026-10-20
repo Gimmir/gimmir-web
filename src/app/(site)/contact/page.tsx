@@ -16,7 +16,7 @@ import { socialMetadata } from "@/lib/seo";
 const TITLE = "Book a Call with Nazar & Oleh";
 // Minutes and names are pulled from `BOOKINGS` so this can't drift from the
 // calls actually on offer.
-const DESCRIPTION = `Book a free call with the founders. Brands with 8+ locations: a ${BOOKINGS.costCheck.minutes}-minute platform check with ${hostNames(BOOKINGS.costCheck.hosts)}. Founders building a SaaS: ${BOOKINGS.founderReview.minutes} minutes with ${hostNames(BOOKINGS.founderReview.hosts)}.`;
+const DESCRIPTION = `Book a free call with the founders. Brands with 8+ locations: a ${BOOKINGS.franchiseCall.minutes}-minute platform check with ${hostNames(BOOKINGS.franchiseCall.hosts)}. Founders building a SaaS: ${BOOKINGS.founderReview.minutes} minutes with ${hostNames(BOOKINGS.founderReview.hosts)}.`;
 
 export const metadata: Metadata = {
   title: TITLE,

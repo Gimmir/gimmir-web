@@ -74,7 +74,7 @@ export const about = {
     ],
     // the last row is a call with each of them
     talk: {
-      nazar: { label: "Talk to Nazar", booking: "costCheck" },
+      nazar: { label: "Talk to Nazar", booking: "franchiseCall" },
       oleh: { label: "Talk to Oleh", booking: "founderReview" },
     },
   },

@@ -216,7 +216,7 @@ export const home = {
         cta: {
           label: "Talk to Nazar",
           note: "brands",
-          booking: "costCheck",
+          booking: "franchiseCall",
         },
       },
       {

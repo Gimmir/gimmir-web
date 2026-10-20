@@ -38,7 +38,7 @@ export function OperatorsHero() {
           </p>
           <div className="fade mt-10 md:mt-12" style={d(1100)}>
             <BookTrigger
-              booking="costCheck"
+              booking="franchiseCall"
               placement="operators-hero"
               className="group flex w-full items-center gap-4 rounded-full bg-ink p-2 text-left text-paper transition-[background-color,color,transform] duration-200 ease-[cubic-bezier(.23,1,.32,1)] hover:bg-lime hover:text-ink active:scale-[.97] sm:inline-flex sm:w-auto sm:pr-2"
             >
