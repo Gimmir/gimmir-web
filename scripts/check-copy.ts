@@ -95,6 +95,24 @@ function isFitnessLocation(location: string): boolean {
   );
 }
 
+// The SaaS-founder process keeps its own step names (the offer plan allows
+// them on /how-we-work and /build-your-saas only).
+const FOUNDER_PREFIXES = [
+  "src/content/how.ts",
+  "src/content/saas.ts",
+  "src/components/how/",
+  "src/components/saas/",
+  "src/app/(site)/how-we-work/",
+  "src/app/(site)/build-your-saas/",
+];
+
+/** True if `location` is on a SaaS-founder page. Sanity locations never are. */
+function isFounderLocation(location: string): boolean {
+  if (location.startsWith("sanity:")) return false;
+  const relPath = location.replace(/:\d+$/, "").split(path.sep).join("/");
+  return FOUNDER_PREFIXES.some((prefix) => relPath.startsWith(prefix));
+}
+
 /**
  * Runs every copy rule against a single string of text, pushing any matches
  * onto `findings`. Shared by both the source scanner and the Sanity scanner.
@@ -147,10 +165,12 @@ function checkText(
     }
   }
 
-  // 4. offer-banned — ERROR. Wording the franchise offer retired.
+  // 4. offer-banned — ERROR. Wording the franchise offer retired. Teardown
+  // and Blueprint stay allowed on the SaaS-founder pages.
   {
-    const re =
-      /\b(?:or a chain|[78]\+\s+(?:locations|units)|teardown|blueprint|per booking|platform bill|white[- ]label|4 to 6 months|four to six months|12 weeks to move)\b/gi;
+    const re = isFounderLocation(location)
+      ? /\b(?:or a chain|[78]\+\s+(?:locations|units)|per booking|platform bill|white[- ]label|4 to 6 months|four to six months|12 weeks to move)\b/gi
+      : /\b(?:or a chain|[78]\+\s+(?:locations|units)|teardown|blueprint|per booking|platform bill|white[- ]label|4 to 6 months|four to six months|12 weeks to move)\b/gi;
     let m: RegExpExecArray | null;
     while ((m = re.exec(text))) {
       findings.push({
