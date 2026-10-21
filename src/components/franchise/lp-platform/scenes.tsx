@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { Phone } from "@/components/franchise/phone";
 import { useFranchise } from "@/components/franchise/franchise-context";
 
@@ -514,29 +516,15 @@ export function TrainingScene() {
   const ex = "flex items-center gap-2.5 rounded-[14px] p-[9px] shadow-[inset_0_0_0_1px_#EEECE6]";
   return (
     <>
-      {/* the studio screen: the same session, big, on the wall */}
-      <div className="absolute top-[70px] right-[5%] flex h-[250px] w-[58%] rotate-2 flex-col justify-between overflow-hidden rounded-[24px] bg-ink p-5 text-paper shadow-[0_30px_60px_-36px_rgba(21,20,14,0.5)]">
-        <div className="flex items-center justify-between text-xs font-semibold text-paper/70">
-          <span>{brand.name} Leeds</span>
-          <span className="inline-flex items-center gap-1.5">
-            <Live />
-            On screen
-          </span>
-        </div>
-        <div>
-          <div className="text-[13px] font-semibold uppercase tracking-[0.06em] text-paper/70">Strength · week 3</div>
-          <div className="mt-1 text-[34px] font-extrabold leading-none tracking-[-0.03em]">Finisher</div>
-          <div className="mt-1.5 text-sm text-paper/80">EMOM 10 min</div>
-        </div>
-        <div className="flex items-end justify-between">
-          <span
-            className={`rounded-full px-3 py-1 text-xs font-bold text-white ${FADE}`}
-            style={{ background: brand.color }}
-          >
-            Next: Back squat 4 × 6
-          </span>
-          <span className="text-[44px] font-extrabold leading-none tracking-[-0.035em] text-lime">45 s</span>
-        </div>
+      {/* a real UN1T studio: the session runs on the wall screens */}
+      <div className="absolute top-[70px] right-[5%] h-[250px] w-[58%] rotate-2 overflow-hidden rounded-[24px] bg-line shadow-[0_30px_60px_-36px_rgba(21,20,14,0.5)]">
+        <Image
+          src="/franchise/un1t-studio.webp"
+          alt=""
+          fill
+          sizes="360px"
+          className="object-cover"
+        />
       </div>
       <div className={`${CARD} absolute bottom-[60px] left-[6%] flex w-[300px] flex-col gap-2 p-3.5 shadow-[inset_0_0_0_1px_var(--color-line),0_30px_60px_-34px_rgba(21,20,14,0.45)]`}>
         <div className="flex items-center justify-between gap-2">

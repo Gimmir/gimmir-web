@@ -44,7 +44,8 @@ export function UrgencyBar() {
   const moved = model.done[1] || model.answers.platform !== null;
 
   return (
-    <div className="bg-ink text-paper">
+    // sits under the site's fixed header (81px at the top of the page)
+    <div className="mt-[81px] bg-ink text-paper">
       <div className="mx-auto flex min-h-11 max-w-[1280px] flex-wrap items-center justify-center gap-x-4 gap-y-1 px-5 py-2 text-sm sm:justify-between">
         <p className="m-0 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <span>

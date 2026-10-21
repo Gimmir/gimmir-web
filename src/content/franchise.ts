@@ -60,7 +60,7 @@ export const franchise = {
   },
 
   cta: {
-    numbers: { label: "Work out my numbers", href: "#calculator" },
+    numbers: { label: "Work out my numbers", href: "/franchise#numbers" },
     call: { label: BOOKINGS.franchiseCall.label },
   },
 

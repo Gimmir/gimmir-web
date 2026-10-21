@@ -16,7 +16,7 @@ import { HeroPhones } from "./phones";
 export function LpHero() {
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
   return (
-    <Stage as="section" id="top" eager className="scroll-mt-24 overflow-x-clip pt-24 pb-[72px]">
+    <Stage as="section" id="top" eager className="scroll-mt-24 overflow-x-clip pt-16 pb-[72px]">
       <Container className="grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] items-center gap-14">
         <div className="flex min-w-0 flex-col gap-[26px]">
           <span

@@ -15,6 +15,7 @@ export const LIVE_WORK = {
     siteHref: "https://un1t.com/",
     membersLabel: "members",
     studiosLabel: "studios",
+    photoAlt: "UN1T members after a session",
   },
   jimmy: {
     kicker: "Case 02 · Jimmy Coach",
@@ -25,6 +26,7 @@ export const LIVE_WORK = {
     siteLabel: "jimmycoach.com",
     siteHref: "https://jimmycoach.com/en",
     dashboardAlt: "Jimmy's coach dashboard",
+    bannerAlt: "Jimmy Coach",
   },
   bridge: {
     lead: "Here's how yours gets built.",

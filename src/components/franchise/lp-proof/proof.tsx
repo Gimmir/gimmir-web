@@ -60,7 +60,19 @@ export function LpProof() {
           </div>
 
           <div className="mt-3 flex flex-col gap-4">
-            <div className={CARD} style={d(after)}>
+            <div className="fade relative" style={d(after)}>
+              <Image
+                src="/franchise/un1t-members.webp"
+                alt={c.un1t.photoAlt}
+                width={2000}
+                height={882}
+                sizes="(min-width: 1280px) 1200px, 100vw"
+                priority={false}
+                className="block h-[clamp(340px,44vw,560px)] w-full rounded-[32px] bg-line object-cover"
+              />
+              <div
+                className={`${CARD} relative mx-4 -mt-16 min-[901px]:absolute min-[901px]:bottom-6 min-[901px]:left-6 min-[901px]:mx-0 min-[901px]:mt-0 min-[901px]:w-[min(460px,calc(100%-48px))]`}
+              >
               <div className="flex items-center gap-3">
                 <Image
                   src={APPS.un1t.icon}
@@ -83,6 +95,7 @@ export function LpProof() {
                 <AppStoreButton href={UN1T.appStore.url}>{c.un1t.storeLabel}</AppStoreButton>
                 <SiteLink href={c.un1t.siteHref}>{c.un1t.siteLabel}</SiteLink>
               </div>
+              </div>
             </div>
 
             {threads.length > 0 ? (
@@ -95,7 +108,16 @@ export function LpProof() {
           </div>
 
           <div className="mt-6 grid items-stretch gap-4 lg:grid-cols-2">
-            <div className={CARD} style={d(after + 100)}>
+            <div className={`${CARD} overflow-hidden !p-0`} style={d(after + 100)}>
+              <Image
+                src="/franchise/jimmy-banner.png"
+                alt={c.jimmy.bannerAlt}
+                width={1128}
+                height={282}
+                sizes="(min-width: 1024px) 560px, 100vw"
+                className="block h-[170px] w-full object-cover"
+              />
+              <div className="flex flex-1 flex-col gap-3.5 p-[26px]">
               <div className="flex items-center gap-3">
                 <Image
                   src={APPS.jimmy.icon}
@@ -117,16 +139,17 @@ export function LpProof() {
                 <AppStoreButton href={JIMMY_APP_STORE}>{c.jimmy.storeLabel}</AppStoreButton>
                 <SiteLink href={c.jimmy.siteHref}>{c.jimmy.siteLabel}</SiteLink>
               </div>
+              </div>
             </div>
             <div
               className="fade overflow-hidden rounded-[24px] bg-line ring-1 ring-line"
               style={d(after + 200)}
             >
               <Image
-                src="/jimmy/dashboard.png"
+                src="/franchise/jimmy-dashboard.webp"
                 alt={c.jimmy.dashboardAlt}
-                width={2055}
-                height={1262}
+                width={2000}
+                height={1328}
                 sizes="(min-width: 1024px) 560px, 100vw"
                 className="block h-full min-h-[240px] w-full object-cover object-left-top"
               />

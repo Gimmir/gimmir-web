@@ -90,10 +90,10 @@ export function LpProcess() {
                 <p className="m-0 text-[15px] leading-normal">{c.post.text}</p>
               ) : null}
               <Image
-                src="/jimmy/dashboard.png"
+                src="/franchise/jimmy-dashboard-post.webp"
                 alt={c.post.imageAlt}
-                width={2055}
-                height={1262}
+                width={2000}
+                height={1188}
                 sizes="(min-width: 768px) 560px, 100vw"
                 className="h-[180px] w-full rounded-lg object-cover object-left-top"
               />
