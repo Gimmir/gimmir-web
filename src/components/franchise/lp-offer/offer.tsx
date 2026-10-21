@@ -11,6 +11,7 @@ import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import { OFFER_COPY as C } from "@/content/franchise-page/offer";
+import { OfferLead } from "./offer-lead";
 import {
   FOUNDING,
   FOUNDING_RETURN,
@@ -89,7 +90,7 @@ function Projection() {
     return (
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-[20px] border-[1.5px] border-dashed border-line-strong px-5 py-[18px] text-[15px] leading-[1.5] text-muted">
         <span>{C.noNumbers}</span>
-        <a href="#numbers" className="font-bold text-ink">
+        <a href="#numbers" className="inline-flex min-h-11 items-center font-bold text-ink">
           {C.runNumbers}
         </a>
       </div>
@@ -133,7 +134,7 @@ export function LpOffer() {
               className="fade m-0 max-w-[660px] text-[19px] leading-[1.55] text-muted"
               style={d(after)}
             >
-              {C.lead}
+              <OfferLead />
             </p>
           </div>
 

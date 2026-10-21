@@ -13,7 +13,14 @@ const parts = OFFER.payments.length;
 export const OFFER_COPY = {
   kicker: "07 · Founding offer",
   title: `${setup} once. Paid in ${parts} parts.`,
-  lead: "Less than one year of the tech fee your studios pay you. Founding partners build the core with us and lock their terms.",
+  /**
+   * The artboard said "Less than one year of the tech fee your studios pay
+   * you", which only holds from 5 studios at £250. The lead now states the
+   * visitor's own figure instead.
+   */
+  leadVersus: (months: string, units: number) =>
+    `That's ${months} months of the tech fee your ${units} studios pay you.`,
+  lead: "Founding partners build the core with us and lock their terms.",
   holdSlot: "Hold a slot",
   noNumbers: `Haven’t run your numbers yet? It takes ${parts} short steps.`,
   runNumbers: "Run my numbers",

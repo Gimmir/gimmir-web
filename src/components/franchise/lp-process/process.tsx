@@ -103,7 +103,7 @@ export function LpProcess() {
                   href={oleh.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-[#0A66C2] no-underline hover:underline"
+                  className="inline-flex min-h-11 items-center font-semibold text-[#0A66C2] no-underline hover:underline"
                 >
                   {c.post.cta}
                 </a>

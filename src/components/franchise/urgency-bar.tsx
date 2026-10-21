@@ -56,7 +56,7 @@ export function UrgencyBar() {
               {daysLeftText(days)}
             </span>
           ) : null}
-          <a href="#offer" className="font-semibold text-paper underline decoration-paper/40 underline-offset-4 hover:decoration-paper">
+          <a href="#offer" className="inline-flex min-h-6 items-center font-semibold text-paper underline decoration-paper/40 underline-offset-4 hover:decoration-paper">
             See the offer
           </a>
         </p>
