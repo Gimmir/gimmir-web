@@ -129,3 +129,72 @@ export const CALC_LIMITS = {
 
 /** The set-up against a year of the tech fee: a 7-studio franchise at £150. */
 export const VERSUS_EXAMPLE = { units: 7, techFee: 150 } as const;
+
+// ── Oleh's landing artboard (21 Oct 2026), the page /franchise moves to ──
+
+/**
+ * Support after launch, switchable any month. Prices are agreed on the
+ * call until Nazar sets them (null shows "Price on the call"), so the
+ * calculator shows HQ's income before the support plan.
+ */
+export type SupportPlan = {
+  id: "support" | "grow" | "scale";
+  name: string;
+  includes: string;
+  /** £ a month; null until set. */
+  price: number | null;
+};
+
+export const SUPPORT_PLANS: SupportPlan[] = [
+  {
+    id: "support",
+    name: "Support",
+    includes: "Hosting, app stores, fixes, security and payment monitoring.",
+    price: null,
+  },
+  {
+    id: "grow",
+    name: "Support + Grow",
+    includes: "Everything in Support, plus 40 hours a month of building.",
+    price: null,
+  },
+  {
+    id: "scale",
+    name: "Support + Scale",
+    includes:
+      "Everything in Support, plus 120+ hours a month of building at a lower hourly rate.",
+    price: null,
+  },
+];
+
+/** What founding partners give in return for the founding terms. */
+export const FOUNDING_RETURN = [
+  "a 12-month support plan",
+  "a case study",
+  "a monthly feedback call while we build the core together",
+] as const;
+
+/**
+ * The three-step model's defaults and answer options. Units start at 3
+ * (Nazar, 20 Oct 2026); the rest are the artboard's. Fractions, not %.
+ */
+export const NETWORK_DEFAULTS = {
+  units: 3,
+  costPerUnit: 250,
+  members: 300,
+  bill: 60,
+  feeRate: 0.01,
+  churn: 0.05,
+  cut: 0.2,
+} as const;
+
+export const NETWORK_OPTIONS = {
+  units: { min: 3, max: 100 },
+  costPerUnit: { min: 100, max: 600, step: 10 },
+  techFee: { min: 0, max: 500, step: 10 },
+  members: [100, 200, 300, 500],
+  bill: [40, 60, 90, 120],
+  feeRate: [0.005, 0.01, 0.02, 0.03],
+  churn: [0.03, 0.05, 0.07, 0.1],
+  cut: [0.1, 0.2, 0.3],
+} as const;

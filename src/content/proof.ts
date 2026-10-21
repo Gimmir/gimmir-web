@@ -95,3 +95,79 @@ export const JIMMY = {
 
 /** Gimmir's own track record; on /work and the home strip, never on fitness pages. */
 export const PRODUCTS_SHIPPED = 9;
+
+/**
+ * Chat testimonials shown as WhatsApp and iMessage threads on /franchise
+ * (Oleh's artboard). Nazar confirmed on 21 Oct 2026 that Rob and Emma
+ * agreed to their messages being shown; the words are theirs, as sent.
+ * Quentin's quote is still to come, so his thread is pending.
+ */
+export type ChatMessage = { text: string; time?: string; from: "them" | "us" };
+
+export type ChatThread = {
+  id: string;
+  name: string;
+  initials: string;
+  org: string;
+  /** Role at the company; null until known (never "[ROLE]" on the page). */
+  role: string | null;
+  app: "WhatsApp" | "iMessage";
+  messages: ChatMessage[];
+};
+
+export const CHATS = {
+  rob: {
+    value: {
+      id: "rob",
+      name: "Rob Smyth",
+      initials: "RS",
+      org: "UN1T",
+      role: null,
+      app: "WhatsApp",
+      messages: [
+        { from: "us", text: "Here is the link for the web app", time: "22:53" },
+        { from: "them", text: "Thank you. Always appreciative of your work and commitment to UN1T", time: "23:16" },
+        { from: "them", text: "This is just the beginning.", time: "23:17" },
+        { from: "them", text: "Big plans to grow this software/app across the globe.", time: "23:17" },
+        { from: "them", text: "There is a great team between all of us and I believe we will go far.", time: "23:19" },
+      ],
+    },
+    status: "approved",
+    source: "Nazar, 21 Oct 2026: Rob agreed",
+  } satisfies Claim<ChatThread>,
+  emma: {
+    value: {
+      id: "emma",
+      name: "Emma Crick",
+      initials: "EC",
+      org: "UN1T",
+      role: null,
+      app: "WhatsApp",
+      messages: [
+        { from: "us", text: "Everything you asked for has been implemented. Please take another pass.", time: "14:27" },
+        { from: "them", text: "The above sounds sensible to me. Then we can work out what the next chunk of work needs to look like.", time: "16:03" },
+        { from: "them", text: "Thank you! I know you've gone above and beyond to get this over the line", time: "16:06" },
+        { from: "us", text: "Looking forward to see people use the apps in full", time: "16:07" },
+        { from: "them", text: "Me too!!", time: "16:07" },
+      ],
+    },
+    status: "approved",
+    source: "Nazar, 21 Oct 2026: Emma agreed",
+  } satisfies Claim<ChatThread>,
+  quentin: {
+    value: {
+      id: "quentin",
+      name: "Quentin",
+      initials: "Q",
+      org: "Jimmy Coach",
+      role: "Coach on Jimmy",
+      app: "iMessage",
+      messages: [{ from: "us", text: "How has Jimmy changed things for you?" }],
+    },
+    status: "pending",
+    source: "Quentin's quote, in his words",
+  } satisfies Claim<ChatThread>,
+} as const;
+
+export const JIMMY_APP_STORE =
+  "https://apps.apple.com/us/app/jimmy-coach/id6746717819";

@@ -94,6 +94,9 @@
   --color-faint: #807d73;
   --color-line: #e4e0d6;
   --color-line-dark: rgba(246, 244, 238, 0.16);
+  /* hairlines that must read on paper-2 too (bridges, rails, flow lines) */
+  --color-line-strong: #cfc9ba;
+  --color-stone: #a39e90;
   --color-lime: #c9f23d;
   --color-lime-deep: #b6df27;
 
