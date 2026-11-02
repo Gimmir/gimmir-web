@@ -112,6 +112,11 @@ export function LpProof() {
                   href={UN1T.appStore.url}
                   label={c.un1t.storeLabel}
                 />
+                <StoreBadge
+                  store="play"
+                  href={UN1T.playStore.url}
+                  label={c.un1t.playLabel}
+                />
                 <SiteLink href={c.un1t.siteHref}>{c.un1t.siteLabel}</SiteLink>
               </div>
             </div>

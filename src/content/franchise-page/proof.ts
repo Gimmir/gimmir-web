@@ -10,6 +10,7 @@ export const LIVE_WORK = {
     kicker: "Case 01 · UN1T",
     headline: "From separate studios to one network on its own software.",
     storeLabel: "UN1T on the App Store",
+    playLabel: "UN1T on Google Play",
     siteLabel: "un1t.com",
     siteHref: "https://un1t.com/",
     membersLabel: "members",

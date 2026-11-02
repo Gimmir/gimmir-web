@@ -44,6 +44,11 @@ export const UN1T = {
     id: "1571083836",
     url: "https://apps.apple.com/gb/app/un1t-training/id1571083836",
   },
+  /** From Nazar, 2 Nov 2026. */
+  playStore: {
+    id: "co.pico.un1t",
+    url: "https://play.google.com/store/apps/details?id=co.pico.un1t",
+  },
   /** Word for word, attributed to Rob at UN1T. */
   quote: {
     value: {
