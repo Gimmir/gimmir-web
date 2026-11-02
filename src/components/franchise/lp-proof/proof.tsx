@@ -1,21 +1,23 @@
 import Image from "next/image";
 
-import { ChapterBridge } from "@/components/franchise/chapters";
+import { CtaBand } from "@/components/franchise/cta-band";
 import { Kicker } from "@/components/franchise/kicker";
+import { Mark } from "@/components/franchise/lp-numbers/shared";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
-import { LIVE_WORK } from "@/content/franchise-page/proof";
+import { jimmyMrrSentence, LIVE_WORK } from "@/content/franchise-page/proof";
 import { CHATS, JIMMY, JIMMY_APP_STORE, shown, UN1T } from "@/content/proof";
-import { APPS } from "@/lib/apps";
 
 import { AppStoreButton, SiteLink } from "./app-store-button";
-import { WhatsAppThread } from "./whatsapp-thread";
+import { IMessageThread, WhatsAppThread } from "./whatsapp-thread";
+
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <div className="display text-[26px] leading-none font-extrabold tracking-[-0.035em]">
+      <div className="display text-[22px] leading-none font-extrabold tracking-[-0.035em]">
         {value}
       </div>
       <div className="mt-1 text-xs leading-[1.5] text-muted">{label}</div>
@@ -23,15 +25,13 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-const CARD =
-  "fade flex flex-col gap-3.5 rounded-[24px] bg-surface p-6 ring-1 ring-line sm:p-7";
-const HEADLINE = "m-0 text-2xl leading-[1.15] font-extrabold tracking-[-0.02em]";
-const STATS = "grid grid-cols-2 gap-2.5 border-y border-line py-3";
+const TILT =
+  "transition-[rotate,translate] duration-300 ease-[var(--ease-out)] motion-reduce:transition-none [@media(hover:hover)]:hover:translate-y-[-4px] [@media(hover:hover)]:hover:rotate-0";
 
 /**
- * /franchise ⑤, Live work (chapter "proof"): the two products Gimmir built
- * and runs. Stats, chats and the Jimmy figure come from `src/content/proof`
- * and render only while approved; a pending claim leaves its slot out.
+ * /franchise Proof: UN1T's app and chats, then Jimmy as a product we own.
+ * Stats, chats and the Jimmy figure come from `src/content/proof` and
+ * render only while approved; a pending claim leaves its slot out.
  */
 export function LpProof() {
   const c = LIVE_WORK;
@@ -41,8 +41,8 @@ export function LpProof() {
   const threads = [shown(CHATS.rob), shown(CHATS.emma)].filter(
     (t) => t !== null,
   );
-  const after = wordCount(c.title) * 40 + 300;
-  const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+  const quentin = shown(CHATS.quentin);
+  const after = wordCount(`${c.title.lead} ${c.title.mark}`) * 40 + 300;
   const un1tStats = [
     studios !== null ? { value: String(studios), label: c.un1t.studiosLabel } : null,
     members !== null ? { value: members, label: c.un1t.membersLabel } : null,
@@ -50,42 +50,42 @@ export function LpProof() {
 
   return (
     <>
-      <Stage as="section" id="proof" data-tone="paper" className="relative">
-        <Container className="flex flex-col gap-7 py-20 md:py-28">
-          <div className="mx-auto flex max-w-[860px] flex-col items-center gap-4 text-center">
+      <Stage as="section" id="proof" data-tone="paper" className="scroll-mt-[84px] pt-32">
+        <Container className="flex flex-col gap-12">
+          <div className="mx-auto flex max-w-[760px] flex-col items-center gap-[18px] text-center">
             <Kicker>{c.kicker}</Kicker>
-            <h2 className="display text-[length:var(--text-title)] leading-[1.02]">
-              <RiseText text={c.title} />
+            <h2 className="display text-[length:var(--text-title)] leading-[1.04]">
+              <RiseText text={c.title.lead} />{" "}
+              <Mark>
+                <RiseText text={c.title.mark} start={wordCount(c.title.lead)} />
+              </Mark>
             </h2>
+            <p className="fade m-0 max-w-[560px] text-lg leading-[1.55] text-muted" style={d(after)}>
+              {c.lead}
+            </p>
           </div>
 
-          <div className="mt-3 flex flex-col gap-4">
-            <div className="fade relative" style={d(after)}>
+          <Stage as="div" className="relative mt-3">
+            <div className="fade" style={d(0)}>
               <Image
                 src="/franchise/un1t-members.webp"
                 alt={c.un1t.photoAlt}
                 width={2000}
                 height={882}
                 sizes="(min-width: 1280px) 1200px, 100vw"
-                priority={false}
                 className="block h-[clamp(340px,44vw,560px)] w-full rounded-[32px] bg-line object-cover"
               />
-              <div
-                className={`${CARD} relative mx-4 -mt-16 min-[901px]:absolute min-[901px]:bottom-6 min-[901px]:left-6 min-[901px]:mx-0 min-[901px]:mt-0 min-[901px]:w-[min(460px,calc(100%-48px))]`}
-              >
-              <div className="flex items-center gap-3">
-                <Image
-                  src={APPS.un1t.icon}
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="size-11 shrink-0 rounded-[12px]"
-                />
-                <Kicker>{c.un1t.kicker}</Kicker>
-              </div>
-              <h3 className={HEADLINE}>{c.un1t.headline}</h3>
+            </div>
+            <div
+              className="fade relative mx-4 -mt-16 flex flex-col gap-3.5 rounded-[20px] bg-surface p-[22px] shadow-[inset_0_0_0_1px_var(--color-line),0_30px_60px_-30px_rgba(21,20,14,0.45)] sm:p-[26px] min-[901px]:absolute min-[901px]:bottom-6 min-[901px]:left-6 min-[901px]:mx-0 min-[901px]:mt-0 min-[901px]:w-[min(460px,calc(100%-48px))]"
+              style={d(150)}
+            >
+              <Kicker>{c.un1t.kicker}</Kicker>
+              <h3 className="display m-0 text-2xl leading-[1.15] tracking-[-0.02em]">
+                {c.un1t.headline}
+              </h3>
               {un1tStats.length > 0 ? (
-                <div className={STATS}>
+                <div className="grid grid-cols-2 gap-2.5 border-y border-line py-3">
                   {un1tStats.map((s) => (
                     <Stat key={s.label} {...s} />
                   ))}
@@ -95,79 +95,81 @@ export function LpProof() {
                 <AppStoreButton href={UN1T.appStore.url}>{c.un1t.storeLabel}</AppStoreButton>
                 <SiteLink href={c.un1t.siteHref}>{c.un1t.siteLabel}</SiteLink>
               </div>
-              </div>
             </div>
+          </Stage>
 
-            {threads.length > 0 ? (
-              <div className="grid gap-4 md:grid-cols-2">
+          {threads.length > 0 ? (
+            <Stage as="div" className="flex flex-col items-center gap-7 pt-4">
+              <div className="fade flex flex-col gap-2 text-center" style={d(0)}>
+                <h3 className="display m-0 text-[clamp(22px,2.4vw,28px)] leading-[1.15] tracking-[-0.025em]">
+                  {c.chats.title}
+                </h3>
+                <p className="m-0 text-[15px] text-muted">{c.chats.note}</p>
+              </div>
+              <div className="grid w-full max-w-[940px] items-start gap-8 md:grid-cols-2">
                 {threads.map((t, i) => (
-                  <WhatsAppThread key={t.id} thread={t} delay={after + 120 + i * 100} />
+                  <WhatsAppThread
+                    key={t.id}
+                    thread={t}
+                    tilt={i % 2 === 0 ? "left" : "right"}
+                    delay={120 + i * 100}
+                  />
                 ))}
               </div>
-            ) : null}
-          </div>
+            </Stage>
+          ) : null}
 
-          <div className="mt-6 grid items-stretch gap-4 lg:grid-cols-2">
-            <div className={`${CARD} overflow-hidden !p-0`} style={d(after + 100)}>
-              <Image
-                src="/franchise/jimmy-banner.png"
-                alt={c.jimmy.bannerAlt}
-                width={1128}
-                height={282}
-                sizes="(min-width: 1024px) 560px, 100vw"
-                className="block h-[170px] w-full object-cover"
-              />
-              <div className="flex flex-1 flex-col gap-3.5 p-[26px]">
-              <div className="flex items-center gap-3">
-                <Image
-                  src={APPS.jimmy.icon}
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="size-11 shrink-0 rounded-[12px]"
-                />
+          <Stage
+            as="div"
+            className="grid items-center gap-10 pt-8 md:pt-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12"
+          >
+            <div className="flex flex-col gap-3.5">
+              <div className="fade" style={d(0)}>
                 <Kicker>{c.jimmy.kicker}</Kicker>
               </div>
-              <h3 className={HEADLINE}>{c.jimmy.headline}</h3>
-              <p className="m-0 text-base leading-normal text-muted">{c.jimmy.text}</p>
-              {mrr !== null ? (
-                <div className={STATS}>
-                  <Stat value={mrr} label={c.jimmy.mrrLabel} />
-                </div>
-              ) : null}
-              <div className="mt-auto flex flex-wrap gap-2.5 pt-1">
+              <h3
+                className="fade display m-0 text-[clamp(26px,3vw,32px)] leading-[1.1] tracking-[-0.025em]"
+                style={d(60)}
+              >
+                {c.jimmy.headline}
+              </h3>
+              <p className="fade m-0 text-base leading-normal text-muted" style={d(120)}>
+                {c.jimmy.text}
+                {jimmyMrrSentence(mrr)}
+              </p>
+              <div className="fade mt-1.5 flex flex-wrap gap-2.5" style={d(180)}>
                 <AppStoreButton href={JIMMY_APP_STORE}>{c.jimmy.storeLabel}</AppStoreButton>
                 <SiteLink href={c.jimmy.siteHref}>{c.jimmy.siteLabel}</SiteLink>
               </div>
+            </div>
+
+            <div className="flex flex-col">
+              <div className="fade ml-auto w-full lg:w-[86%]" style={d(100)}>
+                <Image
+                  src="/franchise/jimmy-dashboard.webp"
+                  alt={c.jimmy.dashboardAlt}
+                  width={2000}
+                  height={1328}
+                  sizes="(min-width: 1280px) 560px, (min-width: 1024px) 45vw, 100vw"
+                  className={`block h-[clamp(220px,28vw,300px)] w-full rotate-[1.5deg] rounded-[20px] bg-line object-cover object-top shadow-[0_0_0_1px_rgba(21,20,14,0.06),0_24px_48px_-28px_rgba(21,20,14,0.4)] ${TILT}`}
+                />
               </div>
+              {quentin !== null ? (
+                <div className="fade relative z-10 -mt-12 w-[88%] sm:w-[68%]" style={d(220)}>
+                  <div className={`-rotate-2 ${TILT}`}>
+                    <IMessageThread thread={quentin} />
+                  </div>
+                </div>
+              ) : null}
             </div>
-            <div
-              className="fade overflow-hidden rounded-[24px] bg-line ring-1 ring-line"
-              style={d(after + 200)}
-            >
-              <Image
-                src="/franchise/jimmy-dashboard.webp"
-                alt={c.jimmy.dashboardAlt}
-                width={2000}
-                height={1328}
-                sizes="(min-width: 1024px) 560px, 100vw"
-                className="block h-full min-h-[240px] w-full object-cover object-left-top"
-              />
-            </div>
-          </div>
+          </Stage>
         </Container>
       </Stage>
-      <ChapterBridge
-        number="06"
-        next="process"
-        statement={
-          <>
-            {c.bridge.lead}{" "}
-            <span className="bg-[linear-gradient(transparent_58%,var(--color-lime)_58%,var(--color-lime)_92%,transparent_92%)] px-0.5">
-              {c.bridge.mark}
-            </span>
-          </>
-        }
+      <CtaBand
+        className="mt-28"
+        title={c.band.title}
+        note={c.band.note}
+        placement={c.band.placement}
       />
     </>
   );
