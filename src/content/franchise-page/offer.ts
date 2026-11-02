@@ -1,4 +1,4 @@
-import { FOUNDING, OFFER } from "@/content/offer";
+import { FOUNDING, OFFER, PRICES_PUBLIC } from "@/content/offer";
 import { formatMoney } from "@/lib/franchise-calc";
 
 /**
@@ -12,7 +12,9 @@ export const OFFER_COPY = {
   kicker: "The founding offer",
   title: {
     lead: `${FOUNDING.slots} founding places.`,
-    mark: `${formatMoney(OFFER.setupFee)}, fixed.`,
+    mark: PRICES_PUBLIC
+      ? `${formatMoney(OFFER.setupFee)}, fixed.`
+      : "One fixed price.",
   },
   /**
    * The artboard said "Less than a year of what 7 studios would pay you for
@@ -22,7 +24,13 @@ export const OFFER_COPY = {
     `That's ${months} months of the app fee your ${units} studios pay you.`,
   lead: "Founding partners build the core with us and lock their terms.",
   price: {
-    label: "Founding set-up, fixed",
+    label: PRICES_PUBLIC ? "Founding set-up, fixed" : "Founding set-up",
+    /** Stands in for the figure while prices are off the site. */
+    hidden: "Private",
+    /** Stands in for each payment amount while prices are off the site. */
+    amountHidden: "Private",
+    hiddenNote:
+      "Our price is private for now. One fixed price, paid in three parts.",
     checks: [
       "Your app, in your brand",
       "Each studio’s own Stripe",

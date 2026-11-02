@@ -15,7 +15,7 @@ import { LpProof } from "@/components/franchise/lp-proof/proof";
 import { UrgencyBar } from "@/components/franchise/urgency-bar";
 import { JsonLd } from "@/components/seo/json-ld";
 import { FAQ_ITEMS } from "@/content/franchise-page/faq";
-import { FOUNDING, OFFER } from "@/content/offer";
+import { FOUNDING, OFFER, PRICES_PUBLIC } from "@/content/offer";
 import { breadcrumbs, faqPage, offerSchema } from "@/lib/schema";
 
 /**
@@ -42,15 +42,17 @@ export function FranchisePage({ landing = false }: { landing?: boolean }) {
         ])}
       />
       {faqLd && <JsonLd data={faqLd} />}
-      <JsonLd
-        data={offerSchema({
-          name: "Founding partner set-up",
-          price: OFFER.setupFee,
-          currency: OFFER.currency,
-          path: "/franchise",
-          availabilityEnds: FOUNDING.termsClose,
-        })}
-      />
+      {PRICES_PUBLIC ? (
+        <JsonLd
+          data={offerSchema({
+            name: "Founding partner set-up",
+            price: OFFER.setupFee,
+            currency: OFFER.currency,
+            path: "/franchise",
+            availabilityEnds: FOUNDING.termsClose,
+          })}
+        />
+      ) : null}
       <UrgencyBar landing={landing} />
       {landing ? <LeadView /> : null}
       <ChapterNav />

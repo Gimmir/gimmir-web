@@ -1,4 +1,4 @@
-import { OFFER } from "@/content/offer";
+import { OFFER, PRICES_PUBLIC } from "@/content/offer";
 import { formatMoney } from "@/lib/franchise-calc";
 import { FOUNDERS } from "@/lib/founders";
 
@@ -14,7 +14,9 @@ const lower = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 const payments = OFFER.payments.map((p) => {
   const [head, week] = p.label.split(", ");
   return {
-    title: `${formatMoney(p.amount)} ${lower(head)}`,
+    title: PRICES_PUBLIC
+      ? `${formatMoney(p.amount)} ${lower(head)}`
+      : capital(head),
     text: week ? `${capital(week)}, ${lower(p.when)}` : p.when,
   };
 });

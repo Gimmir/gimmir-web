@@ -11,7 +11,7 @@ import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { ArrowRight, Check } from "@/components/ui/icons";
 import { OFFER_COPY as C } from "@/content/franchise-page/offer";
-import { FOUNDING_RETURN, OFFER } from "@/content/offer";
+import { FOUNDING_RETURN, OFFER, PRICES_PUBLIC } from "@/content/offer";
 import { formatMoney } from "@/lib/franchise-calc";
 import { OfferLead } from "./offer-lead";
 
@@ -87,9 +87,20 @@ export function LpOffer() {
           <div className="flex flex-col gap-5 rounded-[24px] bg-surface p-6 shadow-[0_30px_70px_-36px_rgba(21,20,14,0.3)] ring-1 ring-line sm:p-8">
             <div>
               <p className="m-0 text-sm text-muted">{C.price.label}</p>
-              <p className="display m-0 mt-1.5 text-[clamp(44px,6vw,56px)] leading-none tabular-nums">
-                {formatMoney(OFFER.setupFee)}
-              </p>
+              {PRICES_PUBLIC ? (
+                <p className="display m-0 mt-1.5 text-[clamp(44px,6vw,56px)] leading-none tabular-nums">
+                  {formatMoney(OFFER.setupFee)}
+                </p>
+              ) : (
+                <>
+                  <p className="display m-0 mt-1.5 text-[clamp(44px,6vw,56px)] leading-none">
+                    {C.price.hidden}
+                  </p>
+                  <p className="m-0 mt-2.5 text-[15px] leading-[1.5] text-muted">
+                    {C.price.hiddenNote}
+                  </p>
+                </>
+              )}
             </div>
             <ul className="m-0 flex list-none flex-col border-b border-line p-0 text-[15px]">
               {OFFER.payments.map((p) => (
@@ -98,7 +109,13 @@ export function LpOffer() {
                   className="flex justify-between gap-3 border-t border-line py-3"
                 >
                   <span>{p.label}</span>
-                  <strong className="tabular-nums">{formatMoney(p.amount)}</strong>
+                  {PRICES_PUBLIC ? (
+                    <strong className="tabular-nums">
+                      {formatMoney(p.amount)}
+                    </strong>
+                  ) : (
+                    <strong className="text-muted">{C.price.amountHidden}</strong>
+                  )}
                 </li>
               ))}
             </ul>

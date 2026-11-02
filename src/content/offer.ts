@@ -36,6 +36,12 @@ export const OFFER = {
   regions: "the UK and Ireland",
 } as const;
 
+/**
+ * Whether the site shows what the offer costs: the set-up, its parts and
+ * Support. Off since 2 Nov 2026 (Nazar): the price is given on the call.
+ */
+export const PRICES_PUBLIC: boolean = false;
+
 /** Founding partners. The live count comes from `offerSettings` in Sanity once it exists. */
 export const FOUNDING = {
   slots: 3,

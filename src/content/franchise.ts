@@ -5,7 +5,7 @@
  * `offer.ts` and `proof.ts`.
  */
 
-import { OFFER } from "@/content/offer";
+import { OFFER, PRICES_PUBLIC } from "@/content/offer";
 import { BOOKINGS } from "@/lib/booking";
 
 const POUNDS = new Intl.NumberFormat("en-GB", {
@@ -21,7 +21,7 @@ export const franchise = {
   meta: {
     // the layout's title template adds "· Gimmir"
     title: "Your franchise app: turn platform fees into HQ income",
-    description: `Franchisees pay Mindbody or Glofox every month. With your own app that money comes to HQ, plus a fee on every payment. ${gbp(OFFER.setupFee)} fixed, ready in ${OFFER.readyWeeks} weeks.`,
+    description: `Franchisees pay Mindbody or Glofox every month. With your own app that money comes to HQ, plus a fee on every payment. ${PRICES_PUBLIC ? `${gbp(OFFER.setupFee)} fixed` : "One fixed price"}, ready in ${OFFER.readyWeeks} weeks.`,
   },
 
   cta: {

@@ -1,4 +1,4 @@
-import { FOUNDING, OFFER, SUPPORT } from "@/content/offer";
+import { FOUNDING, OFFER, PRICES_PUBLIC, SUPPORT } from "@/content/offer";
 
 /**
  * The ten questions on /franchise (Oleh's landing artboard, 2 Nov 2026).
@@ -60,7 +60,9 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
   {
     key: "after-launch",
     question: "What does it cost after launch?",
-    answer: `Support is ${formatMoney(SUPPORT.monthly)} a month, flat, not per studio. From 7 studios, what they pay you for the app covers it. Support + Grow adds ${grow.hours} hours of new features at ${formatMoney(grow.rate)} an hour (${formatMoney(grow.monthly)} a month). Support + Scale adds ${scale.hoursFrom} or more hours at ${formatMoney(scale.rate)} (from ${formatMoney(scale.monthlyFrom)} a month). Everyone keeps Support for at least ${SUPPORT.minMonths} months.`,
+    answer: PRICES_PUBLIC
+      ? `Support is ${formatMoney(SUPPORT.monthly)} a month, flat, not per studio. From 7 studios, what they pay you for the app covers it. Support + Grow adds ${grow.hours} hours of new features at ${formatMoney(grow.rate)} an hour (${formatMoney(grow.monthly)} a month). Support + Scale adds ${scale.hoursFrom} or more hours at ${formatMoney(scale.rate)} (from ${formatMoney(scale.monthlyFrom)} a month). Everyone keeps Support for at least ${SUPPORT.minMonths} months.`
+      : `Support is one flat monthly fee for the whole network, not per studio. Support + Grow adds ${grow.hours} hours of new features a month, Support + Scale ${scale.hoursFrom} or more. Our prices are private for now; we give you the figures on the call. Everyone keeps Support for at least ${SUPPORT.minMonths} months.`,
   },
   {
     key: "requests",

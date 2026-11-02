@@ -2,7 +2,7 @@
 
 import { useFranchise } from "@/components/franchise/franchise-context";
 import { OFFER_COPY as C } from "@/content/franchise-page/offer";
-import { OFFER } from "@/content/offer";
+import { OFFER, PRICES_PUBLIC } from "@/content/offer";
 import { formatMonths } from "@/lib/franchise-calc";
 
 /**
@@ -16,7 +16,9 @@ export function OfferLead() {
   const monthly = units * techFee;
   return (
     <>
-      {monthly > 0 ? `${C.leadVersus(formatMonths(OFFER.setupFee / monthly), units)} ` : null}
+      {PRICES_PUBLIC && monthly > 0
+        ? `${C.leadVersus(formatMonths(OFFER.setupFee / monthly), units)} `
+        : null}
       {C.lead}
     </>
   );

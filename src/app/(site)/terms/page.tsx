@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Pill } from "@/components/ui/pill";
 import { gbp } from "@/content/franchise";
-import { OFFER } from "@/content/offer";
+import { OFFER, PRICES_PUBLIC } from "@/content/offer";
 import { socialMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
@@ -73,10 +73,17 @@ export default function TermsPage() {
 
           <Section title="Pricing and guarantees">
             <p>
-              Prices shown on the site, such as the {gbp(OFFER.setupFee)} founding
-              set-up and the monthly plans, are what we offer when you read
-              them. What you pay is set in your signed agreement. Guarantees
-              described on the site apply as set out in that agreement.
+              {PRICES_PUBLIC ? (
+                <>
+                  Prices shown on the site, such as the {gbp(OFFER.setupFee)}{" "}
+                  founding set-up and the monthly plans, are what we offer when
+                  you read them.
+                </>
+              ) : (
+                "Prices we quote, such as the founding set-up and the monthly plans, are what we offer when we quote them."
+              )}{" "}
+              What you pay is set in your signed agreement. Guarantees described
+              on the site apply as set out in that agreement.
             </p>
           </Section>
 

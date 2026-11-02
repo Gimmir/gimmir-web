@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { useFranchise } from "@/components/franchise/franchise-context";
-import { OFFER, SUPPORT } from "@/content/offer";
+import { OFFER, PRICES_PUBLIC, SUPPORT } from "@/content/offer";
 import { cn } from "@/lib/cn";
 import { formatMoney, formatMonths, formatPercent } from "@/lib/franchise-calc";
 
@@ -124,11 +124,15 @@ export function NumbersResult() {
             {formatMoney(total)}
           </p>
           <p className="m-0 mt-3 text-[15px] leading-[1.5] text-[#2b3600]">
-            {payback
-              ? `After Support at ${formatMoney(SUPPORT.monthly)} a month, ${formatMoney(net)} a year stays with you. The ${formatMoney(OFFER.setupFee)} set-up comes back in about ${formatMonths(payback)} ${formatMonths(payback) === "1" ? "month" : "months"}.`
-              : total > 0
-                ? `At these numbers Support at ${formatMoney(SUPPORT.monthly)} a month costs more than the new income. Raise what studios pay you, or check it with us.`
-                : "Set what studios pay you, or a fee on payments, to see the payback."}
+            {!PRICES_PUBLIC
+              ? total > 0
+                ? "Our price is private for now, so we work out the payback with you on the call."
+                : "Set what studios pay you, or a fee on payments, to see your income."
+              : payback
+                ? `After Support at ${formatMoney(SUPPORT.monthly)} a month, ${formatMoney(net)} a year stays with you. The ${formatMoney(OFFER.setupFee)} set-up comes back in about ${formatMonths(payback)} ${formatMonths(payback) === "1" ? "month" : "months"}.`
+                : total > 0
+                  ? `At these numbers Support at ${formatMoney(SUPPORT.monthly)} a month costs more than the new income. Raise what studios pay you, or check it with us.`
+                  : "Set what studios pay you, or a fee on payments, to see the payback."}
           </p>
           <PillLink href="#book" className="mt-[18px]">
             Check it with us
@@ -137,8 +141,10 @@ export function NumbersResult() {
       ) : null}
 
       <p className="m-0 mt-0.5 text-sm leading-[1.5] text-muted">
-        A projection, not a promise. The payback already takes off Support at{" "}
-        {formatMoney(SUPPORT.monthly)} a month.
+        A projection, not a promise.
+        {PRICES_PUBLIC
+          ? ` The payback already takes off Support at ${formatMoney(SUPPORT.monthly)} a month.`
+          : null}
       </p>
     </div>
   );
