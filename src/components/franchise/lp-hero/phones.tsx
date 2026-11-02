@@ -6,6 +6,7 @@ import { Phone } from "@/components/franchise/phone";
 import styles from "./lp-hero.module.css";
 
 const PAYMENT = 60;
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 const FADE = "transition-[background-color,box-shadow,color] duration-300";
 
 /** The little line icons in the front phone's tab bar. */
@@ -30,7 +31,7 @@ function TabIcon({ stroke, children }: { stroke: string; children: React.ReactNo
  * The hero's two app screens (checkout behind, home in front) and three
  * floating cards, drawn in code with sample data. Everything that is the
  * member app's own colour repaints from the visitor's brand; the
- * "to HQ" share follows the model's fee rate. Decorative, so hidden from
+ * "to HQ" share follows the model's fee rate. The phones and cards settle in as one sequence. Decorative, so hidden from
  * assistive tech.
  */
 export function HeroPhones() {
@@ -40,7 +41,7 @@ export function HeroPhones() {
   const paint = { background: c, color: "#fff" } as const;
 
   return (
-    <div aria-hidden className="relative mx-auto h-[700px] w-full max-w-[480px]">
+    <div aria-hidden className="fade relative mx-auto h-[700px] w-full max-w-[480px]" style={d(250)}>
       <div className="absolute inset-[80px_0_10px_0] rounded-[40px] bg-paper-2" />
 
       {/* back phone: checkout */}
@@ -238,11 +239,13 @@ export function HeroPhones() {
         </div>
       </Phone>
 
-      {/* floating cards */}
-      <div className={`${styles.float} absolute top-0 -right-2 z-[4] w-[284px] max-w-[86%]`}>
-        <div
-          className={`${styles.toast} flex items-start gap-2.5 rounded-[18px] bg-white/[0.97] px-3.5 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.35)]`}
-        >
+      {/* floating cards: they enter one by one once the phones have settled,
+          then drift gently (the outer node enters, the inner one floats) */}
+      <div
+        className={`${styles.enter} absolute top-0 -right-2 z-[4] w-[284px] max-w-[86%]`}
+        style={d(900)}
+      >
+        <div className={`${styles.float} flex items-start gap-2.5 rounded-[18px] bg-white/[0.97] px-3.5 py-3 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.35)]`}>
           <span
             className={`inline-flex size-9 shrink-0 items-center justify-center rounded-[9px] font-extrabold ${FADE}`}
             style={paint}
@@ -259,9 +262,22 @@ export function HeroPhones() {
         </div>
       </div>
       <div
-        className={`${styles.float2} absolute bottom-[54px] -left-4 z-[4] max-[560px]:hidden`}
+        className={`${styles.enter} absolute right-[-24px] bottom-[170px] z-[4] max-[560px]:hidden`}
+        style={d(1060)}
       >
-        <div className="flex items-center gap-3 rounded-3xl bg-surface px-3.5 py-3 shadow-[inset_0_0_0_1px_var(--color-line),0_20px_40px_-22px_rgba(21,20,14,0.45)]">
+        <div className={`${styles.float2} flex items-center gap-2.5 rounded-3xl bg-surface px-3.5 py-3 shadow-[inset_0_0_0_1px_var(--color-line),0_20px_40px_-22px_rgba(21,20,14,0.45)]`}>
+          <span className={styles.live} />
+          <div className="text-[13px] leading-[1.35]">
+            <strong>Day 30 check-in sent</strong>
+            <div className="text-muted">Coach Dean to Sophie</div>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`${styles.enter} absolute bottom-[54px] -left-4 z-[4] max-[560px]:hidden`}
+        style={d(1220)}
+      >
+        <div className={`${styles.float} flex items-center gap-3 rounded-3xl bg-surface px-3.5 py-3 shadow-[inset_0_0_0_1px_var(--color-line),0_20px_40px_-22px_rgba(21,20,14,0.45)]`}>
           <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-lime font-extrabold">
             £
           </span>
@@ -272,18 +288,6 @@ export function HeroPhones() {
           <span className="rounded-full bg-ink px-2.5 py-[5px] text-xs font-bold whitespace-nowrap text-lime">
             +{hqShare} to HQ
           </span>
-        </div>
-      </div>
-      <div
-        className={`${styles.float} absolute right-[-24px] bottom-[170px] z-[4] max-[560px]:hidden`}
-        style={{ animationDelay: "1.4s" }}
-      >
-        <div className="flex items-center gap-2.5 rounded-3xl bg-surface px-3.5 py-3 shadow-[inset_0_0_0_1px_var(--color-line),0_20px_40px_-22px_rgba(21,20,14,0.45)]">
-          <span className={styles.live} />
-          <div className="text-[13px] leading-[1.35]">
-            <strong>Day 30 check-in sent</strong>
-            <div className="text-muted">Coach Dean to Sophie</div>
-          </div>
         </div>
       </div>
     </div>

@@ -1,53 +1,86 @@
-import { MarkerStroke } from "@/components/blocks/inline-headline";
+import { BookTrigger } from "@/components/blocks/book-trigger";
+import { Mark } from "@/components/franchise/lp-numbers/shared";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, RiseWord } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
-import { UN1T } from "@/content/proof";
+import { shown, UN1T } from "@/content/proof";
 
 import { BrandCard } from "./brand-card";
 import styles from "./lp-hero.module.css";
 import { HeroPhones } from "./phones";
 
 /**
- * /franchise chapter "top" (Oleh's artboard): the promise, both asks, the
- * brand card that repaints every app screen, and the two phones. The
- * visitor's brand lives in `FranchiseProvider`; the card and phones read it.
+ * /franchise chapter "top" (Oleh's artboard v2): the promise, the two asks,
+ * three proof checks and the two-phone composition. The compact brand card
+ * under the checks lets a visitor repaint every app screen with their own
+ * name and colour (state lives in `FranchiseProvider`).
  */
-export function LpHero() {
-  const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+
+const studios = shown(UN1T.studios);
+const members = shown(UN1T.members);
+
+// claims still waiting on sign-off drop out instead of rendering
+const CHECKS = [
+  studios !== null ? `Built for ${UN1T.name}, ${studios} studios` : null,
+  members !== null ? `${members} members on it` : null,
+  "Live in 12 weeks, in writing",
+].filter((c): c is string => c !== null);
+
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+
+function Check() {
   return (
-    <Stage as="section" id="top" eager className="scroll-mt-24 overflow-x-clip pt-16 pb-[72px]">
+    <svg aria-hidden viewBox="0 0 18 18" className="mt-0.5 size-[18px] shrink-0">
+      <circle cx="9" cy="9" r="9" fill="var(--color-ink)" />
+      <path
+        d="M5 9.2l2.6 2.6L13 6.6"
+        fill="none"
+        stroke="var(--color-lime)"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function LpHero() {
+  return (
+    <Stage as="section" id="top" eager data-tone="paper" className="scroll-mt-24 overflow-x-clip pt-16 pb-[72px]">
       <Container className="grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] items-center gap-14">
         <div className="flex min-w-0 flex-col gap-[26px]">
           <span
-            className="fade inline-flex min-h-[34px] items-center gap-1.5 self-start rounded-full bg-surface px-3.5 py-1.5 text-sm font-medium text-[#3a382f] ring-1 ring-line"
+            className="fade inline-flex min-h-[34px] items-center gap-1.5 self-start rounded-full bg-surface px-3.5 py-1.5 text-sm font-medium text-muted ring-1 ring-line"
             style={d(0)}
           >
             <span className={styles.live} aria-hidden />
             For fitness and kids&apos; activity franchises · UK and Ireland
           </span>
-          <h1 className="display m-0 text-[clamp(46px,6.6vw,86px)] leading-[0.96] tracking-[-0.045em]">
-            <RiseText text="Your franchise. Your app. Your" />{" "}
-            <span className="relative inline-block">
-              <RiseWord i={6}>income.</RiseWord>
-              <MarkerStroke delay={650} bottom="-0.08em" />
-            </span>
+          <h1 className="display m-0 text-[clamp(46px,6.6vw,86px)] leading-[0.98] tracking-[-0.045em]">
+            <RiseText text="Your brand. Your app. Your" />{" "}
+            <RiseWord i={5}>
+              <Mark>money.</Mark>
+            </RiseWord>
           </h1>
           <p
-            className="fade m-0 max-w-[660px] text-[21px] leading-[1.55] text-muted"
+            className="fade m-0 max-w-[520px] text-[20px] leading-[1.55] text-muted"
             style={d(450)}
           >
-            Your studios pay Mindbody or Glofox every month. With your own app, that money
-            comes to HQ, plus a fee on every payment your members make.
+            Every studio pays Mindbody or Glofox every month. Own the app, and that money
+            comes to you.
           </p>
           <div className="fade flex flex-wrap gap-3" style={d(560)}>
-            <a
-              href="#numbers"
-              className="inline-flex min-h-[52px] items-center gap-3.5 rounded-full bg-ink py-0 pr-2 pl-6 text-base font-semibold text-paper transition-[background-color,transform] duration-200 hover:-translate-y-px hover:bg-[#2a2920] active:scale-[.97]"
+            <BookTrigger
+              booking="franchiseCall"
+              placement="hero"
+              className="inline-flex min-h-[52px] items-center gap-3.5 rounded-full bg-ink py-0 pr-2 pl-6 text-base font-semibold text-paper transition-[background-color,transform] duration-200 ease-[var(--ease-out)] active:scale-[.97] [@media(hover:hover)]:hover:bg-ink-soft"
             >
-              Work out my numbers
-              <span className="inline-flex size-[38px] items-center justify-center rounded-full bg-lime text-ink">
-                <svg aria-hidden viewBox="0 0 16 16" className="size-4" fill="none">
+              Book 30 minutes
+              <span
+                aria-hidden
+                className="inline-flex size-[38px] items-center justify-center rounded-full bg-lime text-ink"
+              >
+                <svg viewBox="0 0 16 16" className="size-4" fill="none">
                   <path
                     d="M3 8h10M9 4l4 4-4 4"
                     stroke="currentColor"
@@ -57,17 +90,26 @@ export function LpHero() {
                   />
                 </svg>
               </span>
-            </a>
+            </BookTrigger>
             <a
-              href={UN1T.appStore.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[52px] items-center rounded-full px-6 text-base font-semibold text-ink ring-[1.5px] ring-ink transition-[background-color,transform] duration-200 ring-inset hover:-translate-y-px hover:bg-paper-2 active:scale-[.97]"
+              href="#numbers"
+              className="inline-flex min-h-[52px] items-center rounded-full px-6 text-base font-semibold text-ink ring-[1.5px] ring-ink transition-[background-color,transform] duration-200 ease-[var(--ease-out)] ring-inset active:scale-[.97] [@media(hover:hover)]:hover:bg-paper-2"
             >
-              See UN1T&apos;s live app
+              Work out my numbers
             </a>
           </div>
-          <BrandCard className="fade" style={d(680)} />
+          <ul
+            className="fade m-0 flex list-none flex-wrap gap-x-5 gap-y-2 p-0 text-sm text-muted"
+            style={d(640)}
+          >
+            {CHECKS.map((c) => (
+              <li key={c} className="inline-flex items-start gap-2">
+                <Check />
+                {c}
+              </li>
+            ))}
+          </ul>
+          <BrandCard className="fade" style={d(720)} />
         </div>
         <HeroPhones />
       </Container>
