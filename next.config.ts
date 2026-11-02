@@ -23,7 +23,11 @@ const STATIC_REDIRECTS = [
   { source: "/operators", destination: "/franchise", permanent: true },
   { source: "/operators/:path*", destination: "/franchise", permanent: true },
   // the calculators moved onto /franchise, right under the hero
-  { source: "/franchise/numbers", destination: "/franchise#numbers", permanent: true },
+  {
+    source: "/franchise/numbers",
+    destination: "/franchise#numbers",
+    permanent: true,
+  },
 ];
 
 const nextConfig: NextConfig = {
@@ -47,6 +51,22 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [...STATIC_REDIRECTS, ...(await fetchRedirects())];
+  },
+  // Landing versions for links from ads and posts: the same URL with
+  // ?landing=true serves the page without the site header and footer
+  // menus. beforeFiles, because /franchise is a page of its own.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/franchise",
+          has: [{ type: "query", key: "landing", value: "true" }],
+          destination: "/lp/franchise",
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
   },
 };
 
