@@ -1,109 +1,130 @@
-import { ChapterBridge } from "@/components/franchise/chapters";
+import { CtaBand } from "@/components/franchise/cta-band";
 import { Kicker } from "@/components/franchise/kicker";
+import { Mark } from "@/components/franchise/lp-numbers/shared";
 import { Stage } from "@/components/motion/stage";
+import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { PLATFORM } from "@/content/franchise-page/platform";
+import { FOUNDING } from "@/content/offer";
 import { cn } from "@/lib/cn";
 
-import { BrandName } from "./brand-name";
-import { PlatformStory } from "./story";
+import { CANVAS } from "./canvas";
+import { AppViz, AskViz, HqViz, PayViz, StayViz, TrainViz } from "./illustrations";
+import { Viz } from "./viz";
 
 /**
- * /franchise, chapter 03 (Oleh's landing artboard): six things the network
- * runs on, told as a scroll story. The steps are plain server markup in a
- * list; the sticky stage beside them (story.tsx) shows the matching screen
- * and follows whichever step is in the middle of the viewport.
+ * /franchise, "What you get" (Oleh's landing artboard, 2 Nov): six things
+ * the network runs on, as a bento grid. Row 1 is wide + narrow, row 2
+ * narrow + wide, row 3 two equal cards. Each card is a soft illustration
+ * panel (drawn in code, repainted with the visitor's brand) with its title
+ * and text under it, or beside it on the wide cards. On a phone it is one
+ * column with the drawing on top.
  */
 
-// one static class per step: the story root carries `data-active`
-const ON = [
-  "group-data-[active='0']/story:border-ink",
-  "group-data-[active='1']/story:border-ink",
-  "group-data-[active='2']/story:border-ink",
-  "group-data-[active='3']/story:border-ink",
-  "group-data-[active='4']/story:border-ink",
-  "group-data-[active='5']/story:border-ink",
-] as const;
-const ON_NUM = [
-  "group-data-[active='0']/story:bg-lime group-data-[active='0']/story:shadow-[0_0_0_1px_var(--color-ink)]",
-  "group-data-[active='1']/story:bg-lime group-data-[active='1']/story:shadow-[0_0_0_1px_var(--color-ink)]",
-  "group-data-[active='2']/story:bg-lime group-data-[active='2']/story:shadow-[0_0_0_1px_var(--color-ink)]",
-  "group-data-[active='3']/story:bg-lime group-data-[active='3']/story:shadow-[0_0_0_1px_var(--color-ink)]",
-  "group-data-[active='4']/story:bg-lime group-data-[active='4']/story:shadow-[0_0_0_1px_var(--color-ink)]",
-  "group-data-[active='5']/story:bg-lime group-data-[active='5']/story:shadow-[0_0_0_1px_var(--color-ink)]",
+const BENTO = [
+  { Art: AppViz, canvas: CANVAS.app, s0: 0.82, span: "min-[1000px]:col-span-4", wide: true },
+  { Art: PayViz, canvas: CANVAS.pay, s0: 0.72, span: "min-[1000px]:col-span-2", wide: false },
+  { Art: StayViz, canvas: CANVAS.stay, s0: 0.72, span: "min-[1000px]:col-span-2", wide: false },
+  { Art: HqViz, canvas: CANVAS.hq, s0: 0.85, span: "min-[1000px]:col-span-4", wide: true },
+  { Art: TrainViz, canvas: CANVAS.train, s0: 1, span: "min-[1000px]:col-span-3", wide: false },
+  { Art: AskViz, canvas: CANVAS.ask, s0: 1, span: "min-[1000px]:col-span-3", wide: false },
 ] as const;
 
+const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+
+const closeLabel = new Date(`${FOUNDING.termsClose}T12:00:00Z`).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 export function LpPlatform() {
-  const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
+  const C = PLATFORM;
+  const title = `${C.title} ${C.marked}`;
+  const after = wordCount(title) * 40 + 300;
+
   return (
     <>
-      <section id="platform" data-tone="paper" className="pt-7 pb-6">
-        <Container className="flex flex-col gap-2">
-          <Stage
-            as="header"
-            className="mx-auto flex max-w-[860px] flex-col items-center gap-4 text-center"
-          >
-            <Kicker className="fade">{PLATFORM.kicker}</Kicker>
-            <h2
-              className="display fade text-[clamp(34px,4.6vw,56px)] leading-none"
-              style={d(100)}
-            >
-              Six things your network runs on. All in <BrandName />
-              &apos;s name.
+      <Stage as="section" id="platform" data-tone="paper" className="scroll-mt-[84px] pt-32">
+        <Container className="flex flex-col gap-8">
+          <div className="mx-auto flex max-w-[860px] flex-col items-center gap-4 text-center">
+            <Kicker>{C.kicker}</Kicker>
+            <h2 className="display m-0 text-[length:var(--text-title)] leading-[1.02]">
+              <RiseText text={C.title} />{" "}
+              <Mark>
+                <RiseText text={C.marked} start={wordCount(C.title)} />
+              </Mark>
             </h2>
-            <p className="fade m-0 max-w-[660px] text-[19px] leading-[1.55] text-muted" style={d(200)}>
-              {PLATFORM.lead}
+            <p
+              className="fade m-0 max-w-[660px] text-[19px] leading-[1.55] text-muted"
+              style={d(after)}
+            >
+              {C.lead}
             </p>
-          </Stage>
-          <PlatformStory>
-            <ol role="list" className="m-0 list-none p-0">
-              {PLATFORM.steps.map((s, i) => (
-                <li
-                  key={s.title}
-                  data-step
-                  className="flex min-h-[78vh] flex-col justify-center py-8 max-[900px]:min-h-[68vh]"
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 min-[1000px]:grid-cols-6">
+            {BENTO.map(({ Art, canvas, s0, span, wide }, i) => {
+              const tile = C.tiles[i];
+              const text = (
+                <div
+                  className={cn(
+                    "flex flex-col gap-2 px-3 pt-1 pb-3.5",
+                    wide && "min-[1000px]:justify-center min-[1000px]:px-7 min-[1000px]:py-6",
+                  )}
                 >
-                  <div
+                  <h3
                     className={cn(
-                      "border-l-[3px] border-line pl-6 transition-colors duration-300 motion-reduce:transition-none",
-                      ON[i],
+                      "m-0 text-xl leading-[1.2] font-bold tracking-[-0.02em]",
+                      wide && "min-[1000px]:text-[28px]",
                     )}
                   >
-                    <span
-                      aria-hidden
-                      className={cn(
-                        "inline-flex size-11 items-center justify-center rounded-full bg-line text-sm font-extrabold transition-[background-color,box-shadow] duration-300 motion-reduce:transition-none",
-                        ON_NUM[i],
-                      )}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="mt-4 text-[clamp(28px,3.2vw,40px)] leading-[1.05] font-extrabold tracking-[-0.03em]">
-                      {s.title}
-                    </h3>
-                    <p className="mt-3 max-w-[660px] text-[19px] leading-[1.55] text-muted">{s.body}</p>
-                    <ul role="list" className="m-0 mt-[18px] flex list-none flex-wrap gap-2 p-0">
-                      {s.chips.map((c) => (
-                        <li
-                          key={c}
-                          className="inline-flex h-[34px] items-center rounded-full bg-paper-2 px-3.5 text-sm font-medium text-[#3a382f]"
-                        >
-                          {c}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </PlatformStory>
+                    {tile.title}
+                  </h3>
+                  <p className="m-0 text-[15px] leading-[1.5] text-muted">{tile.body}</p>
+                </div>
+              );
+              const viz = (
+                <Viz w={canvas.w} h={canvas.h} s0={s0}>
+                  <Art />
+                </Viz>
+              );
+              return (
+                <article
+                  key={tile.title}
+                  className={cn(
+                    "group/card flex flex-col gap-3 rounded-3xl bg-surface p-2.5 shadow-[0_0_0_1px_rgba(21,20,14,0.07),0_16px_40px_-24px_rgba(21,20,14,0.22)] sm:p-3",
+                    span,
+                    wide &&
+                      "flex-col-reverse min-[1000px]:grid min-[1000px]:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] min-[1000px]:gap-3",
+                  )}
+                >
+                  {wide ? (
+                    <>
+                      {text}
+                      {viz}
+                    </>
+                  ) : (
+                    <>
+                      {viz}
+                      {text}
+                    </>
+                  )}
+                </article>
+              );
+            })}
+          </div>
         </Container>
-      </section>
-      <ChapterBridge
-        statement={PLATFORM.bridge.statement}
-        next="everything"
-        number={PLATFORM.bridge.number}
-      />
+      </Stage>
+
+      <Stage className="pt-28 pb-20">
+        <CtaBand
+          title={C.band.title}
+          note={`${FOUNDING.slots} founding places. Terms close ${closeLabel}.`}
+          placement={C.band.placement}
+        />
+      </Stage>
     </>
   );
 }
