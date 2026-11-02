@@ -25,7 +25,7 @@ export function LpNumbers() {
       className="scroll-mt-[84px] pt-32"
     >
       <Container className="flex flex-col gap-10">
-        <div className="mx-auto flex max-w-[780px] flex-col items-center gap-[18px] text-center">
+        <div className="mx-auto flex max-w-[1040px] flex-col items-center gap-[18px] text-center">
           <Kicker>Your numbers</Kicker>
           <h2 className="display m-0 text-[length:var(--text-title)] leading-[1.02]">
             <RiseText text={line1} />

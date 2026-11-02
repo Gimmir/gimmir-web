@@ -1,3 +1,4 @@
+import { Globe } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
 
 /** The artboard's black App Store button. A real link with its own text. */
@@ -23,7 +24,7 @@ export function AppStoreButton({
   );
 }
 
-/** The outlined site link beside it. */
+/** The outlined site link beside it, with a globe so it reads as a website. */
 export function SiteLink({
   href,
   children,
@@ -39,10 +40,11 @@ export function SiteLink({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex min-h-12 items-center rounded-full px-6 text-base font-semibold text-ink no-underline shadow-[inset_0_0_0_1.5px_var(--color-ink)] transition-[background-color,transform] duration-150 hover:bg-paper-2 active:scale-[0.97]",
+        "inline-flex min-h-12 items-center gap-2 rounded-full pr-6 pl-5 text-base font-semibold text-ink no-underline shadow-[inset_0_0_0_1.5px_var(--color-ink)] transition-[background-color,transform] duration-150 active:scale-[0.97] [@media(hover:hover)]:hover:bg-paper-2",
         className,
       )}
     >
+      <Globe className="size-[18px] shrink-0" />
       {children}
     </a>
   );
