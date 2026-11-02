@@ -52,7 +52,7 @@ export function LpProof() {
     <>
       <Stage as="section" id="proof" data-tone="paper" className="scroll-mt-[84px] pt-32">
         <Container className="flex flex-col gap-12">
-          <div className="mx-auto flex max-w-[760px] flex-col items-center gap-[18px] text-center">
+          <div className="mx-auto flex max-w-[1040px] flex-col items-center gap-[18px] text-center">
             <Kicker>{c.kicker}</Kicker>
             <h2 className="display text-[length:var(--text-title)] leading-[1.04]">
               <RiseText text={c.title.lead} />{" "}

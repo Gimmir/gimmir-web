@@ -104,34 +104,3 @@ export function ChapterNav() {
     </>
   );
 }
-
-/**
- * The line between two chapters: one statement, then a numbered node that
- * jumps to the next chapter. Server-renderable (no state).
- */
-export function ChapterBridge({
-  statement,
-  next,
-  number,
-}: {
-  statement: React.ReactNode;
-  next: ChapterId;
-  number: string;
-}) {
-  const label = CHAPTERS.find((c) => c.id === next)?.label ?? "";
-  return (
-    <div className="flex flex-col items-center gap-[22px] px-6 pt-14 pb-1 text-center">
-      <p className="display m-0 max-w-[900px] text-[clamp(28px,3.9vw,50px)] leading-[1.08]">
-        {statement}
-      </p>
-      <span aria-hidden className="block h-[88px] w-[1.5px] origin-top bg-line-strong" />
-      <a
-        href={`#${next}`}
-        aria-label={`Go to ${number}: ${label}`}
-        className="inline-flex h-11 min-w-11 items-center justify-center rounded-full bg-lime px-1.5 text-sm font-extrabold text-ink shadow-[0_0_0_6px_var(--color-paper),0_0_0_7px_var(--color-line)] transition-transform duration-200 ease-[var(--ease-out)] hover:translate-y-[3px]"
-      >
-        {number}
-      </a>
-    </div>
-  );
-}

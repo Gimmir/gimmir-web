@@ -1,5 +1,6 @@
 import { OFFER } from "@/content/offer";
 import { formatMoney } from "@/lib/franchise-calc";
+import { FOUNDERS } from "@/lib/founders";
 
 /**
  * /franchise chapter "How we build" (Oleh's landing artboard, 2 Nov). The
@@ -56,7 +57,7 @@ export const PROCESS = {
     ],
   },
   post: {
-    name: "Oleh Palazh",
+    name: FOUNDERS.oleh.name,
     photo: "/photo/oleh.jpg",
     connection: "· 1st",
     headline:
@@ -93,8 +94,16 @@ export const PROCESS = {
     team: {
       label: "Who builds it",
       people: [
-        { name: "Oleh Palazh", role: "Co-founder, CTO", photo: "/photo/oleh.jpg" },
-        { name: "Nazar Moroz", role: "Co-founder, CEO", photo: "/photo/nazar.jpg" },
+        {
+          name: FOUNDERS.oleh.name,
+          role: "Co-founder, CTO",
+          photo: "/photo/oleh.jpg",
+        },
+        {
+          name: FOUNDERS.nazar.name,
+          role: "Co-founder, CEO",
+          photo: "/photo/nazar.jpg",
+        },
       ],
     },
   },
@@ -104,13 +113,13 @@ export const PROCESS = {
     title: "# build · an example week",
     messages: [
       {
-        name: "Oleh Palazh",
+        name: FOUNDERS.oleh.name,
         photo: "/photo/oleh.jpg",
         time: "Fri 16:02",
         text: "Week 6 done: waitlists and class packs are in the test app. Leeds tries it Monday. New build on your phones: link pinned.",
       },
       {
-        name: "Nazar Moroz",
+        name: FOUNDERS.nazar.name,
         photo: "/photo/nazar.jpg",
         time: "Fri 16:10",
         text: "Next week: moving Leeds members over. Call Tuesday 10:00 as usual.",

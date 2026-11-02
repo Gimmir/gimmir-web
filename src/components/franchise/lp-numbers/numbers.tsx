@@ -11,7 +11,9 @@ import { NumbersModel } from "./model";
  * result. The model is the only client island.
  */
 export function LpNumbers() {
-  const title = "What’s it worth to you? 3 questions, 60 seconds.";
+  const line1 = "What’s it worth to you?";
+  const line2 = "3 questions, 60 seconds.";
+  const title = `${line1} ${line2}`;
   const after = wordCount(title) * 40 + 300;
   const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
@@ -26,7 +28,9 @@ export function LpNumbers() {
         <div className="mx-auto flex max-w-[780px] flex-col items-center gap-[18px] text-center">
           <Kicker>Your numbers</Kicker>
           <h2 className="display m-0 text-[length:var(--text-title)] leading-[1.02]">
-            <RiseText text={title} />
+            <RiseText text={line1} />
+            <br />
+            <RiseText text={line2} start={wordCount(line1)} />
           </h2>
           <p
             className="fade m-0 max-w-[660px] text-[19px] leading-[1.55] text-muted"

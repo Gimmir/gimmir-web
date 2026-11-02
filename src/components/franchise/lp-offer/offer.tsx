@@ -58,7 +58,7 @@ export function LpOffer() {
       className="relative scroll-mt-[84px] pt-32"
     >
       <Container className="flex flex-col items-center gap-12">
-        <div className="mx-auto flex max-w-[760px] flex-col items-center gap-[18px] text-center">
+        <div className="mx-auto flex max-w-[1040px] flex-col items-center gap-[18px] text-center">
           <Kicker>
             {C.kicker}
             {days !== null ? ` · ${days} days left` : null}
