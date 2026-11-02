@@ -4,6 +4,7 @@ import { BookTrigger } from "@/components/blocks/book-trigger";
 import { FaceStack } from "@/components/blocks/face-stack";
 import { MarkerStroke } from "@/components/blocks/inline-headline";
 import { CookieSettingsLink } from "@/components/consent/cookie-settings-link";
+import { FooterPitch } from "@/components/site/footer-pitch";
 import { Container } from "@/components/ui/container";
 import { ArrowRight } from "@/components/ui/icons";
 import { Logomark } from "@/components/ui/logomark";
@@ -21,42 +22,44 @@ export function Footer() {
   return (
     <footer data-tone="ink" className="border-t border-line-dark bg-ink text-paper">
       <Container className="pb-10 pt-20 md:pt-28">
-        {/* phones: a touch smaller, so the marked phrase stays one line */}
-        <p className="display text-balance text-[length:var(--text-title)] leading-[1.02] max-sm:text-[min(2rem,7.4vw)]">
-          {FOOTER.headline[0]}{" "}
-          <span className="relative inline-block whitespace-nowrap">
-            {FOOTER.headline[1]}
-            <MarkerStroke bottom="-0.08em" />
-          </span>
-        </p>
+        <FooterPitch>
+          {/* phones: a touch smaller, so the marked phrase stays one line */}
+          <p className="display text-balance text-[length:var(--text-title)] leading-[1.02] max-sm:text-[min(2rem,7.4vw)]">
+            {FOOTER.headline[0]}{" "}
+            <span className="relative inline-block whitespace-nowrap">
+              {FOOTER.headline[1]}
+              <MarkerStroke bottom="-0.08em" />
+            </span>
+          </p>
 
-        <div className="mt-14 grid gap-3 md:mt-20 lg:grid-cols-2">
-          {BOOK_DOORS.map((d) => (
-            <BookTrigger
-              key={d.id}
-              booking={d.booking}
-              placement="footer"
-              className="group grid grid-cols-[1fr_auto] items-center gap-x-5 gap-y-4 rounded-[24px] border border-line-dark p-5 text-left transition-[background-color,border-color,color] duration-200 hover:border-lime hover:bg-lime hover:text-ink sm:grid-cols-[auto_1fr_auto] md:p-6"
-            >
-              <FaceStack
-                ids={d.faces}
-                size={52}
-                ring="ink"
-                className="col-start-1 row-start-1"
-              />
-              {/* phones: faces and arrow share the top row, words get the full width */}
-              <span className="col-span-2 row-start-2 min-w-0 sm:col-span-1 sm:col-start-2 sm:row-start-1">
-                <span className="block text-lg font-semibold">{d.title}</span>
-                <span className="block text-paper/60 transition-colors duration-200 group-hover:text-ink/70">{d.detail}</span>
-              </span>
-              <span className="col-start-2 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-[transform,background-color,color] duration-200 group-hover:translate-x-0.5 group-hover:bg-ink group-hover:text-paper sm:col-start-3">
-                <ArrowRight className="size-[18px]" />
-              </span>
-            </BookTrigger>
-          ))}
-        </div>
+          <div className="mt-14 grid gap-3 md:mt-20 lg:grid-cols-2">
+            {BOOK_DOORS.map((d) => (
+              <BookTrigger
+                key={d.id}
+                booking={d.booking}
+                placement="footer"
+                className="group grid grid-cols-[1fr_auto] items-center gap-x-5 gap-y-4 rounded-[24px] border border-line-dark p-5 text-left transition-[background-color,border-color,color] duration-200 hover:border-lime hover:bg-lime hover:text-ink sm:grid-cols-[auto_1fr_auto] md:p-6"
+              >
+                <FaceStack
+                  ids={d.faces}
+                  size={52}
+                  ring="ink"
+                  className="col-start-1 row-start-1"
+                />
+                {/* phones: faces and arrow share the top row, words get the full width */}
+                <span className="col-span-2 row-start-2 min-w-0 sm:col-span-1 sm:col-start-2 sm:row-start-1">
+                  <span className="block text-lg font-semibold">{d.title}</span>
+                  <span className="block text-paper/60 transition-colors duration-200 group-hover:text-ink/70">{d.detail}</span>
+                </span>
+                <span className="col-start-2 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-full bg-paper text-ink transition-[transform,background-color,color] duration-200 group-hover:translate-x-0.5 group-hover:bg-ink group-hover:text-paper sm:col-start-3">
+                  <ArrowRight className="size-[18px]" />
+                </span>
+              </BookTrigger>
+            ))}
+          </div>
+        </FooterPitch>
 
-        <div className="mt-20 grid gap-12 border-t border-line-dark pt-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="mt-20 grid gap-12 border-t border-line-dark pt-12 first:mt-0 first:border-t-0 first:pt-0 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Link
               href="/"
