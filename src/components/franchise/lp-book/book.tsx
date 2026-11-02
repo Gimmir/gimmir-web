@@ -66,7 +66,7 @@ function Calendar() {
         <BookTrigger
           booking="franchiseCall"
           placement="franchise-book-card"
-          className="group flex min-h-[52px] w-full cursor-pointer items-center justify-between gap-3.5 rounded-full bg-ink pr-2 pl-6 text-base font-semibold text-paper transition-[background-color,transform] duration-200 ease-[var(--ease-out)] hover:bg-ink/90 active:scale-[0.97] motion-reduce:transition-none"
+          className="group flex min-h-[52px] w-full cursor-pointer items-center justify-between gap-3.5 rounded-full bg-ink pr-2 pl-6 text-base font-semibold text-paper transition-[background-color,transform] duration-200 ease-[var(--ease-out)] hover:bg-ink-soft active:scale-[0.97] motion-reduce:transition-none"
         >
           {C.button}
           <span
@@ -81,21 +81,29 @@ function Calendar() {
   );
 }
 
-/** /franchise 09: the call, with the founders who take it. */
+/** /franchise book: the call, on an ink panel, with the founders who take it. */
 export function LpBook() {
   const days = useDaysLeft();
-  const after = wordCount(C.title) * 40 + 300;
+  const after = wordCount(`${C.title} ${C.mark}`) * 40 + 300;
 
   return (
-    <Stage as="section" id="book" data-tone="paper" className="relative scroll-mt-[84px]">
-      <Container className="pt-8 pb-24">
-        <div className="grid items-center gap-10 rounded-[36px] bg-lime p-6 [grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))] sm:p-10 lg:p-14">
-          <div className="flex flex-col gap-[18px]">
-            <h2 className="display text-[clamp(38px,5vw,64px)] leading-none">
-              <RiseText text={C.title} />
+    <Stage
+      as="section"
+      id="book"
+      data-tone="paper"
+      className="relative scroll-mt-[84px] pt-32 pb-32"
+    >
+      <Container>
+        <div className="grid items-center gap-12 rounded-[32px] bg-ink p-6 text-paper [grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))] sm:p-10 lg:p-14">
+          <div className="flex min-w-0 flex-col gap-[18px]">
+            <h2 className="display text-[clamp(28px,3.2vw,40px)] leading-[1.1]">
+              <RiseText text={C.title} />{" "}
+              <span className="text-lime">
+                <RiseText text={C.mark} start={wordCount(C.title)} />
+              </span>
             </h2>
             <p
-              className="fade m-0 text-[19px] leading-[1.5] text-ink/80"
+              className="fade m-0 text-base leading-[1.55] text-stone"
               style={d(after)}
             >
               {C.lead}
@@ -104,13 +112,17 @@ export function LpBook() {
               className="fade flex flex-wrap items-center gap-2.5"
               style={d(after + 80)}
             >
-              <FaceStack ids={["oleh", "nazar"]} size={44} ring="surface" />
+              <FaceStack ids={["oleh", "nazar"]} size={44} ring="ink" />
               <span className="text-[15px] font-semibold">{C.founders}</span>
             </div>
             <p
-              className="fade m-0 inline-flex min-h-[34px] items-center self-start rounded-full bg-ink/10 px-3.5 text-sm font-semibold"
+              className="fade m-0 inline-flex min-h-9 items-center gap-2 self-start rounded-full bg-paper/10 px-3.5 text-sm font-semibold"
               style={d(after + 140)}
             >
+              <span
+                aria-hidden
+                className="size-2 shrink-0 rounded-full bg-lime motion-safe:animate-pulse-dot"
+              />
               {days === null ? (
                 <span aria-hidden className="invisible">
                   Founding terms close in 00 days
@@ -122,10 +134,15 @@ export function LpBook() {
           </div>
 
           <div
-            className="fade flex flex-col gap-[18px] rounded-[28px] bg-white p-6 shadow-[0_30px_60px_-30px_rgba(21,20,14,0.4)]"
+            className="fade flex min-w-0 flex-col gap-4 rounded-[24px] bg-surface p-6 text-ink shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)]"
             style={d(after + 200)}
           >
-            <p className="m-0 text-lg font-bold">{C.card}</p>
+            <div className="flex items-center justify-between gap-3">
+              <strong className="text-lg">{C.card}</strong>
+              <span className="inline-flex h-[30px] items-center rounded-full bg-paper px-3 text-[13px] font-semibold">
+                {C.tag}
+              </span>
+            </div>
             <Calendar />
             <p className="m-0 text-center text-sm leading-[1.5] text-muted">
               {C.fallbackLead}{" "}
