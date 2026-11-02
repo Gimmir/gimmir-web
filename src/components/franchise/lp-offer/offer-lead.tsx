@@ -7,7 +7,7 @@ import { formatMonths } from "@/lib/franchise-calc";
 
 /**
  * The offer's lead, from the visitor's own numbers: how many months of the
- * tech fee their studios pay HQ the set-up equals. Without a tech fee it
+ * app fee their studios pay HQ the set-up equals. Without a app fee it
  * says only what founding partners do.
  */
 export function OfferLead() {
