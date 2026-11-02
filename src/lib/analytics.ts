@@ -1,5 +1,7 @@
 import { track } from "@vercel/analytics";
 
+import { leadEventProps } from "@/lib/lead-source";
+
 type Props = Record<string, string | number | boolean | null>;
 
 type PostHogLike = { capture?: (event: string, props?: Props) => void };
@@ -19,6 +21,7 @@ const GA4_EVENTS = new Set([
   "call_booked",
   "app_store_click",
   "guide_requested",
+  "landing_view",
 ]);
 
 /**
@@ -26,9 +29,12 @@ const GA4_EVENTS = new Set([
  * nda_card_open, booking_started, booking_completed, buildlog_read_75).
  * Goes to Vercel Analytics always, to PostHog once it is loaded (it is
  * only loaded with a key and cookie consent), and to GA4 for the events
- * in GA4_EVENTS when gtag is loaded.
+ * in GA4_EVENTS when gtag is loaded. Each event carries the visit's lead
+ * source when the link had one (see lib/lead-source.ts).
  */
-export function trackEvent(name: string, props?: Props) {
+export function trackEvent(name: string, rawProps?: Props) {
+  // where the visit came from (?source=linkedin, utm_*) rides on every event
+  const props: Props = { ...leadEventProps(), ...rawProps };
   try {
     track(name, props);
   } catch {

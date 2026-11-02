@@ -13,6 +13,7 @@ import { ArrowRight } from "@/components/ui/icons";
 import { BOOK_COPY as C } from "@/content/franchise-page/offer";
 import { BOOKINGS } from "@/lib/booking";
 import { CAL_NAMESPACE } from "@/lib/cal";
+import { calLeadConfig, readLeadSource, useSearch } from "@/lib/lead-source";
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
@@ -37,6 +38,7 @@ function Calendar() {
   const ref = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
   const booking = BOOKINGS.franchiseCall;
+  const search = useSearch();
 
   useEffect(() => {
     const el = ref.current;
@@ -59,7 +61,10 @@ function Calendar() {
         <Cal
           namespace={CAL_NAMESPACE}
           calLink={booking.calLink}
-          config={CAL_EMBED_CONFIG}
+          config={{
+            ...CAL_EMBED_CONFIG,
+            ...calLeadConfig(readLeadSource(search)),
+          }}
           style={{ width: "100%", minHeight: 300 }}
         />
       ) : (
