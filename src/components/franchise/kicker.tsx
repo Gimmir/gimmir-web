@@ -1,7 +1,7 @@
 import { cn } from "@/lib/cn";
 
 /**
- * A chapter's label above its headline ("02 · Your numbers"), with the
+ * A chapter's label above its headline ("THE MONEY"), with the
  * artboard's small lime square. Shared by every /franchise chapter.
  */
 export function Kicker({
@@ -14,7 +14,7 @@ export function Kicker({
   return (
     <p
       className={cn(
-        "m-0 inline-flex items-center gap-2.5 text-sm font-semibold text-muted",
+        "m-0 inline-flex items-center gap-2 text-xs font-bold tracking-[0.08em] text-muted uppercase",
         className,
       )}
     >

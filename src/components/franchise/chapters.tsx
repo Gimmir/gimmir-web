@@ -14,14 +14,15 @@ import { cn } from "@/lib/cn";
 export const CHAPTERS = [
   { id: "top", label: "Start" },
   { id: "money", label: "The money" },
+  { id: "proof", label: "Proof" },
   { id: "numbers", label: "Your numbers" },
-  { id: "platform", label: "The platform" },
-  { id: "everything", label: "Full flow" },
-  { id: "proof", label: "Live work" },
+  { id: "offer", label: "The offer" },
+  { id: "platform", label: "What you get" },
+  { id: "everything", label: "Every feature" },
   { id: "process", label: "How we build" },
-  { id: "offer", label: "Founding offer" },
+  { id: "groups", label: "Gym groups" },
   { id: "faq", label: "Questions" },
-  { id: "book", label: "Book a call" },
+  { id: "book", label: "Book" },
 ] as const;
 
 export type ChapterId = (typeof CHAPTERS)[number]["id"];

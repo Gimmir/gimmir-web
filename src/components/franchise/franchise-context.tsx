@@ -5,6 +5,7 @@ import { createContext, useContext, useMemo, useRef, useState } from "react";
 import { NETWORK_DEFAULTS } from "@/content/offer";
 import { trackEvent } from "@/lib/analytics";
 import {
+  afterSupportYear,
   networkTotal,
   paybackMonths,
   projectNetwork,
@@ -43,7 +44,8 @@ export type Answers = {
   bill: number | null;
   feeRate: number | null;
   churn: number | null;
-  cut: number | null;
+  /** Points off monthly churn. */
+  drop: number | null;
 };
 
 type Brand = {
@@ -67,6 +69,9 @@ type Model = {
   done: Record<Step, boolean>;
   open: Step | 0;
   total: number;
+  /** What stays with HQ a year after Support. */
+  net: number;
+  /** Months for the set-up to come back after Support; null if it never does. */
   payback: number | null;
 };
 
@@ -86,7 +91,7 @@ const Ctx = createContext<FranchiseState | null>(null);
 const STEP_KEYS: Record<Step, Array<keyof Answers>> = {
   1: ["platform", "units", "costPerUnit"],
   2: ["members", "bill", "techFee", "feeRate"],
-  3: ["churn", "cut"],
+  3: ["churn", "drop"],
 };
 
 function mix(hex: string, amount: number): string {
@@ -114,7 +119,7 @@ export function FranchiseProvider({ children }: { children: React.ReactNode }) {
     bill: null,
     feeRate: null,
     churn: null,
-    cut: null,
+    drop: null,
   });
   // moving a slider counts as answering it; untouched sliders don't
   const [touched, setTouched] = useState<Set<keyof Answers>>(new Set());
@@ -146,11 +151,20 @@ export function FranchiseProvider({ children }: { children: React.ReactNode }) {
       bill: answers.bill ?? NETWORK_DEFAULTS.bill,
       feeRate: answers.feeRate ?? NETWORK_DEFAULTS.feeRate,
       churn: answers.churn ?? NETWORK_DEFAULTS.churn,
-      cut: answers.cut ?? NETWORK_DEFAULTS.cut,
+      drop: answers.drop ?? NETWORK_DEFAULTS.drop,
     };
     const projection = projectNetwork(v);
     const total = networkTotal(projection, done[3]);
-    return { answers, values: v, projection, done, open, total, payback: paybackMonths(total) };
+    return {
+      answers,
+      values: v,
+      projection,
+      done,
+      open,
+      total,
+      net: afterSupportYear(total),
+      payback: paybackMonths(total),
+    };
   }, [answers, done, open]);
 
   const value = useMemo<FranchiseState>(() => {

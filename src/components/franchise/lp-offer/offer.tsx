@@ -16,7 +16,6 @@ import {
   FOUNDING,
   FOUNDING_RETURN,
   OFFER,
-  SUPPORT_PLANS,
 } from "@/content/offer";
 import { cn } from "@/lib/cn";
 import { formatMoney, formatMonths } from "@/lib/franchise-calc";
@@ -119,7 +118,6 @@ export function LpOffer() {
   const days = useDaysLeft();
   const ready = useReadyDate();
   const after = wordCount(C.title) * 40 + 300;
-  const support = C.support;
 
   return (
     <>
@@ -218,32 +216,6 @@ export function LpOffer() {
             </div>
           </div>
 
-          <div className="fade flex flex-col gap-3.5" style={d(after + 280)}>
-            <div className="flex flex-wrap items-baseline justify-between gap-2.5">
-              <h3 className="m-0 text-[22px] font-bold">{support.title}</h3>
-              <p className="m-0 text-sm text-muted">{support.note}</p>
-            </div>
-            <ul className="m-0 grid list-none gap-3 p-0 [grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))]">
-              {SUPPORT_PLANS.map((plan) => (
-                <li
-                  key={plan.id}
-                  className={cn(
-                    card,
-                    "flex flex-col gap-2.5 p-[22px] transition-[transform,box-shadow] duration-200 ease-[var(--ease-out)] motion-reduce:transition-none [@media(hover:hover)]:hover:-translate-y-[3px] [@media(hover:hover)]:hover:shadow-[0_22px_44px_-26px_rgba(21,20,14,0.35)]",
-                    plan.id === support.featured && "ring-[1.5px] ring-ink",
-                  )}
-                >
-                  <h4 className="m-0 text-[19px] font-bold">{plan.name}</h4>
-                  <p className="m-0 text-[15px] leading-[1.5] text-muted">
-                    {plan.includes}
-                  </p>
-                  <p className="m-0 mt-auto pt-1 font-bold tabular-nums">
-                    {plan.price === null ? support.price : formatMoney(plan.price)}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
         </Container>
       </Stage>
 

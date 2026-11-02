@@ -5,8 +5,8 @@ import { FranchiseProvider } from "@/components/franchise/franchise-context";
 import { LpBook } from "@/components/franchise/lp-book/book";
 import { LpFaq } from "@/components/franchise/lp-faq/faq";
 import { LpFlow } from "@/components/franchise/lp-flow/flow";
+import { LpGroups } from "@/components/franchise/lp-groups/groups";
 import { LpHero } from "@/components/franchise/lp-hero/hero";
-import { LpStats } from "@/components/franchise/lp-hero/stats";
 import { LpMoney } from "@/components/franchise/lp-money/money";
 import { LpNumbers } from "@/components/franchise/lp-numbers/numbers";
 import { LpOffer } from "@/components/franchise/lp-offer/offer";
@@ -34,10 +34,10 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 // The offer page every outreach link points to, on Oleh's landing artboard
-// (21 Oct 2026): numbered chapters, ① the hero with the visitor's brand on
-// the app, ② where the money goes, ③ their own numbers in 3 steps, ④ the
-// platform as a scroll story, ⑤ the full flow, ⑥ live work, ⑦ how we
-// build, ⑧ the founding offer, ⑨ questions, ⑩ book a call.
+// (2 Nov 2026): the hero with the visitor's brand on the app, where the
+// money goes, live work, their own numbers in 3 steps, the founding offer,
+// six things the network runs on, every feature stage by stage, how we
+// build, gym groups that own their sites, questions, book a call.
 export default function FranchisePage() {
   const faqLd = faqPage([...FAQ_ITEMS]);
 
@@ -62,14 +62,14 @@ export default function FranchisePage() {
       <UrgencyBar />
       <ChapterNav />
       <LpHero />
-      <LpStats />
       <LpMoney />
+      <LpProof />
       <LpNumbers />
+      <LpOffer />
       <LpPlatform />
       <LpFlow />
-      <LpProof />
       <LpProcess />
-      <LpOffer />
+      <LpGroups />
       <LpFaq />
       <LpBook />
     </FranchiseProvider>

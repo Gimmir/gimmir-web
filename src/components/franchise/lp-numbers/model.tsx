@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { useFranchise, type Step as StepId } from "@/components/franchise/franchise-context";
 import { NETWORK_OPTIONS } from "@/content/offer";
-import { formatPercent } from "@/lib/franchise-calc";
+import { formatMoney, formatPercent } from "@/lib/franchise-calc";
 
 import { ChipQuestion, SliderQuestion } from "./controls";
 import { NumbersResult } from "./result";
@@ -25,9 +25,8 @@ const options = <T extends string | number>(
 const PLATFORM_OPTIONS = options(PLATFORMS, (v) => v);
 const MEMBER_OPTIONS = options(NETWORK_OPTIONS.members, String);
 const BILL_OPTIONS = options(NETWORK_OPTIONS.bill, (v) => `£${v}`);
-const FEE_OPTIONS = options(NETWORK_OPTIONS.feeRate, formatPercent);
+const FEE_OPTIONS = options(NETWORK_OPTIONS.feeRate, (v) => (v === 0 ? "None" : formatPercent(v)));
 const CHURN_OPTIONS = options(NETWORK_OPTIONS.churn, formatPercent);
-const CUT_OPTIONS = options(NETWORK_OPTIONS.cut, formatPercent);
 
 const small = "m-0 text-sm leading-[1.5] text-muted";
 
@@ -54,11 +53,17 @@ export function NumbersModel() {
   const nextLabel = (n: StepId) =>
     done[n] ? "Done" : n < 3 ? "Continue" : "See my projection";
 
-  const stayNow = Math.round(projection.stayYear * 100);
-  const stayNew = Math.round(projection.stayYearNew * 100);
   const churn = formatPercent(values.churn);
   const churnNew = formatPercent(projection.churnNew);
   const name = platformName(answers.platform);
+  // what churn drops to, never under 1%: "4% · at least", "3%", "2% · best case"
+  const dropOptions = NETWORK_OPTIONS.drop
+    .filter((d) => Math.round((values.churn - d) * 1000) >= 10)
+    .map((d, i, all) => ({
+      value: d as number,
+      label: `${formatPercent(values.churn - d)}${i === 0 ? " · at least" : i === all.length - 1 && all.length === 3 ? " · best case" : ""}`,
+    }));
+  const members = projection.totalMembers.toLocaleString("en-GB");
 
   return (
     <div className="grid items-start gap-6 rounded-3xl bg-surface p-4 shadow-[inset_0_0_0_1px_var(--color-line),0_30px_70px_-36px_rgba(21,20,14,0.3)] sm:p-[clamp(16px,2.6vw,28px)] lg:grid-cols-2">
@@ -110,7 +115,7 @@ export function NumbersModel() {
           {...stepProps(2)}
           title="Your income as HQ"
           hint="4 quick questions"
-          summary={`${values.members} members · ${pounds(values.bill)} a month · ${pounds(values.techFee)} tech fee · ${formatPercent(values.feeRate)} on payments`}
+          summary={`${values.members} members · ${pounds(values.bill)} a month · ${pounds(values.techFee)} app fee · ${formatPercent(values.feeRate)} on payments`}
         >
           <ChipQuestion
             id="np-members"
@@ -128,7 +133,7 @@ export function NumbersModel() {
           />
           <SliderQuestion
             id="np-tech"
-            label="Tech fee each studio pays HQ a month"
+            label="What each studio pays you for the app, a month"
             display={pounds(values.techFee)}
             valueText={`${pounds(values.techFee)} a month`}
             value={values.techFee}
@@ -137,11 +142,11 @@ export function NumbersModel() {
             step={NETWORK_OPTIONS.techFee.step}
             onChange={(v) => answer("techFee", v)}
             onHold={hold(2)}
-            hint={`Your call as HQ. It starts at what they pay ${name} now, so nothing changes for them.`}
+            hint={`Your call. Charge less than ${name} and they save. Charge more and you earn more.`}
           />
           <ChipQuestion
             id="np-fee"
-            label="Your fee on every member payment"
+            label="Your fee on every payment members make"
             options={FEE_OPTIONS}
             value={answers.feeRate}
             onChange={(v) => answer("feeRate", v)}
@@ -156,40 +161,41 @@ export function NumbersModel() {
           {...stepProps(3)}
           title="Less churn, higher retention"
           hint="What less churn is worth"
-          summary={`Churn ${churn} to ${churnNew} a month · ${stayNow}% to ${stayNew}% stay a year`}
+          summary={`Churn ${churn} to ${churnNew} · ${projection.keptMonth} more members keep paying each month`}
         >
           <p className="m-0 text-[15px] leading-[1.5] text-muted">
-            Members leave most in their first 90 days. Your own app runs a proper 30 to
-            90-day onboarding flow: a welcome, first classes booked, coach check-ins at
-            day 30 and 60, members at risk flagged, failed payments chased. Churn goes
-            down, retention goes up.
+            Members leave most in their first 90 days. A proper 30 to 90-day onboarding
+            flow keeps more of them: a welcome, first classes booked, coach check-ins at
+            day 30 and 60, members at risk flagged, failed payments chased.
           </p>
           <ChipQuestion
             id="np-churn"
-            label="Members your studios lose a month, today"
+            label="Churn today: members your studios lose a month"
             options={CHURN_OPTIONS}
             value={answers.churn}
             onChange={(v) => answer("churn", v)}
           />
           <ChipQuestion
-            id="np-cut"
-            label="With the onboarding flow, churn drops by"
-            options={CUT_OPTIONS}
-            value={answers.cut}
-            onChange={(v) => answer("cut", v)}
+            id="np-drop"
+            label="With proper onboarding, churn drops to"
+            options={dropOptions}
+            value={answers.drop}
+            onChange={(v) => answer("drop", v)}
           />
-          <dl className="m-0 grid grid-cols-2 gap-2.5">
-            <div className="rounded-2xl bg-paper px-4 py-3.5">
-              <dt className={small}>Churn a month</dt>
-              <dd className="m-0 mt-1 text-xl font-extrabold">
-                {churn} → {churnNew}
-              </dd>
+          <dl className="m-0 flex flex-col gap-2 rounded-2xl bg-paper px-4 py-3.5 text-[15px] leading-[1.4]">
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted">Today, of {members} members</dt>
+              <dd className="m-0 font-bold">{projection.lostMonth} leave a month</dd>
             </div>
-            <div className="rounded-2xl bg-paper px-4 py-3.5">
-              <dt className={small}>Still with you after a year</dt>
-              <dd className="m-0 mt-1 text-xl font-extrabold">
-                {stayNow}% → {stayNew}%
-              </dd>
+            <div className="flex justify-between gap-3">
+              <dt className="text-muted">With onboarding, at {churnNew}</dt>
+              <dd className="m-0 font-bold">{projection.lostMonthNew} leave a month</dd>
+            </div>
+            <div className="flex justify-between gap-3 border-t border-line pt-2">
+              <dt className="font-bold">
+                {projection.keptMonth} more keep paying {pounds(values.bill)}
+              </dt>
+              <dd className="m-0 font-bold">+{formatMoney(projection.extraRevenueMonth)} a month</dd>
             </div>
           </dl>
           <div className="flex flex-wrap items-center gap-3.5">

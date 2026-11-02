@@ -14,9 +14,19 @@ export const OFFER = {
   setupFee: 12_000,
   /** The set-up, paid in 3 parts. */
   payments: [
-    { amount: 4_000, when: "holds your slot" },
-    { amount: 4_000, when: "when it’s ready" },
-    { amount: 4_000, when: "once your fee is flowing" },
+    { amount: 4_000, label: "At signing", when: "Holds your slot", week: 1 },
+    {
+      amount: 4_000,
+      label: "Mid-build, week 6",
+      when: "Once you’ve seen the app on your phone",
+      week: 6,
+    },
+    {
+      amount: 4_000,
+      label: "At release",
+      when: "When your apps are live in the stores",
+      week: 12,
+    },
   ],
   readyWeeks: 12,
   /** If they leave, they can buy the code for this multiple of the set-up. */
@@ -33,62 +43,51 @@ export const FOUNDING = {
   termsClose: "2026-12-01",
 } as const;
 
-// ── Oleh's landing artboard (21 Oct 2026) ──
+// ── Oleh's landing artboard (2 Nov 2026) ──
 
 /**
- * Support after launch, switchable any month. Prices are agreed on the
- * call until Nazar sets them (null shows "Price on the call"), so the
- * calculator shows HQ's income before the support plan.
+ * Support after launch: one flat price for the network, not per studio
+ * (Nazar, 2 Nov 2026). Grow and Scale add building hours on top.
  */
-export type SupportPlan = {
-  id: "support" | "grow" | "scale";
-  name: string;
-  includes: string;
-  /** £ a month; null until set. */
-  price: number | null;
-};
-
-export const SUPPORT_PLANS: SupportPlan[] = [
-  {
-    id: "support",
-    name: "Support",
-    includes: "Hosting, app stores, fixes, security and payment monitoring.",
-    price: null,
-  },
-  {
-    id: "grow",
-    name: "Support + Grow",
-    includes: "Everything in Support, plus 40 hours a month of building.",
-    price: null,
-  },
-  {
-    id: "scale",
-    name: "Support + Scale",
-    includes:
-      "Everything in Support, plus 120+ hours a month of building at a lower hourly rate.",
-    price: null,
-  },
-];
+export const SUPPORT = {
+  /** £ a month, flat. */
+  monthly: 980,
+  /** Founding partners keep Support at least this long. */
+  minMonths: 6,
+  grow: { hours: 40, rate: 35, monthly: 1_400 },
+  scale: { hoursFrom: 80, rate: 30, monthlyFrom: 2_400 },
+} as const;
 
 /** What founding partners give in return for the founding terms. */
 export const FOUNDING_RETURN = [
-  "a 12-month support plan",
   "a case study",
-  "a monthly feedback call while we build the core together",
+  "a monthly feedback call",
+  `Support for at least ${SUPPORT.minMonths} months`,
 ] as const;
 
 /**
+ * Gym groups that own their sites (5 to 50): we rebuild their platform and
+ * member app as one system, and they get the code. No public price.
+ */
+export const GROUPS = {
+  minSites: 5,
+  maxSites: 50,
+  regions: "UK and US",
+} as const;
+
+/**
  * The three-step model's defaults and answer options. Units start at 3
- * (Nazar, 20 Oct 2026); the rest are the artboard's. Fractions, not %.
+ * (Nazar, 20 Oct 2026, kept on 2 Nov); the rest are the artboard's.
+ * Fractions, not %; `drop` is in points off monthly churn.
  */
 export const NETWORK_DEFAULTS = {
   units: 3,
   costPerUnit: 250,
   members: 300,
-  bill: 60,
+  bill: 100,
   feeRate: 0.01,
   churn: 0.05,
-  cut: 0.2,
+  drop: 0.01,
 } as const;
 
 export const NETWORK_OPTIONS = {
@@ -96,8 +95,9 @@ export const NETWORK_OPTIONS = {
   costPerUnit: { min: 100, max: 600, step: 10 },
   techFee: { min: 0, max: 500, step: 10 },
   members: [100, 200, 300, 500],
-  bill: [40, 60, 90, 120],
-  feeRate: [0.005, 0.01, 0.02, 0.03],
+  bill: [50, 75, 100, 150, 200, 250],
+  feeRate: [0, 0.005, 0.01, 0.02, 0.03],
   churn: [0.03, 0.05, 0.07, 0.1],
-  cut: [0.1, 0.2, 0.3],
+  /** Points off churn; options that would take it under 1% are hidden. */
+  drop: [0.01, 0.02, 0.03],
 } as const;

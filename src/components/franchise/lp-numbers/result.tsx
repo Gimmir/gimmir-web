@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { useFranchise } from "@/components/franchise/franchise-context";
-import { OFFER } from "@/content/offer";
+import { OFFER, SUPPORT } from "@/content/offer";
 import { cn } from "@/lib/cn";
 import { formatMoney, formatMonths, formatPercent } from "@/lib/franchise-calc";
 
@@ -49,7 +49,7 @@ function useFitsScreen() {
 
 export function NumbersResult() {
   const { brand, model } = useFranchise();
-  const { answers, values, projection, done, total, payback } = model;
+  const { answers, values, projection, done, total, net, payback } = model;
   const { ref, fits } = useFitsScreen();
 
   const fee = formatPercent(values.feeRate);
@@ -78,7 +78,7 @@ export function NumbersResult() {
         <div className={cn(card, appear, "flex flex-col gap-3")}>
           <h3 className={lbl}>Comes to {brand.hq} instead</h3>
           <p className={cn(row, "m-0")}>
-            <span className="text-muted">Tech fees from {values.units} studios</span>
+            <span className="text-muted">App fees from {values.units} studios</span>
             <strong>+{formatMoney(projection.techFeeYear)}</strong>
           </p>
           <p className={cn(row, "m-0")}>
@@ -97,16 +97,17 @@ export function NumbersResult() {
           <h3 className={lbl}>Less churn</h3>
           <p className={cn(row, "m-0")}>
             <span className="text-muted">
-              {projection.membersKeptYear.toLocaleString("en-GB")} fewer members
-              leave a year, churn {churn} to {churnNew}
+              {projection.keptMonth} more members a month keep paying, churn {churn} to{" "}
+              {churnNew}
             </span>
+            <strong>+{formatMoney(projection.extraRevenueMonth)} a month</strong>
           </p>
           <p className={cn(row, "m-0")}>
-            <span className="text-muted">More revenue for your studios</span>
+            <span className="text-muted">More revenue for your studios, a year</span>
             <strong>+{formatMoney(projection.extraRevenueYear)}</strong>
           </p>
           <p className={cn(row, "m-0")}>
-            <span className="text-muted">Your {fee} fee on their payments</span>
+            <span className="text-muted">Your {fee} fee on it</span>
             <strong>+{formatMoney(projection.retentionGainYear)}</strong>
           </p>
         </div>
@@ -124,8 +125,10 @@ export function NumbersResult() {
           </p>
           <p className="m-0 mt-3 text-[15px] leading-[1.5] text-[#2b3600]">
             {payback
-              ? `The ${formatMoney(OFFER.setupFee)} set-up comes back in about ${formatMonths(payback)} ${formatMonths(payback) === "1" ? "month" : "months"}.`
-              : "Set a tech fee or a fee on payments to see the payback."}
+              ? `After Support at ${formatMoney(SUPPORT.monthly)} a month, ${formatMoney(net)} a year stays with you. The ${formatMoney(OFFER.setupFee)} set-up comes back in about ${formatMonths(payback)} ${formatMonths(payback) === "1" ? "month" : "months"}.`
+              : total > 0
+                ? `At these numbers Support at ${formatMoney(SUPPORT.monthly)} a month costs more than the new income. Raise what studios pay you, or check it with us.`
+                : "Set what studios pay you, or a fee on payments, to see the payback."}
           </p>
           <PillLink href="#book" className="mt-[18px]">
             Check it with us
@@ -134,7 +137,8 @@ export function NumbersResult() {
       ) : null}
 
       <p className="m-0 mt-0.5 text-sm leading-[1.5] text-muted">
-        A projection, not a promise. Before your monthly support plan.
+        A projection, not a promise. The payback already takes off Support at{" "}
+        {formatMoney(SUPPORT.monthly)} a month.
       </p>
     </div>
   );
