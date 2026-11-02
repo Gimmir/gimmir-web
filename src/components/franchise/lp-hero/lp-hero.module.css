@@ -1,5 +1,42 @@
-/* The hero's motions. Transform and opacity (or a ring's box-shadow) only;
-   all off for reduced motion, where everything simply rests in place. */
+/* The hero's motions. Transform, opacity and a little blur only; all off
+   for reduced motion, where the stage rests as one still frame. */
+
+/* the phones settle in first (delay per layer via --d) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+
+@keyframes rise-back {
+  from {
+    opacity: 0;
+    transform: translate(-18px, 22px) rotate(-3deg);
+  }
+}
+
+/* a card arriving, one after another */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+}
+
+/* the push drops in from above, like a real one */
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.97);
+  }
+}
+
+@keyframes glow-in {
+  from {
+    opacity: 0;
+  }
+}
 
 @keyframes float {
   0%,
@@ -11,11 +48,41 @@
   }
 }
 
-/* a floating card arriving, one after another (delay set per card via --d) */
-@keyframes card-in {
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* a new payment replaces the last one: blur bridges the two states */
+@keyframes swap {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+}
+
+/* the fee leaves the payment and lands on HQ's total */
+@keyframes fly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(150px, -30px) scale(0.92);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(166px, -18px) scale(0.6);
+  }
+}
+
+/* HQ's total takes the hit */
+@keyframes bump {
+  0% {
+    transform: scale(1.08);
   }
 }
 
@@ -29,8 +96,24 @@
   }
 }
 
+.rise {
+  animation: rise 900ms var(--ease-out) var(--d, 0ms) both;
+}
+
+.riseBack {
+  animation: rise-back 1000ms var(--ease-out) var(--d, 0ms) both;
+}
+
 .enter {
-  animation: card-in 300ms var(--ease-out) var(--d, 0ms) both;
+  animation: card-in 420ms var(--ease-out) var(--d, 0ms) both;
+}
+
+.drop {
+  animation: drop 520ms var(--ease-out) var(--d, 0ms) both;
+}
+
+.glowIn {
+  animation: glow-in 1400ms ease-out var(--d, 0ms) both;
 }
 
 /* the idle drift starts after the card has arrived */
@@ -40,6 +123,26 @@
 
 .float2 {
   animation: float 8s ease-in-out 2.4s infinite;
+}
+
+.orbit {
+  transform-origin: 320px 320px;
+  animation: spin 120s linear infinite;
+}
+
+.swap {
+  animation: swap 260ms var(--ease-out) both;
+}
+
+.fly {
+  pointer-events: none;
+  animation: fly 680ms cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+
+.bump {
+  display: inline-block;
+  transform-origin: left center;
+  animation: bump 320ms var(--ease-out);
 }
 
 .live {
@@ -53,9 +156,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .rise,
+  .riseBack,
   .enter,
+  .drop,
+  .glowIn,
   .float,
   .float2,
+  .orbit,
+  .swap,
+  .fly,
+  .bump,
   .live {
     animation: none;
   }

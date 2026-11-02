@@ -1,5 +1,5 @@
 import { BookTrigger } from "@/components/blocks/book-trigger";
-import { Mark } from "@/components/franchise/lp-numbers/shared";
+import { MarkerStroke } from "@/components/blocks/inline-headline";
 import { Stage } from "@/components/motion/stage";
 import { RiseText, RiseWord } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
@@ -30,7 +30,11 @@ const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
 function Check() {
   return (
-    <svg aria-hidden viewBox="0 0 18 18" className="mt-0.5 size-[18px] shrink-0">
+    <svg
+      aria-hidden
+      viewBox="0 0 18 18"
+      className="mt-0.5 size-[18px] shrink-0"
+    >
       <circle cx="9" cy="9" r="9" fill="var(--color-ink)" />
       <path
         d="M5 9.2l2.6 2.6L13 6.6"
@@ -46,8 +50,14 @@ function Check() {
 
 export function LpHero() {
   return (
-    <Stage as="section" id="top" eager data-tone="paper" className="scroll-mt-24 overflow-x-clip pt-16 pb-[72px]">
-      <Container className="grid grid-cols-[repeat(auto-fit,minmax(min(340px,100%),1fr))] items-center gap-14">
+    <Stage
+      as="section"
+      id="top"
+      eager
+      data-tone="paper"
+      className="scroll-mt-24 overflow-x-clip pt-16 pb-[72px]"
+    >
+      <Container className="grid items-center gap-x-10 gap-y-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.02fr)]">
         <div className="flex min-w-0 flex-col gap-[26px]">
           <span
             className="fade inline-flex min-h-[34px] items-center gap-1.5 self-start rounded-full bg-surface px-3.5 py-1.5 text-sm font-medium text-muted ring-1 ring-line"
@@ -58,16 +68,17 @@ export function LpHero() {
           </span>
           <h1 className="display m-0 text-[clamp(46px,6.6vw,86px)] leading-[0.98] tracking-[-0.045em]">
             <RiseText text="Your brand. Your app. Your" />{" "}
-            <RiseWord i={5}>
-              <Mark>money.</Mark>
-            </RiseWord>
+            <span className="relative inline-block whitespace-nowrap">
+              <RiseWord i={5}>money.</RiseWord>
+              <MarkerStroke delay={620} bottom="-0.02em" />
+            </span>
           </h1>
           <p
             className="fade m-0 max-w-[520px] text-[20px] leading-[1.55] text-muted"
             style={d(450)}
           >
-            Every studio pays Mindbody or Glofox every month. Own the app, and that money
-            comes to you.
+            Every studio pays Mindbody or Glofox every month. Own the app, and
+            that money comes to you.
           </p>
           <div className="fade flex flex-wrap gap-3" style={d(560)}>
             <BookTrigger
