@@ -8,9 +8,14 @@ import { RiseText, wordCount } from "@/components/motion/words";
 import { Container } from "@/components/ui/container";
 import { jimmyMrrSentence, LIVE_WORK } from "@/content/franchise-page/proof";
 import { CHATS, JIMMY, JIMMY_APP_STORE, shown, UN1T } from "@/content/proof";
+import { GUESTS } from "@/lib/people";
 
-import { AppStoreButton, SiteLink } from "./app-store-button";
-import { IMessageThread, WhatsAppThread } from "./whatsapp-thread";
+import { SiteLink, StoreBadge } from "./app-store-button";
+import {
+  IMessageContact,
+  IMessageThread,
+  WhatsAppThread,
+} from "./whatsapp-thread";
 
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as React.CSSProperties;
 
@@ -44,13 +49,20 @@ export function LpProof() {
   const quentin = shown(CHATS.quentin);
   const after = wordCount(`${c.title.lead} ${c.title.mark}`) * 40 + 300;
   const un1tStats = [
-    studios !== null ? { value: String(studios), label: c.un1t.studiosLabel } : null,
+    studios !== null
+      ? { value: String(studios), label: c.un1t.studiosLabel }
+      : null,
     members !== null ? { value: members, label: c.un1t.membersLabel } : null,
   ].filter((s) => s !== null);
 
   return (
     <>
-      <Stage as="section" id="proof" data-tone="paper" className="scroll-mt-[84px] pt-32">
+      <Stage
+        as="section"
+        id="proof"
+        data-tone="paper"
+        className="scroll-mt-[84px] pt-32"
+      >
         <Container className="flex flex-col gap-12">
           <div className="mx-auto flex max-w-[1040px] flex-col items-center gap-[18px] text-center">
             <Kicker>{c.kicker}</Kicker>
@@ -60,7 +72,10 @@ export function LpProof() {
                 <RiseText text={c.title.mark} start={wordCount(c.title.lead)} />
               </Mark>
             </h2>
-            <p className="fade m-0 max-w-[560px] text-lg leading-[1.55] text-muted" style={d(after)}>
+            <p
+              className="fade m-0 max-w-[560px] text-lg leading-[1.55] text-muted"
+              style={d(after)}
+            >
               {c.lead}
             </p>
           </div>
@@ -92,7 +107,11 @@ export function LpProof() {
                 </div>
               ) : null}
               <div className="flex flex-wrap gap-2.5">
-                <AppStoreButton href={UN1T.appStore.url}>{c.un1t.storeLabel}</AppStoreButton>
+                <StoreBadge
+                  store="apple"
+                  href={UN1T.appStore.url}
+                  label={c.un1t.storeLabel}
+                />
                 <SiteLink href={c.un1t.siteHref}>{c.un1t.siteLabel}</SiteLink>
               </div>
             </div>
@@ -100,7 +119,10 @@ export function LpProof() {
 
           {threads.length > 0 ? (
             <Stage as="div" className="flex flex-col items-center gap-7 pt-4">
-              <div className="fade flex flex-col gap-2 text-center" style={d(0)}>
+              <div
+                className="fade flex flex-col gap-2 text-center"
+                style={d(0)}
+              >
                 <h3 className="display m-0 text-[clamp(22px,2.4vw,28px)] leading-[1.15] tracking-[-0.025em]">
                   {c.chats.title}
                 </h3>
@@ -133,12 +155,27 @@ export function LpProof() {
               >
                 {c.jimmy.headline}
               </h3>
-              <p className="fade m-0 text-base leading-normal text-muted" style={d(120)}>
+              <p
+                className="fade m-0 text-base leading-normal text-muted"
+                style={d(120)}
+              >
                 {c.jimmy.text}
                 {jimmyMrrSentence(mrr)}
               </p>
-              <div className="fade mt-1.5 flex flex-wrap gap-2.5" style={d(180)}>
-                <AppStoreButton href={JIMMY_APP_STORE}>{c.jimmy.storeLabel}</AppStoreButton>
+              <div
+                className="fade mt-1.5 flex flex-wrap gap-2.5"
+                style={d(180)}
+              >
+                <StoreBadge
+                  store="apple"
+                  href={JIMMY_APP_STORE}
+                  label={c.jimmy.storeLabel}
+                />
+                <StoreBadge
+                  store="play"
+                  href={c.jimmy.playHref}
+                  label={c.jimmy.playLabel}
+                />
                 <SiteLink href={c.jimmy.siteHref}>{c.jimmy.siteLabel}</SiteLink>
               </div>
             </div>
@@ -154,13 +191,25 @@ export function LpProof() {
                   className={`block h-[clamp(220px,28vw,300px)] w-full rotate-[1.5deg] rounded-[20px] bg-line object-cover object-top shadow-[0_0_0_1px_rgba(21,20,14,0.06),0_24px_48px_-28px_rgba(21,20,14,0.4)] ${TILT}`}
                 />
               </div>
-              {quentin !== null ? (
-                <div className="fade relative z-10 -mt-12 w-[88%] sm:w-[68%]" style={d(220)}>
-                  <div className={`-rotate-2 ${TILT}`}>
+              {/* Quentin, named and pictured with his OK; his own words join
+                  as an iMessage once he has sent them (CHATS.quentin) */}
+              <div
+                className="fade relative z-10 -mt-12 w-[88%] sm:w-[68%]"
+                style={d(220)}
+              >
+                <div className={`-rotate-2 ${TILT}`}>
+                  {quentin !== null ? (
                     <IMessageThread thread={quentin} />
-                  </div>
+                  ) : (
+                    <IMessageContact
+                      name={GUESTS.quentin.name}
+                      photo={GUESTS.quentin.photo}
+                      role={c.jimmy.quentinRole}
+                      note={c.jimmy.quentinNote}
+                    />
+                  )}
                 </div>
-              ) : null}
+              </div>
             </div>
           </Stage>
         </Container>

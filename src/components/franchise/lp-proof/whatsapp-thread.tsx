@@ -8,7 +8,9 @@ const BUBBLE =
 /** "UN1T", or "UN1T · Owner" once a real role is known (never "[ROLE]"). */
 function whoLine(thread: ChatThread): string {
   const role = thread.role?.trim();
-  return role && !/^\[.*\]$/.test(role) ? `${thread.org} · ${role}` : thread.org;
+  return role && !/^\[.*\]$/.test(role)
+    ? `${thread.org} · ${role}`
+    : thread.org;
 }
 
 /**
@@ -119,6 +121,41 @@ export function IMessageThread({ thread }: { thread: ChatThread }) {
           </li>
         ))}
       </ul>
+    </figure>
+  );
+}
+
+/**
+ * Quentin before his quote is in: the same iMessage card, with who he is
+ * instead of a message. Named and pictured with his OK.
+ */
+export function IMessageContact({
+  name,
+  photo,
+  role,
+  note,
+}: {
+  name: string;
+  photo: string;
+  role: string;
+  note: string;
+}) {
+  return (
+    <figure className="m-0 flex flex-col overflow-hidden rounded-[24px] bg-white text-black shadow-[0_0_0_1px_rgba(21,20,14,0.06),0_24px_48px_-28px_rgba(21,20,14,0.4)]">
+      <div className="flex items-center gap-3 border-b border-[#E5E5EA] bg-[#F7F7F7] px-4 py-3">
+        <Image
+          src={photo}
+          alt=""
+          width={40}
+          height={40}
+          className="size-10 shrink-0 rounded-full object-cover"
+        />
+        <figcaption>
+          <div className="text-[15px] font-semibold">{name}</div>
+          <div className="text-xs text-[#6b6b6b]">{role}</div>
+        </figcaption>
+      </div>
+      <p className="m-0 p-4 text-sm leading-[1.45] text-[#3a3a3c]">{note}</p>
     </figure>
   );
 }

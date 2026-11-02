@@ -25,10 +25,18 @@ export const LIVE_WORK = {
     headline: "We run software as owners, too.",
     /** The sentence before the figure; the figure is added only while approved. */
     text: "A coaching app we co-founded with a coach and built.",
-    storeLabel: "Jimmy on the App Store",
+    storeLabel: "Jimmy Coach on the App Store",
+    playLabel: "Jimmy Coach on Google Play",
+    playHref:
+      "https://play.google.com/store/apps/details?id=com.jimmycoach.jimmy",
     siteLabel: "jimmycoach.com",
     siteHref: "https://jimmycoach.com/en",
     dashboardAlt: "Jimmy's coach dashboard",
+    // facts already on /work/jimmy-coach; his own quote replaces this card
+    // once it's in (CHATS.quentin in proof.ts)
+    quentinRole: "Co-founder of Jimmy Coach",
+    quentinNote:
+      "Hyrox & CrossFit coach, 250+ clients. He asked for his own app, so we built it together.",
   },
   band: {
     title: "You've seen the app. Now see it with your numbers.",
